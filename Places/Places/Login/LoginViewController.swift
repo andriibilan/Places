@@ -35,13 +35,13 @@ class LoginViewController: UIViewController {
         } else {
             let email = emailTextField.text
             let password = passwordTextfield.text
-            Auth.auth().signIn(withEmail: email!, password: password!) { (user, error) in
+            Auth.auth().createUser(withEmail: email!, password: password!) { (user, error) in
                 
                 if error == nil {
                     print("You have successfully logged in")
                     
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "Profile")
-                    self.present(vc!, animated: true, completion: nil)
+//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "Profile")
+//                    self.present(vc!, animated: true, completion: nil)
                     
                 } else {
                     
