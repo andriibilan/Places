@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Detail Place View Controller-->
+        <scene sceneID="AWn-QL-hvW">
+            <objects>
+                <viewController id="Je1-fC-mgn" customClass="DetailPlaceViewController" customModule="Places" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="72P-FZ-6bp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJP-ek-g6e" userLabel="buttons">
+                                <rect key="frame" x="0.0" y="602.5" width="375" height="64.5"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Op3-an-sx1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="602.5"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FfR-ep-5ND" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="904"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="FfR-ep-5ND" firstAttribute="top" secondItem="Op3-an-sx1" secondAttribute="top" id="BMr-Q6-qNo"/>
+                                    <constraint firstAttribute="bottom" secondItem="FfR-ep-5ND" secondAttribute="bottom" constant="-301.5" id="EMV-y5-jQp"/>
+                                    <constraint firstAttribute="trailing" secondItem="FfR-ep-5ND" secondAttribute="trailing" id="HHZ-1V-77t"/>
+                                    <constraint firstItem="FfR-ep-5ND" firstAttribute="width" secondItem="Op3-an-sx1" secondAttribute="width" id="nIz-ke-y5C"/>
+                                    <constraint firstItem="FfR-ep-5ND" firstAttribute="leading" secondItem="Op3-an-sx1" secondAttribute="leading" id="twA-5B-d3L"/>
+                                    <constraint firstItem="FfR-ep-5ND" firstAttribute="height" secondItem="Op3-an-sx1" secondAttribute="height" multiplier="1.5" id="unb-sb-UTy"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Op3-an-sx1" firstAttribute="leading" secondItem="hEn-EQ-D61" secondAttribute="leading" id="Dtd-aS-30V"/>
+                            <constraint firstItem="sJP-ek-g6e" firstAttribute="top" secondItem="Op3-an-sx1" secondAttribute="bottom" id="Frx-Zh-yBR"/>
+                            <constraint firstItem="Op3-an-sx1" firstAttribute="top" secondItem="72P-FZ-6bp" secondAttribute="top" id="Fxm-uT-D54"/>
+                            <constraint firstItem="sJP-ek-g6e" firstAttribute="leading" secondItem="hEn-EQ-D61" secondAttribute="leading" id="KcL-d6-KJa"/>
+                            <constraint firstItem="Op3-an-sx1" firstAttribute="trailing" secondItem="hEn-EQ-D61" secondAttribute="trailing" id="UVX-JE-auc"/>
+                            <constraint firstItem="sJP-ek-g6e" firstAttribute="height" secondItem="hEn-EQ-D61" secondAttribute="height" multiplier="0.1" id="bV0-NK-5vn"/>
+                            <constraint firstItem="sJP-ek-g6e" firstAttribute="bottom" secondItem="hEn-EQ-D61" secondAttribute="bottom" id="cmE-cV-cI0"/>
+                            <constraint firstItem="sJP-ek-g6e" firstAttribute="trailing" secondItem="hEn-EQ-D61" secondAttribute="trailing" id="zLd-qA-xeg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hEn-EQ-D61"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xcv-VS-DJi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="40.799999999999997" y="-384.55772113943033"/>
+        </scene>
+    </scenes>
+</document>
