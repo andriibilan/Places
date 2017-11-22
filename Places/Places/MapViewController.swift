@@ -9,10 +9,26 @@
 import UIKit
 
 class MapViewController: UIViewController {
-
+    var isSideMenuHidden = true
+    
+    @IBOutlet weak var sideMenuConstraint: NSLayoutConstraint!
+    
+    @IBAction func showSideMenu(_ sender: Any) {
+        if isSideMenuHidden {
+            sideMenuConstraint.constant = 0
+            UIView.animate(withDuration: 0.5, animations: { self.view.layoutIfNeeded()})
+        } else {
+            sideMenuConstraint.constant = -160
+            UIView.animate(withDuration: 0.5, animations: { self.view.layoutIfNeeded()})
+        }
+        isSideMenuHidden = !isSideMenuHidden
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        sideMenuConstraint.constant = -160
         // Do any additional setup after loading the view.
     }
 

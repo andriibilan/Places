@@ -70,6 +70,22 @@
                                 <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ny9-BK-1UC">
+                                <rect key="frame" x="48" y="607" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.87322145699999998" green="0.98523384329999997" blue="0.07190831751" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Filter"/>
+                                <connections>
+                                    <action selector="showSideMenu:" destination="6eg-wI-33n" eventType="touchUpInside" id="N9W-Jf-Awf"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpA-aE-Hki">
+                                <rect key="frame" x="0.0" y="129" width="160" height="451"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="weH-Vx-05d"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -77,15 +93,22 @@
                             <constraint firstItem="HFl-mO-hU1" firstAttribute="top" secondItem="5Pq-cN-7gF" secondAttribute="top" id="8RG-rd-MgE"/>
                             <constraint firstItem="DRm-1c-Gez" firstAttribute="top" secondItem="5Pq-cN-7gF" secondAttribute="top" constant="20" id="FCv-Az-smr"/>
                             <constraint firstAttribute="trailing" secondItem="HFl-mO-hU1" secondAttribute="trailing" id="Jgj-z7-C4o"/>
+                            <constraint firstItem="jpA-aE-Hki" firstAttribute="top" secondItem="DRm-1c-Gez" secondAttribute="bottom" constant="53" id="LET-Ev-1V9"/>
                             <constraint firstAttribute="trailing" secondItem="DRm-1c-Gez" secondAttribute="trailing" id="Mc5-ca-otg"/>
                             <constraint firstItem="DRm-1c-Gez" firstAttribute="leading" secondItem="5Pq-cN-7gF" secondAttribute="leading" id="TbB-uU-m4O"/>
+                            <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="jpA-aE-Hki" secondAttribute="bottom" constant="87" id="jyS-cQ-7NZ"/>
+                            <constraint firstItem="jpA-aE-Hki" firstAttribute="leading" secondItem="J1c-lw-TzP" secondAttribute="leading" id="pP2-3r-bkg"/>
                             <constraint firstAttribute="bottom" secondItem="HFl-mO-hU1" secondAttribute="bottom" id="x6g-nc-txe"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="J1c-lw-TzP"/>
                     </view>
+                    <connections>
+                        <outlet property="sideMenuConstraint" destination="pP2-3r-bkg" id="RRV-nQ-R41"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6B-D0-qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1164" y="-398"/>
+            <point key="canvasLocation" x="1488.8" y="-301.79910044977515"/>
         </scene>
         <!--List View Controller-->
         <scene sceneID="zcY-Zo-fQE">
@@ -124,11 +147,12 @@
                             <constraint firstItem="PgG-5D-Wbu" firstAttribute="top" secondItem="lbg-qR-cKM" secondAttribute="bottom" constant="35" id="quw-9X-qme"/>
                             <constraint firstAttribute="trailing" secondItem="PgG-5D-Wbu" secondAttribute="trailing" id="u2v-sQ-Omi"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="8Cr-NY-7d7"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QTz-Ho-Zm2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1164" y="565"/>
+            <point key="canvasLocation" x="1489" y="554"/>
         </scene>
     </scenes>
 </document>
