@@ -12,8 +12,7 @@
 		75F7EB741FC59B75002F169E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB731FC59B75002F169E /* LoginViewController.swift */; };
 		75F7EB761FC59B84002F169E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB751FC59B84002F169E /* SignUpViewController.swift */; };
 		75F7EB791FC59E96002F169E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB781FC59E96002F169E /* ProfileViewController.swift */; };
-		75F7EB7B1FC59F33002F169E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F7EB7A1FC59F33002F169E /* Login.storyboard */; };
-		75F7EB7D1FC59F46002F169E /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F7EB7C1FC59F46002F169E /* SignUp.storyboard */; };
+		75F7EB7B1FC59F33002F169E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F7EB7A1FC59F33002F169E /* Main.storyboard */; };
 		75F7EB7F1FC59F58002F169E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F7EB7E1FC59F58002F169E /* Profile.storyboard */; };
 		75F7EB831FC5A8AD002F169E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75F7EB821FC5A8AD002F169E /* GoogleService-Info.plist */; };
 		8A8C5C761FC57F3E00A834EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C5C751FC57F3E00A834EA /* AppDelegate.swift */; };
@@ -31,8 +30,7 @@
 		75F7EB731FC59B75002F169E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		75F7EB751FC59B84002F169E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		75F7EB781FC59E96002F169E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		75F7EB7A1FC59F33002F169E /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		75F7EB7C1FC59F46002F169E /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
+		75F7EB7A1FC59F33002F169E /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		75F7EB7E1FC59F58002F169E /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		75F7EB821FC5A8AD002F169E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8A8C5C721FC57F3E00A834EA /* Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Places.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,9 +77,8 @@
 			isa = PBXGroup;
 			children = (
 				75F7EB731FC59B75002F169E /* LoginViewController.swift */,
-				75F7EB7A1FC59F33002F169E /* Login.storyboard */,
+				75F7EB7A1FC59F33002F169E /* Main.storyboard */,
 				75F7EB751FC59B84002F169E /* SignUpViewController.swift */,
-				75F7EB7C1FC59F46002F169E /* SignUp.storyboard */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -204,9 +201,8 @@
 				8A8C5C801FC57F3E00A834EA /* LaunchScreen.storyboard in Resources */,
 				75F7EB831FC5A8AD002F169E /* GoogleService-Info.plist in Resources */,
 				2BA689A11FC5928C00B2C2A9 /* DetailPlace.storyboard in Resources */,
-				75F7EB7D1FC59F46002F169E /* SignUp.storyboard in Resources */,
 				8A8C5C7D1FC57F3E00A834EA /* Assets.xcassets in Resources */,
-				75F7EB7B1FC59F33002F169E /* Login.storyboard in Resources */,
+				75F7EB7B1FC59F33002F169E /* Main.storyboard in Resources */,
 				75F7EB7F1FC59F58002F169E /* Profile.storyboard in Resources */,
 				8A8C5C7B1FC57F3E00A834EA /* Main.storyboard in Resources */,
 			);
