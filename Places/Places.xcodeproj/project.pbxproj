@@ -12,6 +12,8 @@
 		8A8C5C7B1FC57F3E00A834EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A8C5C791FC57F3E00A834EA /* Main.storyboard */; };
 		8A8C5C7D1FC57F3E00A834EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A8C5C7C1FC57F3E00A834EA /* Assets.xcassets */; };
 		8A8C5C801FC57F3E00A834EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A8C5C7E1FC57F3E00A834EA /* LaunchScreen.storyboard */; };
+		8A8C5C881FC5A1B000A834EA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C5C871FC5A1B000A834EA /* MapViewController.swift */; };
+		8A8C5C8A1FC5A1C100A834EA /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C5C891FC5A1C100A834EA /* ListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		8A8C5C7C1FC57F3E00A834EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A8C5C7F1FC57F3E00A834EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A8C5C811FC57F3E00A834EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A8C5C871FC5A1B000A834EA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		8A8C5C891FC5A1C100A834EA /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 				8A8C5C771FC57F3E00A834EA /* ViewController.swift */,
 				8A8C5C791FC57F3E00A834EA /* Main.storyboard */,
 				8A8C5C7C1FC57F3E00A834EA /* Assets.xcassets */,
+				8A8C5C891FC5A1C100A834EA /* ListViewController.swift */,
+				8A8C5C871FC5A1B000A834EA /* MapViewController.swift */,
 				8A8C5C7E1FC57F3E00A834EA /* LaunchScreen.storyboard */,
 				8A8C5C811FC57F3E00A834EA /* Info.plist */,
 			);
@@ -137,6 +143,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A8C5C781FC57F3E00A834EA /* ViewController.swift in Sources */,
+				8A8C5C881FC5A1B000A834EA /* MapViewController.swift in Sources */,
+				8A8C5C8A1FC5A1C100A834EA /* ListViewController.swift in Sources */,
 				8A8C5C761FC57F3E00A834EA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
