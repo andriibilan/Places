@@ -19,18 +19,17 @@ class currentLocations: UIViewController, CLLocationManagerDelegate {
     
     func determineMyCurrentLocation() {
              locationManager = CLLocationManager()
+        locationManager.requestWhenInUseAuthorization()
             if CLLocationManager.locationServicesEnabled() {
                 locationManager.delegate = self
-                locationManager.requestWhenInUseAuthorization()
-                locationManager.desiredAccuracy = kCLLocationAccuracyBest
-
-                locationManager.distanceFilter = 200
-                
+                locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+                locationManager.distanceFilter = 500
                     locationManager.startUpdatingLocation()
-                    locationManager.startUpdatingHeading()
-                let locValue : CLLocationCoordinate2D = locationManager.location!.coordinate
+                   locationManager.startUpdatingHeading()
+                
+                 let locValue : CLLocationCoordinate2D = locationManager.location!.coordinate
             region = MKCoordinateRegion(center: locValue, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-
+                
                 
                 }
     
@@ -64,8 +63,11 @@ class currentLocations: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse || status == .authorizedAlways {
             print("User allowed us to access location")
-            
-    }
-   
+            locationManager.requestWhenInUseAuthorization()
+        } else {
+            locationManager.delegate = self
+            locationManager.requestAlwaysAuthorization()
+        }
+      
 }
 }
