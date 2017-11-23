@@ -10,29 +10,29 @@ import UIKit
 
 class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var photoArray :[UIImage] = []
-    
     @IBOutlet weak var PhotoCollectionView: UICollectionView!
+    
+    var photoArray :[UIImage] = []
     
     //TODO: load real image when I'll have choosing place
     override func viewDidLoad() {
         super.viewDidLoad()
         
         photoArray.append(#imageLiteral(resourceName: "noPhotoIcon"))
-        photoArray.append(#imageLiteral(resourceName: "noPhotoIcon"))
-        photoArray.append(#imageLiteral(resourceName: "noPhotoIcon"))
-        photoArray.append(#imageLiteral(resourceName: "noPhotoIcon"))
-        photoArray.append(#imageLiteral(resourceName: "noPhotoIcon"))
-        photoArray.append(#imageLiteral(resourceName: "noPhotoIcon"))
-        photoArray.append(#imageLiteral(resourceName: "noPhotoIcon"))
-        photoArray.append(#imageLiteral(resourceName: "noPhotoIcon"))
-        photoArray.append(#imageLiteral(resourceName: "noPhotoIcon"))
-        photoArray.append(#imageLiteral(resourceName: "noPhotoIcon"))
-        photoArray.append(#imageLiteral(resourceName: "noPhotoIcon"))
-        photoArray.append(#imageLiteral(resourceName: "noPhotoIcon"))
+        photoArray.append(#imageLiteral(resourceName: "phone number"))
+        photoArray.append(#imageLiteral(resourceName: "path"))
+        photoArray.append(#imageLiteral(resourceName: "ratting"))
+        photoArray.append(#imageLiteral(resourceName: "website"))
+        photoArray.append(#imageLiteral(resourceName: "share"))
+        photoArray.append(#imageLiteral(resourceName: "address"))
+        photoArray.append(#imageLiteral(resourceName: "opening hours"))
+        photoArray.append(#imageLiteral(resourceName: "path"))
+        photoArray.append(#imageLiteral(resourceName: "ratting"))
+        photoArray.append(#imageLiteral(resourceName: "phone number"))
+        photoArray.append(#imageLiteral(resourceName: "website"))
         
         if  photoArray.count == 0{
-            photoArray.append(#imageLiteral(resourceName: "noPhotoIcon"))
+            photoArray.append(#imageLiteral(resourceName: "ratting"))
         }
         PhotoCollectionView.delegate = self
         PhotoCollectionView.dataSource = self
@@ -40,11 +40,25 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     }
 
     //TODO: IF item is selected than go to PhotoPagingViewController
-    /*
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        <#code#>
+        //TODO: here must returning current image with current image but not today
+        performSegue(withIdentifier: "DetailToPhoto", sender:  indexPath)
     }
-     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DetailToPhoto"{
+            let photoVC = segue.destination as! PhotoPagingViewController
+            
+            for temp in photoArray{
+                photoVC.photoArray.append(temp)
+            }
+            photoVC.photoArray = self.photoArray
+            photoVC.indexPath = sender as? IndexPath
+        }
+    }
+    
+    
     
     //MARK: Collection View Data Source
     
