@@ -9,9 +9,27 @@
 import UIKit
 
 class MapViewController: UIViewController {
-    var isSideMenuHidden = true
     
+    @IBOutlet weak var menuView: UIViewX!
     @IBOutlet weak var sideMenuConstraint: NSLayoutConstraint!
+    
+     var isSideMenuHidden = true
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        sideMenuConstraint.constant = -160
+        // Do any additional setup after loading the view.
+        menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        //        closeMenu()
+        
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     
     @IBAction func showSideMenu(_ sender: Any) {
         if isSideMenuHidden {
@@ -25,17 +43,20 @@ class MapViewController: UIViewController {
     }
     
     
+    @IBAction func menuTapped(_ sender: FloatingActionButton) {
+        UIView.animate(withDuration: 0.3, animations: {
+            if self.menuView.transform == .identity {
+                self.menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            } else {
+                self.menuView.transform = .identity
+            }
+        })
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        sideMenuConstraint.constant = -160
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+//    func closeMenu(){
+//         menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+//    }
+//
     
 
     /*
