@@ -401,6 +401,7 @@
                     </view>
                     <connections>
                         <outlet property="menuView" destination="C0Q-sZ-dW2" id="W08-ni-WYD"/>
+                        <outlet property="map" destination="HFl-mO-hU1" id="dop-oM-jhB"/>
                         <outlet property="sideMenuConstraint" destination="pP2-3r-bkg" id="RRV-nQ-R41"/>
                     </connections>
                 </viewController>
