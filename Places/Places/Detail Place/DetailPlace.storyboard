@@ -21,7 +21,36 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJP-ek-g6e" userLabel="buttons">
                                 <rect key="frame" x="0.0" y="602.5" width="375" height="64.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Nbb-gi-wwD">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Uv-Pt-pg6">
+                                                <rect key="frame" x="0.0" y="0.0" width="94" height="64.5"/>
+                                                <state key="normal" image="path"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHN-Ho-O7s">
+                                                <rect key="frame" x="94" y="0.0" width="93.5" height="64.5"/>
+                                                <state key="normal" image="phone number"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ik9-MU-vOa">
+                                                <rect key="frame" x="187.5" y="0.0" width="94" height="64.5"/>
+                                                <state key="normal" image="website"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KvA-rb-BYI">
+                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="64.5"/>
+                                                <state key="normal" image="share"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Nbb-gi-wwD" firstAttribute="leading" secondItem="sJP-ek-g6e" secondAttribute="leading" id="Ma3-Nk-vr2"/>
+                                    <constraint firstAttribute="bottom" secondItem="Nbb-gi-wwD" secondAttribute="bottom" id="Nod-3l-TRl"/>
+                                    <constraint firstAttribute="trailing" secondItem="Nbb-gi-wwD" secondAttribute="trailing" id="jvW-XW-nMk"/>
+                                    <constraint firstItem="Nbb-gi-wwD" firstAttribute="top" secondItem="sJP-ek-g6e" secondAttribute="top" id="ypl-cY-hmr"/>
+                                </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Op3-an-sx1">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="602.5"/>
@@ -222,8 +251,10 @@
         <image name="address" width="20" height="32"/>
         <image name="noPhotoIcon" width="512" height="512"/>
         <image name="opening hours" width="32" height="32"/>
+        <image name="path" width="48" height="48"/>
         <image name="phone number" width="32" height="32"/>
         <image name="ratting" width="32" height="32"/>
+        <image name="share" width="28" height="32"/>
         <image name="website" width="32" height="32"/>
     </resources>
 </document>
