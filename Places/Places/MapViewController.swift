@@ -12,13 +12,17 @@ import CoreLocation
 
 
 class MapViewController: UIViewController {
-    var isSideMenuHidden = true
+
    
     var currentLocation = currentLocations()
     @IBOutlet weak var map: MKMapView!
+
     
+    @IBOutlet weak var menuView: UIViewX!
     @IBOutlet weak var sideMenuConstraint: NSLayoutConstraint!
     
+     var isSideMenuHidden = true
+
     @IBAction func showSideMenu(_ sender: Any) {
         if isSideMenuHidden {
             sideMenuConstraint.constant = 0
@@ -31,6 +35,16 @@ class MapViewController: UIViewController {
     }
     
     
+
+    @IBAction func menuTapped(_ sender: FloatingActionButton) {
+        UIView.animate(withDuration: 0.3, animations: {
+            if self.menuView.transform == .identity {
+                self.menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            } else {
+                self.menuView.transform = .identity
+            }
+        })
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +55,16 @@ class MapViewController: UIViewController {
         }
         map.showsUserLocation = true
         sideMenuConstraint.constant = -160
-        
+         menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
+    
+//    func closeMenu(){
+//         menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+//    }
+//
     
 
     /*
