@@ -316,7 +316,7 @@
                                         <state key="normal" image="2703062-64"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZ7-mN-XYi">
-                                        <rect key="frame" x="62" y="65" width="50" height="50"/>
+                                        <rect key="frame" x="62" y="55" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="deh-4n-HA3"/>
                                             <constraint firstAttribute="width" constant="50" id="qq6-FQ-vhb"/>
@@ -324,7 +324,7 @@
                                         <state key="normal" image="2703073-64"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFa-2t-k8b">
-                                        <rect key="frame" x="22" y="123" width="50" height="50"/>
+                                        <rect key="frame" x="22" y="113" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Xwe-ia-hEX"/>
                                             <constraint firstAttribute="height" constant="50" id="bMP-6a-2Df"/>
@@ -338,7 +338,7 @@
                                     <constraint firstItem="DHE-yK-Tu7" firstAttribute="top" secondItem="C0Q-sZ-dW2" secondAttribute="top" constant="22" id="6p0-tc-tdy"/>
                                     <constraint firstAttribute="height" constant="290" id="7y9-pP-fk9"/>
                                     <constraint firstAttribute="width" constant="290" id="CNv-rm-etd"/>
-                                    <constraint firstItem="fZ7-mN-XYi" firstAttribute="top" secondItem="C0Q-sZ-dW2" secondAttribute="top" constant="65" id="XHF-Dv-VAj"/>
+                                    <constraint firstItem="fZ7-mN-XYi" firstAttribute="top" secondItem="C0Q-sZ-dW2" secondAttribute="top" constant="55" id="XHF-Dv-VAj"/>
                                     <constraint firstItem="pFa-2t-k8b" firstAttribute="top" secondItem="fZ7-mN-XYi" secondAttribute="bottom" constant="8" symbolic="YES" id="boO-Hj-Kuo"/>
                                     <constraint firstItem="fZ7-mN-XYi" firstAttribute="leading" secondItem="C0Q-sZ-dW2" secondAttribute="leading" constant="62" id="oGz-OS-UnV"/>
                                     <constraint firstItem="DHE-yK-Tu7" firstAttribute="leading" secondItem="fZ7-mN-XYi" secondAttribute="trailing" constant="8" symbolic="YES" id="oNo-zd-pl4"/>
@@ -400,8 +400,8 @@
                         <viewLayoutGuide key="safeArea" id="J1c-lw-TzP"/>
                     </view>
                     <connections>
-                        <outlet property="menuView" destination="C0Q-sZ-dW2" id="W08-ni-WYD"/>
                         <outlet property="map" destination="HFl-mO-hU1" id="dop-oM-jhB"/>
+                        <outlet property="menuView" destination="C0Q-sZ-dW2" id="W08-ni-WYD"/>
                         <outlet property="sideMenuConstraint" destination="pP2-3r-bkg" id="RRV-nQ-R41"/>
                     </connections>
                 </viewController>

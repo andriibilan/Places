@@ -15,6 +15,7 @@
 		49E3C00B1FC6D19300400A06 /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00A1FC6D19300400A06 /* UIViewX.swift */; };
 		49E3C00D1FC6D1A000400A06 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */; };
 		49E3C00F1FC6E12800400A06 /* UIImageViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00E1FC6E12800400A06 /* UIImageViewX.swift */; };
+		529191691FC715A0008FD5AB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529191681FC71598008FD5AB /* CoreLocation.framework */; };
 		52DA83411FC6CC5300CCC364 /* currentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA83401FC6CC5300CCC364 /* currentLocations.swift */; };
 		75F7EB741FC59B75002F169E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB731FC59B75002F169E /* LoginViewController.swift */; };
 		75F7EB761FC59B84002F169E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB751FC59B84002F169E /* SignUpViewController.swift */; };
@@ -45,6 +46,7 @@
 		49E3C00A1FC6D19300400A06 /* UIViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
 		49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		49E3C00E1FC6E12800400A06 /* UIImageViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewX.swift; sourceTree = "<group>"; };
+		529191681FC71598008FD5AB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		52DA83401FC6CC5300CCC364 /* currentLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = currentLocations.swift; sourceTree = "<group>"; };
 		612ABD6E4073E47B3FBF9A37 /* Pods-Places.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Places.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Places/Pods-Places.debug.xcconfig"; sourceTree = "<group>"; };
 		75F7EB731FC59B75002F169E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				529191691FC715A0008FD5AB /* CoreLocation.framework in Frameworks */,
 				BF830C9C5DBC1BE7459571A2 /* Pods_Places.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +110,7 @@
 		68BFA9EE6ACA38C160097694 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				529191681FC71598008FD5AB /* CoreLocation.framework */,
 				E3AF254E3C5EE01EBA2A9FF6 /* Pods_Places.framework */,
 			);
 			name = Frameworks;
