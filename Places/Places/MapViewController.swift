@@ -39,6 +39,7 @@ class MapViewController: UIViewController {
         if currentLocation.region != nil {
             self.map.setRegion(currentLocation.region!, animated: true)
         }
+        map.showsUserLocation = true
         sideMenuConstraint.constant = -160
         
         // Do any additional setup after loading the view.
