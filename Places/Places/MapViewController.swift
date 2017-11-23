@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
+
 
 class MapViewController: UIViewController {
     var isSideMenuHidden = true
+   
+    var currentLocation = currentLocations()
+    @IBOutlet weak var map: MKMapView!
     
     @IBOutlet weak var sideMenuConstraint: NSLayoutConstraint!
     
@@ -28,7 +34,13 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        currentLocation.determineMyCurrentLocation()
+        if currentLocation.region != nil {
+            self.map.setRegion(currentLocation.region!, animated: true)
+        }
         sideMenuConstraint.constant = -160
+        
         // Do any additional setup after loading the view.
     }
 
