@@ -18,20 +18,38 @@ class currentLocations: UIViewController, CLLocationManagerDelegate {
     var region: MKCoordinateRegion?
     
     func determineMyCurrentLocation() {
-             locationManager = CLLocationManager()
-        locationManager.requestWhenInUseAuthorization()
-            if CLLocationManager.locationServicesEnabled() {
-                locationManager.delegate = self
-                locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-                locationManager.distanceFilter = 500
-                    locationManager.startUpdatingLocation()
-                   locationManager.startUpdatingHeading()
-                
-                 let locValue : CLLocationCoordinate2D = locationManager.location!.coordinate
-            region = MKCoordinateRegion(center: locValue, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-                
-                
-                }
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        if CLLocationManager.locationServicesEnabled() {
+            switch(CLLocationManager.authorizationStatus()) {
+            case .notDetermined, .restricted, .denied:
+                locationManager.requestWhenInUseAuthorization()
+            case .authorizedAlways, .authorizedWhenInUse:
+                locationManager.requestLocation()
+                locationManager.requestWhenInUseAuthorization()
+                locationManager.requestAlwaysAuthorization()
+                locationManager.startUpdatingLocation()
+                let locValue : CLLocationCoordinate2D = locationManager.location!.coordinate
+                region = MKCoordinateRegion(center: locValue, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            }
+        } else {
+            print("Location services are not enabled")
+        }
+        
+//        if CLLocationManager.authorizationStatus() == .notDetermined {
+//            self.locationManager.requestWhenInUseAuthorization()
+//        }
+        // Check for Location Services
+        
+//        if CLLocationManager.locationServicesEnabled() {
+//            locationManager.requestLocation()
+//            locationManager.requestWhenInUseAuthorization()
+//            locationManager.requestAlwaysAuthorization()
+//            locationManager.startUpdatingLocation()
+//            let locValue : CLLocationCoordinate2D = locationManager.location!.coordinate
+//            region = MKCoordinateRegion(center: locValue, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+//        }
     
             
         
@@ -63,10 +81,13 @@ class currentLocations: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse || status == .authorizedAlways {
             print("User allowed us to access location")
+            locationManager.delegate = self
+            locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
         } else {
             locationManager.delegate = self
             locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
         }
       
 }
