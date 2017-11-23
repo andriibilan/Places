@@ -55,7 +55,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        map.showsUserLocation = true
+        //map.showsUserLocation = true
         
         
         if (CLLocationManager.locationServicesEnabled())
@@ -86,6 +86,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
          region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
         map.setRegion(region!, animated: true)
+        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
+        myAnnotation.coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        myAnnotation.title = "Current location"
+        map.addAnnotation(myAnnotation)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -111,6 +115,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         print("Error \(error)")
     }
 
+    func searchPins(){
+        let pins = Array<MKPointAnnotation>() // This is an empty array, so just use your array of locations or add to this.
+        
+        if let currentLocation = locationManager.location?.coordinate {
+            
+            for pin in pins {
+                
+                let locationMapPoint = MKMapPointForCoordinate(currentLocation)
+                
+                let pinMapPoint = MKMapPointForCoordinate(pin.coordinate)
+                
+                let distance = MKMetersBetweenMapPoints(locationMapPoint, pinMapPoint)
+                
+                if distance >= 0 && distance <= 200 {
+                    
+                    self.map.addAnnotation(pin)
+                }
+            }
+        }
+        
+    }
+    
+    
+    
 //    func closeMenu(){
 //         menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
 //    }
@@ -127,4 +155,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     */
 
+}
+extension MKMapView {
+    
+    func topCenterCoordinate() -> CLLocationCoordinate2D {
+        return self.convert(CGPoint(x: self.frame.size.width / 2.0, y: 0), toCoordinateFrom: self)
+    }
+    
+    func currentRadius() -> Double {
+        let centerLocation = CLLocation(latitude: self.centerCoordinate.latitude, longitude: self.centerCoordinate.longitude)
+        let topCenterCoordinate = self.topCenterCoordinate()
+        let topCenterLocation = CLLocation(latitude: topCenterCoordinate.latitude, longitude: topCenterCoordinate.longitude)
+        return centerLocation.distance(from: topCenterLocation)
+    }
+    
 }
