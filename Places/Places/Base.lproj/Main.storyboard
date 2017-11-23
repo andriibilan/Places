@@ -322,6 +322,9 @@
                                             <constraint firstAttribute="width" constant="50" id="qq6-FQ-vhb"/>
                                         </constraints>
                                         <state key="normal" image="2703073-64"/>
+                                        <connections>
+                                            <action selector="currentLocation:" destination="6eg-wI-33n" eventType="touchUpInside" id="3Mj-ut-ZNW"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFa-2t-k8b">
                                         <rect key="frame" x="22" y="113" width="50" height="50"/>
