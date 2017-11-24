@@ -14,8 +14,6 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
 
     @IBOutlet weak var currentPhotoCollectionView: UICollectionView!
     
-    @IBOutlet weak var allPhotoCollectionView: UICollectionView!
-    
     var photoArray : [UIImage] = []
     
     var indexPath : IndexPath!
@@ -27,22 +25,12 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
 
         currentPhotoCollectionView.delegate = self
         currentPhotoCollectionView.dataSource = self
-        
-        
-        allPhotoCollectionView.delegate = self
-        allPhotoCollectionView.dataSource = self
-       
     }
     
 
     
     override func viewDidAppear(_ animated: Bool) {
         currentPhotoCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
-    }
-
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.currentPhotoCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -51,7 +39,6 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell
-        
         cell?.photoImageView?.image = photoArray[indexPath.row]
         
 

@@ -32,14 +32,23 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHN-Ho-O7s">
                                                 <rect key="frame" x="94" y="0.0" width="93.5" height="64.5"/>
                                                 <state key="normal" image="phone number"/>
+                                                <connections>
+                                                    <action selector="openPhone:" destination="Je1-fC-mgn" eventType="touchUpInside" id="1qB-kk-jBc"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ik9-MU-vOa">
                                                 <rect key="frame" x="187.5" y="0.0" width="94" height="64.5"/>
                                                 <state key="normal" image="website"/>
+                                                <connections>
+                                                    <action selector="openWebsite:" destination="Je1-fC-mgn" eventType="touchUpInside" id="gS3-wB-L4l"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KvA-rb-BYI">
                                                 <rect key="frame" x="281.5" y="0.0" width="93.5" height="64.5"/>
                                                 <state key="normal" image="share"/>
+                                                <connections>
+                                                    <action selector="sharePlace:" destination="Je1-fC-mgn" eventType="touchUpInside" id="Pq7-dT-A8i"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -92,7 +101,7 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OeB-a3-OS7" userLabel="Feedback Table View">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OeB-a3-OS7" userLabel="Feedback Table View">
                                                 <rect key="frame" x="0.0" y="542.5" width="375" height="361.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableView>
@@ -111,9 +120,30 @@
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="address" translatesAutoresizingMaskIntoConstraints="NO" id="h6s-PY-UWz">
                                                                         <rect key="frame" x="0.0" y="60.5" width="75" height="60"/>
                                                                     </imageView>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ratting" translatesAutoresizingMaskIntoConstraints="NO" id="7bW-FQ-EMq">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l1A-th-frm">
                                                                         <rect key="frame" x="0.0" y="120.5" width="75" height="60.5"/>
-                                                                    </imageView>
+                                                                        <subviews>
+                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ratting" translatesAutoresizingMaskIntoConstraints="NO" id="7bW-FQ-EMq">
+                                                                                <rect key="frame" x="0.0" y="-0.5" width="75" height="61"/>
+                                                                            </imageView>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vz7-FP-h52">
+                                                                                <rect key="frame" x="19.5" y="15" width="37.5" height="30"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                <color key="textColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="vz7-FP-h52" firstAttribute="centerX" secondItem="l1A-th-frm" secondAttribute="centerX" id="29s-oH-bo2"/>
+                                                                            <constraint firstItem="vz7-FP-h52" firstAttribute="centerY" secondItem="l1A-th-frm" secondAttribute="centerY" id="Iq2-LX-4Iq"/>
+                                                                            <constraint firstItem="vz7-FP-h52" firstAttribute="height" secondItem="l1A-th-frm" secondAttribute="height" multiplier="0.5" id="Ksj-WX-pUw"/>
+                                                                            <constraint firstItem="7bW-FQ-EMq" firstAttribute="leading" secondItem="l1A-th-frm" secondAttribute="leading" id="N3D-8M-uVh"/>
+                                                                            <constraint firstItem="7bW-FQ-EMq" firstAttribute="top" secondItem="l1A-th-frm" secondAttribute="top" id="PS8-EP-hAW"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="7bW-FQ-EMq" secondAttribute="trailing" id="cPD-yt-XUp"/>
+                                                                            <constraint firstItem="vz7-FP-h52" firstAttribute="width" secondItem="l1A-th-frm" secondAttribute="width" multiplier="0.5" id="cxl-80-BUw"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="7bW-FQ-EMq" secondAttribute="bottom" id="j9S-sc-M6d"/>
+                                                                        </constraints>
+                                                                    </view>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="website" translatesAutoresizingMaskIntoConstraints="NO" id="5O2-Ox-3eu">
                                                                         <rect key="frame" x="0.0" y="181" width="75" height="60"/>
                                                                     </imageView>
@@ -140,12 +170,10 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ratting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4as-VG-hAQ">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZN-QO-5L0">
                                                                         <rect key="frame" x="0.0" y="120.5" width="300" height="60.5"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                        <nil key="textColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="website" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ZJ-XD-ghU">
                                                                         <rect key="frame" x="0.0" y="181" width="300" height="60"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -224,6 +252,13 @@
                     </view>
                     <connections>
                         <outlet property="PhotoCollectionView" destination="FYY-uH-e9T" id="Ivj-1g-yb3"/>
+                        <outlet property="placeAddress" destination="onf-AG-GAx" id="sWZ-Sp-dEC"/>
+                        <outlet property="placeHours" destination="KDb-kw-AsK" id="uNu-pm-lbm"/>
+                        <outlet property="placeName" destination="GN5-kL-OLW" id="R7q-k8-i40"/>
+                        <outlet property="placePhone" destination="hGr-qY-po9" id="QU2-LJ-SGY"/>
+                        <outlet property="placeRattingLabel" destination="vz7-FP-h52" id="nuJ-0t-vs2"/>
+                        <outlet property="placeRattingView" destination="dZN-QO-5L0" id="baY-Ue-XR2"/>
+                        <outlet property="placeWebsite" destination="5ZJ-XD-ghU" id="MF6-Ai-gmX"/>
                         <segue destination="YBU-3i-5y2" kind="show" identifier="DetailToPhoto" id="JZZ-Bp-B2R"/>
                     </connections>
                 </viewController>
@@ -239,96 +274,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="jyR-Mt-XGe" userLabel="Collection's Stack View">
-                                <rect key="frame" x="37" y="84.5" width="300" height="518"/>
-                                <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZDN-i6-Ylp" userLabel="Current Photo Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="362.5"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="7z1-Rq-gwv">
-                                            <size key="itemSize" width="300" height="362.5"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCollectionViewCell" id="fON-eY-cRS" customClass="PhotoCollectionViewCell" customModule="Places" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="362.5"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="362.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AgK-Rx-LlU" userLabel="Current Photo Image View">
-                                                            <rect key="frame" x="0.0" y="0.0" width="300" height="362.5"/>
-                                                        </imageView>
-                                                    </subviews>
-                                                </view>
-                                                <constraints>
-                                                    <constraint firstItem="AgK-Rx-LlU" firstAttribute="height" secondItem="fON-eY-cRS" secondAttribute="height" id="4F7-2Y-Loe"/>
-                                                    <constraint firstItem="AgK-Rx-LlU" firstAttribute="centerY" secondItem="fON-eY-cRS" secondAttribute="centerY" id="I5y-yA-EKy"/>
-                                                    <constraint firstItem="AgK-Rx-LlU" firstAttribute="width" secondItem="fON-eY-cRS" secondAttribute="width" id="OSN-ge-9GY"/>
-                                                    <constraint firstItem="AgK-Rx-LlU" firstAttribute="centerX" secondItem="fON-eY-cRS" secondAttribute="centerX" id="TDy-Hb-BlG"/>
-                                                </constraints>
-                                                <connections>
-                                                    <outlet property="photoImageView" destination="AgK-Rx-LlU" id="Hgf-5T-Yt4"/>
-                                                </connections>
-                                            </collectionViewCell>
-                                        </cells>
-                                    </collectionView>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CdN-K1-fnC" userLabel="All Photo Collection View">
-                                        <rect key="frame" x="0.0" y="362.5" width="300" height="155.5"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cPO-dN-2rl">
-                                            <size key="itemSize" width="120" height="155.5"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCollectionViewCell" id="KEo-KI-ylJ" customClass="PhotoCollectionViewCell" customModule="Places" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="6.5" width="120" height="143"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="143"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SLG-E9-pvP" userLabel="All Photos Image View">
-                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="143"/>
-                                                        </imageView>
-                                                    </subviews>
-                                                </view>
-                                                <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="SLG-E9-pvP" secondAttribute="trailing" id="Kf2-FN-enV"/>
-                                                    <constraint firstItem="SLG-E9-pvP" firstAttribute="top" secondItem="KEo-KI-ylJ" secondAttribute="top" id="hH1-1B-6eD"/>
-                                                    <constraint firstAttribute="bottom" secondItem="SLG-E9-pvP" secondAttribute="bottom" id="kvB-A3-ALH"/>
-                                                    <constraint firstItem="SLG-E9-pvP" firstAttribute="leading" secondItem="KEo-KI-ylJ" secondAttribute="leading" id="vyU-Xd-c3d"/>
-                                                </constraints>
-                                                <size key="customSize" width="120" height="143"/>
-                                                <connections>
-                                                    <outlet property="photoImageView" destination="SLG-E9-pvP" id="8P4-iG-b7k"/>
-                                                </connections>
-                                            </collectionViewCell>
-                                        </cells>
-                                    </collectionView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="ZDN-i6-Ylp" firstAttribute="height" secondItem="jyR-Mt-XGe" secondAttribute="height" multiplier="0.7" id="84A-wH-xZW"/>
-                                    <constraint firstItem="CdN-K1-fnC" firstAttribute="height" secondItem="jyR-Mt-XGe" secondAttribute="height" multiplier="0.3" id="d35-AD-iuF"/>
-                                </constraints>
-                            </stackView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZDN-i6-Ylp" userLabel="Current Photo Collection View">
+                                <rect key="frame" x="37.5" y="76.5" width="300" height="534"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="7z1-Rq-gwv">
+                                    <size key="itemSize" width="300" height="534"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCollectionViewCell" id="fON-eY-cRS" customClass="PhotoCollectionViewCell" customModule="Places" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="534"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="534"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AgK-Rx-LlU" userLabel="Current Photo Image View">
+                                                    <rect key="frame" x="0.5" y="-0.5" width="300" height="534"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="AgK-Rx-LlU" firstAttribute="height" secondItem="fON-eY-cRS" secondAttribute="height" id="4F7-2Y-Loe"/>
+                                            <constraint firstItem="AgK-Rx-LlU" firstAttribute="centerY" secondItem="fON-eY-cRS" secondAttribute="centerY" id="I5y-yA-EKy"/>
+                                            <constraint firstItem="AgK-Rx-LlU" firstAttribute="width" secondItem="fON-eY-cRS" secondAttribute="width" id="OSN-ge-9GY"/>
+                                            <constraint firstItem="AgK-Rx-LlU" firstAttribute="centerX" secondItem="fON-eY-cRS" secondAttribute="centerX" id="TDy-Hb-BlG"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="photoImageView" destination="AgK-Rx-LlU" id="Hgf-5T-Yt4"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="jyR-Mt-XGe" firstAttribute="centerX" secondItem="uCu-dC-WNZ" secondAttribute="centerX" id="OoM-KV-izy"/>
-                            <constraint firstItem="jyR-Mt-XGe" firstAttribute="height" secondItem="uCu-dC-WNZ" secondAttribute="height" multiplier="0.8" id="VBl-uX-ZhP"/>
-                            <constraint firstItem="jyR-Mt-XGe" firstAttribute="width" secondItem="uCu-dC-WNZ" secondAttribute="width" multiplier="0.8" id="ctr-lB-5TW"/>
-                            <constraint firstItem="jyR-Mt-XGe" firstAttribute="centerY" secondItem="uCu-dC-WNZ" secondAttribute="centerY" id="v0z-rz-byC"/>
+                            <constraint firstItem="ZDN-i6-Ylp" firstAttribute="centerX" secondItem="uCu-dC-WNZ" secondAttribute="centerX" id="71x-bL-vjs"/>
+                            <constraint firstItem="ZDN-i6-Ylp" firstAttribute="height" secondItem="hvS-bj-5RS" secondAttribute="height" multiplier="0.8" id="9Pj-dp-VBC"/>
+                            <constraint firstItem="ZDN-i6-Ylp" firstAttribute="width" secondItem="hvS-bj-5RS" secondAttribute="width" multiplier="0.8" id="cFK-3k-xgv"/>
+                            <constraint firstItem="ZDN-i6-Ylp" firstAttribute="centerY" secondItem="uCu-dC-WNZ" secondAttribute="centerY" id="uVt-yp-R2a"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uCu-dC-WNZ"/>
                     </view>
                     <connections>
-                        <outlet property="allPhotoCollectionView" destination="CdN-K1-fnC" id="Lse-bJ-Lfx"/>
                         <outlet property="currentPhotoCollectionView" destination="ZDN-i6-Ylp" id="1ps-QO-cbL"/>
                     </connections>
                 </viewController>
