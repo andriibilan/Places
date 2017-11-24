@@ -286,7 +286,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cHr-Uv-c98" secondAttribute="height" multiplier="1:1" id="Tu3-s6-1Tk"/>
                                 </constraints>
-                                <state key="normal" image="134216-64-3"/>
+                                <state key="normal" image="211602-64"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
                                         <real key="value" value="1"/>
@@ -359,7 +359,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Ny9-BK-1UC" secondAttribute="height" multiplier="1:1" id="imD-iD-k3A"/>
                                 </constraints>
-                                <state key="normal" image="211602-64"/>
+                                <state key="normal" image="134216-64-3"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="30"/>
