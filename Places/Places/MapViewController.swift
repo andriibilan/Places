@@ -54,6 +54,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         //map.showsUserLocation = true
         
@@ -77,6 +78,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         // Do any additional setup after loading the view.
     }
 
+    // radius / places in radius
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
@@ -84,7 +86,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
          region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        
+        let loc = CLLocation(latitude: location.coordinate.latitude as CLLocationDegrees, longitude: location.coordinate.longitude as CLLocationDegrees)
+        addRadiusCircle(location: loc)
         map.setRegion(region!, animated: true)
         let myAnnotation: MKPointAnnotation = MKPointAnnotation()
         myAnnotation.coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
@@ -115,25 +118,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         print("Error \(error)")
     }
 
-    func searchPins(){
-        let pins = Array<MKPointAnnotation>() // This is an empty array, so just use your array of locations or add to this.
-        
-        if let currentLocation = locationManager.location?.coordinate {
-            
-            for pin in pins {
-                
-                let locationMapPoint = MKMapPointForCoordinate(currentLocation)
-                
-                let pinMapPoint = MKMapPointForCoordinate(pin.coordinate)
-                
-                let distance = MKMetersBetweenMapPoints(locationMapPoint, pinMapPoint)
-                
-                if distance >= 0 && distance <= 200 {
-                    
-                    self.map.addAnnotation(pin)
-                }
-            }
-        }
+    func addRadiusCircle(location: CLLocation){
+        self.map.delegate = self
+        let circle = MKCircle(center: location.coordinate, radius: 200 as CLLocationDistance)
+        self.map.add(circle)
+    }
+    
+    func mapView(_ map: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+//        if overlay is MKCircle {
+            let circle = MKCircleRenderer(overlay: overlay)
+            circle.strokeColor = UIColor.red
+            circle.fillColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.02)
+            circle.lineWidth = 1
+            return circle
         
     }
     
@@ -156,17 +153,4 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     */
 
 }
-extension MKMapView {
-    
-    func topCenterCoordinate() -> CLLocationCoordinate2D {
-        return self.convert(CGPoint(x: self.frame.size.width / 2.0, y: 0), toCoordinateFrom: self)
-    }
-    
-    func currentRadius() -> Double {
-        let centerLocation = CLLocation(latitude: self.centerCoordinate.latitude, longitude: self.centerCoordinate.longitude)
-        let topCenterCoordinate = self.topCenterCoordinate()
-        let topCenterLocation = CLLocation(latitude: topCenterCoordinate.latitude, longitude: topCenterCoordinate.longitude)
-        return centerLocation.distance(from: topCenterLocation)
-    }
-    
-}
+

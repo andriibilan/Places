@@ -20,40 +20,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bs7-zQ-nIa">
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="epZ-6t-w9F">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="6eg-wI-33n" kind="embed" id="Tmn-Th-8TH"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRz-UB-V2K">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="5id-H3-pCg" kind="embed" id="9uW-v7-4UU"/>
+                                </connections>
+                            </containerView>
                             <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" horizontalCompressionResistancePriority="890" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nDW-Of-fAx">
                                 <rect key="frame" x="13" y="80" width="348" height="29"/>
                                 <segments>
                                     <segment title="Map"/>
                                     <segment title="List"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="oVJ-iD-v0a"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Bs7-zQ-nIa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-20" id="0iN-mK-1Vk"/>
                             <constraint firstItem="nDW-Of-fAx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="BWk-ZD-jnl"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Bs7-zQ-nIa" secondAttribute="bottom" id="Jak-V5-nCA"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Bs7-zQ-nIa" secondAttribute="trailing" id="WzM-Ke-SYt"/>
-                            <constraint firstItem="Bs7-zQ-nIa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="XzN-Vn-Qy3"/>
+                            <constraint firstItem="WRz-UB-V2K" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-20" id="NuZ-sC-Tq4"/>
                             <constraint firstItem="nDW-Of-fAx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="13" id="abx-qf-kCr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WRz-UB-V2K" secondAttribute="trailing" id="kio-g5-IJQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nDW-Of-fAx" secondAttribute="trailing" constant="14" id="p3p-Mj-9z1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="WRz-UB-V2K" secondAttribute="bottom" id="xY9-j2-QOe"/>
+                            <constraint firstItem="WRz-UB-V2K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xoH-9e-FRp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="EYl-4U-Y5F"/>
                     <connections>
-                        <outlet property="childView" destination="Bs7-zQ-nIa" id="n8T-Ju-Qiw"/>
-                        <outlet property="segmentControl" destination="nDW-Of-fAx" id="e8x-KB-mRz"/>
+                        <outlet property="listView" destination="WRz-UB-V2K" id="PgK-q7-BnM"/>
+                        <outlet property="mapView" destination="epZ-6t-w9F" id="rzk-cb-Pgw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="417" y="119"/>
+            <point key="canvasLocation" x="678" y="0.0"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="N6v-sr-aB5">
@@ -73,7 +85,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpA-aE-Hki">
-                                <rect key="frame" x="0.0" y="129" width="160" height="451"/>
+                                <rect key="frame" x="0.0" y="129" width="160" height="448"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKf-sT-1uI" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
                                         <rect key="frame" x="44" y="8" width="108" height="36"/>
@@ -286,7 +298,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cHr-Uv-c98" secondAttribute="height" multiplier="1:1" id="Tu3-s6-1Tk"/>
                                 </constraints>
-                                <state key="normal" image="134216-64-3"/>
+                                <state key="normal" image="211602-64"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
                                         <real key="value" value="1"/>
@@ -333,6 +345,9 @@
                                             <constraint firstAttribute="height" constant="50" id="bMP-6a-2Df"/>
                                         </constraints>
                                         <state key="normal" image="115801-64"/>
+                                        <connections>
+                                            <segue destination="fCN-jj-NYF" kind="show" id="obW-zI-TE2"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92018407579999995" green="0.29233893750000001" blue="0.4312838316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -359,7 +374,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Ny9-BK-1UC" secondAttribute="height" multiplier="1:1" id="imD-iD-k3A"/>
                                 </constraints>
-                                <state key="normal" image="211602-64"/>
+                                <state key="normal" image="134216-64-3"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="30"/>
@@ -391,9 +406,9 @@
                             <constraint firstAttribute="trailing" secondItem="DRm-1c-Gez" secondAttribute="trailing" id="Mc5-ca-otg"/>
                             <constraint firstItem="Ny9-BK-1UC" firstAttribute="leading" secondItem="J1c-lw-TzP" secondAttribute="leading" constant="20" id="NSy-qv-bgw"/>
                             <constraint firstItem="DRm-1c-Gez" firstAttribute="leading" secondItem="5Pq-cN-7gF" secondAttribute="leading" id="TbB-uU-m4O"/>
+                            <constraint firstItem="Ny9-BK-1UC" firstAttribute="top" secondItem="jpA-aE-Hki" secondAttribute="bottom" constant="10" id="f3m-ko-zmA"/>
                             <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="cHr-Uv-c98" secondAttribute="bottom" constant="20" id="gbc-6F-h6T"/>
                             <constraint firstItem="Ny9-BK-1UC" firstAttribute="width" secondItem="HFl-mO-hU1" secondAttribute="width" multiplier="0.16" id="hLh-Pa-Qd6"/>
-                            <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="jpA-aE-Hki" secondAttribute="bottom" constant="87" id="jyS-cQ-7NZ"/>
                             <constraint firstAttribute="trailing" secondItem="C0Q-sZ-dW2" secondAttribute="trailing" constant="-99" id="k9f-HY-mdY"/>
                             <constraint firstItem="J1c-lw-TzP" firstAttribute="trailing" secondItem="cHr-Uv-c98" secondAttribute="trailing" constant="20" id="kG6-iJ-9y5"/>
                             <constraint firstItem="jpA-aE-Hki" firstAttribute="leading" secondItem="J1c-lw-TzP" secondAttribute="leading" id="pP2-3r-bkg"/>
@@ -402,6 +417,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="J1c-lw-TzP"/>
                     </view>
+                    <navigationItem key="navigationItem" id="DAY-vo-2an"/>
                     <connections>
                         <outlet property="map" destination="HFl-mO-hU1" id="dop-oM-jhB"/>
                         <outlet property="menuView" destination="C0Q-sZ-dW2" id="W08-ni-WYD"/>
@@ -410,7 +426,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6B-D0-qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1488.8" y="-301.79910044977515"/>
+            <point key="canvasLocation" x="2216.8000000000002" y="-460.11994002998506"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="yvT-ZR-588">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" id="fCN-jj-NYF" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="cm7-hc-dL3"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kle-i7-qUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3575" y="-173"/>
         </scene>
         <!--List View Controller-->
         <scene sceneID="zcY-Zo-fQE">
@@ -504,7 +530,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QTz-Ho-Zm2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1488.8" y="553.67316341829087"/>
+            <point key="canvasLocation" x="2217" y="434"/>
         </scene>
     </scenes>
     <resources>
