@@ -115,27 +115,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         print("Error \(error)")
     }
 
-    func searchPins(){
-        let pins = Array<MKPointAnnotation>() // This is an empty array, so just use your array of locations or add to this.
-        
-        if let currentLocation = locationManager.location?.coordinate {
-            
-            for pin in pins {
-                
-                let locationMapPoint = MKMapPointForCoordinate(currentLocation)
-                
-                let pinMapPoint = MKMapPointForCoordinate(pin.coordinate)
-                
-                let distance = MKMetersBetweenMapPoints(locationMapPoint, pinMapPoint)
-                
-                if distance >= 0 && distance <= 200 {
-                    
-                    self.map.addAnnotation(pin)
-                }
-            }
-        }
-        
-    }
+  
     
     
     
@@ -156,17 +136,4 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     */
 
 }
-extension MKMapView {
-    
-    func topCenterCoordinate() -> CLLocationCoordinate2D {
-        return self.convert(CGPoint(x: self.frame.size.width / 2.0, y: 0), toCoordinateFrom: self)
-    }
-    
-    func currentRadius() -> Double {
-        let centerLocation = CLLocation(latitude: self.centerCoordinate.latitude, longitude: self.centerCoordinate.longitude)
-        let topCenterCoordinate = self.topCenterCoordinate()
-        let topCenterLocation = CLLocation(latitude: topCenterCoordinate.latitude, longitude: topCenterCoordinate.longitude)
-        return centerLocation.distance(from: topCenterLocation)
-    }
-    
-}
+
