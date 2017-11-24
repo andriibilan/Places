@@ -15,7 +15,7 @@
 		49E3C00B1FC6D19300400A06 /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00A1FC6D19300400A06 /* UIViewX.swift */; };
 		49E3C00D1FC6D1A000400A06 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */; };
 		49E3C00F1FC6E12800400A06 /* UIImageViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00E1FC6E12800400A06 /* UIImageViewX.swift */; };
-		52DA83411FC6CC5300CCC364 /* currentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA83401FC6CC5300CCC364 /* currentLocations.swift */; };
+		529191691FC715A0008FD5AB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529191681FC71598008FD5AB /* CoreLocation.framework */; };
 		75F7EB741FC59B75002F169E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB731FC59B75002F169E /* LoginViewController.swift */; };
 		75F7EB761FC59B84002F169E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB751FC59B84002F169E /* SignUpViewController.swift */; };
 		75F7EB791FC59E96002F169E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB781FC59E96002F169E /* ProfileViewController.swift */; };
@@ -32,6 +32,7 @@
 		8A8C5C8A1FC5A1C100A834EA /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C5C891FC5A1C100A834EA /* ListViewController.swift */; };
 		8A9BF7781FC6E22E002E970C /* MapSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BF7771FC6E22E002E970C /* MapSettingTableViewController.swift */; };
 		8A9BF77A1FC6E2F5002E970C /* UserSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BF7791FC6E2F5002E970C /* UserSettingTableViewController.swift */; };
+		8A9BF77C1FC6F89A002E970C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BF77B1FC6F89A002E970C /* ListTableViewCell.swift */; };
 		8AAC34041FC6D3BE0060C3A2 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AAC34031FC6D3BE0060C3A2 /* Settings.storyboard */; };
 		BF830C9C5DBC1BE7459571A2 /* Pods_Places.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3AF254E3C5EE01EBA2A9FF6 /* Pods_Places.framework */; };
 /* End PBXBuildFile section */
@@ -45,7 +46,7 @@
 		49E3C00A1FC6D19300400A06 /* UIViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
 		49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		49E3C00E1FC6E12800400A06 /* UIImageViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewX.swift; sourceTree = "<group>"; };
-		52DA83401FC6CC5300CCC364 /* currentLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = currentLocations.swift; sourceTree = "<group>"; };
+		529191681FC71598008FD5AB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		612ABD6E4073E47B3FBF9A37 /* Pods-Places.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Places.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Places/Pods-Places.debug.xcconfig"; sourceTree = "<group>"; };
 		75F7EB731FC59B75002F169E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		75F7EB751FC59B84002F169E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +66,7 @@
 		8A8C5C891FC5A1C100A834EA /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		8A9BF7771FC6E22E002E970C /* MapSettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSettingTableViewController.swift; sourceTree = "<group>"; };
 		8A9BF7791FC6E2F5002E970C /* UserSettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingTableViewController.swift; sourceTree = "<group>"; };
+		8A9BF77B1FC6F89A002E970C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		8AAC34031FC6D3BE0060C3A2 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		CB4057642B85CB5208C2B10D /* Pods-Places.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Places.release.xcconfig"; path = "Pods/Target Support Files/Pods-Places/Pods-Places.release.xcconfig"; sourceTree = "<group>"; };
 		E3AF254E3C5EE01EBA2A9FF6 /* Pods_Places.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Places.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				529191691FC715A0008FD5AB /* CoreLocation.framework in Frameworks */,
 				BF830C9C5DBC1BE7459571A2 /* Pods_Places.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +110,7 @@
 		68BFA9EE6ACA38C160097694 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				529191681FC71598008FD5AB /* CoreLocation.framework */,
 				E3AF254E3C5EE01EBA2A9FF6 /* Pods_Places.framework */,
 			);
 			name = Frameworks;
@@ -163,11 +167,11 @@
 				8A8C5C7C1FC57F3E00A834EA /* Assets.xcassets */,
 				8AAC34001FC6D2A10060C3A2 /* Settings */,
 				8A8C5C891FC5A1C100A834EA /* ListViewController.swift */,
+				8A9BF77B1FC6F89A002E970C /* ListTableViewCell.swift */,
 				8A8C5C871FC5A1B000A834EA /* MapViewController.swift */,
 				8A8C5C7E1FC57F3E00A834EA /* LaunchScreen.storyboard */,
 				8A8C5C811FC57F3E00A834EA /* Info.plist */,
 				75F7EB821FC5A8AD002F169E /* GoogleService-Info.plist */,
-				52DA83401FC6CC5300CCC364 /* currentLocations.swift */,
 			);
 			path = Places;
 			sourceTree = "<group>";
@@ -321,7 +325,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				75F7EB791FC59E96002F169E /* ProfileViewController.swift in Sources */,
-				52DA83411FC6CC5300CCC364 /* currentLocations.swift in Sources */,
 				2B4BA9141FC5EC0E00B5E598 /* DetailPlaceViewController.swift in Sources */,
 				49E3C0091FC6D18E00400A06 /* UIButtonX.swift in Sources */,
 				75F7EB741FC59B75002F169E /* LoginViewController.swift in Sources */,
@@ -330,6 +333,7 @@
 				8A8C5C781FC57F3E00A834EA /* ViewController.swift in Sources */,
 				49E3C00D1FC6D1A000400A06 /* FloatingActionButton.swift in Sources */,
 				8A8C5C881FC5A1B000A834EA /* MapViewController.swift in Sources */,
+				8A9BF77C1FC6F89A002E970C /* ListTableViewCell.swift in Sources */,
 				8A9BF7781FC6E22E002E970C /* MapSettingTableViewController.swift in Sources */,
 				2B4BA9151FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift in Sources */,
 				8A8C5C8A1FC5A1C100A834EA /* ListViewController.swift in Sources */,
