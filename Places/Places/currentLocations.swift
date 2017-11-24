@@ -27,8 +27,8 @@ class currentLocations: UIViewController, CLLocationManagerDelegate {
                 locationManager.distanceFilter = 200
                 
                     locationManager.startUpdatingLocation()
-                    locationManager.startUpdatingHeading()
-                let locValue : CLLocationCoordinate2D = locationManager.location!.coordinate
+             //       locationManager.startUpdatingHeading()
+            //    let locValue : CLLocationCoordinate2D = locationManager.location!.coordinate
             region = MKCoordinateRegion(center: locValue, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
 
                 
