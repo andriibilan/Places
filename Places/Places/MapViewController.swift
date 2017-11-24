@@ -85,7 +85,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
          region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        
+        let loc = CLLocation(latitude: location.coordinate.latitude as CLLocationDegrees, longitude: location.coordinate.longitude as CLLocationDegrees)
+        addRadiusCircle(location: loc)
         map.setRegion(region!, animated: true)
         let myAnnotation: MKPointAnnotation = MKPointAnnotation()
         myAnnotation.coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
@@ -116,7 +117,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         print("Error \(error)")
     }
 
-  
+    func addRadiusCircle(location: CLLocation){
+        self.map.delegate = self
+        let circle = MKCircle(center: location.coordinate, radius: 200 as CLLocationDistance)
+        self.map.add(circle)
+    }
+    
+    func mapView(_ map: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+//        if overlay is MKCircle {
+            let circle = MKCircleRenderer(overlay: overlay)
+            circle.strokeColor = UIColor.red
+            circle.fillColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.02)
+            circle.lineWidth = 1
+            return circle
+        
+    }
     
     
     
