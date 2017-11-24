@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2AS-bC-jLG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,10 +9,34 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="5VR-1I-NPR">
+            <objects>
+                <navigationController id="2AS-bC-jLG" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aaY-WP-u5N">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="a75-yv-vy1" kind="relationship" relationship="rootViewController" id="dh4-dk-p6R"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uek-iU-xMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-383" y="-644"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="VEF-Zo-01A">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="l3a-m8-3uX" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZqT-vy-dIt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1219" y="-1258"/>
+        </scene>
         <!--Settings-->
         <scene sceneID="Ruv-pv-FaT">
             <objects>
-                <tableViewController id="a75-yv-vy1" sceneMemberID="viewController">
+                <tableViewController id="a75-yv-vy1" customClass="SettingsTableViewController" customModule="Places" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="xo4-9C-tzx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,7 +61,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="87t-SJ-2K3" kind="show" id="CkO-XU-exT"/>
+                                            <segue destination="87t-SJ-2K3" kind="show" identifier="showMapSettings" id="CkO-XU-exT"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="r38-m9-F1R">
@@ -57,7 +81,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="IPJ-tp-u9Y" kind="show" id="XQ8-QB-9U3"/>
+                                            <segue destination="IPJ-tp-u9Y" kind="show" id="qKp-yu-g2G"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -68,11 +92,17 @@
                             <outlet property="delegate" destination="a75-yv-vy1" id="Cj2-nX-oCX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="FqC-I0-bg9"/>
+                    <navigationItem key="navigationItem" title="Settings" id="FqC-I0-bg9">
+                        <barButtonItem key="leftBarButtonItem" title="❮ Back" id="Bhf-R8-li8">
+                            <connections>
+                                <segue destination="l3a-m8-3uX" kind="show" id="cXj-Ib-bh6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bZ-XV-gte" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="740" y="-643.62818590704649"/>
+            <point key="canvasLocation" x="713" y="-643"/>
         </scene>
         <!--User Setting Table View Controller-->
         <scene sceneID="ixu-0Y-owy">
@@ -100,14 +130,8 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <connections>
-                                                <outletCollection property="gestureRecognizers" destination="NYR-oD-qxj" id="5ew-5D-82p"/>
-                                            </connections>
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="6iB-C3-S3x" appends="YES" id="HWx-sb-Rh3"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="dM6-2f-i4H">
                                         <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
@@ -126,9 +150,6 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="MPD-DR-3p5" appends="YES" id="bFF-Bi-cIc"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -138,20 +159,11 @@
                             <outlet property="delegate" destination="IPJ-tp-u9Y" id="HTT-qj-84h"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="KsR-hY-xwO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="efm-IH-9rM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="6iB-C3-S3x" userLabel="Tap Gesture Recognizer for email">
-                    <connections>
-                        <action selector="changeEmail:" destination="IPJ-tp-u9Y" id="aAQ-vQ-Qwz"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="MPD-DR-3p5" userLabel="Tap Gesture Recognizer for password">
-                    <connections>
-                        <action selector="changePassword:" destination="IPJ-tp-u9Y" id="wVN-y6-ywW"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1773.5999999999999" y="-236.13193403298354"/>
+            <point key="canvasLocation" x="1836" y="-226"/>
         </scene>
         <!--Map Setting Table View Controller-->
         <scene sceneID="QOB-7R-CQh">
@@ -179,8 +191,8 @@
                                                         <action selector="sliderRadius:" destination="87t-SJ-2K3" eventType="valueChanged" id="hAj-UM-Gnn"/>
                                                     </connections>
                                                 </slider>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFu-uj-a6c">
-                                                    <rect key="frame" x="262" y="11" width="53" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="200  m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFu-uj-a6c">
+                                                    <rect key="frame" x="262" y="11" width="69" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -204,6 +216,7 @@
                             <outlet property="delegate" destination="87t-SJ-2K3" id="dRs-fv-GM0"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Tfw-fO-q1Z"/>
                     <connections>
                         <outlet property="mapRadius" destination="JFu-uj-a6c" id="nyq-d4-1Tu"/>
                     </connections>
@@ -211,22 +224,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qIL-FA-87S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1773.5999999999999" y="-955.77211394302856"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="WJe-gX-Pmo">
-            <objects>
-                <navigationController id="enp-um-YWC" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="t2B-4D-iDs">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="a75-yv-vy1" kind="relationship" relationship="rootViewController" id="CD6-6R-dL7"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="n1a-Ve-9JD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-46" y="-642"/>
         </scene>
     </scenes>
 </document>

@@ -48,7 +48,7 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+           
         currentLocation.determineMyCurrentLocation()
         if currentLocation.region != nil {
             self.map.setRegion(currentLocation.region!, animated: true)
