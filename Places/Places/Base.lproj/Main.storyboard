@@ -20,9 +20,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="epZ-6t-w9F">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epZ-6t-w9F">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="6eg-wI-33n" kind="embed" id="Tmn-Th-8TH"/>
                                 </connections>
@@ -47,11 +46,15 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="nDW-Of-fAx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="BWk-ZD-jnl"/>
+                            <constraint firstItem="epZ-6t-w9F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DRh-0I-QfF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="epZ-6t-w9F" secondAttribute="bottom" id="GpT-c3-XXA"/>
                             <constraint firstItem="WRz-UB-V2K" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-20" id="NuZ-sC-Tq4"/>
                             <constraint firstItem="nDW-Of-fAx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="13" id="abx-qf-kCr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="epZ-6t-w9F" secondAttribute="top" constant="20" id="dOC-SB-nne"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WRz-UB-V2K" secondAttribute="trailing" id="kio-g5-IJQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nDW-Of-fAx" secondAttribute="trailing" constant="14" id="p3p-Mj-9z1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="WRz-UB-V2K" secondAttribute="bottom" id="xY9-j2-QOe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="epZ-6t-w9F" secondAttribute="trailing" id="xbC-p8-la3"/>
                             <constraint firstItem="WRz-UB-V2K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xoH-9e-FRp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -65,12 +68,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="678" y="0.0"/>
+            <point key="canvasLocation" x="677.60000000000002" y="-0.44977511244377816"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="N6v-sr-aB5">
             <objects>
-                <viewController storyboardIdentifier="mapVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6eg-wI-33n" customClass="MapViewController" customModule="Places" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mapVC" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6eg-wI-33n" customClass="MapViewController" customModule="Places" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Pq-cN-7gF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -78,218 +81,55 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="HFl-mO-hU1">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="DRm-1c-Gez">
-                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpA-aE-Hki">
-                                <rect key="frame" x="0.0" y="129" width="160" height="448"/>
+                                <rect key="frame" x="0.0" y="120" width="160" height="457"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKf-sT-1uI" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="8" width="108" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.9147612452507019" green="0.79515409469604492" blue="0.39071303606033325" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="if_appicns_Safari_85110" translatesAutoresizingMaskIntoConstraints="NO" id="c0X-bS-dGN" customClass="UIImageViewX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="52" width="36" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="30"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0C-nW-JVd" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="52" width="108" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.88167840242385864" green="0.45916438102722168" blue="0.33434653282165527" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="if_appicns_Safari_85110" translatesAutoresizingMaskIntoConstraints="NO" id="uYZ-mQ-eFs" customClass="UIImageViewX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="96" width="36" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="30"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQ5-u1-JB5" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="96" width="108" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.61437207460403442" green="0.23152616620063782" blue="0.32045483589172363" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="if_appicns_Safari_85110" translatesAutoresizingMaskIntoConstraints="NO" id="gBV-jS-e7p" customClass="UIImageViewX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="140" width="36" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="30"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g86-4x-JfW" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="140" width="108" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.32310307025909424" green="0.19328123331069946" blue="0.34327450394630432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="if_appicns_Safari_85110" translatesAutoresizingMaskIntoConstraints="NO" id="WbJ-Ja-paX" customClass="UIImageViewX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="184" width="36" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="30"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5b9-c5-h05" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="184" width="108" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.79237461090087891" green="0.9146086573600769" blue="0.44901198148727417" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="if_appicns_Safari_85110" translatesAutoresizingMaskIntoConstraints="NO" id="j9G-Mb-J7T" customClass="UIImageViewX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="228" width="36" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="30"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtL-1L-HWe" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="228" width="108" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.42668867111206055" green="0.74215775728225708" blue="0.50128507614135742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="if_appicns_Safari_85110" translatesAutoresizingMaskIntoConstraints="NO" id="kIc-fH-MGc" customClass="UIImageViewX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="272" width="36" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="30"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lw7-8F-PAe" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="272" width="108" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.33604896068572998" green="0.32673662900924683" blue="0.60326278209686279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="if_appicns_Safari_85110" translatesAutoresizingMaskIntoConstraints="NO" id="ntY-ql-qYp" customClass="UIImageViewX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="316" width="36" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="30"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aR6-9Z-pLI" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="316" width="108" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.34741002321243286" green="0.7764706015586853" blue="0.99105125665664673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="if_appicns_Safari_85110" translatesAutoresizingMaskIntoConstraints="NO" id="mBA-8h-joL" customClass="UIImageViewX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="360" width="36" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="30"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofs-Tw-fQv" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="360" width="108" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.96768254041671753" green="0.40215975046157837" blue="0.85523921251296997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="if_appicns_Safari_85110" translatesAutoresizingMaskIntoConstraints="NO" id="gfz-Ju-Rt4" customClass="UIImageViewX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="404" width="36" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="30"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9DY-1Z-8cc" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="404" width="108" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.2275260389" green="0.67915946250000003" blue="0.54944974179999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="if_appicns_Safari_85110" translatesAutoresizingMaskIntoConstraints="NO" id="QXT-1m-ahv" customClass="UIImageViewX" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="8" width="36" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="30"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dvC-Vm-Gg7">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="457"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mapFilter" rowHeight="51" id="Y7v-38-1T7" customClass="MapFilterTableViewCell" customModule="Places" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="160" height="51"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y7v-38-1T7" id="t5Y-3J-c6J">
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="50.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RHs-Xx-xri">
+                                                            <rect key="frame" x="4" y="4" width="43" height="42"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="RHs-Xx-xri" secondAttribute="height" multiplier="43:42" id="6m7-dB-F8g"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dkm-pO-2KY">
+                                                            <rect key="frame" x="57" y="10" width="93" height="30"/>
+                                                            <state key="normal" title="Filter"/>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="RHs-Xx-xri" firstAttribute="top" secondItem="t5Y-3J-c6J" secondAttribute="top" constant="4" id="0zp-01-XCc"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Dkm-pO-2KY" secondAttribute="trailing" constant="10" id="8kd-E9-ple"/>
+                                                        <constraint firstItem="Dkm-pO-2KY" firstAttribute="top" secondItem="t5Y-3J-c6J" secondAttribute="top" constant="10" id="EW2-py-L6F"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Dkm-pO-2KY" secondAttribute="bottom" constant="10" id="aVH-em-ouy"/>
+                                                        <constraint firstItem="RHs-Xx-xri" firstAttribute="leading" secondItem="t5Y-3J-c6J" secondAttribute="leading" constant="4" id="k5m-c4-bzM"/>
+                                                        <constraint firstItem="Dkm-pO-2KY" firstAttribute="leading" secondItem="RHs-Xx-xri" secondAttribute="trailing" constant="10" id="l1I-YF-qlb"/>
+                                                        <constraint firstAttribute="bottom" secondItem="RHs-Xx-xri" secondAttribute="bottom" constant="4" id="w2q-Zw-wbo"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="iconFilter" destination="RHs-Xx-xri" id="K37-XY-8Pt"/>
+                                                    <outlet property="nameFilter" destination="Dkm-pO-2KY" id="m4S-Ij-dNf"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="dvC-Vm-Gg7" secondAttribute="bottom" id="5ao-oD-d19"/>
+                                    <constraint firstItem="dvC-Vm-Gg7" firstAttribute="leading" secondItem="jpA-aE-Hki" secondAttribute="leading" id="Cno-eB-0u4"/>
+                                    <constraint firstAttribute="trailing" secondItem="dvC-Vm-Gg7" secondAttribute="trailing" id="Lxl-ba-lsV"/>
                                     <constraint firstAttribute="width" constant="160" id="weH-Vx-05d"/>
+                                    <constraint firstItem="dvC-Vm-Gg7" firstAttribute="top" secondItem="jpA-aE-Hki" secondAttribute="top" id="zzV-mA-AdY"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHr-Uv-c98" customClass="FloatingActionButton" customModule="Places" customModuleProvider="target">
@@ -317,6 +157,13 @@
                                     <action selector="menuTapped:" destination="6eg-wI-33n" eventType="touchUpInside" id="yMb-Me-EOd"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="DRm-1c-Gez">
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <viewLayoutGuide key="safeArea" id="cxa-2c-GQc"/>
+                                <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0Q-sZ-dW2" customClass="UIViewX" customModule="Places" customModuleProvider="target">
                                 <rect key="frame" x="184" y="481" width="290" height="290"/>
                                 <subviews>
@@ -397,20 +244,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="HFl-mO-hU1" firstAttribute="leading" secondItem="5Pq-cN-7gF" secondAttribute="leading" id="2hc-jg-V0F"/>
+                            <constraint firstItem="DRm-1c-Gez" firstAttribute="top" secondItem="J1c-lw-TzP" secondAttribute="top" id="44M-VI-ode"/>
                             <constraint firstItem="cHr-Uv-c98" firstAttribute="width" secondItem="J1c-lw-TzP" secondAttribute="width" multiplier="0.16" id="5pP-g5-aNC"/>
                             <constraint firstItem="HFl-mO-hU1" firstAttribute="top" secondItem="5Pq-cN-7gF" secondAttribute="top" id="8RG-rd-MgE"/>
-                            <constraint firstItem="DRm-1c-Gez" firstAttribute="top" secondItem="5Pq-cN-7gF" secondAttribute="top" constant="20" id="FCv-Az-smr"/>
+                            <constraint firstItem="jpA-aE-Hki" firstAttribute="top" secondItem="J1c-lw-TzP" secondAttribute="top" constant="100" id="CaG-X2-HKE"/>
                             <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="Ny9-BK-1UC" secondAttribute="bottom" constant="20" id="Faf-pQ-j1Y"/>
                             <constraint firstAttribute="trailing" secondItem="HFl-mO-hU1" secondAttribute="trailing" id="Jgj-z7-C4o"/>
-                            <constraint firstItem="jpA-aE-Hki" firstAttribute="top" secondItem="DRm-1c-Gez" secondAttribute="bottom" constant="53" id="LET-Ev-1V9"/>
                             <constraint firstAttribute="trailing" secondItem="DRm-1c-Gez" secondAttribute="trailing" id="Mc5-ca-otg"/>
                             <constraint firstItem="Ny9-BK-1UC" firstAttribute="leading" secondItem="J1c-lw-TzP" secondAttribute="leading" constant="20" id="NSy-qv-bgw"/>
                             <constraint firstItem="DRm-1c-Gez" firstAttribute="leading" secondItem="5Pq-cN-7gF" secondAttribute="leading" id="TbB-uU-m4O"/>
-                            <constraint firstItem="Ny9-BK-1UC" firstAttribute="top" secondItem="jpA-aE-Hki" secondAttribute="bottom" constant="10" id="f3m-ko-zmA"/>
                             <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="cHr-Uv-c98" secondAttribute="bottom" constant="20" id="gbc-6F-h6T"/>
                             <constraint firstItem="Ny9-BK-1UC" firstAttribute="width" secondItem="HFl-mO-hU1" secondAttribute="width" multiplier="0.16" id="hLh-Pa-Qd6"/>
                             <constraint firstAttribute="trailing" secondItem="C0Q-sZ-dW2" secondAttribute="trailing" constant="-99" id="k9f-HY-mdY"/>
                             <constraint firstItem="J1c-lw-TzP" firstAttribute="trailing" secondItem="cHr-Uv-c98" secondAttribute="trailing" constant="20" id="kG6-iJ-9y5"/>
+                            <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="jpA-aE-Hki" secondAttribute="bottom" constant="90" id="nOX-EX-x6c"/>
                             <constraint firstItem="jpA-aE-Hki" firstAttribute="leading" secondItem="J1c-lw-TzP" secondAttribute="leading" id="pP2-3r-bkg"/>
                             <constraint firstAttribute="bottom" secondItem="HFl-mO-hU1" secondAttribute="bottom" id="x6g-nc-txe"/>
                             <constraint firstAttribute="bottom" secondItem="C0Q-sZ-dW2" secondAttribute="bottom" constant="-104" id="ylg-zb-IBn"/>
@@ -419,6 +266,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="DAY-vo-2an"/>
                     <connections>
+                        <outlet property="filterTableView" destination="dvC-Vm-Gg7" id="6Y1-3v-t36"/>
                         <outlet property="map" destination="HFl-mO-hU1" id="dop-oM-jhB"/>
                         <outlet property="menuView" destination="C0Q-sZ-dW2" id="W08-ni-WYD"/>
                         <outlet property="sideMenuConstraint" destination="pP2-3r-bkg" id="RRV-nQ-R41"/>
@@ -539,6 +387,5 @@
         <image name="211602-64" width="32" height="32"/>
         <image name="2703062-64" width="32" height="32"/>
         <image name="2703073-64" width="32" height="32"/>
-        <image name="if_appicns_Safari_85110" width="64" height="63"/>
     </resources>
 </document>

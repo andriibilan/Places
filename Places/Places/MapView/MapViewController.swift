@@ -11,13 +11,14 @@ import MapKit
 import CoreLocation
 
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
    
     //var currentLocation = currentLocations()
     @IBOutlet weak var map: MKMapView!
-
+    @IBOutlet weak var filterTableView: UITableView!
+    
     @IBAction func currentLocation(_ sender: Any) {
         if region != nil {
             self.map.setRegion(region!, animated: true)
@@ -32,7 +33,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBAction func showSideMenu(_ sender: Any) {
         if isSideMenuHidden {
             sideMenuConstraint.constant = 0
-            UIView.animate(withDuration: 0.5, animations: { self.view.layoutIfNeeded()})
+            UIView.animate(withDuration: 0.5, animations:
+                { self.view.layoutIfNeeded()}
+            
+            )
         } else {
             sideMenuConstraint.constant = -160
             UIView.animate(withDuration: 0.5, animations: { self.view.layoutIfNeeded()})
@@ -54,7 +58,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        filterTableView.delegate = self
+        filterTableView.dataSource = self
         
         //map.showsUserLocation = true
         
@@ -117,7 +122,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     {
         print("Error \(error)")
     }
-
+    
     func addRadiusCircle(location: CLLocation){
         self.map.delegate = self
         let circle = MKCircle(center: location.coordinate, radius: 200 as CLLocationDistance)
@@ -125,32 +130,50 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func mapView(_ map: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-//        if overlay is MKCircle {
-            let circle = MKCircleRenderer(overlay: overlay)
-            circle.strokeColor = UIColor.red
-            circle.fillColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.02)
-            circle.lineWidth = 1
-            return circle
+        //        if overlay is MKCircle {
+        let circle = MKCircleRenderer(overlay: overlay)
+        circle.strokeColor = UIColor.red
+        circle.fillColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.02)
+        circle.lineWidth = 1
+        return circle
         
     }
     
+  
+    let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
+    let iconFilterArray = [#imageLiteral(resourceName: "rsz_bar"),#imageLiteral(resourceName: "rsz_cafe"),#imageLiteral(resourceName: "rsz_restaurant"), #imageLiteral(resourceName: "rsz_bank"),#imageLiteral(resourceName: "rsz_nightclub") ,#imageLiteral(resourceName: "rsz_museum"),#imageLiteral(resourceName: "rsz_beutysalon"),#imageLiteral(resourceName: "rsz_pharmacy"),#imageLiteral(resourceName: "rsz_hospital"),#imageLiteral(resourceName: "rsz_bus_station"),#imageLiteral(resourceName: "rsz_gasstation"),#imageLiteral(resourceName: "rsz_1university"), #imageLiteral(resourceName: "rsz_police"),#imageLiteral(resourceName: "rsz_church"),#imageLiteral(resourceName: "rsz_cemetery"),#imageLiteral(resourceName: "rsz_park"),#imageLiteral(resourceName: "rsz_gym")]
     
-    
-//    func closeMenu(){
-//         menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-//    }
-//
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    */
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return nameFilterArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let filterCell = tableView.dequeueReusableCell(withIdentifier: "mapFilter", for: indexPath) as! MapFilterTableViewCell
+        let name = nameFilterArray[indexPath.row]
+       filterCell.nameFilter.setTitle(name, for: .normal)
+       filterCell.iconFilter.image = iconFilterArray[indexPath.row]
+        
+        return filterCell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+ // first version
+       // let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
+       //cell.layer.transform = transform
+//second version
+        cell.layer.transform = CATransform3DScale(CATransform3DIdentity, -1, 1, 1)
+        UIView.animate(withDuration: 0.4) {
+            cell.alpha = 1
+            cell.layer.transform = CATransform3DIdentity
+        }
+    }
+
 
 }
 

@@ -34,6 +34,7 @@
 		8A9BF77A1FC6E2F5002E970C /* UserSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BF7791FC6E2F5002E970C /* UserSettingTableViewController.swift */; };
 		8A9BF77C1FC6F89A002E970C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BF77B1FC6F89A002E970C /* ListTableViewCell.swift */; };
 		8A9BF77E1FC72238002E970C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BF77D1FC72238002E970C /* SettingsTableViewController.swift */; };
+		8AA21ED51FC8446B0046202F /* MapFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA21ED41FC8446B0046202F /* MapFilterTableViewCell.swift */; };
 		8AAC34041FC6D3BE0060C3A2 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AAC34031FC6D3BE0060C3A2 /* Settings.storyboard */; };
 		BF830C9C5DBC1BE7459571A2 /* Pods_Places.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3AF254E3C5EE01EBA2A9FF6 /* Pods_Places.framework */; };
 /* End PBXBuildFile section */
@@ -69,6 +70,7 @@
 		8A9BF7791FC6E2F5002E970C /* UserSettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingTableViewController.swift; sourceTree = "<group>"; };
 		8A9BF77B1FC6F89A002E970C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		8A9BF77D1FC72238002E970C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		8AA21ED41FC8446B0046202F /* MapFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterTableViewCell.swift; sourceTree = "<group>"; };
 		8AAC34031FC6D3BE0060C3A2 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		CB4057642B85CB5208C2B10D /* Pods-Places.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Places.release.xcconfig"; path = "Pods/Target Support Files/Pods-Places/Pods-Places.release.xcconfig"; sourceTree = "<group>"; };
 		E3AF254E3C5EE01EBA2A9FF6 /* Pods_Places.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Places.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,21 +163,38 @@
 			children = (
 				75F7EB721FC59B5B002F169E /* Login */,
 				75F7EB771FC59E80002F169E /* Profile */,
-				8A8C5C751FC57F3E00A834EA /* AppDelegate.swift */,
 				49E3C0071FC6D0CF00400A06 /* Custom elements */,
-				8A8C5C771FC57F3E00A834EA /* ViewController.swift */,
-				8A8C5C791FC57F3E00A834EA /* Main.storyboard */,
 				2B4BA90E1FC5EC0E00B5E598 /* Detail Place */,
+				8A8C5C771FC57F3E00A834EA /* ViewController.swift */,
+				8A8C5C751FC57F3E00A834EA /* AppDelegate.swift */,
+				8A8C5C791FC57F3E00A834EA /* Main.storyboard */,
 				8A8C5C7C1FC57F3E00A834EA /* Assets.xcassets */,
 				8AAC34001FC6D2A10060C3A2 /* Settings */,
-				8A8C5C891FC5A1C100A834EA /* ListViewController.swift */,
-				8A9BF77B1FC6F89A002E970C /* ListTableViewCell.swift */,
-				8A8C5C871FC5A1B000A834EA /* MapViewController.swift */,
+				8AA21ED31FC844360046202F /* ListView */,
+				8AA21ED11FC844120046202F /* MapView */,
 				8A8C5C7E1FC57F3E00A834EA /* LaunchScreen.storyboard */,
 				8A8C5C811FC57F3E00A834EA /* Info.plist */,
 				75F7EB821FC5A8AD002F169E /* GoogleService-Info.plist */,
 			);
 			path = Places;
+			sourceTree = "<group>";
+		};
+		8AA21ED11FC844120046202F /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				8A8C5C871FC5A1B000A834EA /* MapViewController.swift */,
+				8AA21ED41FC8446B0046202F /* MapFilterTableViewCell.swift */,
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
+		8AA21ED31FC844360046202F /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+				8A8C5C891FC5A1C100A834EA /* ListViewController.swift */,
+				8A9BF77B1FC6F89A002E970C /* ListTableViewCell.swift */,
+			);
+			path = ListView;
 			sourceTree = "<group>";
 		};
 		8AAC34001FC6D2A10060C3A2 /* Settings */ = {
@@ -335,6 +354,7 @@
 				49E3C00B1FC6D19300400A06 /* UIViewX.swift in Sources */,
 				8A8C5C781FC57F3E00A834EA /* ViewController.swift in Sources */,
 				49E3C00D1FC6D1A000400A06 /* FloatingActionButton.swift in Sources */,
+				8AA21ED51FC8446B0046202F /* MapFilterTableViewCell.swift in Sources */,
 				8A8C5C881FC5A1B000A834EA /* MapViewController.swift in Sources */,
 				8A9BF77C1FC6F89A002E970C /* ListTableViewCell.swift in Sources */,
 				8A9BF7781FC6E22E002E970C /* MapSettingTableViewController.swift in Sources */,

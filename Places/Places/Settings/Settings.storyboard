@@ -95,7 +95,7 @@
                     <navigationItem key="navigationItem" title="Settings" id="FqC-I0-bg9">
                         <barButtonItem key="leftBarButtonItem" title="❮ Back" id="Bhf-R8-li8">
                             <connections>
-                                <segue destination="l3a-m8-3uX" kind="show" id="cXj-Ib-bh6"/>
+                                <segue destination="l3a-m8-3uX" kind="show" animates="NO" id="cXj-Ib-bh6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
