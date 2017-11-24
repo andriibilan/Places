@@ -77,6 +77,10 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="HFl-mO-hU1">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Pcr-ak-bxN" appends="YES" id="hU2-zU-6mZ"/>
+                                </connections>
                             </mapView>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="DRm-1c-Gez">
                                 <rect key="frame" x="0.0" y="20" width="375" height="56"/>
@@ -425,6 +429,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6B-D0-qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Pcr-ak-bxN">
+                    <connections>
+                        <action selector="addAnnotation:" destination="6eg-wI-33n" id="TCb-Z6-QW7"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2216.8000000000002" y="-460.11994002998506"/>
         </scene>
