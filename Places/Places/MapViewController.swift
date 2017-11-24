@@ -11,12 +11,18 @@ import MapKit
 import CoreLocation
 
 
-class MapViewController: UIViewController {
-
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+    var locationManager:CLLocationManager!
+    var region: MKCoordinateRegion?
    
-    var currentLocation = currentLocations()
+    //var currentLocation = currentLocations()
     @IBOutlet weak var map: MKMapView!
 
+    @IBAction func currentLocation(_ sender: Any) {
+        if region != nil {
+            self.map.setRegion(region!, animated: true)
+        }
+    }
     
     @IBOutlet weak var menuView: UIViewX!
     @IBOutlet weak var sideMenuConstraint: NSLayoutConstraint!
@@ -48,18 +54,87 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-           
-        currentLocation.determineMyCurrentLocation()
-        if currentLocation.region != nil {
-            self.map.setRegion(currentLocation.region!, animated: true)
+
+        
+        //map.showsUserLocation = true
+        
+        
+        if (CLLocationManager.locationServicesEnabled())
+        {
+            locationManager = CLLocationManager()
+            locationManager.delegate = self
+            locationManager.requestLocation()
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestAlwaysAuthorization()
+            if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+                locationManager.startUpdatingLocation()
+            } else {
+                locationManager!.requestWhenInUseAuthorization()
+            }
         }
-        map.showsUserLocation = true
+        
         sideMenuConstraint.constant = -160
          menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         // Do any additional setup after loading the view.
     }
 
+    // radius / places in radius
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+        let location = locations.last! as CLLocation
+        
+        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+         region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        let loc = CLLocation(latitude: location.coordinate.latitude as CLLocationDegrees, longitude: location.coordinate.longitude as CLLocationDegrees)
+        addRadiusCircle(location: loc)
+        map.setRegion(region!, animated: true)
+        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
+        myAnnotation.coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        myAnnotation.title = "Current location"
+        map.addAnnotation(myAnnotation)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    
+        switch status {
+        case .notDetermined:
+            print("NotDetermined")
+        case .restricted:
+            print("Restricted")
+        case .denied:
+            print("Denied")
+        case .authorizedAlways:
+            print("AuthorizedAlways")
+        case .authorizedWhenInUse:
+            print("AuthorizedWhenInUse")
+            locationManager!.startUpdatingLocation()
+        }
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        print("Error \(error)")
+    }
 
+    func addRadiusCircle(location: CLLocation){
+        self.map.delegate = self
+        let circle = MKCircle(center: location.coordinate, radius: 200 as CLLocationDistance)
+        self.map.add(circle)
+    }
+    
+    func mapView(_ map: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+//        if overlay is MKCircle {
+            let circle = MKCircleRenderer(overlay: overlay)
+            circle.strokeColor = UIColor.red
+            circle.fillColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.02)
+            circle.lineWidth = 1
+            return circle
+        
+    }
+    
+    
     
 //    func closeMenu(){
 //         menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
@@ -78,3 +153,4 @@ class MapViewController: UIViewController {
     */
 
 }
+
