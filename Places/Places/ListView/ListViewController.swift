@@ -48,11 +48,37 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		}
 	}
 	
+	@IBAction func sortingButtonTapped(_ sender: UIButton) {
+		
+		
+		if sortingByName {
+			sender.setImage( #imageLiteral(resourceName: "name-sorting"), for: .normal)
+			sortingByName = false
+		} else {
+			sender.setImage(#imageLiteral(resourceName: "distance-sorting"), for: .normal)
+			sortingByName = true
+		}
+	}
+	
+	@IBAction func filteringButtonTapped(_ sender: UIButton) {
+		
+		if filterOpenOnly {
+			sender.setImage( #imageLiteral(resourceName: "clear-filter"), for: .normal)
+			filterOpenOnly = false
+		} else {
+			sender.setImage(#imageLiteral(resourceName: "filter"), for: .normal)
+			filterOpenOnly = true
+		}
+		
+	}
+	
 	
 	public var places:[PlaceTemp] = []
 	private var searchResults: [PlaceTemp] = []
 	private var searchController: UISearchController!
 	
+	private var filterOpenOnly = true
+	private var sortingByName = true
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
