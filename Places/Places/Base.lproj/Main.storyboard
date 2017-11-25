@@ -386,6 +386,7 @@
                                             <outlet property="openClosedImageView" destination="p6s-8p-6vs" id="cLd-1s-tZc"/>
                                             <outlet property="thumbnailImageView" destination="qUf-PE-xaD" id="zko-YY-fOK"/>
                                             <outlet property="type" destination="gmi-NC-vDE" id="sVj-e6-b4q"/>
+                                            <segue destination="w39-4y-S2s" kind="show" identifier="ShowDetailPlace" id="NOk-4w-6xs"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -447,6 +448,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QTz-Ho-Zm2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2217" y="434"/>
+        </scene>
+        <!--DetailPlace-->
+        <scene sceneID="dVY-x5-2jD">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DetailPlace" id="w39-4y-S2s" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8bm-Uw-XWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3393" y="539"/>
         </scene>
     </scenes>
     <resources>
