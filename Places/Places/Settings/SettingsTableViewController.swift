@@ -8,11 +8,11 @@
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController {
-
+class SettingsTableViewController: UITableViewController{
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationController?.isNavigationBarHidden = false
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -20,7 +20,9 @@ class SettingsTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-
+    
+    
+    
 
     // MARK: - Table view data source
 
@@ -38,6 +40,8 @@ class SettingsTableViewController: UITableViewController {
             switch identifier {
             case "showMapSettings":
                 let mapSettingsVC = segue.destination as! MapSettingTableViewController
+
+                
 //            case "showUserSettings":
 //                let userSettingsVC = segue.destination as! UserSettingTableViewController
             default:

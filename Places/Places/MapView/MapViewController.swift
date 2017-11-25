@@ -17,6 +17,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
 
+
     let locationData = [
         //Walker Art Gallery
         ["name": "Walker Art Gallery",
@@ -79,7 +80,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         super.viewDidLoad()
         filterTableView.delegate = self
         filterTableView.dataSource = self
-
+       // print(UserDefaults.standard.integer(forKey: "Radius"))
         addAnnotations(coords: locationData)
         //map.showsUserLocation = true
         
