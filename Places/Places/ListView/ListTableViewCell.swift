@@ -2,8 +2,8 @@
 //  ListTableViewCell.swift
 //  Places
 //
-//  Created by andriibilan on 11/23/17.
-//  Copyright © 2017 andriibilan. All rights reserved.
+//  Created by Roman Melnychok on 11/23/17.
+//  Copyright © 2017 Roman Melnychok. All rights reserved.
 //
 
 import UIKit
@@ -11,10 +11,32 @@ import UIKit
 
 class ListTableViewCell: UITableViewCell {
 	
-	@IBOutlet weak var imageIcon: UIImageView!
-	@IBOutlet weak var namePlace: UILabel!
-	@IBOutlet weak var isOpen: UILabel!
-	@IBOutlet weak var distanceToUser: UILabel!
+	@IBOutlet weak var thumbnailImageView: UIImageView! {
+		didSet {
+			thumbnailImageView.layer.cornerRadius = thumbnailImageView.bounds.width / 2
+			thumbnailImageView.clipsToBounds = true
+		}
+	}
+
+	@IBOutlet weak var name: UILabel!
+		{
+		didSet {
+			name.numberOfLines = 0
+		}
+	}
+	@IBOutlet weak var type: UILabel!
+		{
+		didSet {
+			type.numberOfLines = 0
+		}
+	}
+	@IBOutlet weak var openClosedImageView: UIImageView!
+	@IBOutlet weak var distance: UILabel!
+		{
+		didSet {
+			distance.numberOfLines = 0
+		}
+	}
 	
 	
 	
@@ -27,10 +49,26 @@ class ListTableViewCell: UITableViewCell {
 	
 	func configureCell(with place: PlaceTemp)  {
 		
-		imageIcon.image = #imageLiteral(resourceName: "noPhotoIcon")
-		namePlace.text = "temp"
-		isOpen.text = "open"
-		isOpen.textColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
+		thumbnailImageView.image = #imageLiteral(resourceName: "marker")
+		name.text = place.name ?? "Name"
+
+		openClosedImageView.image = nil
+
+		//Open/Closed
+		let placeIsOpen = place.isOpen ?? false
+
+		if placeIsOpen {
+			openClosedImageView.image = #imageLiteral(resourceName: "open-sign")
+		} else {
+			openClosedImageView.image = #imageLiteral(resourceName: "closed-sign")
+		}
+		
+		if let dist = place.distance {
+			distance.text = "\(dist.rounded(toPlaces: 2)) м."
+
+		}
+
+		
 		
 	}
 	

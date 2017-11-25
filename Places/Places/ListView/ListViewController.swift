@@ -2,8 +2,8 @@
 //  ListViewController.swift
 //  Places
 //
-//  Created by andriibilan on 11/22/17.
-//  Copyright © 2017 andriibilan. All rights reserved.
+//  Created by Roman Melnychok on 11/22/17.
+//  Copyright © 2017 Roman Melnychok. All rights reserved.
 //
 
 import UIKit
@@ -14,13 +14,39 @@ class PlaceTemp {
 	var name:String?
 	var isOpen:Bool?
 	var distance:Double?
-	var imageURL:[String]?
+	var photos:[String]?
+	var type: String
+	
+	
+	init(name: String, isOpen: Bool, distance: Double, photos: [String], type:String ) {
+		
+		self.name = name
+		self.isOpen = isOpen
+		self.distance = distance
+		self.photos = photos
+		self.type = type
+		
+	}
 	
 }
 
 class ListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
 	
 	@IBOutlet weak var tableView: UITableView!
+	
+	@IBOutlet weak var sortingButton: UIButton! {
+		didSet {
+			sortingButton.layer.cornerRadius = sortingButton.bounds.width / 2
+			sortingButton.clipsToBounds = true
+		}
+	}
+	
+	@IBOutlet weak var filteringButton: UIButton!{
+		didSet {
+			filteringButton.layer.cornerRadius = filteringButton.bounds.width / 2
+			filteringButton.clipsToBounds = true
+		}
+	}
 	
 	
 	public var places:[PlaceTemp] = []
@@ -40,10 +66,20 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		//tableView.estimatedRowHeight = 120
 		//tableView.rowHeight = UITableViewAutomaticDimension
 		
-		for _ in 0...10 {
-			places.append(PlaceTemp())
-		}
 		
+		//[+] for testing only
+		for i in 0...30 {
+			
+			var  open = true
+			if (i % 2 == 0)  {
+				open = true
+			} else {
+				open = false
+			}
+				
+			places.append(PlaceTemp(name: "Name \(i)", isOpen: open , distance: ((Double(i) * 10.456) + 5.345), photos: ["hello"],type: "Restorant"))
+		}
+		//[-] for testing only
 		
 		
 	}
@@ -56,7 +92,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 	
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 10//places.count
+		return places.count
 	}
 	
 	
