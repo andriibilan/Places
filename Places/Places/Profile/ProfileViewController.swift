@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController {
             
             let user = Users(snapshot: snapshot)
             self.emailLabeltext.text = user.email
-            self.passwordLabelText.text = user.password
+//            self.passwordLabelText.text = user.password
             self.phoneLabelText.text = user.phone
             
             let profileImageURL = user.ImageUrl
