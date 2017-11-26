@@ -208,14 +208,6 @@
             </objects>
             <point key="canvasLocation" x="142" y="948"/>
         </scene>
-        <!--Profile-->
-        <scene sceneID="QmU-pj-oC2">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Profile" id="W73-L6-Tho" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uiG-lX-kvu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="804" y="188"/>
-        </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="b4L-TD-YU3">
             <objects>

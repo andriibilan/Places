@@ -20,12 +20,13 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         if Auth.auth().currentUser != nil {
             let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
-            self.present(profileVC, animated: true, completion: nil)
+           self.present(profileVC, animated: true, completion: nil)
         }
     }
     
