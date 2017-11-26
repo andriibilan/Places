@@ -315,10 +315,10 @@
             </objects>
             <point key="canvasLocation" x="3481" y="-432"/>
         </scene>
-        <!--Profile-->
+        <!--Login-->
         <scene sceneID="db3-A5-2i2">
             <objects>
-                <viewControllerPlaceholder storyboardName="Profile" id="xjy-Hw-8Ed" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Login" id="xjy-Hw-8Ed" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CaS-yi-BHX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3472" y="-479"/>
