@@ -294,16 +294,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 	
 	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 		transition.transitionMode = .present
-		transition.startingPoint = settingsButton.center
-		transition.circleColor = settingsButton.backgroundColor!
+		transition.startingPoint = menuView.center
+		transition.circleColor = menuView.backgroundColor! //settingsButton.backgroundColor!
 		
 		return transition
 	}
 	
 	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 		transition.transitionMode = .dismiss
-		transition.startingPoint = settingsButton.center
-		transition.circleColor = settingsButton.backgroundColor!
+		transition.startingPoint = menuView.center
+		transition.circleColor = menuView.backgroundColor!
 		
 		return transition
 	}
@@ -311,7 +311,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "ShowSettings" {
-			let secondVC = segue.destination as! SettingsTableViewController
+//			UIView.animate(withDuration: 0.3, animations: {
+//				self.menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+//				
+//			})
+			let secondVC = segue.destination as! SettingsViewController
 			secondVC.transitioningDelegate = self
 			secondVC.modalPresentationStyle = .custom
 		}}

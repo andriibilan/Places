@@ -8,11 +8,48 @@
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController{
+class SettingsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate{
+	
+	
+	
+	@IBOutlet weak var tableview: UITableView!
+	
+	@IBOutlet weak var dismissButton: UIButton!{
+		didSet{
+			dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
+			dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+		}
+	}
+	
+	@IBAction func dismissButtonTaped(_ sender: UIButton) {
+			self.dismiss(animated: true, completion: nil)
+	}
+	
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 2
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		
+		if indexPath.row == 0 {
+			 return tableView.dequeueReusableCell(withIdentifier: "mapcell", for: indexPath)
+		} else {
+			return tableView.dequeueReusableCell(withIdentifier: "usercell", for: indexPath)
+		}
+		
+		return UITableViewCell()
+	}
+	
+	
+	
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
+		
+		tableview.dataSource = self
+		tableview.delegate = self 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -24,17 +61,8 @@ class SettingsTableViewController: UITableViewController{
     
     
 
-    // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 2
-    }
+	
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier{
             switch identifier {

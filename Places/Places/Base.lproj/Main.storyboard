@@ -157,6 +157,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cHr-Uv-c98" secondAttribute="height" multiplier="1:1" id="Tu3-s6-1Tk"/>
                                 </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="211602-64"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
@@ -215,7 +216,7 @@
                                         </constraints>
                                         <state key="normal" image="115801-64"/>
                                         <connections>
-                                            <segue destination="fCN-jj-NYF" kind="show" identifier="ShowSettings" id="Gjq-SO-6e4"/>
+                                            <segue destination="fCN-jj-NYF" kind="presentation" identifier="ShowSettings" id="Gjq-SO-6e4"/>
                                         </connections>
                                     </button>
                                 </subviews>
