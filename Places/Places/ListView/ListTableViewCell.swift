@@ -50,8 +50,7 @@ class ListTableViewCell: UITableViewCell {
 	func configureCell(with place: PlaceTemp)  {
 		
 		thumbnailImageView.image = #imageLiteral(resourceName: "marker")
-		name.text = place.name ?? "Name"
-
+		name.text = place.name 
 		openClosedImageView.image = nil
 
 		//Open/Closed
@@ -63,10 +62,10 @@ class ListTableViewCell: UITableViewCell {
 			openClosedImageView.image = #imageLiteral(resourceName: "closed-sign")
 		}
 		
-		if let dist = place.distance {
-			distance.text = "\(dist.rounded(toPlaces: 2)) м."
 
-		}
+		distance.text = "\( place.distance.rounded(toPlaces: 2)) м."
+
+		type.text = place.type
 
 		
 		

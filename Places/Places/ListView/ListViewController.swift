@@ -11,9 +11,9 @@ import UIKit
 //MARK:-TEMP
 class PlaceTemp {
 	
-	var name:String?
+	var name:String = ""
 	var isOpen:Bool?
-	var distance:Double?
+	var distance:Double = 0.0
 	var photos:[String]?
 	var type: String
 	
@@ -54,30 +54,40 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		if sortingByName {
 			sender.setImage( #imageLiteral(resourceName: "name-sorting"), for: .normal)
 			sortingByName = false
+			places.sort(by: {$0.name < $1.name})
+			
 		} else {
 			sender.setImage(#imageLiteral(resourceName: "distance-sorting"), for: .normal)
 			sortingByName = true
+			places.sort(by: {$0.distance < $1.distance})
 		}
+		
+		refillOpenPlaces()
+		
+		self.tableView.reloadData()
 	}
 	
 	@IBAction func filteringButtonTapped(_ sender: UIButton) {
 		
-		if filterOpenOnly {
+		if !filterOpenOnly {
 			sender.setImage( #imageLiteral(resourceName: "clear-filter"), for: .normal)
-			filterOpenOnly = false
+			filterOpenOnly = true
 		} else {
 			sender.setImage(#imageLiteral(resourceName: "filter"), for: .normal)
-			filterOpenOnly = true
+			filterOpenOnly = false
 		}
+		
+		refillOpenPlaces()
+		
+		self.tableView.reloadData()
 		
 	}
 	
 	
-	public var places:[PlaceTemp] = []
-	private var searchResults: [PlaceTemp] = []
-	private var searchController: UISearchController!
 	
-	private var filterOpenOnly = true
+	public var places:[PlaceTemp] = []
+	private var openPlaces: [PlaceTemp] = []
+	private var filterOpenOnly = false
 	private var sortingByName = true
 	
 	override func viewDidLoad() {
@@ -102,7 +112,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 			} else {
 				open = false
 			}
-				
+			
 			places.append(PlaceTemp(name: "Name \(i)", isOpen: open , distance: ((Double(i) * 10.456) + 5.345), photos: ["hello"],type: "Restorant"))
 		}
 		//[-] for testing only
@@ -110,6 +120,15 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		
 	}
 	
+	private func refillOpenPlaces() {
+		
+		if filterOpenOnly {
+			openPlaces = places.filter{$0.isOpen! == true}
+		} else {
+			openPlaces = places
+		}
+		
+	}
 	
 	//MARK:- TableView DataSource
 	func numberOfSections(in tableView: UITableView) -> Int {
@@ -118,7 +137,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 	
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return places.count
+		return filterOpenOnly ? openPlaces.count : places.count
 	}
 	
 	
@@ -128,8 +147,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		
 		if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
 			
-			//let place = (isFilterActive) ? searchResults[indexPath.row] : places[indexPath.row]
-			let place  = places[indexPath.row]
+			let place = (filterOpenOnly) ? openPlaces[indexPath.row] : places[indexPath.row]
 			
 			
 			cell.configureCell(with:place)
@@ -143,11 +161,20 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		
 	}
 	
-	
-	//MARK: - SEARCH
-	var isFilterActive: Bool {
-		return false//(searchController.isActive && searchController.searchBar.text != "")
+	//MARK: - Fade in effect
+	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		// Define the initial state (Before the animation)
+		cell.alpha = 0
+		
+		// Define the final state (After the animation)
+		UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
+
 	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
+	}
+	
 	
 	
 }
