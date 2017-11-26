@@ -24,7 +24,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oTN-RS-ne0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="vWT-hH-Rok"/>
             </objects>
             <point key="canvasLocation" x="-450" y="0.0"/>
         </scene>
@@ -213,7 +212,7 @@
                                         </constraints>
                                         <state key="normal" image="115801-64"/>
                                         <connections>
-                                            <segue destination="fCN-jj-NYF" kind="show" id="obW-zI-TE2"/>
+                                            <segue destination="fCN-jj-NYF" kind="show" id="Gjq-SO-6e4"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -289,6 +288,8 @@
                         <outlet property="filterTableView" destination="dvC-Vm-Gg7" id="6Y1-3v-t36"/>
                         <outlet property="map" destination="HFl-mO-hU1" id="dop-oM-jhB"/>
                         <outlet property="menuView" destination="C0Q-sZ-dW2" id="W08-ni-WYD"/>
+                        <outlet property="profileButton" destination="DHE-yK-Tu7" id="KwR-nH-fnR"/>
+                        <outlet property="settingsButton" destination="pFa-2t-k8b" id="NbZ-r7-dh2"/>
                         <outlet property="sideMenuConstraint" destination="pP2-3r-bkg" id="RRV-nQ-R41"/>
                     </connections>
                 </viewController>

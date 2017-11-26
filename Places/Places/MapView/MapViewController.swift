@@ -44,6 +44,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.map.setRegion(region!, animated: true)
         }
     }
+	
+	@IBOutlet weak var settingsButton: UIButton!
+	
+	@IBOutlet weak var profileButton: UIButton!
+	
     
     @IBOutlet weak var menuView: UIViewX!
     @IBOutlet weak var sideMenuConstraint: NSLayoutConstraint!
