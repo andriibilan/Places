@@ -12,11 +12,12 @@ import CoreLocation
 
 
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource,UIViewControllerTransitioningDelegate {
 
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
 
+	let transition = CustomTransitionAnimator()
 
     let locationData = [
         //Walker Art Gallery
@@ -44,6 +45,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.map.setRegion(region!, animated: true)
         }
     }
+	
+	@IBOutlet weak var settingsButton: UIButton!
+	
+	@IBOutlet weak var profileButton: UIButton!
+	
     
     @IBOutlet weak var menuView: UIViewX!
     @IBOutlet weak var sideMenuConstraint: NSLayoutConstraint!
@@ -285,6 +291,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
 
+	
+	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+		transition.transitionMode = .present
+		transition.startingPoint = settingsButton.center
+		transition.circleColor = settingsButton.backgroundColor!
+		
+		return transition
+	}
+	
+	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+		transition.transitionMode = .dismiss
+		transition.startingPoint = settingsButton.center
+		transition.circleColor = settingsButton.backgroundColor!
+		
+		return transition
+	}
 
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "ShowSettings" {
+			let secondVC = segue.destination as! SettingsTableViewController
+			secondVC.transitioningDelegate = self
+			secondVC.modalPresentationStyle = .custom
+		}}
 }
 
