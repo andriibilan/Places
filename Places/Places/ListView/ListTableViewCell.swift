@@ -17,7 +17,7 @@ class ListTableViewCell: UITableViewCell {
 			thumbnailImageView.clipsToBounds = true
 		}
 	}
-
+	
 	@IBOutlet weak var name: UILabel!
 		{
 		didSet {
@@ -38,37 +38,9 @@ class ListTableViewCell: UITableViewCell {
 		}
 	}
 	
-	
-	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		// Initialization code
-	}
-	
-	
-	
-	func configureCell(with place: PlaceTemp)  {
-		
-		thumbnailImageView.image = #imageLiteral(resourceName: "marker")
-		name.text = place.name 
-		openClosedImageView.image = nil
-
-		//Open/Closed
-		let placeIsOpen = place.isOpen ?? false
-
-		if placeIsOpen {
-			openClosedImageView.image = #imageLiteral(resourceName: "open-sign")
-		} else {
-			openClosedImageView.image = #imageLiteral(resourceName: "closed-sign")
-		}
-		
-
-		distance.text = "\( place.distance.rounded(toPlaces: 2)) м."
-
-		type.text = place.type
-
-		
-		
 	}
 	
 }

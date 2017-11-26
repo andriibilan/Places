@@ -30,6 +30,8 @@ class PlaceTemp {
 	
 }
 
+
+
 class ListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
 	
 	@IBOutlet weak var tableView: UITableView!
@@ -90,7 +92,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 	}
 	
 	private func scaleAnimation(onButton button:UIButton)  {
-		button.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+		button.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
 		UIView.animate(withDuration: 0.5, delay: 0, options: .allowUserInteraction, animations: {
 			[button] in button.transform = CGAffineTransform.identity
 			}, completion: nil)
@@ -102,6 +104,9 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 	private var openPlaces: [PlaceTemp] = []
 	private var filterOpenOnly = false
 	private var sortingByName = true
+	private var task: URLSessionDownloadTask!
+	private var session: URLSession!
+	private var cache:NSCache<AnyObject, AnyObject>!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -116,8 +121,13 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		//tableView.rowHeight = UITableViewAutomaticDimension
 		
 		
+		session = URLSession.shared
+		task 	= URLSessionDownloadTask()
+		cache	= NSCache()
+		
 		//[+] for testing only
-		for i in 0...30 {
+		let urlTest = "https://s3-eu-west-1.amazonaws.com/romel/pokemon/"
+		for i in 1...100 {
 			
 			var  open = true
 			if (i % 2 == 0)  {
@@ -126,7 +136,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 				open = false
 			}
 			
-			places.append(PlaceTemp(name: "Name \(i)", isOpen: open , distance: ((Double(i) * 10.456) + 5.345), photos: ["hello"],type: "Restorant"))
+			places.append(PlaceTemp(name: "Name \(i)", isOpen: open , distance: ((Double(i) * 10.456) + 5.345), photos: [urlTest + "\(i).png"],type: "Restorant"))
 		}
 		//[-] for testing only
 		
@@ -163,8 +173,61 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 			let place = (filterOpenOnly) ? openPlaces[indexPath.row] : places[indexPath.row]
 			
 			
-			cell.configureCell(with:place)
+			//placeholder image
+			cell.thumbnailImageView.image = #imageLiteral(resourceName: "marker")
 			
+			//name
+			cell.name.text		= place.name
+			//distance
+			cell.distance.text	= "\( place.distance.rounded(toPlaces: 2)) м."
+			//place type
+			cell.type.text		= place.type
+
+			
+			//Open/Closed
+			cell.openClosedImageView.image = nil
+			if let placeIsOpen = place.isOpen {
+				if placeIsOpen {
+					cell.openClosedImageView.image = #imageLiteral(resourceName: "open-sign")
+				} else {
+					cell.openClosedImageView.image = #imageLiteral(resourceName: "closed-sign")
+				}
+			}
+			
+			let urlString = place.photos![0]
+			let url:URL! = URL(string: place.photos![0])
+			
+			//downloading/cashing image from internet
+			if let cachedImage = (self.cache.object(forKey: (urlString as AnyObject) ) as? UIImage ) {
+				//we are using cashe
+				print("Using cashe - \(urlString)")
+				cell.thumbnailImageView.image = cachedImage
+				
+			} else {
+				//download image and add to cache
+				
+				task = session.downloadTask(with: url, completionHandler: { (location, response, error) -> Void in
+					if let data = try? Data(contentsOf: url){
+						
+						DispatchQueue.main.async(execute: { () -> Void in
+							//DispatchQueue.global(qos: .background).async {
+							// if the current cell is visible
+							if let updateCell = self.tableView.cellForRow(at: indexPath) as? ListTableViewCell{
+								let img:UIImage! = UIImage(data: data)
+								
+								//DispatchQueue.main.sync {
+									updateCell.thumbnailImageView?.image = img
+								//}
+								self.cache.setObject(img, forKey: urlString as AnyObject)
+								print("adding to cache - \(urlString)")
+							}
+						}
+						)
+					}
+				})
+				task.resume()
+				
+			}
 			
 			return cell
 		}
@@ -177,10 +240,10 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 	//MARK: - Fade in effect
 	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		// Define the initial state (Before the animation)
-		cell.alpha = 0
+		//cell.alpha = 0
 		
 		// Define the final state (After the animation)
-		UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
+		//UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
 
 	}
 	
