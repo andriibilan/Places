@@ -11,10 +11,11 @@ import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
-    
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
+    
+    var authService = AuthService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +23,18 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if Auth.auth().currentUser != nil {
+            let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
+            self.present(profileVC, animated: true, completion: nil)
+        }
+    }
+    
     @IBAction func loginAction(_ sender: Any) {
-        if self.emailTextField.text == "" || self.passwordTextfield.text == "" {
+        let email = emailTextField.text
+        let password = passwordTextfield.text
+        
+        if (email?.isEmpty)! || (password?.isEmpty)! {
             
             let alertController = UIAlertController(title: "Error", message: "Please enter an email and password.", preferredStyle: .alert)
             
@@ -33,27 +44,9 @@ class LoginViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
             
         } else {
-            let email = emailTextField.text
-            let password = passwordTextfield.text
-            Auth.auth().createUser(withEmail: email!, password: password!) { (user, error) in
-                
-                if error == nil {
-                    print("You have successfully logged in")
-                    
-//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "Profile")
-//                    self.present(vc!, animated: true, completion: nil)
-                    
-                } else {
-                    
-                    let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
-                    
-                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(defaultAction)
-                    
-                    self.present(alertController, animated: true, completion: nil)
-                }
-            }
+            authService.logIn(email: emailTextField.text!, password: passwordTextfield.text!)
         }
     }
     
 }
+

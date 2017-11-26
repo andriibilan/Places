@@ -27,3 +27,4 @@ class Validator {
         return phoneTest.evaluate(with: testStr)
     }
 }
+
