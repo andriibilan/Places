@@ -9,7 +9,7 @@
 import UIKit
 
 class SettingsTableViewController: UITableViewController{
-    
+    let slider = SliderTransition()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
@@ -22,7 +22,7 @@ class SettingsTableViewController: UITableViewController{
 
     
     
-    
+
 
     // MARK: - Table view data source
 
@@ -39,10 +39,10 @@ class SettingsTableViewController: UITableViewController{
         if let identifier = segue.identifier{
             switch identifier {
             case "showMapSettings":
-                let mapSettingsVC = segue.destination as! MapSettingTableViewController
-
+                let mapSettingsVC = segue.destination 
+                mapSettingsVC.transitioningDelegate = slider
                 
-//            case "showUserSettings":
+                //            case "showUserSettings":
 //                let userSettingsVC = segue.destination as! UserSettingTableViewController
             default:
                 break

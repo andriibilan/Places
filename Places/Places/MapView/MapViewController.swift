@@ -39,6 +39,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     //var currentLocation = currentLocations()
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var filterTableView: UITableView!
+    @IBOutlet weak var viewForFilter: UIView!
     
     @IBAction func currentLocation(_ sender: Any) {
         if region != nil {
@@ -89,7 +90,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
        // print(UserDefaults.standard.integer(forKey: "Radius"))
         addAnnotations(coords: locationData)
         //map.showsUserLocation = true
-        
+        viewForFilter.setCorenerAndShadow(viewForFilter)
         
         if (CLLocationManager.locationServicesEnabled())
         {
@@ -279,6 +280,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterCell.nameFilter.text = nameFilterArray[indexPath.row]
         filterCell.iconFilter.image = iconFilterArray[indexPath.row]
         filterCell.accessoryType = accessory
+        filterCell.selectionStyle = .none
         return filterCell
     }
     
@@ -290,20 +292,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 //second version
         cell.layer.transform = CATransform3DScale(CATransform3DIdentity, -1, 1, 1)
-        UIView.animate(withDuration: 0.4) {
+        UIView.animate(withDuration: 0.5) {
             cell.alpha = 1
             cell.layer.transform = CATransform3DIdentity
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var accessory=UITableViewCellAccessoryType.none
+        var accessory = UITableViewCellAccessoryType.none
         
         if selectedCell.contains(indexPath.row) {
             selectedCell.remove(indexPath.row)
+            print("cancel filter: \(nameFilterArray[indexPath.row])")
             }else{
             selectedCell.add(indexPath.row)
             accessory = .checkmark
+            print("choose filter: \(nameFilterArray[indexPath.row])")
             }
+        
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = accessory
         }

@@ -37,7 +37,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="87t-SJ-2K3" kind="show" identifier="showMapSettings" id="CkO-XU-exT"/>
+                                            <segue destination="87t-SJ-2K3" kind="show" identifier="showMapSettings" id="CXV-Kp-wPd"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="r38-m9-F1R">
@@ -196,7 +196,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qIL-FA-87S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1773.5999999999999" y="-955.77211394302856"/>
+            <point key="canvasLocation" x="1836" y="-999"/>
         </scene>
     </scenes>
 </document>
