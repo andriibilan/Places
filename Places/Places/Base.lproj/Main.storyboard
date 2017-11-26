@@ -120,24 +120,26 @@
                                                                 <constraint firstAttribute="width" secondItem="RHs-Xx-xri" secondAttribute="height" multiplier="43:42" id="6m7-dB-F8g"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dkm-pO-2KY">
-                                                            <rect key="frame" x="57" y="10" width="93" height="30"/>
-                                                            <state key="normal" title="Filter"/>
-                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="LHx-rr-LBK">
+                                                            <rect key="frame" x="55" y="10" width="105" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="RHs-Xx-xri" firstAttribute="top" secondItem="t5Y-3J-c6J" secondAttribute="top" constant="4" id="0zp-01-XCc"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Dkm-pO-2KY" secondAttribute="trailing" constant="10" id="8kd-E9-ple"/>
-                                                        <constraint firstItem="Dkm-pO-2KY" firstAttribute="top" secondItem="t5Y-3J-c6J" secondAttribute="top" constant="10" id="EW2-py-L6F"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Dkm-pO-2KY" secondAttribute="bottom" constant="10" id="aVH-em-ouy"/>
+                                                        <constraint firstAttribute="trailing" secondItem="LHx-rr-LBK" secondAttribute="trailing" id="HAA-Us-Cv6"/>
+                                                        <constraint firstItem="LHx-rr-LBK" firstAttribute="top" secondItem="t5Y-3J-c6J" secondAttribute="top" constant="10" id="R8f-Hl-pEZ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="LHx-rr-LBK" secondAttribute="bottom" constant="10.5" id="SC5-0j-OzZ"/>
+                                                        <constraint firstItem="LHx-rr-LBK" firstAttribute="leading" secondItem="RHs-Xx-xri" secondAttribute="trailing" constant="8" id="fKH-wZ-W06"/>
                                                         <constraint firstItem="RHs-Xx-xri" firstAttribute="leading" secondItem="t5Y-3J-c6J" secondAttribute="leading" constant="4" id="k5m-c4-bzM"/>
-                                                        <constraint firstItem="Dkm-pO-2KY" firstAttribute="leading" secondItem="RHs-Xx-xri" secondAttribute="trailing" constant="10" id="l1I-YF-qlb"/>
                                                         <constraint firstAttribute="bottom" secondItem="RHs-Xx-xri" secondAttribute="bottom" constant="4" id="w2q-Zw-wbo"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="iconFilter" destination="RHs-Xx-xri" id="K37-XY-8Pt"/>
-                                                    <outlet property="nameFilter" destination="Dkm-pO-2KY" id="m4S-Ij-dNf"/>
+                                                    <outlet property="nameFilter" destination="LHx-rr-LBK" id="yy4-0D-SkR"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>

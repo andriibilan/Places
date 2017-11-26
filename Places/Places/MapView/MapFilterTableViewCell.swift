@@ -12,7 +12,8 @@ class MapFilterTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var iconFilter: UIImageView!
-    @IBOutlet weak var nameFilter: UIButton!
+    @IBOutlet weak var nameFilter: UILabel!
+    
     
     
     override func awakeFromNib() {

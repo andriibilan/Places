@@ -264,16 +264,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
      func numberOfSections(in tableView: UITableView) -> Int {
             return 1
         }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nameFilterArray.count
     }
+    var selectedCell = NSMutableIndexSet()
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var accessory=UITableViewCellAccessoryType.none
         let filterCell = tableView.dequeueReusableCell(withIdentifier: "mapFilter", for: indexPath) as! MapFilterTableViewCell
-        let name = nameFilterArray[indexPath.row]
-       filterCell.nameFilter.setTitle(name, for: .normal)
-       filterCell.iconFilter.image = iconFilterArray[indexPath.row]
-        
+        if selectedCell.contains(indexPath.row) {
+            accessory = .checkmark
+        }
+        filterCell.nameFilter.text = nameFilterArray[indexPath.row]
+        filterCell.iconFilter.image = iconFilterArray[indexPath.row]
+        filterCell.accessoryType = accessory
         return filterCell
     }
     
@@ -290,7 +295,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             cell.layer.transform = CATransform3DIdentity
         }
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var accessory=UITableViewCellAccessoryType.none
+        
+        if selectedCell.contains(indexPath.row) {
+            selectedCell.remove(indexPath.row)
+            }else{
+            selectedCell.add(indexPath.row)
+            accessory = .checkmark
+            }
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = accessory
+        }
 
+    }
 	
 	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 		transition.transitionMode = .present
