@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2BA689A11FC5928C00B2C2A9 /* DetailPlace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BA689A01FC5928C00B2C2A9 /* DetailPlace.storyboard */; };
 		2BA689A31FC592AE00B2C2A9 /* DetailPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA689A21FC592AE00B2C2A9 /* DetailPlaceViewController.swift */; };
+		75010CB81FC8171600CD780A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75010CB71FC8171600CD780A /* User.swift */; };
+		750220FE1FC6CFA10029C2F4 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750220FD1FC6CFA10029C2F4 /* Validator.swift */; };
+		75501EDC1FCADEE200299BFE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75501EDB1FCADEE200299BFE /* AuthService.swift */; };
 		75F7EB741FC59B75002F169E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB731FC59B75002F169E /* LoginViewController.swift */; };
 		75F7EB761FC59B84002F169E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB751FC59B84002F169E /* SignUpViewController.swift */; };
 		75F7EB791FC59E96002F169E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB781FC59E96002F169E /* ProfileViewController.swift */; };
@@ -27,6 +30,9 @@
 		2BA689A01FC5928C00B2C2A9 /* DetailPlace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailPlace.storyboard; sourceTree = "<group>"; };
 		2BA689A21FC592AE00B2C2A9 /* DetailPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlaceViewController.swift; sourceTree = "<group>"; };
 		612ABD6E4073E47B3FBF9A37 /* Pods-Places.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Places.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Places/Pods-Places.debug.xcconfig"; sourceTree = "<group>"; };
+		75010CB71FC8171600CD780A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		750220FD1FC6CFA10029C2F4 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		75501EDB1FCADEE200299BFE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		75F7EB731FC59B75002F169E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		75F7EB751FC59B84002F169E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		75F7EB781FC59E96002F169E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -77,8 +83,11 @@
 			isa = PBXGroup;
 			children = (
 				75F7EB731FC59B75002F169E /* LoginViewController.swift */,
-				75F7EB7A1FC59F33002F169E /* Main.storyboard */,
 				75F7EB751FC59B84002F169E /* SignUpViewController.swift */,
+				750220FD1FC6CFA10029C2F4 /* Validator.swift */,
+				75010CB71FC8171600CD780A /* User.swift */,
+				75501EDB1FCADEE200299BFE /* AuthService.swift */,
+				75F7EB7A1FC59F33002F169E /* Main.storyboard */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -266,7 +275,10 @@
 				75F7EB791FC59E96002F169E /* ProfileViewController.swift in Sources */,
 				75F7EB741FC59B75002F169E /* LoginViewController.swift in Sources */,
 				8A8C5C781FC57F3E00A834EA /* ViewController.swift in Sources */,
+				75501EDC1FCADEE200299BFE /* AuthService.swift in Sources */,
 				8A8C5C761FC57F3E00A834EA /* AppDelegate.swift in Sources */,
+				75010CB81FC8171600CD780A /* User.swift in Sources */,
+				750220FE1FC6CFA10029C2F4 /* Validator.swift in Sources */,
 				2BA689A31FC592AE00B2C2A9 /* DetailPlaceViewController.swift in Sources */,
 				75F7EB761FC59B84002F169E /* SignUpViewController.swift in Sources */,
 			);
