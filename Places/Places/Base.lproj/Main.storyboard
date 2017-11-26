@@ -167,6 +167,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cHr-Uv-c98" secondAttribute="height" multiplier="1:1" id="Tu3-s6-1Tk"/>
                                 </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="211602-64"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
@@ -225,7 +226,7 @@
                                         </constraints>
                                         <state key="normal" image="115801-64"/>
                                         <connections>
-                                            <segue destination="fCN-jj-NYF" kind="show" identifier="ShowSettings" id="Gjq-SO-6e4"/>
+                                            <segue destination="fCN-jj-NYF" kind="presentation" identifier="ShowSettings" id="Gjq-SO-6e4"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -326,10 +327,10 @@
             </objects>
             <point key="canvasLocation" x="3481" y="-432"/>
         </scene>
-        <!--Profile-->
+        <!--Login-->
         <scene sceneID="db3-A5-2i2">
             <objects>
-                <viewControllerPlaceholder storyboardName="Profile" id="xjy-Hw-8Ed" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Login" id="xjy-Hw-8Ed" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CaS-yi-BHX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3472" y="-479"/>

@@ -19,11 +19,13 @@
 		49E3C00F1FC6E12800400A06 /* UIImageViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00E1FC6E12800400A06 /* UIImageViewX.swift */; };
 		529191691FC715A0008FD5AB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529191681FC71598008FD5AB /* CoreLocation.framework */; };
 		52E5577C1FCA4E90000B7FFC /* CustomTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5577B1FCA4E90000B7FFC /* CustomTransitionAnimator.swift */; };
+		757042221FCB09450075FC87 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757042211FCB09450075FC87 /* Validator.swift */; };
+		757042241FCB09620075FC87 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757042231FCB09620075FC87 /* User.swift */; };
+		757042261FCB097B0075FC87 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757042251FCB097B0075FC87 /* AuthService.swift */; };
 		75F7EB741FC59B75002F169E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB731FC59B75002F169E /* LoginViewController.swift */; };
 		75F7EB761FC59B84002F169E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB751FC59B84002F169E /* SignUpViewController.swift */; };
 		75F7EB791FC59E96002F169E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB781FC59E96002F169E /* ProfileViewController.swift */; };
 		75F7EB7B1FC59F33002F169E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F7EB7A1FC59F33002F169E /* Login.storyboard */; };
-		75F7EB7D1FC59F46002F169E /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F7EB7C1FC59F46002F169E /* SignUp.storyboard */; };
 		75F7EB7F1FC59F58002F169E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F7EB7E1FC59F58002F169E /* Profile.storyboard */; };
 		75F7EB831FC5A8AD002F169E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75F7EB821FC5A8AD002F169E /* GoogleService-Info.plist */; };
 		8A8C5C761FC57F3E00A834EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C5C751FC57F3E00A834EA /* AppDelegate.swift */; };
@@ -58,11 +60,13 @@
 		529191681FC71598008FD5AB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		52E5577B1FCA4E90000B7FFC /* CustomTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionAnimator.swift; sourceTree = "<group>"; };
 		612ABD6E4073E47B3FBF9A37 /* Pods-Places.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Places.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Places/Pods-Places.debug.xcconfig"; sourceTree = "<group>"; };
+		757042211FCB09450075FC87 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		757042231FCB09620075FC87 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		757042251FCB097B0075FC87 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		75F7EB731FC59B75002F169E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		75F7EB751FC59B84002F169E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		75F7EB781FC59E96002F169E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75F7EB7A1FC59F33002F169E /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		75F7EB7C1FC59F46002F169E /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		75F7EB7E1FC59F58002F169E /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		75F7EB821FC5A8AD002F169E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8A8C5C721FC57F3E00A834EA /* Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Places.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,9 +156,11 @@
 			isa = PBXGroup;
 			children = (
 				75F7EB731FC59B75002F169E /* LoginViewController.swift */,
-				75F7EB7A1FC59F33002F169E /* Login.storyboard */,
 				75F7EB751FC59B84002F169E /* SignUpViewController.swift */,
-				75F7EB7C1FC59F46002F169E /* SignUp.storyboard */,
+				757042211FCB09450075FC87 /* Validator.swift */,
+				757042231FCB09620075FC87 /* User.swift */,
+				757042251FCB097B0075FC87 /* AuthService.swift */,
+				75F7EB7A1FC59F33002F169E /* Login.storyboard */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -312,7 +318,6 @@
 			files = (
 				8A8C5C801FC57F3E00A834EA /* LaunchScreen.storyboard in Resources */,
 				75F7EB831FC5A8AD002F169E /* GoogleService-Info.plist in Resources */,
-				75F7EB7D1FC59F46002F169E /* SignUp.storyboard in Resources */,
 				8A8C5C7D1FC57F3E00A834EA /* Assets.xcassets in Resources */,
 				75F7EB7B1FC59F33002F169E /* Login.storyboard in Resources */,
 				2B4BA9131FC5EC0E00B5E598 /* DetailPlace.storyboard in Resources */,
@@ -383,7 +388,9 @@
 				8A9C7C791FCB1AE8009B9C86 /* SliderTransition.swift in Sources */,
 				75F7EB741FC59B75002F169E /* LoginViewController.swift in Sources */,
 				2BCDF2361FC8481B00EA96F0 /* Extension for Double.swift in Sources */,
+				757042221FCB09450075FC87 /* Validator.swift in Sources */,
 				2B4BA9161FC5EC0E00B5E598 /* PhotoPagingViewController.swift in Sources */,
+				757042261FCB097B0075FC87 /* AuthService.swift in Sources */,
 				2BCDF2331FC83DE500EA96F0 /* TestModelPlace.swift in Sources */,
 				49E3C00B1FC6D19300400A06 /* UIViewX.swift in Sources */,
 				52E5577C1FCA4E90000B7FFC /* CustomTransitionAnimator.swift in Sources */,
@@ -398,6 +405,7 @@
 				8A9C7C7B1FCB371A009B9C86 /* Extension for view.swift in Sources */,
 				49E3C00F1FC6E12800400A06 /* UIImageViewX.swift in Sources */,
 				8A8C5C761FC57F3E00A834EA /* AppDelegate.swift in Sources */,
+				757042241FCB09620075FC87 /* User.swift in Sources */,
 				8A9BF77E1FC72238002E970C /* SettingsTableViewController.swift in Sources */,
 				75F7EB761FC59B84002F169E /* SignUpViewController.swift in Sources */,
 				8A9BF77A1FC6E2F5002E970C /* UserSettingTableViewController.swift in Sources */,
