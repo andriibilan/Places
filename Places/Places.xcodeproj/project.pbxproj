@@ -124,6 +124,13 @@
 			path = "Custom elements";
 			sourceTree = "<group>";
 		};
+		52E5577A1FCA4868000B7FFC /* CustomTransition */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomTransition;
+			sourceTree = "<group>";
+		};
 		68BFA9EE6ACA38C160097694 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +188,7 @@
 				2B4BA90E1FC5EC0E00B5E598 /* Detail Place */,
 				8A8C5C771FC57F3E00A834EA /* ViewController.swift */,
 				8A8C5C751FC57F3E00A834EA /* AppDelegate.swift */,
+				52E5577A1FCA4868000B7FFC /* CustomTransition */,
 				8A8C5C791FC57F3E00A834EA /* Main.storyboard */,
 				8A8C5C7C1FC57F3E00A834EA /* Assets.xcassets */,
 				8AAC34001FC6D2A10060C3A2 /* Settings */,

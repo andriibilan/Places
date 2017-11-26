@@ -24,6 +24,7 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oTN-RS-ne0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="vWT-hH-Rok"/>
             </objects>
             <point key="canvasLocation" x="-450" y="0.0"/>
         </scene>
