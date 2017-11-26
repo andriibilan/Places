@@ -192,6 +192,9 @@
                                             <constraint firstAttribute="height" constant="50" id="LHl-03-QC9"/>
                                         </constraints>
                                         <state key="normal" image="2703062-64"/>
+                                        <connections>
+                                            <segue destination="xjy-Hw-8Ed" kind="show" id="Fjh-DJ-O0e"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZ7-mN-XYi">
                                         <rect key="frame" x="62" y="55" width="50" height="50"/>
@@ -212,7 +215,7 @@
                                         </constraints>
                                         <state key="normal" image="115801-64"/>
                                         <connections>
-                                            <segue destination="fCN-jj-NYF" kind="show" id="Gjq-SO-6e4"/>
+                                            <segue destination="fCN-jj-NYF" kind="show" identifier="ShowSettings" id="Gjq-SO-6e4"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -310,7 +313,15 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kle-i7-qUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3575" y="-173"/>
+            <point key="canvasLocation" x="3481" y="-432"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="db3-A5-2i2">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="xjy-Hw-8Ed" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CaS-yi-BHX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3472" y="-479"/>
         </scene>
         <!--List View Controller-->
         <scene sceneID="zcY-Zo-fQE">
