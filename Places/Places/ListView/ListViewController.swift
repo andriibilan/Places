@@ -62,6 +62,9 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 			places.sort(by: {$0.distance < $1.distance})
 		}
 		
+		//perform scale animation
+		scaleAnimation(onButton: sender)
+
 		refillOpenPlaces()
 		
 		self.tableView.reloadData()
@@ -77,10 +80,20 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 			filterOpenOnly = false
 		}
 		
+		//perform scale animation
+		scaleAnimation(onButton: sender)
+		
 		refillOpenPlaces()
 		
 		self.tableView.reloadData()
 		
+	}
+	
+	private func scaleAnimation(onButton button:UIButton)  {
+		button.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+		UIView.animate(withDuration: 0.5, delay: 0, options: .allowUserInteraction, animations: {
+			[button] in button.transform = CGAffineTransform.identity
+			}, completion: nil)
 	}
 	
 	
