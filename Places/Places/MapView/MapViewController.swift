@@ -48,9 +48,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
 	
 	@IBOutlet weak var settingsButton: UIButton!
+    
 	
 	@IBOutlet weak var profileButton: UIButton!
 	
+    @IBAction func profileButtonAction(_ sender: Any) {
+        let appDel : AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDel.showProfile()
+    }
     
     @IBOutlet weak var menuView: UIViewX!
     @IBOutlet weak var sideMenuConstraint: NSLayoutConstraint!

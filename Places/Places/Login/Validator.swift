@@ -22,7 +22,7 @@ class Validator {
     }
     
     func isValidPhoneNumber(testStr: String) -> Bool {
-        let phoneRegEx = "^\\d{3}-\\d{3}-\\d{4}$"
+        let phoneRegEx = "^((\\+)|(00))[0-9]{6,14}$"
         let phoneTest = NSPredicate(format:"SELF MATCHES %@", phoneRegEx)
         return phoneTest.evaluate(with: testStr)
     }

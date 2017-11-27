@@ -85,6 +85,17 @@ struct AuthService {
         }
     }
     
+    func updateUserInfo(userName: String, email: String, phone: String) {
+        let userID : String = (Auth.auth().currentUser?.uid)!
+        let currentUserInfo = ["userName": userName,
+                               "email": email,
+                               "phone": phone]
+//                               "photoURL": String(describing: userID.photoURL!)]
+        
+        let userRef = dataBaseReference.child("Users").child(userID)
+        userRef.updateChildValues(currentUserInfo)
+    }
+    
     func logIn(email: String, password: String) {
         
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in

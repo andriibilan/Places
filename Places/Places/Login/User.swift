@@ -18,12 +18,19 @@ class Users {
     var password: String?
     var ImageUrl: String?
     
+    init(name: String, email: String, phone: String, ImageUrl: String) {
+        
+        self.firstName = name
+        self.email = email
+        self.phone = phone
+        self.ImageUrl = ImageUrl
+    }
     
     init(snapshot: DataSnapshot) {
         
         let value = snapshot.value as! NSDictionary
         
-        self.firstName = value["firstName"] as? String
+        self.firstName = value["userName"] as? String
         self.email = value["email"] as? String ?? ""
         self.password = value["password"] as? String ?? ""
         self.phone = value["phone"] as? String ?? ""

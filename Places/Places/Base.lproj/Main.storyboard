@@ -204,6 +204,7 @@
                                         </constraints>
                                         <state key="normal" image="2703062-64"/>
                                         <connections>
+                                            <action selector="profileButtonAction:" destination="6eg-wI-33n" eventType="touchUpInside" id="bvi-r5-tdD"/>
                                             <segue destination="xjy-Hw-8Ed" kind="show" id="Fjh-DJ-O0e"/>
                                         </connections>
                                     </button>
