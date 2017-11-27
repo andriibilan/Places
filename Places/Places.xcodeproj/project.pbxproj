@@ -40,10 +40,9 @@
 		8A8C5C801FC57F3E00A834EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A8C5C7E1FC57F3E00A834EA /* LaunchScreen.storyboard */; };
 		8A8C5C881FC5A1B000A834EA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C5C871FC5A1B000A834EA /* MapViewController.swift */; };
 		8A8C5C8A1FC5A1C100A834EA /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C5C891FC5A1C100A834EA /* ListViewController.swift */; };
-		8A9BF7781FC6E22E002E970C /* MapSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BF7771FC6E22E002E970C /* MapSettingTableViewController.swift */; };
-		8A9BF77A1FC6E2F5002E970C /* UserSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BF7791FC6E2F5002E970C /* UserSettingTableViewController.swift */; };
+		8A9BF7781FC6E22E002E970C /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BF7771FC6E22E002E970C /* SettingTableViewController.swift */; };
 		8A9BF77C1FC6F89A002E970C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BF77B1FC6F89A002E970C /* ListTableViewCell.swift */; };
-		8A9BF77E1FC72238002E970C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BF77D1FC72238002E970C /* SettingsTableViewController.swift */; };
+		8A9BF77E1FC72238002E970C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9BF77D1FC72238002E970C /* SettingsViewController.swift */; };
 		8A9C7C791FCB1AE8009B9C86 /* SliderTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C7C781FCB1AE8009B9C86 /* SliderTransition.swift */; };
 		8A9C7C7B1FCB371A009B9C86 /* Extension for view.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C7C7A1FCB371A009B9C86 /* Extension for view.swift */; };
 		8AA21ED51FC8446B0046202F /* MapFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA21ED41FC8446B0046202F /* MapFilterTableViewCell.swift */; };
@@ -88,10 +87,9 @@
 		8A8C5C811FC57F3E00A834EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A8C5C871FC5A1B000A834EA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8A8C5C891FC5A1C100A834EA /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
-		8A9BF7771FC6E22E002E970C /* MapSettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSettingTableViewController.swift; sourceTree = "<group>"; };
-		8A9BF7791FC6E2F5002E970C /* UserSettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingTableViewController.swift; sourceTree = "<group>"; };
+		8A9BF7771FC6E22E002E970C /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		8A9BF77B1FC6F89A002E970C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
-		8A9BF77D1FC72238002E970C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		8A9BF77D1FC72238002E970C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8A9C7C781FCB1AE8009B9C86 /* SliderTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderTransition.swift; sourceTree = "<group>"; };
 		8A9C7C7A1FCB371A009B9C86 /* Extension for view.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension for view.swift"; sourceTree = "<group>"; };
 		8AA21ED41FC8446B0046202F /* MapFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterTableViewCell.swift; sourceTree = "<group>"; };
@@ -259,10 +257,9 @@
 		8AAC34001FC6D2A10060C3A2 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				8A9BF77D1FC72238002E970C /* SettingsTableViewController.swift */,
+				8A9BF77D1FC72238002E970C /* SettingsViewController.swift */,
 				8AAC34031FC6D3BE0060C3A2 /* Settings.storyboard */,
-				8A9BF7771FC6E22E002E970C /* MapSettingTableViewController.swift */,
-				8A9BF7791FC6E2F5002E970C /* UserSettingTableViewController.swift */,
+				8A9BF7771FC6E22E002E970C /* SettingTableViewController.swift */,
 				8A9C7C781FCB1AE8009B9C86 /* SliderTransition.swift */,
 			);
 			path = Settings;
@@ -427,16 +424,15 @@
 				8A8C5C881FC5A1B000A834EA /* MapViewController.swift in Sources */,
 				8A9BF77C1FC6F89A002E970C /* ListTableViewCell.swift in Sources */,
 				25ACDC721FCC227400695896 /* Rating.swift in Sources */,
-				8A9BF7781FC6E22E002E970C /* MapSettingTableViewController.swift in Sources */,
+				8A9BF7781FC6E22E002E970C /* SettingTableViewController.swift in Sources */,
 				2B4BA9151FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift in Sources */,
 				8A8C5C8A1FC5A1C100A834EA /* ListViewController.swift in Sources */,
 				8A9C7C7B1FCB371A009B9C86 /* Extension for view.swift in Sources */,
 				49E3C00F1FC6E12800400A06 /* UIImageViewX.swift in Sources */,
 				8A8C5C761FC57F3E00A834EA /* AppDelegate.swift in Sources */,
 				757042241FCB09620075FC87 /* User.swift in Sources */,
-				8A9BF77E1FC72238002E970C /* SettingsTableViewController.swift in Sources */,
+				8A9BF77E1FC72238002E970C /* SettingsViewController.swift in Sources */,
 				75F7EB761FC59B84002F169E /* SignUpViewController.swift in Sources */,
-				8A9BF77A1FC6E2F5002E970C /* UserSettingTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

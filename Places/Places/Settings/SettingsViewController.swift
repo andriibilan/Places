@@ -9,7 +9,7 @@
 import UIKit
 
 
-class SettingsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate{
+class SettingsViewController: UIViewController {
 	
 	
 	
@@ -49,8 +49,7 @@ class SettingsViewController: UIViewController,UITableViewDataSource,UITableView
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
 		
-		tableview.dataSource = self
-		tableview.delegate = self 
+		
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

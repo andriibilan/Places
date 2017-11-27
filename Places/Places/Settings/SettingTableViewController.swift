@@ -1,5 +1,5 @@
 //
-//  UserSettingTableViewController.swift
+//  TableViewController.swift
 //  Places
 //
 //  Created by andriibilan on 11/23/17.
@@ -8,40 +8,52 @@
 
 import UIKit
 
-class UserSettingTableViewController: UITableViewController {
+class SettingTableViewController: UITableViewController {
+    let defaultsRadius = UserDefaults.standard
     
-   
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return  1
+    @IBOutlet weak var mapRadius: UILabel!
+    @IBOutlet weak var sliderValue: UISlider!
+    
+    @IBAction func sliderRadius(_ sender: UISlider) {
+        let slider = lroundf(sender.value)
+        mapRadius.text = "\(slider) m"
+        defaultsRadius.set(slider, forKey: "Radius")
+        
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        sliderValue.setValue(Float(defaultsRadius.integer(forKey: "Radius")) ,animated: true)
+        mapRadius.text = String(defaultsRadius.integer(forKey: "Radius"))
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0 :
-            changeEmail()
+            print("touch 1 section")
+           changeEmail()
         case 1:
+            print("touch 2 section")
             changePassword()
         default:
             break
         }
     }
     
-
-    
     func changeEmail() {
         let emailAlertController = UIAlertController(title: "e-mail", message: "Please write new e-mail", preferredStyle: .alert)
         changeAlertProperties(alertController: emailAlertController)
         emailAlertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (alert: UIAlertAction) in
-            if self.ValidatorForEmail(isEmail: emailAlertController.textFields![0].text!){
+            if self.ValidatorForEmail(isEmail: emailAlertController.textFields![0].text!) {
                 print("All is okay. email is good")
                 self.changeIsGood()
                 
                 
-            }else{  print("Fucking error. try again, looser")}
+            } else {
+                print("Fucking error. try again, looser")
+                
+            }
             
             
             
@@ -54,7 +66,7 @@ class UserSettingTableViewController: UITableViewController {
         present(emailAlertController, animated: true, completion: nil)
     }
     
- 
+    
     
     func  changePassword() {
         let passwordAllertController = UIAlertController(title: "Password", message: "Please write new password", preferredStyle: .alert)
@@ -107,15 +119,6 @@ class UserSettingTableViewController: UITableViewController {
             return false
         }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
     
-
+    
 }
