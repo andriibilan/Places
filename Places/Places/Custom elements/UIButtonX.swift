@@ -3,7 +3,7 @@
 //  SkyApp
 //
 //  Created by Mark Moeykens on 12/18/16.
-//  Copyright © 2016 Mark Moeykens. All rights reserved.
+//  Copyright © 2017 Andrew. All rights reserved.
 //
 
 import UIKit

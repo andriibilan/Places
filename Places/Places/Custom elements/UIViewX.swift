@@ -3,7 +3,7 @@
 //  DesignableX
 //
 //  Created by Mark Moeykens on 12/31/16.
-//  Copyright © 2016 Mark Moeykens. All rights reserved.
+//  Copyright © 2017 Andrew. All rights reserved.
 //
 
 import UIKit

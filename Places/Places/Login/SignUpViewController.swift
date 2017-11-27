@@ -11,124 +11,70 @@ import Firebase
 import FirebaseDatabase
 
 class SignUpViewController: UIViewController {
-    @IBOutlet  weak var emailTextField: UITextField!
-    @IBOutlet  weak var passwordTextField: UITextField!
-    @IBOutlet  weak var confirmPassTextField: UITextField!
-    @IBOutlet  weak var nameTextField: UITextField!
-    @IBOutlet  weak var phoneTextField: UITextField!
     
-    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
+    @IBOutlet private weak var confirmPassTextField: UITextField!
+    @IBOutlet private weak var firstNameTextField: UITextField!
+    @IBOutlet private weak var lastNameTextField: UITextField!
+    @IBOutlet private weak var phoneTextField: UITextField!
     
-    private var userReference: DatabaseReference!
+    @IBOutlet private weak var profileImage: UIImageView!
+    
+    private var messageText : String!
+    var authService = AuthService()
+    var validator = Validator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameTextField.delegate = self
-        userReference = Database.database().reference(withPath: "Users")
     }
     
     @IBAction func selectProfileImage(_ sender: Any) {
         chooseImage()
     }
     
+    @IBAction func selectSignInButton(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
+        self.present(vc!, animated: true, completion: nil)
+    }
+    
     @IBAction func registerAction(_ sender: Any) {
         
-        if ((emailTextField.text == "") || (passwordTextField.text == "") || (nameTextField.text == "") || (phoneTextField.text == ""))
-        {
-            let alertController = UIAlertController(title: "Error", message: "Please complete all fields", preferredStyle: .alert)
-            
-            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(defaultAction)
-            
-            present(alertController, animated: true, completion: nil)
+        if (firstNameTextField.text?.isEmpty)! {
+            messageText = "Please complete all fields."
+            alertAction(messageText)
+        }
+        if !validator.isValidEmail(email: emailTextField.text!) {
+            messageText = "Please enter your correct email."
+            alertAction(messageText)
+        }
+        //        if !validator.isValidPhoneNumber(testStr: phoneTextField.text!) {
+        //            messageText = "Please enter your correct phone number."
+        //            alertAction(messageText)
+        //        }
+        if !validator.isValidPassword(password: passwordTextField.text!) && passwordTextField.text!.count <= 8 {
+            messageText = "Passwords must contain at least 8 characters."
+            alertAction(messageText)
+        }
+        if passwordTextField.text != confirmPassTextField.text {
+            messageText = "Confirmed password not matched please try again."
+            alertAction(messageText)
+        }
+        if profileImage.image == nil {
+            messageText = "You need to add photo, If you want create user !"
+            alertAction(messageText)
         }
         else
         {
-            saveToFirebase()
-//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
-//            self.present(vc!, animated: true, completion: nil)
-        }
-        
-        
-    }
-    
-    func saveToFirebase() {
-        
-        if let email = emailTextField.text, let password = passwordTextField.text
-        {
-            Auth.auth().createUser(withEmail: email, password: password, completion: {(user, error) in
-                
-                if let firebaseError = error
-                {
-                    print(firebaseError.localizedDescription)
-                    return
-                }
-                
-                guard let userId = user?.uid else { return }
-                
-                let currentUserRef = self.userReference.child("\(userId)")
-                currentUserRef.setValue(user?.uid)
-                
-                //successfully authenticated user
-                let imageName = NSUUID().uuidString
-                let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
-                
-                let userInfo = currentUserRef.child("userInfo")
-                
-                let email = userInfo.child("email")
-                let password = userInfo.child("password")
-                let userName = userInfo.child("userName")
-                let phone = userInfo.child("phone")
-                let profileImages = userInfo.child("profileImage")
-                
-                if (self.profileImage.image != nil) {
-                    if let uploadData = UIImagePNGRepresentation(self.profileImage.image!) {
-                        
-                        storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
-                            
-                            if let error = error {
-                                print(error)
-                                return
-                            }
-                            
-                            if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
-                                profileImages.setValue(profileImageUrl)
-                            }
-                        })
-                    }
-                }
-                email.setValue(self.emailTextField.text)
-                userName.setValue(self.nameTextField.text)
-                password.setValue(self.passwordTextField.text)
-                
-                phone.setValue(self.phoneTextField.text)
-                
-                
-            })
+            let pictureData = UIImageJPEGRepresentation(self.profileImage.image!, 0.30)
+            authService.createUser(userName: firstNameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, password: passwordTextField.text!, pictureData: pictureData!)
         }
     }
     
-    func isValidEmailAddress(emailAddressString: String) -> Bool {
-        
-        var returnValue = true
-        let emailRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
-        
-        do {
-            let regex = try NSRegularExpression(pattern: emailRegEx)
-            let nsString = emailAddressString as NSString
-            let results = regex.matches(in: emailAddressString, range: NSRange(location: 0, length: nsString.length))
-            
-            if results.count == 0
-            {
-                returnValue = false
-            }
-            
-        } catch let error as NSError {
-            print("invalid regex: \(error.localizedDescription)")
-            returnValue = false
-        }
-        
-        return  returnValue
+    func alertAction(_ message: String) {
+        let alertMessage = UIAlertController(title: "Oops!", message: message , preferredStyle: .alert)
+        alertMessage.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertMessage, animated: true, completion: nil)
     }
     
 }
@@ -149,7 +95,7 @@ extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationCo
             if UIImagePickerController.isSourceTypeAvailable(.camera){
                 imagePickerController.sourceType = .camera
                 self.present(imagePickerController, animated: true, completion: nil)
-            } else{
+            } else {
                 print("Camera not available")
             }
         }))
@@ -163,7 +109,6 @@ extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationCo
         
         self.present(actionSheet, animated: true, completion: nil)
     }
-    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let images  = info[UIImagePickerControllerOriginalImage] as! UIImage
@@ -182,12 +127,59 @@ extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationCo
         picker.dismiss(animated: true, completion: nil)
     }
 }
+
 //MARK: TextField
-extension SignUpViewController: UITextFieldDelegate{
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = nameTextField.text else { return true }
-        let newLength = text.count + string.count - range.length
-        return newLength <= 50
-    }
+extension SignUpViewController: UITextFieldDelegate {
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        switch textField {
+        case firstNameTextField:
+            guard let text = firstNameTextField.text else { return true }
+            let newLength = text.count + string.count - range.length
+            return newLength <= 10
+            
+        case lastNameTextField:
+            guard let text = lastNameTextField.text else { return true }
+            let newLength = text.count + string.count - range.length
+            return newLength <= 15
+            
+        case phoneTextField:
+            var originalText = textField.text
+            
+            if (originalText?.count)! == 0
+            {
+                originalText?.append("+38")
+            }
+            if (originalText?.count)! == 3
+            {
+                originalText?.append(" (0")
+            }
+            if (originalText?.count)! == 8
+            {
+                originalText?.append(") ")
+            }
+            if (originalText?.count)! == 12
+            {
+                originalText?.append("-")
+            }
+            if (originalText?.count)! == 15
+            {
+                originalText?.append("-")
+            }
+            if (originalText?.count)! == 19
+            {
+                guard let text = phoneTextField.text else { return true }
+                let newLength = text.count + string.count - range.length
+                return newLength <= 19
+            }
+            phoneTextField.text = originalText
+            
+        default:
+            break
+        }
+        return true
+    }
 }
+
+

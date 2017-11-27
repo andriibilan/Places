@@ -9,18 +9,23 @@
 import UIKit
 
 class MapSettingTableViewController: UITableViewController {
-    
+    let defaultsRadius = UserDefaults.standard
     
     @IBOutlet weak var mapRadius: UILabel!
+    @IBOutlet weak var sliderValue: UISlider!
     
     @IBAction func sliderRadius(_ sender: UISlider) {
-        var sliderValue = lroundf(sender.value)
-        mapRadius.text = "\(sliderValue)"
+        let slider = lroundf(sender.value)
+        mapRadius.text = "\(slider) m"
+        defaultsRadius.set(slider, forKey: "Radius")
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        sliderValue.setValue(Float(defaultsRadius.integer(forKey: "Radius")) ,animated: true)
+        mapRadius.text = String(defaultsRadius.integer(forKey: "Radius"))
         
     }
+    
 }
