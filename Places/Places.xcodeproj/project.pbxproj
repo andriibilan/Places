@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		258B06561FC837C6003A09B8 /* NewPlaceBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 258B06551FC837C6003A09B8 /* NewPlaceBoard.storyboard */; };
+		258B06581FC861A1003A09B8 /* high.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 258B06571FC861A1003A09B8 /* high.jpg */; };
+		258B065A1FC861D6003A09B8 /* AddNewPlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B06591FC861D6003A09B8 /* AddNewPlaceController.swift */; };
+		25ACDC721FCC227400695896 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ACDC711FCC227400695896 /* Rating.swift */; };
 		2B4BA9131FC5EC0E00B5E598 /* DetailPlace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B4BA90F1FC5EC0E00B5E598 /* DetailPlace.storyboard */; };
 		2B4BA9141FC5EC0E00B5E598 /* DetailPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4BA9101FC5EC0E00B5E598 /* DetailPlaceViewController.swift */; };
 		2B4BA9151FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4BA9111FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift */; };
@@ -48,6 +52,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		258B06551FC837C6003A09B8 /* NewPlaceBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewPlaceBoard.storyboard; sourceTree = "<group>"; };
+		258B06571FC861A1003A09B8 /* high.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = high.jpg; sourceTree = "<group>"; };
+		258B06591FC861D6003A09B8 /* AddNewPlaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPlaceController.swift; sourceTree = "<group>"; };
+		25ACDC711FCC227400695896 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		2B4BA90F1FC5EC0E00B5E598 /* DetailPlace.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailPlace.storyboard; sourceTree = "<group>"; };
 		2B4BA9101FC5EC0E00B5E598 /* DetailPlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPlaceViewController.swift; sourceTree = "<group>"; };
 		2B4BA9111FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -105,6 +113,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		258B06541FC8377B003A09B8 /* AddPlace */ = {
+			isa = PBXGroup;
+			children = (
+				258B06551FC837C6003A09B8 /* NewPlaceBoard.storyboard */,
+				258B06571FC861A1003A09B8 /* high.jpg */,
+				258B06591FC861D6003A09B8 /* AddNewPlaceController.swift */,
+			);
+			path = AddPlace;
+			sourceTree = "<group>";
+		};
 		2B4BA90E1FC5EC0E00B5E598 /* Detail Place */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +131,7 @@
 				2BCDF2321FC83DE500EA96F0 /* TestModelPlace.swift */,
 				2B4BA9111FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift */,
 				2B4BA9121FC5EC0E00B5E598 /* PhotoPagingViewController.swift */,
+				25ACDC711FCC227400695896 /* Rating.swift */,
 			);
 			path = "Detail Place";
 			sourceTree = "<group>";
@@ -197,6 +216,7 @@
 		8A8C5C741FC57F3E00A834EA /* Places */ = {
 			isa = PBXGroup;
 			children = (
+				258B06541FC8377B003A09B8 /* AddPlace */,
 				2BCDF2341FC847ED00EA96F0 /* Extensions */,
 				75F7EB721FC59B5B002F169E /* Login */,
 				75F7EB771FC59E80002F169E /* Profile */,
@@ -321,10 +341,12 @@
 			files = (
 				8A8C5C801FC57F3E00A834EA /* LaunchScreen.storyboard in Resources */,
 				75F7EB831FC5A8AD002F169E /* GoogleService-Info.plist in Resources */,
+				258B06561FC837C6003A09B8 /* NewPlaceBoard.storyboard in Resources */,
 				8A8C5C7D1FC57F3E00A834EA /* Assets.xcassets in Resources */,
 				75F7EB7B1FC59F33002F169E /* Login.storyboard in Resources */,
 				2B4BA9131FC5EC0E00B5E598 /* DetailPlace.storyboard in Resources */,
 				8AAC34041FC6D3BE0060C3A2 /* Settings.storyboard in Resources */,
+				258B06581FC861A1003A09B8 /* high.jpg in Resources */,
 				75F7EB7F1FC59F58002F169E /* Profile.storyboard in Resources */,
 				8A8C5C7B1FC57F3E00A834EA /* Main.storyboard in Resources */,
 			);
@@ -388,6 +410,7 @@
 				75F7EB791FC59E96002F169E /* ProfileViewController.swift in Sources */,
 				2B4BA9141FC5EC0E00B5E598 /* DetailPlaceViewController.swift in Sources */,
 				5291916B1FCC1E02008FD5AB /* myAnnotation.swift in Sources */,
+				258B065A1FC861D6003A09B8 /* AddNewPlaceController.swift in Sources */,
 				49E3C0091FC6D18E00400A06 /* UIButtonX.swift in Sources */,
 				8A9C7C791FCB1AE8009B9C86 /* SliderTransition.swift in Sources */,
 				75F7EB741FC59B75002F169E /* LoginViewController.swift in Sources */,
@@ -403,6 +426,7 @@
 				8AA21ED51FC8446B0046202F /* MapFilterTableViewCell.swift in Sources */,
 				8A8C5C881FC5A1B000A834EA /* MapViewController.swift in Sources */,
 				8A9BF77C1FC6F89A002E970C /* ListTableViewCell.swift in Sources */,
+				25ACDC721FCC227400695896 /* Rating.swift in Sources */,
 				8A9BF7781FC6E22E002E970C /* MapSettingTableViewController.swift in Sources */,
 				2B4BA9151FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift in Sources */,
 				8A8C5C8A1FC5A1C100A834EA /* ListViewController.swift in Sources */,

@@ -48,10 +48,10 @@ class SignUpViewController: UIViewController {
             messageText = "Please enter your correct email."
             alertAction(messageText)
         }
-        //        if !validator.isValidPhoneNumber(testStr: phoneTextField.text!) {
-        //            messageText = "Please enter your correct phone number."
-        //            alertAction(messageText)
-        //        }
+        if !validator.isValidPhoneNumber(testStr: phoneTextField.text!) {
+            messageText = "Please enter your correct phone number."
+            alertAction(messageText)
+        }
         if !validator.isValidPassword(password: passwordTextField.text!) && passwordTextField.text!.count <= 8 {
             messageText = "Passwords must contain at least 8 characters."
             alertAction(messageText)

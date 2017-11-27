@@ -20,15 +20,14 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if Auth.auth().currentUser != nil {
-            let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
-            self.present(profileVC, animated: true, completion: nil)
-        }
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        if Auth.auth().currentUser != nil {
+//            let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
+//            self.present(profileVC, animated: true, completion: nil)
+//        }
+//    }
     
     @IBAction func loginAction(_ sender: Any) {
         let email = emailTextField.text
