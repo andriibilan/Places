@@ -75,7 +75,14 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
 			let secondVC = segue.destination as! SettingsViewController
 			secondVC.transitioningDelegate = self
 			secondVC.modalPresentationStyle = .custom
-		}}
+		}
+		if segue.identifier == "ShowLogin" {
+			let secondVC = segue.destination as! LoginViewController
+			secondVC.transitioningDelegate = self
+			secondVC.modalPresentationStyle = .custom
+		}
+
+	}
     
 }
 
