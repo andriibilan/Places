@@ -12,10 +12,10 @@ import FirebaseDatabase
 
 class ProfileViewController: UIViewController {
     
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var phoneTextField: UITextField!
-    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var nameTextField: UITextField!
+    @IBOutlet private weak var phoneTextField: UITextField!
+    @IBOutlet private weak var profileImage: UIImageView!
     
     
     @IBOutlet weak var userNameLabelText: UILabel!
@@ -24,8 +24,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var phoneLabelText: UILabel!
     @IBOutlet weak var passwordLabelText: UILabel!
     
-    let userID = (Auth.auth().currentUser?.uid)!
-    let ref = Database.database().reference()
+    private let userID = (Auth.auth().currentUser?.uid)!
+    private let ref = Database.database().reference()
+    var authService = AuthService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +46,9 @@ class ProfileViewController: UIViewController {
         ref.child("Users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
             
             let user = Users(snapshot: snapshot)
-            self.emailLabeltext.text = user.email
-//            self.passwordLabelText.text = user.password
-            self.phoneLabelText.text = user.phone
+            self.emailTextField.text = user.email
+            self.nameTextField.text = user.firstName
+            self.phoneTextField.text = user.phone
             
             let profileImageURL = user.ImageUrl
             let url = URL(string: profileImageURL!)
@@ -70,6 +71,11 @@ class ProfileViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @IBAction func editButton(_ sender: Any) {
+        
+        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneLabelText.text!)
     }
     
 }
