@@ -13,30 +13,37 @@ import CoreLocation
 
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource,UIViewControllerTransitioningDelegate {
-
+    var list : ListViewController?
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
 
 	let transition = CustomTransitionAnimator()
 
+    
+    
     let locationData = [
         //Walker Art Gallery
         ["name": "Walker Art Gallery",
+         "image" : "pet.png",
           "description" : "It is a very cool church",
          "latitude": 37.769366,
          "longitude": -122.421464],
+        
+        
         //Liver Buildings
         ["name": "Liver Buildings",
+         "image" : "mops.png",
          "description" : "It is a very cool church",
          "latitude": 37.774115,
          "longitude": -122.427129],
         //St George's Hall
         ["name": "St George's Hall",
+         "image" : "mops.png",
          "description" : "It is a very cool church",
          "latitude": 37.788888,
          "longitude": -122.400000]
     ]
-    //var currentLocation = currentLocations()
+    
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var filterTableView: UITableView!
     @IBOutlet weak var viewForFilter: UIView!
@@ -87,9 +94,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         super.viewDidLoad()
         filterTableView.delegate = self
         filterTableView.dataSource = self
-       // print(UserDefaults.standard.integer(forKey: "Radius"))
+        
         addAnnotations(coords: locationData)
-        //map.showsUserLocation = true
         viewForFilter.setCorenerAndShadow(viewForFilter)
         
         if (CLLocationManager.locationServicesEnabled())
@@ -125,6 +131,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let myAnnotation: MKPointAnnotation = MKPointAnnotation()
         myAnnotation.coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         myAnnotation.title = "Current location"
+        
         map.addAnnotation(myAnnotation)
     }
     
@@ -146,20 +153,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func addAnnotations(coords: [[String : Any]]){
-        var annotations = [MKPointAnnotation]()
+        var annotations = [CustomAnnotation]()
         for each in locationData {
             let latitude = CLLocationDegrees(each["latitude"] as! Double)
             let longitude = CLLocationDegrees(each["longitude"] as! Double)
             let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let name = each["name"] as! String
-            let annotation : MKPointAnnotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "\(name)"
+            let descript = each["description"] as! String
+            let img = each["image"] as! String
+            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: "\(name)", subtitle: "\(descript)", enableInfoButton: true, image: resizeImage(image: UIImage(named: img)!, targetSize: CGSize(width: 40.0, height: 40.0)))
+            //annotation.title = "\(name)"
+            //annotation.subtitle = "\(descript)"
             annotations.append(annotation)
-            
+
         }
         map.addAnnotations(annotations)
-        
     }
     
     
@@ -169,14 +177,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
 
     
-    func addRadiusCircle(location: CLLocation){
-        self.map.delegate = self
-        let circle = MKCircle(center: location.coordinate, radius: 200 as CLLocationDistance)
-        self.map.add(circle)
-    }
+    
     
     func mapView(_ map: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-      // if overlay is MKCircle {
             let circle = MKCircleRenderer(overlay: overlay)
             circle.strokeColor = UIColor.green
             circle.fillColor = UIColor(red: 0, green: 235, blue: 20, alpha: 0.02)
@@ -184,80 +187,79 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             return circle
         
     }
-    
+   
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        print("viewForAnnotation \(String(describing: annotation.title))")
-        if annotation is MKUserLocation {
-            return nil
-        }
-        let reuseID = "pin"
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? MKPinAnnotationView
-        if(pinView == nil) {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
-            pinView?.leftCalloutAccessoryView = UIImageView(image: resizeImage(image: #imageLiteral(resourceName: "church"), targetSize: CGSize(width: 30.0, height: 30.0)))
-            let multiLineView = UIView(frame: CGRect(x: 0, y: 0, width: 23, height: 23))
-            // add all the labels you need here
-            let label1 = UILabel(frame: CGRect(x: 0, y: 10, width: 10, height: 10))
-            label1.text = "Some text"
-            multiLineView.addSubview(label1)
-            let label2 = UILabel(frame: CGRect(x: 0, y: 20, width: 10, height: 10))
-            label2.text = "some text"
-            pinView!.leftCalloutAccessoryView = multiLineView
-
-            pinView!.canShowCallout = true
-
-        }
-        return pinView
-    }
-    
-    @IBAction func addAnnotation(_ sender: UILongPressGestureRecognizer) {
-        if sender.state == .ended {
-            let location = sender.location(in: map)
-            let coordinate = map.convert(location,toCoordinateFrom: map)
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            map.addAnnotation(annotation)
-        }
-    }
-    
-    
-    
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        if let annotation = annotation as? CustomAnnotation {
+            let identifier = "pin"
+            var view: MKPinAnnotationView
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+                as? MKPinAnnotationView { // 2
+                dequeuedView.annotation = annotation
+                view = dequeuedView
+            } else {
+                // 3
+                
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                view.image = #imageLiteral(resourceName: "address")
+                
+                view.canShowCallout = true
+                view.calloutOffset = CGPoint(x: -5, y: 5)
+                view.leftCalloutAccessoryView = UIImageView(image: annotation.image!)
+                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+            }
+            return view
         } else {
-            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+            let identifier = "pin"
+            var view: MKPinAnnotationView
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+                as? MKPinAnnotationView { // 2
+                dequeuedView.annotation = annotation
+                view = dequeuedView
+                view.image = #imageLiteral(resourceName: "address")
+                view.leftCalloutAccessoryView = UIImageView(image: #imageLiteral(resourceName: "pet"))
         }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
+        return nil
     }
-   
-//    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-//        print("regionDidChangeAnimated")
-//        let annotations = self.map.annotations
-//        self.map.removeAnnotations(annotations)
-//        self.map.addAnnotations(annotations)
-//    }
-
+    }
+    
         
+        
+        
+        
+//        print("viewForAnnotation \(String(describing: annotation.title))")
+//        if annotation is MKUserLocation {
+//            return nil
+//        }
+//        let reuseID = "pin"
+//        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? MKPinAnnotationView
+//        if(pinView == nil) {
+//            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+//
+//           pinView?.leftCalloutAccessoryView = UIImageView(image: annotation.subImage!)
+//            pinView?.rightCalloutAccessoryView = UIButton.init(type: UIButtonType.detailDisclosure)
+//            pinView!.canShowCallout = true
+//
+//        }
+//        return pinView
+    
+    
+//    @IBAction func addAnnotation(_ sender: UILongPressGestureRecognizer) {
+//        if sender.state == .ended {
+//            let location = sender.location(in: map)
+//            let coordinate = map.convert(location,toCoordinateFrom: map)
+//
+//            let annotation = MKPointAnnotation()
+//            annotation.coordinate = coordinate
+//            map.addAnnotation(annotation)
+//        }
+//    }
+//
+    
+    
+  
+
+        /////////////////////////////////////////////////////////////////////////
         
         let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
         let iconFilterArray = [#imageLiteral(resourceName: "rsz_bar"),#imageLiteral(resourceName: "rsz_cafe"),#imageLiteral(resourceName: "rsz_restaurant"), #imageLiteral(resourceName: "rsz_bank"),#imageLiteral(resourceName: "rsz_nightclub") ,#imageLiteral(resourceName: "rsz_museum"),#imageLiteral(resourceName: "rsz_beutysalon"),#imageLiteral(resourceName: "rsz_pharmacy"),#imageLiteral(resourceName: "rsz_hospital"),#imageLiteral(resourceName: "rsz_bus_station"),#imageLiteral(resourceName: "rsz_gasstation"),#imageLiteral(resourceName: "rsz_1university"), #imageLiteral(resourceName: "rsz_police"),#imageLiteral(resourceName: "rsz_church"),#imageLiteral(resourceName: "rsz_cemetery"),#imageLiteral(resourceName: "rsz_park"),#imageLiteral(resourceName: "rsz_gym")]
@@ -342,5 +344,41 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 			secondVC.transitioningDelegate = self
 			secondVC.modalPresentationStyle = .custom
 		}}
+    
+    
+    func addRadiusCircle(location: CLLocation){
+        let radius =  UserDefaults.standard.double(forKey: "Radius")
+        self.map.delegate = self
+        let circle = MKCircle(center: location.coordinate, radius: radius as CLLocationDistance)
+        self.map.add(circle)
+    }
+    
+    
+    
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
 }
 
