@@ -22,6 +22,7 @@
 		49E3C00D1FC6D1A000400A06 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */; };
 		49E3C00F1FC6E12800400A06 /* UIImageViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00E1FC6E12800400A06 /* UIImageViewX.swift */; };
 		529191691FC715A0008FD5AB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529191681FC71598008FD5AB /* CoreLocation.framework */; };
+		5291916B1FCC1E02008FD5AB /* myAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5291916A1FCC1E02008FD5AB /* myAnnotation.swift */; };
 		52E5577C1FCA4E90000B7FFC /* CustomTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5577B1FCA4E90000B7FFC /* CustomTransitionAnimator.swift */; };
 		757042221FCB09450075FC87 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757042211FCB09450075FC87 /* Validator.swift */; };
 		757042241FCB09620075FC87 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757042231FCB09620075FC87 /* User.swift */; };
@@ -66,6 +67,7 @@
 		49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		49E3C00E1FC6E12800400A06 /* UIImageViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewX.swift; sourceTree = "<group>"; };
 		529191681FC71598008FD5AB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5291916A1FCC1E02008FD5AB /* myAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myAnnotation.swift; sourceTree = "<group>"; };
 		52E5577B1FCA4E90000B7FFC /* CustomTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionAnimator.swift; sourceTree = "<group>"; };
 		612ABD6E4073E47B3FBF9A37 /* Pods-Places.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Places.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Places/Pods-Places.debug.xcconfig"; sourceTree = "<group>"; };
 		757042211FCB09450075FC87 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
@@ -214,7 +216,6 @@
 		8A8C5C741FC57F3E00A834EA /* Places */ = {
 			isa = PBXGroup;
 			children = (
-
 				258B06541FC8377B003A09B8 /* AddPlace */,
 				2BCDF2341FC847ED00EA96F0 /* Extensions */,
 				75F7EB721FC59B5B002F169E /* Login */,
@@ -241,6 +242,7 @@
 			children = (
 				8A8C5C871FC5A1B000A834EA /* MapViewController.swift */,
 				8AA21ED41FC8446B0046202F /* MapFilterTableViewCell.swift */,
+				5291916A1FCC1E02008FD5AB /* myAnnotation.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -340,7 +342,6 @@
 				8A8C5C801FC57F3E00A834EA /* LaunchScreen.storyboard in Resources */,
 				75F7EB831FC5A8AD002F169E /* GoogleService-Info.plist in Resources */,
 				258B06561FC837C6003A09B8 /* NewPlaceBoard.storyboard in Resources */,
-				75F7EB7D1FC59F46002F169E /* SignUp.storyboard in Resources */,
 				8A8C5C7D1FC57F3E00A834EA /* Assets.xcassets in Resources */,
 				75F7EB7B1FC59F33002F169E /* Login.storyboard in Resources */,
 				2B4BA9131FC5EC0E00B5E598 /* DetailPlace.storyboard in Resources */,
@@ -408,6 +409,7 @@
 			files = (
 				75F7EB791FC59E96002F169E /* ProfileViewController.swift in Sources */,
 				2B4BA9141FC5EC0E00B5E598 /* DetailPlaceViewController.swift in Sources */,
+				5291916B1FCC1E02008FD5AB /* myAnnotation.swift in Sources */,
 				258B065A1FC861D6003A09B8 /* AddNewPlaceController.swift in Sources */,
 				49E3C0091FC6D18E00400A06 /* UIButtonX.swift in Sources */,
 				8A9C7C791FCB1AE8009B9C86 /* SliderTransition.swift in Sources */,
@@ -576,7 +578,7 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Places/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-23.Places";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.Places";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -592,7 +594,7 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Places/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-23.Places";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.Places";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
