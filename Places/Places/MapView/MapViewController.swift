@@ -64,7 +64,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     @IBAction func showSideMenu(_ sender: Any) {
         if isSideMenuHidden {
-            sideMenuConstraint.constant = 0
+            sideMenuConstraint.constant = -3
             UIView.animate(withDuration: 0.5, animations:
                 { self.view.layoutIfNeeded()}
             
@@ -200,7 +200,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? MKPinAnnotationView
         if(pinView == nil) {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
-            pinView?.leftCalloutAccessoryView = UIImageView(image: resizeImage(image: #imageLiteral(resourceName: "church"), targetSize: CGSize(width: 30.0, height: 30.0)))
+            pinView?.leftCalloutAccessoryView = UIImageView(image: resizeImage(image: #imageLiteral(resourceName: "address"), targetSize: CGSize(width: 30.0, height: 30.0)))
             let multiLineView = UIView(frame: CGRect(x: 0, y: 0, width: 23, height: 23))
             // add all the labels you need here
             let label1 = UILabel(frame: CGRect(x: 0, y: 10, width: 10, height: 10))
@@ -265,8 +265,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         
         let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
-        let iconFilterArray = [#imageLiteral(resourceName: "rsz_bar"),#imageLiteral(resourceName: "rsz_cafe"),#imageLiteral(resourceName: "rsz_restaurant"), #imageLiteral(resourceName: "rsz_bank"),#imageLiteral(resourceName: "rsz_nightclub") ,#imageLiteral(resourceName: "rsz_museum"),#imageLiteral(resourceName: "rsz_beutysalon"),#imageLiteral(resourceName: "rsz_pharmacy"),#imageLiteral(resourceName: "rsz_hospital"),#imageLiteral(resourceName: "rsz_bus_station"),#imageLiteral(resourceName: "rsz_gasstation"),#imageLiteral(resourceName: "rsz_1university"), #imageLiteral(resourceName: "rsz_police"),#imageLiteral(resourceName: "rsz_church"),#imageLiteral(resourceName: "rsz_cemetery"),#imageLiteral(resourceName: "rsz_park"),#imageLiteral(resourceName: "rsz_gym")]
-        
+        let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "Church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
+        let colorCellArray = [#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1),#colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1),#colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1),#colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1),#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1),#colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1),#colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1),#colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1),#colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1),#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1),#colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1),#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1),#colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1),#colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1),#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1),#colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1),#colorLiteral(red: 0.7255562742, green: 0.7755160531, blue: 0.3035012881, alpha: 1)]
      func numberOfSections(in tableView: UITableView) -> Int {
             return 1
         }
@@ -284,6 +284,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         filterCell.nameFilter.text = nameFilterArray[indexPath.row]
         filterCell.iconFilter.image = iconFilterArray[indexPath.row]
+        filterCell.backgroundColor = colorCellArray[indexPath.row]
         filterCell.accessoryType = accessory
         filterCell.selectionStyle = .none
         return filterCell
@@ -297,7 +298,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 //second version
         cell.layer.transform = CATransform3DScale(CATransform3DIdentity, -1, 1, 1)
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.7) {
             cell.alpha = 1
             cell.layer.transform = CATransform3DIdentity
         }
