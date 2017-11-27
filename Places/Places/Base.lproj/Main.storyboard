@@ -196,21 +196,23 @@
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="sectionIndexColor" red="0.95623749489999998" green="0.3225761056" blue="0.33518427610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mapFilter" rowHeight="51" id="Y7v-38-1T7" customClass="MapFilterTableViewCell" customModule="Places" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="160" height="51"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mapFilter" rowHeight="40" id="Y7v-38-1T7" customClass="MapFilterTableViewCell" customModule="Places" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="160" height="40"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y7v-38-1T7" id="t5Y-3J-c6J">
-                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="51"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RHs-Xx-xri">
-                                                            <rect key="frame" x="7" y="4" width="43" height="43"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RHs-Xx-xri">
+                                                            <rect key="frame" x="7" y="4.5" width="32" height="32"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="RHs-Xx-xri" secondAttribute="height" multiplier="32:32" id="6m7-dB-F8g"/>
+                                                                <constraint firstAttribute="width" constant="32" id="56Q-Ar-pRi"/>
+                                                                <constraint firstAttribute="height" constant="32" id="VpY-3L-svm"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="LHx-rr-LBK">
-                                                            <rect key="frame" x="58" y="10" width="102" height="30"/>
+                                                            <rect key="frame" x="47" y="10.5" width="113" height="19"/>
                                                             <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -486,6 +488,6 @@
         <image name="filter" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NOk-4w-6xs"/>
+        <segue reference="okD-G1-lk4"/>
     </inferredMetricsTieBreakers>
 </document>
