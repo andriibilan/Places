@@ -12,13 +12,13 @@ import CoreLocation
 
 
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource,UIViewControllerTransitioningDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
     //var list : ListViewController?
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
     var menu = ViewController()
     
-	let transition = CustomTransitionAnimator()
+	
 
     
     
@@ -307,33 +307,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     }
 	
-	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-		transition.transitionMode = .present
-		transition.startingPoint = menu.menuView.center
-		transition.circleColor = menu.menuView.backgroundColor! //settingsButton.backgroundColor!
-		
-		return transition
-	}
-	
-	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-		transition.transitionMode = .dismiss
-		transition.startingPoint = menu.menuView.center
-		transition.circleColor = menu.menuView.backgroundColor!
-		
-		return transition
-	}
+
 
 	
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "ShowSettings" {
-//			UIView.animate(withDuration: 0.3, animations: {
-//				self.menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-//				
-//			})
-			let secondVC = segue.destination as! SettingsViewController
-			secondVC.transitioningDelegate = self
-			secondVC.modalPresentationStyle = .custom
-		}}
     
     
     func addRadiusCircle(location: CLLocation){
