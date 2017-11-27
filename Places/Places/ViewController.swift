@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
+    @IBOutlet weak var menuView: UIViewX!
+    
     
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -26,16 +28,27 @@ class ViewController: UIViewController {
         }
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-      listView.isHidden = true
-            self.navigationController?.isNavigationBarHidden = true
-    
+        listView.isHidden = true
+        menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
     
+    @IBAction func menuTapped(_ sender: FloatingActionButton) {
+        UIView.animate(withDuration: 0.3, animations: {
+            if self.menuView.transform == .identity {
+                self.menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            } else {
+                self.menuView.transform = .identity
+            }
+        })
+    }
     
 }
 

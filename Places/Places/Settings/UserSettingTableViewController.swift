@@ -10,7 +10,15 @@ import UIKit
 
 class UserSettingTableViewController: UITableViewController {
     
-
+   
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return  1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0 :
@@ -22,18 +30,18 @@ class UserSettingTableViewController: UITableViewController {
         }
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return  1
-    }
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
+
     
-    func changeEmail(){
+    func changeEmail() {
         let emailAlertController = UIAlertController(title: "e-mail", message: "Please write new e-mail", preferredStyle: .alert)
         changeAlertProperties(alertController: emailAlertController)
         emailAlertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (alert: UIAlertAction) in
-            
+            if self.ValidatorForEmail(isEmail: emailAlertController.textFields![0].text!){
+                print("All is okay. email is good")
+                self.changeIsGood()
+                
+                
+            }else{  print("Fucking error. try again, looser")}
             
             
             
@@ -46,6 +54,7 @@ class UserSettingTableViewController: UITableViewController {
         present(emailAlertController, animated: true, completion: nil)
     }
     
+ 
     
     func  changePassword() {
         let passwordAllertController = UIAlertController(title: "Password", message: "Please write new password", preferredStyle: .alert)
@@ -75,8 +84,8 @@ class UserSettingTableViewController: UITableViewController {
         present(passwordAllertController, animated: true, completion: nil)
     }
     
-   
-    func changeAlertProperties(alertController: UIAlertController){
+    
+    func changeAlertProperties(alertController: UIAlertController) {
         let subview = alertController.view.subviews.first! as UIView
         let alertContentView = subview.subviews.first! as UIView
         alertContentView.backgroundColor = UIColor.green
@@ -84,18 +93,29 @@ class UserSettingTableViewController: UITableViewController {
         alertContentView.layer.borderWidth = 3;
         alertContentView.layer.borderColor = UIColor.white.cgColor
     }
+    func changeIsGood() {
+        let alert = UIAlertController(title: "DONE", message: nil, preferredStyle: .alert)
+        changeAlertProperties(alertController: alert)
+        self.present(alert, animated: true, completion: {self.dismiss(animated: true, completion: nil)})
+    }
     
-    
-    
+    func ValidatorForEmail( isEmail: String)-> Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}", options: .caseInsensitive)
+            return regex.firstMatch(in: isEmail, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, isEmail.count)) != nil
+        } catch {
+            return false
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-   
+    
 
 }
