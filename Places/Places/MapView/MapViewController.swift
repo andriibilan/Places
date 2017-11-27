@@ -16,7 +16,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var list : ListViewController?
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
-
+    var menu = ViewController()
+    
 	let transition = CustomTransitionAnimator()
 
     
@@ -64,7 +65,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         appDel.showProfile()
     }
     
-    @IBOutlet weak var menuView: UIViewX!
     @IBOutlet weak var sideMenuConstraint: NSLayoutConstraint!
     
      var isSideMenuHidden = true
@@ -81,18 +81,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             UIView.animate(withDuration: 0.5, animations: { self.view.layoutIfNeeded()})
         }
         isSideMenuHidden = !isSideMenuHidden
-    }
-    
-    
-
-    @IBAction func menuTapped(_ sender: FloatingActionButton) {
-        UIView.animate(withDuration: 0.3, animations: {
-            if self.menuView.transform == .identity {
-                self.menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-            } else {
-                self.menuView.transform = .identity
-            }
-        })
     }
     
     override func viewDidLoad() {
@@ -118,7 +106,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         sideMenuConstraint.constant = -160
-         menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         // Do any additional setup after loading the view.
     }
 
@@ -324,16 +311,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 	
 	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 		transition.transitionMode = .present
-		transition.startingPoint = menuView.center
-		transition.circleColor = menuView.backgroundColor! //settingsButton.backgroundColor!
+		transition.startingPoint = menu.menuView.center
+		transition.circleColor = menu.menuView.backgroundColor! //settingsButton.backgroundColor!
 		
 		return transition
 	}
 	
 	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 		transition.transitionMode = .dismiss
-		transition.startingPoint = menuView.center
-		transition.circleColor = menuView.backgroundColor!
+		transition.startingPoint = menu.menuView.center
+		transition.circleColor = menu.menuView.backgroundColor!
 		
 		return transition
 	}
