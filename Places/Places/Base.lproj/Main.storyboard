@@ -138,16 +138,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZ7-mN-XYi">
-                                <rect key="frame" x="305" y="404" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="fZ7-mN-XYi" secondAttribute="height" multiplier="1:1" id="pGR-Ud-0Nd"/>
-                                </constraints>
-                                <state key="normal" image="2703073-64"/>
-                                <connections>
-                                    <action selector="currentLocation:" destination="6eg-wI-33n" eventType="touchUpInside" id="3Mj-ut-ZNW"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -156,14 +146,11 @@
                             <constraint firstItem="epZ-6t-w9F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DRh-0I-QfF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="epZ-6t-w9F" secondAttribute="bottom" id="GpT-c3-XXA"/>
                             <constraint firstAttribute="trailing" secondItem="C0Q-sZ-dW2" secondAttribute="trailing" constant="-95" id="J91-WV-pxv"/>
-                            <constraint firstAttribute="trailing" secondItem="fZ7-mN-XYi" secondAttribute="trailing" constant="10" id="KAo-TD-lVy"/>
-                            <constraint firstItem="fZ7-mN-XYi" firstAttribute="width" secondItem="WRz-UB-V2K" secondAttribute="width" multiplier="0.16" id="KUc-s1-eBO"/>
                             <constraint firstItem="WRz-UB-V2K" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-20" id="NuZ-sC-Tq4"/>
                             <constraint firstItem="nDW-Of-fAx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="13" id="abx-qf-kCr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="epZ-6t-w9F" secondAttribute="top" constant="20" id="dOC-SB-nne"/>
                             <constraint firstAttribute="bottom" secondItem="C0Q-sZ-dW2" secondAttribute="bottom" constant="-95" id="dvF-1R-LwH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cHr-Uv-c98" secondAttribute="bottom" constant="20" id="eBE-Tl-WoX"/>
-                            <constraint firstItem="C0Q-sZ-dW2" firstAttribute="top" secondItem="fZ7-mN-XYi" secondAttribute="bottom" constant="8" id="gh5-Gz-CZg"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WRz-UB-V2K" secondAttribute="trailing" id="kio-g5-IJQ"/>
                             <constraint firstItem="cHr-Uv-c98" firstAttribute="width" secondItem="WRz-UB-V2K" secondAttribute="width" multiplier="0.16" id="ot6-e3-Em8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nDW-Of-fAx" secondAttribute="trailing" constant="14" id="p3p-Mj-9z1"/>
@@ -281,6 +268,16 @@
                                     <action selector="showSideMenu:" destination="6eg-wI-33n" eventType="touchUpInside" id="N9W-Jf-Awf"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZ7-mN-XYi">
+                                <rect key="frame" x="291" y="366" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fZ7-mN-XYi" secondAttribute="height" multiplier="1:1" id="pGR-Ud-0Nd"/>
+                                </constraints>
+                                <state key="normal" image="2703073-64"/>
+                                <connections>
+                                    <action selector="currentLocation:" destination="6eg-wI-33n" eventType="touchUpInside" id="3Mj-ut-ZNW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -290,6 +287,8 @@
                             <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="Ny9-BK-1UC" secondAttribute="bottom" constant="20" id="Faf-pQ-j1Y"/>
                             <constraint firstAttribute="trailing" secondItem="HFl-mO-hU1" secondAttribute="trailing" id="Jgj-z7-C4o"/>
                             <constraint firstItem="Ny9-BK-1UC" firstAttribute="leading" secondItem="J1c-lw-TzP" secondAttribute="leading" constant="20" id="NSy-qv-bgw"/>
+                            <constraint firstAttribute="bottom" secondItem="fZ7-mN-XYi" secondAttribute="bottom" constant="237" id="SH7-Be-cpf"/>
+                            <constraint firstAttribute="trailing" secondItem="fZ7-mN-XYi" secondAttribute="trailing" constant="20" id="X3v-DB-vqH"/>
                             <constraint firstItem="Ny9-BK-1UC" firstAttribute="width" secondItem="HFl-mO-hU1" secondAttribute="width" multiplier="0.16" id="hLh-Pa-Qd6"/>
                             <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="jpA-aE-Hki" secondAttribute="bottom" constant="100" id="nOX-EX-x6c"/>
                             <constraint firstItem="jpA-aE-Hki" firstAttribute="leading" secondItem="J1c-lw-TzP" secondAttribute="leading" id="pP2-3r-bkg"/>
