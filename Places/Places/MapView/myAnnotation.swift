@@ -31,7 +31,7 @@ class CustomAnnotation : NSObject, MKAnnotation {
         view.isEnabled = true
         view.canShowCallout = true
         view.image = image
-        view.rightCalloutAccessoryView = UIButton(type: UIButtonType.custom)
+        view.rightCalloutAccessoryView = UIButton(type: UIButtonType.detailDisclosure)
         view.centerOffset = CGPoint(x: 0 ,y: -32)
  
         return view

@@ -303,6 +303,7 @@
                         <outlet property="map" destination="HFl-mO-hU1" id="dop-oM-jhB"/>
                         <outlet property="sideMenuConstraint" destination="pP2-3r-bkg" id="RRV-nQ-R41"/>
                         <outlet property="viewForFilter" destination="jpA-aE-Hki" id="vd5-dV-Au0"/>
+                        <segue destination="w39-4y-S2s" kind="show" identifier="detailVC" id="okD-G1-lk4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6B-D0-qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -312,7 +313,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1905" y="-399"/>
+            <point key="canvasLocation" x="1927" y="-479"/>
         </scene>
         <!--Settings-->
         <scene sceneID="yvT-ZR-588">
@@ -491,4 +492,7 @@
         <image name="distance-sorting" width="32" height="32"/>
         <image name="filter" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="okD-G1-lk4"/>
+    </inferredMetricsTieBreakers>
 </document>

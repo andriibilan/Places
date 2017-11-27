@@ -13,7 +13,7 @@ import CoreLocation
 
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource,UIViewControllerTransitioningDelegate {
-    var list : ListViewController?
+    //var list : ListViewController?
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
     var menu = ViewController()
@@ -29,8 +29,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
           "description" : "It is a very cool church",
          "latitude": 37.769366,
          "longitude": -122.421464],
-        
-        
         //Liver Buildings
         ["name": "Liver Buildings",
          "image" : "mops.png",
@@ -114,10 +112,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
+        //map.removeAnnotations(map.annotations)
         let location = locations.last! as CLLocation
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
          region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         let loc = CLLocation(latitude: location.coordinate.latitude as CLLocationDegrees, longitude: location.coordinate.longitude as CLLocationDegrees)
+        if self.map.annotations.count != 0 {
+            let annotation = self.map.annotations[0]
+            self.map.removeAnnotation(annotation)
+        }
+        //let radius =  UserDefaults.standard.double(forKey: "Radius")
+        //let circle = MKCircle(center: location.coordinate, radius: radius)
+        //self.map.add(circle)
         addRadiusCircle(location: loc)
         map.setRegion(region!, animated: true)
         let myAnnotation: MKPointAnnotation = MKPointAnnotation()
@@ -125,6 +131,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         myAnnotation.title = "Current location"
         
         map.addAnnotation(myAnnotation)
+        locationManager.startUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -138,6 +145,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             print("Denied")
         case .authorizedAlways:
             print("AuthorizedAlways")
+            locationManager!.startUpdatingLocation()
         case .authorizedWhenInUse:
             print("AuthorizedWhenInUse")
             locationManager!.startUpdatingLocation()
@@ -145,6 +153,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func addAnnotations(coords: [[String : Any]]){
+        //map.removeAnnotations(map.annotations)
         var annotations = [CustomAnnotation]()
         for each in locationData {
             let latitude = CLLocationDegrees(each["latitude"] as! Double)
@@ -172,18 +181,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     func mapView(_ map: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKCircle {
             let circle = MKCircleRenderer(overlay: overlay)
             circle.strokeColor = UIColor.green
-            circle.fillColor = UIColor(red: 0, green: 235, blue: 20, alpha: 0.02)
+            circle.fillColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.1)
             circle.lineWidth = 1
             return circle
-        
+        } else {
+            return MKPolylineRenderer()
+        }
     }
+//            let circle = MKCircleRenderer(overlay: overlay)
+//            circle.strokeColor = UIColor.green
+//            circle.fillColor = UIColor(red: 0, green: 235, blue: 20, alpha: 0.02)
+//            circle.lineWidth = 1
+//
+//            return circle
+//
+    
    
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-      
-       
+        guard !(annotation is MKUserLocation) else {
+            return nil
+        }
         if let annotation = annotation as? CustomAnnotation {
             let identifier = "pin"
             var view: MKPinAnnotationView
@@ -203,54 +224,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
             }
             return view
-        } else {
-            let identifier = "pin"
-            var view: MKPinAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-                as? MKPinAnnotationView { // 2
-                dequeuedView.annotation = annotation
-                view = dequeuedView
-                view.image = #imageLiteral(resourceName: "address")
-                view.leftCalloutAccessoryView = UIImageView(image: #imageLiteral(resourceName: "pet"))
         }
         return nil
     }
+    
+    
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView || control == view.detailCalloutAccessoryView || control == view.leftCalloutAccessoryView {
+            //print(view.annotation?.title) // your annotation's title
+            //Perform a segue here to navigate to another viewcontroller
+            performSegue(withIdentifier: "detailVC", sender: view)
+        }
     }
-    
         
+
         
-        
-        
-//        print("viewForAnnotation \(String(describing: annotation.title))")
-//        if annotation is MKUserLocation {
-//            return nil
-//        }
-//        let reuseID = "pin"
-//        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? MKPinAnnotationView
-//        if(pinView == nil) {
-//            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
-//
-//           pinView?.leftCalloutAccessoryView = UIImageView(image: annotation.subImage!)
-//            pinView?.rightCalloutAccessoryView = UIButton.init(type: UIButtonType.detailDisclosure)
-//            pinView!.canShowCallout = true
-//
-//        }
-//        return pinView
-    
-    
-//    @IBAction func addAnnotation(_ sender: UILongPressGestureRecognizer) {
-//        if sender.state == .ended {
-//            let location = sender.location(in: map)
-//            let coordinate = map.convert(location,toCoordinateFrom: map)
-//
-//            let annotation = MKPointAnnotation()
-//            annotation.coordinate = coordinate
-//            map.addAnnotation(annotation)
-//        }
-//    }
-//
-    
-    
+
   
 
         /////////////////////////////////////////////////////////////////////////
@@ -328,7 +318,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 	}
 
 	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "ShowSettings" {
 //			UIView.animate(withDuration: 0.3, animations: {
 //				self.menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
@@ -341,12 +331,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     func addRadiusCircle(location: CLLocation){
+        
         let radius =  UserDefaults.standard.double(forKey: "Radius")
         self.map.delegate = self
         let circle = MKCircle(center: location.coordinate, radius: radius as CLLocationDistance)
         self.map.add(circle)
     }
-    
     
     
     func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
