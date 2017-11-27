@@ -15,6 +15,7 @@
 		2B4BA9141FC5EC0E00B5E598 /* DetailPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4BA9101FC5EC0E00B5E598 /* DetailPlaceViewController.swift */; };
 		2B4BA9151FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4BA9111FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift */; };
 		2B4BA9161FC5EC0E00B5E598 /* PhotoPagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4BA9121FC5EC0E00B5E598 /* PhotoPagingViewController.swift */; };
+		2B8608061FCC4DB10007B777 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8608051FCC4DB10007B777 /* ReviewTableViewCell.swift */; };
 		2BCDF2331FC83DE500EA96F0 /* TestModelPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCDF2321FC83DE500EA96F0 /* TestModelPlace.swift */; };
 		2BCDF2361FC8481B00EA96F0 /* Extension for Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCDF2351FC8481B00EA96F0 /* Extension for Double.swift */; };
 		49E3C0091FC6D18E00400A06 /* UIButtonX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C0081FC6D18E00400A06 /* UIButtonX.swift */; };
@@ -59,6 +60,7 @@
 		2B4BA9101FC5EC0E00B5E598 /* DetailPlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPlaceViewController.swift; sourceTree = "<group>"; };
 		2B4BA9111FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		2B4BA9121FC5EC0E00B5E598 /* PhotoPagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPagingViewController.swift; sourceTree = "<group>"; };
+		2B8608051FCC4DB10007B777 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		2BCDF2321FC83DE500EA96F0 /* TestModelPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModelPlace.swift; sourceTree = "<group>"; };
 		2BCDF2351FC8481B00EA96F0 /* Extension for Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension for Double.swift"; sourceTree = "<group>"; };
 		49E3C0081FC6D18E00400A06 /* UIButtonX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonX.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				2B4BA90F1FC5EC0E00B5E598 /* DetailPlace.storyboard */,
 				2B4BA9101FC5EC0E00B5E598 /* DetailPlaceViewController.swift */,
 				2BCDF2321FC83DE500EA96F0 /* TestModelPlace.swift */,
+				2B8608051FCC4DB10007B777 /* ReviewTableViewCell.swift */,
 				2B4BA9111FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift */,
 				2B4BA9121FC5EC0E00B5E598 /* PhotoPagingViewController.swift */,
 				25ACDC711FCC227400695896 /* Rating.swift */,
@@ -433,6 +436,8 @@
 				757042241FCB09620075FC87 /* User.swift in Sources */,
 				8A9BF77E1FC72238002E970C /* SettingsViewController.swift in Sources */,
 				75F7EB761FC59B84002F169E /* SignUpViewController.swift in Sources */,
+				2B8608061FCC4DB10007B777 /* ReviewTableViewCell.swift in Sources */,
+				8A9BF77A1FC6E2F5002E970C /* UserSettingTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

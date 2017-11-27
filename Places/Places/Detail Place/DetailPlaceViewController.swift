@@ -8,7 +8,9 @@
 
 import UIKit
 
-class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate {
+    
+    
     
     @IBOutlet weak var PhotoCollectionView: UICollectionView!
     
@@ -26,6 +28,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var placePhone: UILabel?
     
+    @IBOutlet weak var feedbackTableView: UITableView!
     
     
     
@@ -67,6 +70,14 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         PhotoCollectionView.delegate = self
         PhotoCollectionView.dataSource = self
         
+        
+        //
+        
+        
+        feedbackTableView.delegate = self
+        feedbackTableView.dataSource = self
+        
+        //
     }
     
     
@@ -149,4 +160,35 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         }
         return cell!
     }
+    
+    ///
+    
+    
+  
+    
+    //MARK: Table View Data Source
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("count:\(String(describing: testPlace.forReview.count))")
+        return (testPlace.forReview.count)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let review = testPlace.forReview[indexPath.row]
+        
+        let cell  = feedbackTableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as! ReviewTableViewCell
+        
+        cell.labelForReview.text = review.review
+        if review.isanonymous{
+            cell.labelForReviewer.text = "Anonymous"
+        }else{
+            cell.labelForReviewer.text = review.reviewer
+        }
+        //TODO:RATTING
+        
+        
+        
+        return cell
+    }
+    
 }

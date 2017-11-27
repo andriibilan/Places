@@ -11,6 +11,30 @@ import UIKit
 
 
 
+class Review{
+    var reviewer : String?
+    var review : String?
+    var isanonymous : Bool!
+    var reviewRatting : Double?
+    
+    init(){
+        reviewer = "Reviewer"
+        review = """
+        1234567890 1234567890 1234567890 
+        1234567890 1234567890 1234567890
+        1234567890 1234567890 1234567890
+        1234567890 1234567890 1234567890
+        1234567890 1234567890 1234567890
+        1234567890 1234567890 1234567890
+        1234567890 1234567890 1234567890
+        1234567890 1234567890 1234567890
+        """
+        
+        isanonymous = false
+        reviewRatting = 3.2
+    }
+}
+
 class TestPlace{
     
     var image : [UIImage] = []
@@ -20,7 +44,8 @@ class TestPlace{
     var website : String?
     var hours : String?
     var phone : String?
-    //TODO: review
+    //
+    var forReview : [Review] = []
     
     func installDefaultValues(){
         //
@@ -45,6 +70,10 @@ class TestPlace{
         phone = "380925839548"
         //
         //TODO: Review!!!
+        forReview.append(Review())
+        forReview.append(Review())
+        forReview.append(Review())
+        forReview.append(Review())
     }
     
     
