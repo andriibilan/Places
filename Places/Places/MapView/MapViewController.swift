@@ -288,7 +288,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.alpha = 0
  // first version
-       // cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
+        //cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
 
 //second version
         cell.layer.transform = CATransform3DScale(CATransform3DIdentity, -1, 1, 1)
