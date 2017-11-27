@@ -11,21 +11,22 @@ import UIKit
 class SettingTableViewController: UITableViewController {
     let defaultsRadius = UserDefaults.standard
     
-    @IBOutlet weak var mapRadius: UILabel!
+    
+    @IBOutlet weak var searchRadius: UILabel!
     @IBOutlet weak var sliderValue: UISlider!
     
     @IBAction func sliderRadius(_ sender: UISlider) {
         let slider = lroundf(sender.value)
-        mapRadius.text = "\(slider) m"
+        searchRadius.text = "Search Radius: \(slider) m"
         defaultsRadius.set(slider, forKey: "Radius")
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        sliderValue.setValue(Float(defaultsRadius.integer(forKey: "Radius")) ,animated: true)
-        mapRadius.text = String(defaultsRadius.integer(forKey: "Radius"))
-        
+            sliderValue.setValue(Float(defaultsRadius.integer(forKey: "Radius")) ,animated: true)
+            searchRadius.text = "Search Radius: \(String(defaultsRadius.integer(forKey: "Radius"))) m"
+        print(Float(defaultsRadius.integer(forKey: "Radius")))
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

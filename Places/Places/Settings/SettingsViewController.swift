@@ -23,7 +23,8 @@ class SettingsViewController: UIViewController {
 	}
 	
 	@IBAction func dismissButtonTaped(_ sender: UIButton) {
-			self.dismiss(animated: true, completion: nil)
+        print(UserDefaults.standard.integer(forKey: "Radius"))
+        self.dismiss(animated: true, completion: nil)
 	}
 	
 	

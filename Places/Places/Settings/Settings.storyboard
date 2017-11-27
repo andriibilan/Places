@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -90,29 +91,32 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="86.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raI-pe-jZJ">
-                                                    <rect key="frame" x="258" y="15" width="71" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="100" maxValue="2000" translatesAutoresizingMaskIntoConstraints="NO" id="8Ni-Sz-KaM">
-                                                    <rect key="frame" x="16" y="46" width="345" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="100" maxValue="2000" translatesAutoresizingMaskIntoConstraints="NO" id="8Ni-Sz-KaM">
+                                                    <rect key="frame" x="16" y="45" width="345" height="31"/>
                                                     <connections>
                                                         <action selector="sliderRadius:" destination="75l-ai-u0M" eventType="valueChanged" id="qDB-N0-drC"/>
                                                     </connections>
                                                 </slider>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Search Radius:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZNG-YC-91q">
-                                                    <rect key="frame" x="128" y="11" width="118" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyI-Iq-cxc">
+                                                    <rect key="frame" x="16" y="11" width="210" height="26"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="210" id="21Z-cT-YgK"/>
+                                                        <constraint firstAttribute="height" constant="26" id="udZ-t1-t9T"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="tintColor" red="0.87322145699999998" green="0.98523384329999997" blue="0.07190831751" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="vyI-Iq-cxc" firstAttribute="top" secondItem="LI9-rA-kvM" secondAttribute="topMargin" id="5ET-nz-kry"/>
+                                                <constraint firstItem="vyI-Iq-cxc" firstAttribute="leading" secondItem="LI9-rA-kvM" secondAttribute="leadingMargin" id="6ZZ-yT-pBj"/>
+                                                <constraint firstItem="8Ni-Sz-KaM" firstAttribute="leading" secondItem="LI9-rA-kvM" secondAttribute="leading" constant="18" id="9jT-Yk-Mem"/>
+                                                <constraint firstAttribute="trailing" secondItem="8Ni-Sz-KaM" secondAttribute="trailing" constant="16" id="DDW-60-43E"/>
+                                                <constraint firstAttribute="bottom" secondItem="8Ni-Sz-KaM" secondAttribute="bottom" constant="11.5" id="MPm-2m-j8q"/>
+                                                <constraint firstItem="8Ni-Sz-KaM" firstAttribute="top" secondItem="vyI-Iq-cxc" secondAttribute="bottom" constant="8" symbolic="YES" id="Nm6-Vc-T4k"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -162,7 +166,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="mapRadius" destination="raI-pe-jZJ" id="cgK-AH-dYD"/>
+                        <outlet property="searchRadius" destination="vyI-Iq-cxc" id="wBn-li-oaT"/>
                         <outlet property="sliderValue" destination="8Ni-Sz-KaM" id="MX0-fZ-9uy"/>
                     </connections>
                 </tableViewController>
