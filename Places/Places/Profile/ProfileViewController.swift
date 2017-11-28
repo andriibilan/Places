@@ -11,6 +11,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
+
 class ProfileViewController: UIViewController {
     
     @IBOutlet private weak var emailTextField: UITextField!

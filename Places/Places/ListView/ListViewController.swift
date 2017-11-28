@@ -114,6 +114,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		tableView.delegate = self
 		tableView.dataSource = self
 		
+		tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 148, right: 0)
 		
 		//
 		tableView.tableFooterView = UIView()
@@ -244,7 +245,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		
 		// Define the final state (After the animation)
 		//UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
-
+				
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -14,7 +14,19 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-    
+	
+	
+	@IBOutlet weak var dismissButton: UIButton!{
+		didSet{
+			dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
+			dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+		}
+	}
+	
+	@IBAction func dismissButtonTaped(_ sender: UIButton) {
+		self.dismiss(animated: true, completion: nil)
+	}
+	
     var authService = AuthService()
     
     override func viewDidLoad() {
