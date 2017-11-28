@@ -30,15 +30,17 @@ class SettingTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0 :
-            print("touch 1 section")
-           changeEmail()
-        case 1:
-            print("touch 2 section")
-            changePassword()
-        default:
-            break
+        if indexPath.section == 1 {
+            switch indexPath.row {
+            case 0 :
+                print("touch 1 section")
+                changeEmail()
+            case 1:
+                print("touch 2 section")
+                changePassword()
+            default:
+                break
+            }
         }
     }
     
