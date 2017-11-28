@@ -9,7 +9,7 @@
 import UIKit
 
 class SettingTableViewController: UITableViewController {
-    let defaultsRadius = UserDefaults.standard
+    let defaults = UserDefaults.standard
     
     
     @IBOutlet weak var searchRadius: UILabel!
@@ -18,31 +18,50 @@ class SettingTableViewController: UITableViewController {
     @IBAction func sliderRadius(_ sender: UISlider) {
         let slider = lroundf(sender.value)
         searchRadius.text = "Search Radius: \(slider) m"
-        defaultsRadius.set(slider, forKey: "Radius")
+        defaults.set(slider, forKey: "Radius")
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            sliderValue.setValue(Float(defaultsRadius.integer(forKey: "Radius")) ,animated: true)
-            searchRadius.text = "Search Radius: \(String(defaultsRadius.integer(forKey: "Radius"))) m"
-        print(Float(defaultsRadius.integer(forKey: "Radius")))
+            sliderValue.setValue(Float(defaults.integer(forKey: "Radius")) ,animated: true)
+            searchRadius.text = "Search Radius: \(String(defaults.integer(forKey: "Radius"))) m"
+        print(Float(defaults.integer(forKey: "Radius")))
 
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0 :
-            print("touch 1 section")
-           changeEmail()
-        case 1:
-            print("touch 2 section")
-            changePassword()
-        default:
-            break
+        if indexPath.section == 1 {
+            switch indexPath.row {
+            case 0 :
+                print("touch 1 row")
+                changeEmail()
+            case 1:
+                print("touch 2 row")
+                changePassword()
+            default:
+                break
+            }
+        } else {
+            switch indexPath.row {
+            case 1:
+                changeMapType()
+            default:
+                break
+            }
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.textLabel?.textColor = UIColor.black
         }
     }
     
+  
+
+
+
     func changeEmail() {
         let emailAlertController = UIAlertController(title: "e-mail", message: "Please write new e-mail", preferredStyle: .alert)
         changeAlertProperties(alertController: emailAlertController)
@@ -121,6 +140,26 @@ class SettingTableViewController: UITableViewController {
             return false
         }
     }
-    
-    
+    func changeMapType() {
+        let mapTypeAlertController = UIAlertController(title: "Change map type", message: "Please choose map type", preferredStyle: .alert)
+        changeAlertProperties(alertController: mapTypeAlertController)
+        let standartType = UIAlertAction(title: "Standart", style: .default) { (action) in
+            self.defaults.set(1, forKey: "mapType")
+            print(UserDefaults.standard.integer(forKey: "mapType"))
+
+        }
+        let satelliteType = UIAlertAction(title: "Satellite", style: .default) { (action) in
+            self.defaults.set(2, forKey: "mapType")
+            print(UserDefaults.standard.integer(forKey: "mapType"))
+
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+
+        mapTypeAlertController.addAction(standartType)
+        mapTypeAlertController.addAction(satelliteType)
+        mapTypeAlertController.addAction(cancelAction)
+        present(mapTypeAlertController, animated: true, completion: nil)
+        
+    }
+ 
 }
