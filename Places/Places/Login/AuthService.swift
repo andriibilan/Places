@@ -90,7 +90,7 @@ struct AuthService {
         let currentUserInfo = ["userName": userName,
                                "email": email,
                                "phone": phone]
-//                               "photoURL": String(describing: userID.photoURL!)]
+        //                               "photoURL": String(describing: userID.photoURL!)]
         
         let userRef = dataBaseReference.child("Users").child(userID)
         userRef.updateChildValues(currentUserInfo)

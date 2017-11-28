@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
 class ProfileViewController: UIViewController {
     
@@ -17,24 +18,13 @@ class ProfileViewController: UIViewController {
     @IBOutlet private weak var phoneTextField: UITextField!
     @IBOutlet private weak var profileImage: UIImageView!
     
-    
-    @IBOutlet weak var userNameLabelText: UILabel!
-    @IBOutlet weak var emailLabeltext: UILabel!
-    
-    @IBOutlet weak var phoneLabelText: UILabel!
-    @IBOutlet weak var passwordLabelText: UILabel!
-    
     private let userID = (Auth.auth().currentUser?.uid)!
     private let ref = Database.database().reference()
     var authService = AuthService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        getProfileData()
+       // getProfileData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,8 +39,8 @@ class ProfileViewController: UIViewController {
             self.emailTextField.text = user.email
             self.nameTextField.text = user.firstName
             self.phoneTextField.text = user.phone
-            
             let profileImageURL = user.ImageUrl
+            
             let url = URL(string: profileImageURL!)
             let data = try? Data(contentsOf: url!)
             
@@ -58,6 +48,8 @@ class ProfileViewController: UIViewController {
                 self.profileImage.image = UIImage(data: data!)
             }
         })
+        
+        
     }
     
     @IBAction func logOutButton(_ sender: Any) {
@@ -74,9 +66,63 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func editButton(_ sender: Any) {
-        
-        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneLabelText.text!)
+        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!)
+        chooseImage()
     }
     
 }
+
+//MARK: ImagePickerController
+extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func chooseImage() {
+        
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        
+        let actionSheet = UIAlertController(title: "Photo Source", message: nil, preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action: UIAlertAction) in
+            
+            if UIImagePickerController.isSourceTypeAvailable(.camera){
+                imagePickerController.sourceType = .camera
+                self.present(imagePickerController, animated: true, completion: nil)
+            } else {
+                print("Camera not available")
+            }
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (action: UIAlertAction) in
+            imagePickerController.sourceType = .photoLibrary
+            self.present(imagePickerController, animated: true, completion: nil)
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let images  = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        profileImage.image = images
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!) {
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ProfileViewController:  UIScrollViewDelegate {
+    
+}
+
 

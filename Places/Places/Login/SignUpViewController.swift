@@ -66,7 +66,7 @@ class SignUpViewController: UIViewController {
         }
         else
         {
-            let pictureData = UIImageJPEGRepresentation(self.profileImage.image!, 0.30)
+            let pictureData = UIImageJPEGRepresentation(self.profileImage.image!, 0.20)
             authService.createUser(userName: firstNameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, password: passwordTextField.text!, pictureData: pictureData!)
         }
     }
@@ -82,7 +82,7 @@ class SignUpViewController: UIViewController {
 //MARK: ImagePickerController
 extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    private func chooseImage() {
+     func chooseImage() {
         
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self

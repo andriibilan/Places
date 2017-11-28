@@ -214,7 +214,6 @@
 		8A8C5C741FC57F3E00A834EA /* Places */ = {
 			isa = PBXGroup;
 			children = (
-
 				258B06541FC8377B003A09B8 /* AddPlace */,
 				2BCDF2341FC847ED00EA96F0 /* Extensions */,
 				75F7EB721FC59B5B002F169E /* Login */,
@@ -340,7 +339,6 @@
 				8A8C5C801FC57F3E00A834EA /* LaunchScreen.storyboard in Resources */,
 				75F7EB831FC5A8AD002F169E /* GoogleService-Info.plist in Resources */,
 				258B06561FC837C6003A09B8 /* NewPlaceBoard.storyboard in Resources */,
-				75F7EB7D1FC59F46002F169E /* SignUp.storyboard in Resources */,
 				8A8C5C7D1FC57F3E00A834EA /* Assets.xcassets in Resources */,
 				75F7EB7B1FC59F33002F169E /* Login.storyboard in Resources */,
 				2B4BA9131FC5EC0E00B5E598 /* DetailPlace.storyboard in Resources */,
