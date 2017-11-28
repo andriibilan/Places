@@ -10,17 +10,14 @@ import UIKit
 import MapKit
 import CoreLocation
 
-
+var changerad = false
+var refresh = Bool()
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
     //var list : ListViewController?
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
     var menu = ViewController()
-    
-	
-
-    
     
     let locationData = [
         //Walker Art Gallery
@@ -50,9 +47,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBAction func currentLocation(_ sender: Any) {
         if region != nil {
             self.map.setRegion(region!, animated: true)
+            locationManager.startUpdatingLocation()
         }
     }
 	
+   
+
 	@IBOutlet weak var settingsButton: UIButton!
     
 	
@@ -80,16 +80,36 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         isSideMenuHidden = !isSideMenuHidden
     }
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
+        map.showsPointsOfInterest = false
+        map.showsCompass = false
+        map.showsBuildings = false
+        map.showsTraffic = false
+        changeMapType()
         filterTableView.delegate = self
         filterTableView.dataSource = self
         map.removeAnnotations(map.annotations)
         addAnnotations(coords: locationData)
-        viewForFilter.setCorenerAndShadow(viewForFilter)
-        
+        locationManagerConfigurate()
+        viewForFilter.setCorenerAndShadow(viewForFilter)       
+        if UserDefaults.standard.integer(forKey: "Radius") == 0 {
+            UserDefaults.standard.set(200, forKey: "Radius")
+        }
+        if refresh == true {
+            let loc = CLLocation(latitude: map.userLocation.coordinate.latitude as CLLocationDegrees, longitude: map.userLocation.coordinate.longitude as CLLocationDegrees)
+            addRadiusCircle(location: loc)
+            refresh = false
+        }
+        sideMenuConstraint.constant = -160
+        // Do any additional setup after loading the view.
+    }
+
+    
+    
+    func locationManagerConfigurate(){
         if (CLLocationManager.locationServicesEnabled())
         {
             locationManager = CLLocationManager()
@@ -104,14 +124,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
         }
         
-        if UserDefaults.standard.integer(forKey: "Radius") == 0 {
-            UserDefaults.standard.set(200, forKey: "Radius")
-        }
-        sideMenuConstraint.constant = -160
-        // Do any additional setup after loading the view.
     }
-
+    
+    
+    
+    
     // radius / places in radius
+    func changeMapType(){
+        let type = 2
+            //UserDefaults.standard.double(forKey: "Radius")
+        switch type {
+        case 1:
+            map.mapType = .standard
+        case 2:
+            map.mapType = .mutedStandard
+        case 3:
+            map.mapType = .hybridFlyover
+        default:
+            break
+        }
+    }
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
@@ -206,34 +240,45 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 
         if annotation is MKUserLocation {
-            return nil
+            let identifier = "pin"
+            var view: MKPinAnnotationView
+            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.image = UIImage(named: "address.png")
+            return view
         } else {
 
         if let annotation = annotation as? CustomAnnotation {
             let identifier = "pin"
             var view: MKPinAnnotationView
+            
             if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
                 as? MKPinAnnotationView { // 2
                 dequeuedView.annotation = annotation
                 view = dequeuedView
+                
+                
             } else {
                 // 3
-                
                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view.image = #imageLiteral(resourceName: "address")
-                
                 view.canShowCallout = true
+                view.image = UIImage(named: "address.png")
+
                 view.calloutOffset = CGPoint(x: -5, y: 5)
                 view.leftCalloutAccessoryView = UIImageView(image: annotation.image!)
                 view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+                
             }
+           
+           
             return view
         }
         return nil
     }
+        
     }
     
-    
+
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView || control == view.detailCalloutAccessoryView || control == view.leftCalloutAccessoryView {
@@ -324,4 +369,5 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
 
 }
+
 
