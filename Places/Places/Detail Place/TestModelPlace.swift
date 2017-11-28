@@ -20,7 +20,11 @@ class Review{
     init(){
         reviewer = "Reviewer"
         review = """
-        1234567890 1234567890 1234567890 
+        1234567890 1234567890 1234567890
+        1234567890 1234567890 1234567890
+        1234567890 1234567890 1234567890
+        1234567890 1234567890 1234567890
+        1234567890 1234567890 1234567890
         1234567890 1234567890 1234567890
         1234567890 1234567890 1234567890
         1234567890 1234567890 1234567890
@@ -31,8 +35,23 @@ class Review{
         """
         
         isanonymous = false
-        reviewRatting = 3.2
+        reviewRatting = 2.3
     }
+    
+    init(_ : Int){
+        reviewer = "Reviewer"
+        review = """
+        1234567890 1234567890 1234567890
+        1234567890 1234567890 1234567890
+        1234567890 1234567890 1234567890
+        1234567890 1234567890 1234567890
+        """
+        
+        isanonymous = true
+        reviewRatting = 4.7
+    }
+    
+    
 }
 
 class TestPlace{
@@ -70,9 +89,13 @@ class TestPlace{
         phone = "380925839548"
         //
         //TODO: Review!!!
+        forReview.append(Review(4))
         forReview.append(Review())
+        forReview.append(Review(4))
         forReview.append(Review())
+        forReview.append(Review(4))
         forReview.append(Review())
+        forReview.append(Review(4))
         forReview.append(Review())
     }
     

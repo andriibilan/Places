@@ -37,6 +37,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     //
     
     
+    @IBOutlet weak var heightConstaintForReviewTable: NSLayoutConstraint!
     
     
     //TODO: load real image when I'll have choosing place
@@ -65,21 +66,40 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         placePhone?.text = testPlace.phone
         //
         
+
+        
+        placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((placeRattingView?.frame.height)!), currentRate: testPlace.ratting!))
         
         
-        PhotoCollectionView.delegate = self
-        PhotoCollectionView.dataSource = self
+        
+            PhotoCollectionView.delegate = self
+            PhotoCollectionView.dataSource = self
+         
         
         
         //
+       
+       
+            feedbackTableView.delegate = self
+            feedbackTableView.dataSource = self
         
         
-        feedbackTableView.delegate = self
-        feedbackTableView.dataSource = self
+
         
-        //
+   
+        
+        
     }
     
+    
+   
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        print("pre-end: \(heightTable)")
+        heightConstaintForReviewTable.constant = heightTable
+        print("end: \(heightTable)")
+    }
     
     @IBAction func openWebsite(_ sender: UIButton) {
         guard let website = testPlace.website else{
@@ -115,9 +135,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     
     
-    
-    
-    
+ 
     
     
 
@@ -146,33 +164,45 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     //function for returning number of items in section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print( testPlace.image.count)
         return testPlace.image.count
     }
     
     //function for filling my cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell
+       // cell?.frame.size = feedbackTableView.estimatedRowHeight
+ //       cell?.sizeToFit()
         
         if testPlace.image.count != 0{
             cell?.photoImageView?.image = testPlace.image[indexPath.row]
         }else{
             cell?.photoImageView?.image = #imageLiteral(resourceName: "noPhotoIcon")
         }
+        //
+        
+        
         return cell!
     }
     
     ///
+ 
     
+    //
+    
+    
+    var heightTable :CGFloat = 0.0
+    //
     
   
     
     //MARK: Table View Data Source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("count:\(String(describing: testPlace.forReview.count))")
-        return (testPlace.forReview.count)
+        print("count: \(testPlace.forReview.count)")
+        return testPlace.forReview.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let review = testPlace.forReview[indexPath.row]
         
@@ -185,9 +215,32 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
             cell.labelForReviewer.text = review.reviewer
         }
         //TODO:RATTING
+        cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: testPlace.forReview[indexPath.row].reviewRatting!))
+        
+        
+//
+//
+        
+       
         
         
         
+        
+        heightTable += cell.labelForReviewer.frame.height + cell.labelForReview.frame.height
+        
+        
+        
+        
+      
+       
+        //
+        
+        print("reviewer: \(cell.labelForReviewer.frame.height)")
+        print("reviewer: \(cell.labelForReview.frame.height)")
+        print("height: \(heightTable)")
+        
+        
+        heightConstaintForReviewTable.constant = heightTable
         return cell
     }
     
