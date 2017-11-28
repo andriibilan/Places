@@ -8,28 +8,78 @@
 
 import UIKit
 
-class AddNewPlaceController: UIViewController {
+class AddNewPlaceController: UIViewController, UITextFieldDelegate, SetCategory {
 
+    let destination = "toAddBoard"
+    
+    var phoneFormat: phoneNumberFormatter?
+    
+    @IBOutlet weak var number: UITextField!
+   
+    @IBOutlet weak var list: UIView!
+    
+    @IBOutlet weak var category: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "high.jpg")!)
-        // Do any additional setup after loading the view.
+        number.delegate = self
+        category.delegate = self
+        
+        list.isHidden = true
+        phoneFormat = phoneNumberFormatter(field: number, ins: "+380(_-_) _-_-_ _-_ _-_", replacmentCharacter: "_")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == destination {
+            let childController = segue.destination as? DlistViewController
+            childController?.delegate = self
+            print("parent")
+        }
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+      
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == category{
+            list.isHidden = false
+        }
+        return true
     }
-    */
+    /*
+    @IBAction func categoryTouched(_ sender: UITextField) {
+        print("---------------")
+    }*/
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if textField == number {
+            let allowedCharacters = CharacterSet.decimalDigits
+            let characterSet = CharacterSet(charactersIn: string)
+            if string.isEmpty {
+                phoneFormat?.backspace()
+            }
+            else if allowedCharacters.isSuperset(of: characterSet) == true {
+                phoneFormat?.printNumber(newDigit: string.first!)
+            }
+        }
+        return false
+    }
 
+    @IBAction func postToGoogle(_ sender: UIButton) {
+        let alert = UIAlertController(title: "SORRY", message: "GOOGLE is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func setCategoryText(newText: String){
+        print("segue")
+        category.text = newText
+        list.isHidden = true
+    }
 }
