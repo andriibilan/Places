@@ -27,7 +27,12 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
             break
         }
     }
-	
+    
+    @IBAction func profileButton(_ sender: Any) {
+//        let appDel : AppDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDel.showProfile()
+    }
+    
 	private let transition = CustomTransitionAnimator()
     
     override func viewDidLoad() {

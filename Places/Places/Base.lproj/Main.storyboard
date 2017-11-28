@@ -30,7 +30,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oTN-RS-ne0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-450" y="0.0"/>
+            <point key="canvasLocation" x="-78" y="-1"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -103,6 +103,7 @@
                                         </constraints>
                                         <state key="normal" image="2703062-64"/>
                                         <connections>
+                                            <action selector="profileButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U2e-ki-YKv"/>
                                             <segue destination="xjy-Hw-8Ed" kind="presentation" identifier="ShowLogin" id="Fjh-DJ-O0e"/>
                                         </connections>
                                     </button>
@@ -490,6 +491,6 @@
         <image name="filter" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NOk-4w-6xs"/>
+        <segue reference="okD-G1-lk4"/>
     </inferredMetricsTieBreakers>
 </document>
