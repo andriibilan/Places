@@ -10,8 +10,6 @@ import UIKit
 
 class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     
-    
-    
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
     @IBOutlet weak var menuView: UIViewX!
