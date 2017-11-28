@@ -172,7 +172,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let name = each["name"] as! String
             let descript = each["description"] as! String
             let img = each["image"] as! String
-            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: "\(name)", subtitle: "\(descript)", enableInfoButton: true, image: resizeImage(image: UIImage(named: img)!, targetSize: CGSize(width: 40.0, height: 40.0)))
+            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: "\(name)", subtitle: "\(descript)", enableInfoButton: true, image: (UIImage(named: img))!.resizedImage(withBounds: CGSize(width: 40.0, height: 40.0)))
         
             annotations.append(annotation)
 
@@ -192,8 +192,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func mapView(_ map: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKCircle {
             let circle = MKCircleRenderer(overlay: overlay)
-            circle.strokeColor = UIColor.green
-            circle.fillColor = UIColor(red: 0, green: 235, blue: 20, alpha: 0.03)
+            circle.strokeColor = #colorLiteral(red: 0.1254901961, green: 0.6980392157, blue: 0.6666666667, alpha: 1)
+            circle.fillColor = UIColor(red: 0, green: 235, blue: 20, alpha: 0.07)
             circle.lineWidth = 1
             return circle
         } else {
@@ -322,33 +322,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.map.add(circle)
         }
         
-    
-    
-    
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
-        }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
-    }
+
 }
 
