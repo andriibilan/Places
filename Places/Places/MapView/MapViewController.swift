@@ -10,17 +10,14 @@ import UIKit
 import MapKit
 import CoreLocation
 
-
+var changerad = false
+var refresh = Bool()
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
     //var list : ListViewController?
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
     var menu = ViewController()
-    
-	
-
-    
     
     let locationData = [
         //Walker Art Gallery
@@ -50,9 +47,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBAction func currentLocation(_ sender: Any) {
         if region != nil {
             self.map.setRegion(region!, animated: true)
+            locationManager.startUpdatingLocation()
         }
     }
 	
+   
+
 	@IBOutlet weak var settingsButton: UIButton!
     
 	
@@ -80,16 +80,36 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         isSideMenuHidden = !isSideMenuHidden
     }
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
+        map.showsPointsOfInterest = false
+        map.showsCompass = false
+        map.showsBuildings = false
+        map.showsTraffic = false
+        changeMapType()
         filterTableView.delegate = self
         filterTableView.dataSource = self
         map.removeAnnotations(map.annotations)
         addAnnotations(coords: locationData)
-        viewForFilter.setCorenerAndShadow(viewForFilter)
-        
+        locationManagerConfigurate()
+        viewForFilter.setCorenerAndShadow(viewForFilter)       
+        if UserDefaults.standard.integer(forKey: "Radius") == 0 {
+            UserDefaults.standard.set(200, forKey: "Radius")
+        }
+        if refresh == true {
+            let loc = CLLocation(latitude: map.userLocation.coordinate.latitude as CLLocationDegrees, longitude: map.userLocation.coordinate.longitude as CLLocationDegrees)
+            addRadiusCircle(location: loc)
+            refresh = false
+        }
+        sideMenuConstraint.constant = -160
+        // Do any additional setup after loading the view.
+    }
+
+    
+    
+    func locationManagerConfigurate(){
         if (CLLocationManager.locationServicesEnabled())
         {
             locationManager = CLLocationManager()
@@ -104,14 +124,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
         }
         
-        if UserDefaults.standard.integer(forKey: "Radius") == 0 {
-            UserDefaults.standard.set(200, forKey: "Radius")
-        }
-        sideMenuConstraint.constant = -160
-        // Do any additional setup after loading the view.
     }
-
+    
+    
+    
+    
     // radius / places in radius
+    func changeMapType(){
+        let type = 2
+            //UserDefaults.standard.double(forKey: "Radius")
+        switch type {
+        case 1:
+            map.mapType = .standard
+        case 2:
+            map.mapType = .mutedStandard
+        case 3:
+            map.mapType = .hybridFlyover
+        default:
+            break
+        }
+    }
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
@@ -120,23 +154,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
          region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         let loc = CLLocation(latitude: location.coordinate.latitude as CLLocationDegrees, longitude: location.coordinate.longitude as CLLocationDegrees)
-        if self.map.annotations.count != 0 {
-            let annotation = self.map.annotations[0]
-            self.map.removeAnnotation(annotation)
-        }
-        //let radius =  UserDefaults.standard.double(forKey: "Radius")
-        //let circle = MKCircle(center: location.coordinate, radius: radius)
-        //self.map.add(circle)
-        addRadiusCircle(location: loc)
-        map.setRegion(region!, animated: true)
-        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
-        myAnnotation.coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-        myAnnotation.title = "Current location"
         
-        map.addAnnotation(myAnnotation)
+        if map.annotations.count != 0 {
+            let annotation = self.map.annotations[0]
+            map.removeAnnotation(annotation)
+            
+        }
+        
+        addRadiusCircle(location: loc)
+        let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        addCurrentLocation(coords: coordinate)
         locationManager.startUpdatingLocation()
+        
     }
     
+    func addCurrentLocation(coords: CLLocationCoordinate2D){
+        map.removeAnnotations(map.annotations)
+        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
+        myAnnotation.coordinate = coords
+        myAnnotation.title = "Current location"
+        map.setRegion(region!, animated: true)
+        map.addAnnotation(myAnnotation)
+        addAnnotations(coords: locationData)
+        
+    }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     
         switch status {
@@ -165,9 +206,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let name = each["name"] as! String
             let descript = each["description"] as! String
             let img = each["image"] as! String
-            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: "\(name)", subtitle: "\(descript)", enableInfoButton: true, image: resizeImage(image: UIImage(named: img)!, targetSize: CGSize(width: 40.0, height: 40.0)))
-            //annotation.title = "\(name)"
-            //annotation.subtitle = "\(descript)"
+            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: "\(name)", subtitle: "\(descript)", enableInfoButton: true, image: (UIImage(named: img))!.resizedImage(withBounds: CGSize(width: 40.0, height: 40.0)))
+        
             annotations.append(annotation)
 
         }
@@ -186,58 +226,63 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func mapView(_ map: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKCircle {
             let circle = MKCircleRenderer(overlay: overlay)
-            circle.strokeColor = UIColor.green
-            circle.fillColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.1)
+            circle.strokeColor = #colorLiteral(red: 0.1254901961, green: 0.6980392157, blue: 0.6666666667, alpha: 1)
+            circle.fillColor = UIColor(red: 0, green: 235, blue: 20, alpha: 0.07)
             circle.lineWidth = 1
             return circle
         } else {
             return MKPolylineRenderer()
         }
     }
-//            let circle = MKCircleRenderer(overlay: overlay)
-//            circle.strokeColor = UIColor.green
-//            circle.fillColor = UIColor(red: 0, green: 235, blue: 20, alpha: 0.02)
-//            circle.lineWidth = 1
-//
-//            return circle
-//
-    
+
    
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 
-        guard !(annotation is MKUserLocation) else {
-            return nil
-        }
+        if annotation is MKUserLocation {
+            let identifier = "pin"
+            var view: MKPinAnnotationView
+            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.image = UIImage(named: "address.png")
+            return view
+        } else {
 
         if let annotation = annotation as? CustomAnnotation {
             let identifier = "pin"
             var view: MKPinAnnotationView
+            
             if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
                 as? MKPinAnnotationView { // 2
                 dequeuedView.annotation = annotation
                 view = dequeuedView
+                
+                
             } else {
                 // 3
-                
                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view.image = #imageLiteral(resourceName: "address")
-                
                 view.canShowCallout = true
+                view.image = UIImage(named: "address.png")
+
                 view.calloutOffset = CGPoint(x: -5, y: 5)
                 view.leftCalloutAccessoryView = UIImageView(image: annotation.image!)
                 view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+                
             }
+           
+           
             return view
         }
         return nil
     }
+        
+    }
     
-    
+
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView || control == view.detailCalloutAccessoryView || control == view.leftCalloutAccessoryView {
-            //print(view.annotation?.title) // your annotation's title
+       
             //Perform a segue here to navigate to another viewcontroller
             performSegue(withIdentifier: "detailVC", sender: view)
         }
@@ -251,7 +296,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         /////////////////////////////////////////////////////////////////////////
         
         let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
+
         let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"), #imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
+
         let colorCellArray = [#colorLiteral(red: 0.862745098, green: 0.07843137255, blue: 0.2352941176, alpha: 1),#colorLiteral(red: 0.816177428, green: 0.3087009804, blue: 0.3607843137, alpha: 1),#colorLiteral(red: 1, green: 0.4054285386, blue: 0.3137254902, alpha: 1),#colorLiteral(red: 0.9803921569, green: 0.5019607843, blue: 0.4470588235, alpha: 1),#colorLiteral(red: 1, green: 0.6470588235, blue: 0, alpha: 1),#colorLiteral(red: 1, green: 0.8431372549, blue: 0, alpha: 1),#colorLiteral(red: 0.6039215686, green: 0.8039215686, blue: 0.1960784314, alpha: 1),#colorLiteral(red: 0.6784313725, green: 1, blue: 0.1843137255, alpha: 1),#colorLiteral(red: 0, green: 1, blue: 0, alpha: 1),#colorLiteral(red: 0, green: 1, blue: 0.4980392157, alpha: 1),#colorLiteral(red: 0.2352941176, green: 0.7019607843, blue: 0.4431372549, alpha: 1),#colorLiteral(red: 0.1254901961, green: 0.6980392157, blue: 0.6666666667, alpha: 1),#colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1),#colorLiteral(red: 0.4823529412, green: 0.4078431373, blue: 0.9333333333, alpha: 1),#colorLiteral(red: 1, green: 0.5478362439, blue: 0.7764705882, alpha: 1),#colorLiteral(red: 1, green: 0.4463541667, blue: 0.7960784314, alpha: 1),#colorLiteral(red: 0.8549019608, green: 0.4392156863, blue: 0.8392156863, alpha: 1)]
      func numberOfSections(in tableView: UITableView) -> Int {
             return 1
@@ -313,38 +360,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     func addRadiusCircle(location: CLLocation){
-        
-        let radius =  UserDefaults.standard.double(forKey: "Radius")
-        self.map.delegate = self
-        let circle = MKCircle(center: location.coordinate, radius: radius as CLLocationDistance)
-        self.map.add(circle)
-    }
-    
-    
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+            for overlay in map.overlays {
+                map.remove(overlay)
+            }
+            let radius =  UserDefaults.standard.double(forKey: "Radius")
+            self.map.delegate = self
+            let circle = MKCircle(center: location.coordinate, radius: radius as CLLocationDistance)
+            self.map.add(circle)
         }
         
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
-    }
+
 }
+
 
