@@ -89,7 +89,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         map.removeAnnotations(map.annotations)
         addAnnotations(coords: locationData)
         viewForFilter.setCorenerAndShadow(viewForFilter)
-        
+
         if (CLLocationManager.locationServicesEnabled())
         {
             locationManager = CLLocationManager()
@@ -246,7 +246,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
         
 
-  
+    func colorForIndex(index: Int) -> UIColor {
+        let nameCount = nameFilterArray.count - 1
+        let val = (CGFloat(index) / CGFloat(nameCount)) * 0.9
+        print(val)
+        return UIColor(red: 1.0, green: val, blue: 0.0, alpha: 1.0)
+    }
 
         /////////////////////////////////////////////////////////////////////////
         
@@ -270,7 +275,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         filterCell.nameFilter.text = nameFilterArray[indexPath.row]
         filterCell.iconFilter.image = iconFilterArray[indexPath.row]
-        filterCell.backgroundColor = colorCellArray[indexPath.row]
+        //filterCell.backgroundColor = colorCellArray[indexPath.row]
+        filterCell.backgroundColor = colorForIndex(index: indexPath.row)
         filterCell.accessoryType = accessory
         filterCell.selectionStyle = .none
         return filterCell
@@ -300,7 +306,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             accessory = .checkmark
             print("choose filter: \(nameFilterArray[indexPath.row])")
             }
-        
+        print("radius into map: \(UserDefaults.standard.integer(forKey: "Radius"))")
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = accessory
         }

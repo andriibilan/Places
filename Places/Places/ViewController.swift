@@ -28,7 +28,8 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         }
     }
 	
-	private let transition = CustomTransitionAnimator()
+   
+    private let transition = CustomTransitionAnimator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
