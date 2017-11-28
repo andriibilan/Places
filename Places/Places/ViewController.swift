@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
@@ -27,6 +27,8 @@ class ViewController: UIViewController {
             break
         }
     }
+	
+	private let transition = CustomTransitionAnimator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +51,38 @@ class ViewController: UIViewController {
             }
         })
     }
+	
+	
+	//MARK:- Custom Transition
+	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+		transition.transitionMode = .present
+		transition.startingPoint = menuView.center
+		transition.circleColor = menuView.backgroundColor!
+		
+		return transition
+	}
+	
+	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+		transition.transitionMode = .dismiss
+		transition.startingPoint = menuView.center
+		transition.circleColor = menuView.backgroundColor!
+		
+		return transition
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "ShowSettings" {
+			let secondVC = segue.destination as! SettingsViewController
+			secondVC.transitioningDelegate = self
+			secondVC.modalPresentationStyle = .custom
+		}
+		if segue.identifier == "ShowLogin" {
+			let secondVC = segue.destination as! LoginViewController
+			secondVC.transitioningDelegate = self
+			secondVC.modalPresentationStyle = .custom
+		}
+
+	}
     
 }
 

@@ -87,7 +87,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="street-map (1)" translatesAutoresizingMaskIntoConstraints="NO" id="dXP-vM-Qlc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="street-map (1)" translatesAutoresizingMaskIntoConstraints="NO" id="dXP-vM-Qlc">
                                 <rect key="frame" x="70" y="120" width="235" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="wxI-DF-aQf"/>
@@ -105,7 +105,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fht-dV-p8k">
                                 <rect key="frame" x="112.5" y="360" width="150" height="40"/>
-                                <color key="backgroundColor" red="1" green="0.33260008730000001" blue="0.16415433800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.2275260389" green="0.67915946250000003" blue="0.54944974179999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="PEc-Xc-qeS"/>
                                     <constraint firstAttribute="width" constant="150" id="vqi-nO-K3z"/>
@@ -119,7 +119,9 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZO-ca-bgR">
                                 <rect key="frame" x="76" y="410" width="223" height="30"/>
-                                <state key="normal" title="Don't have an account? Sign Up!"/>
+                                <state key="normal" title="Don't have an account? Sign Up!">
+                                    <color key="titleColor" red="0.93500250579999999" green="0.94593256709999995" blue="0.95562154050000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="d7a-qM-Njr" kind="show" id="MFg-zO-c6G">
                                         <nil key="action"/>
@@ -135,13 +137,30 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Epx-Ec-9vY">
+                                <rect key="frame" x="295" y="587" width="60" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="EaV-9R-yZq"/>
+                                    <constraint firstAttribute="width" constant="60" id="TSO-Bn-o35"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <color key="tintColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="211602-64">
+                                    <color key="titleColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissButtonTaped:" destination="kGH-RH-c2b" eventType="touchUpInside" id="QcP-C0-r1m"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.93500250579999999" green="0.94593256709999995" blue="0.95562154050000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="dXP-vM-Qlc" firstAttribute="leading" secondItem="fQy-hq-Nds" secondAttribute="leading" constant="70" id="3Vi-HM-Eaj"/>
                             <constraint firstItem="bbL-KY-9zT" firstAttribute="leading" secondItem="Vix-WJ-imQ" secondAttribute="leadingMargin" constant="40" id="8OD-Ya-OCs"/>
                             <constraint firstItem="f5p-Sg-uwl" firstAttribute="top" secondItem="bbL-KY-9zT" secondAttribute="bottom" constant="15" id="JnA-ki-Prm"/>
                             <constraint firstItem="bbL-KY-9zT" firstAttribute="top" secondItem="dXP-vM-Qlc" secondAttribute="bottom" constant="35" id="TeN-2G-d9T"/>
+                            <constraint firstItem="fQy-hq-Nds" firstAttribute="trailing" secondItem="Epx-Ec-9vY" secondAttribute="trailing" constant="20" id="TlX-Vi-zHS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bbL-KY-9zT" secondAttribute="trailing" constant="40" id="WG9-kY-BK5"/>
                             <constraint firstItem="xZO-ca-bgR" firstAttribute="centerX" secondItem="Vix-WJ-imQ" secondAttribute="centerX" id="WIe-dt-upJ"/>
                             <constraint firstItem="f5p-Sg-uwl" firstAttribute="leading" secondItem="Vix-WJ-imQ" secondAttribute="leadingMargin" constant="40" id="WeJ-XG-Ne9"/>
@@ -150,12 +169,14 @@
                             <constraint firstItem="xZO-ca-bgR" firstAttribute="top" secondItem="Fht-dV-p8k" secondAttribute="bottom" constant="10" id="iET-Ae-6Vw"/>
                             <constraint firstItem="dXP-vM-Qlc" firstAttribute="top" secondItem="fQy-hq-Nds" secondAttribute="top" constant="100" id="pYb-Rr-Xom"/>
                             <constraint firstItem="Fht-dV-p8k" firstAttribute="top" secondItem="f5p-Sg-uwl" secondAttribute="bottom" constant="20" id="v3H-nd-Bhu"/>
+                            <constraint firstItem="fQy-hq-Nds" firstAttribute="bottom" secondItem="Epx-Ec-9vY" secondAttribute="bottom" constant="20" id="vmx-TE-Gv0"/>
                             <constraint firstItem="fQy-hq-Nds" firstAttribute="trailing" secondItem="dXP-vM-Qlc" secondAttribute="trailing" constant="70" id="z3S-F4-yUQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQy-hq-Nds"/>
                     </view>
                     <navigationItem key="navigationItem" id="opJ-pV-OsX"/>
                     <connections>
+                        <outlet property="dismissButton" destination="Epx-Ec-9vY" id="dOO-cW-Ta8"/>
                         <outlet property="emailTextField" destination="bbL-KY-9zT" id="dga-In-58Y"/>
                         <outlet property="logoImage" destination="dXP-vM-Qlc" id="zdA-Cn-uKE"/>
                         <outlet property="passwordTextfield" destination="f5p-Sg-uwl" id="Hil-Hc-FDS"/>
@@ -496,6 +517,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="211602-64" width="32" height="32"/>
         <image name="Icon - Mail" width="24" height="18"/>
         <image name="Icon - Password" width="22" height="32"/>
         <image name="icon User" width="100" height="100"/>

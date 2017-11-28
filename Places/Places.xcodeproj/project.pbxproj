@@ -22,6 +22,7 @@
 		49E3C00B1FC6D19300400A06 /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00A1FC6D19300400A06 /* UIViewX.swift */; };
 		49E3C00D1FC6D1A000400A06 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */; };
 		49E3C00F1FC6E12800400A06 /* UIImageViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00E1FC6E12800400A06 /* UIImageViewX.swift */; };
+		521CFD741FCCCE3800CD86DD /* ExtensionForUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521CFD731FCCCE3800CD86DD /* ExtensionForUIImage.swift */; };
 		529191691FC715A0008FD5AB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529191681FC71598008FD5AB /* CoreLocation.framework */; };
 		5291916B1FCC1E02008FD5AB /* myAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5291916A1FCC1E02008FD5AB /* myAnnotation.swift */; };
 		52E5577C1FCA4E90000B7FFC /* CustomTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5577B1FCA4E90000B7FFC /* CustomTransitionAnimator.swift */; };
@@ -67,6 +68,7 @@
 		49E3C00A1FC6D19300400A06 /* UIViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
 		49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		49E3C00E1FC6E12800400A06 /* UIImageViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewX.swift; sourceTree = "<group>"; };
+		521CFD731FCCCE3800CD86DD /* ExtensionForUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionForUIImage.swift; sourceTree = "<group>"; };
 		529191681FC71598008FD5AB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5291916A1FCC1E02008FD5AB /* myAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myAnnotation.swift; sourceTree = "<group>"; };
 		52E5577B1FCA4E90000B7FFC /* CustomTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionAnimator.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				2BCDF2351FC8481B00EA96F0 /* Extension for Double.swift */,
 				8A9C7C7A1FCB371A009B9C86 /* Extension for view.swift */,
+				521CFD731FCCCE3800CD86DD /* ExtensionForUIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				49E3C00B1FC6D19300400A06 /* UIViewX.swift in Sources */,
 				52E5577C1FCA4E90000B7FFC /* CustomTransitionAnimator.swift in Sources */,
 				8A8C5C781FC57F3E00A834EA /* ViewController.swift in Sources */,
+				521CFD741FCCCE3800CD86DD /* ExtensionForUIImage.swift in Sources */,
 				49E3C00D1FC6D1A000400A06 /* FloatingActionButton.swift in Sources */,
 				8AA21ED51FC8446B0046202F /* MapFilterTableViewCell.swift in Sources */,
 				8A8C5C881FC5A1B000A834EA /* MapViewController.swift in Sources */,
@@ -437,7 +441,6 @@
 				8A9BF77E1FC72238002E970C /* SettingsViewController.swift in Sources */,
 				75F7EB761FC59B84002F169E /* SignUpViewController.swift in Sources */,
 				2B8608061FCC4DB10007B777 /* ReviewTableViewCell.swift in Sources */,
-				8A9BF77A1FC6E2F5002E970C /* UserSettingTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

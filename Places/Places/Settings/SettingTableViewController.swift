@@ -27,6 +27,7 @@ class SettingTableViewController: UITableViewController {
             sliderValue.setValue(Float(defaultsRadius.integer(forKey: "Radius")) ,animated: true)
             searchRadius.text = "Search Radius: \(String(defaultsRadius.integer(forKey: "Radius"))) m"
         print(Float(defaultsRadius.integer(forKey: "Radius")))
+
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

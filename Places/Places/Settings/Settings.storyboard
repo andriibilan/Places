@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LzO-Ak-tFw">
-                                <rect key="frame" x="0.0" y="168" width="375" height="499"/>
+                                <rect key="frame" x="0.0" y="168" width="375" height="319"/>
                                 <connections>
                                     <segue destination="75l-ai-u0M" kind="embed" id="p3r-iZ-Jrq"/>
                                 </connections>
@@ -53,7 +53,7 @@
                         <constraints>
                             <constraint firstItem="r5Z-k8-Wn1" firstAttribute="trailing" secondItem="vAK-zJ-Nq7" secondAttribute="trailing" id="4DY-jk-Imd"/>
                             <constraint firstItem="vAK-zJ-Nq7" firstAttribute="leading" secondItem="r5Z-k8-Wn1" secondAttribute="leading" id="JhM-Rk-Dow"/>
-                            <constraint firstItem="r5Z-k8-Wn1" firstAttribute="bottom" secondItem="LzO-Ak-tFw" secondAttribute="bottom" id="Oev-Ls-HVu"/>
+                            <constraint firstItem="r5Z-k8-Wn1" firstAttribute="bottom" secondItem="LzO-Ak-tFw" secondAttribute="bottom" constant="180" id="Oev-Ls-HVu"/>
                             <constraint firstItem="LzO-Ak-tFw" firstAttribute="leading" secondItem="r5Z-k8-Wn1" secondAttribute="leading" id="QQO-6K-1fp"/>
                             <constraint firstItem="r5Z-k8-Wn1" firstAttribute="trailing" secondItem="LzO-Ak-tFw" secondAttribute="trailing" id="Vsw-oL-7dv"/>
                             <constraint firstAttribute="trailing" secondItem="Zcc-x6-CRh" secondAttribute="trailing" constant="20" id="Wrq-Pc-uoT"/>
@@ -76,7 +76,7 @@
             <objects>
                 <tableViewController id="75l-ai-u0M" customClass="SettingTableViewController" customModule="Places" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="VNu-Il-GFQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="319"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="tintColor" red="0.87322145699999998" green="0.98523384329999997" blue="0.07190831751" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
