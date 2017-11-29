@@ -192,7 +192,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             map.removeAnnotation(annotation)
             
         }
-        
+        let radius =  UserDefaults.standard.integer(forKey: "Radius")
+        var manager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ",
+                                          radius: radius,
+                                          currentLocation: Location(latitude: location.coordinate.latitude ,longitude: location.coordinate.longitude),
+                                          filters: [PlaceType](),
+                                          delegate: nil)
+        { (foundedPlaces) in
+                                            self.addAnnotations(coords: foundedPlaces!)
+        }
         addRadiusCircle(location: loc)
         let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         addCurrentLocation(coords: coordinate)
@@ -207,7 +215,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         myAnnotation.title = "Current location"
         map.setRegion(region!, animated: true)
         map.addAnnotation(myAnnotation)
-        addAnnotations(coords: locationData)
+        //addAnnotations(coords: locationData)
         
     }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -228,17 +236,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    func addAnnotations(coords: [[String : Any]]){
+    func addAnnotations(coords: [Place]){
         //map.removeAnnotations(map.annotations)
         var annotations = [CustomAnnotation]()
-        for each in locationData {
-            let latitude = CLLocationDegrees(each["latitude"] as! Double)
-            let longitude = CLLocationDegrees(each["longitude"] as! Double)
-            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let name = each["name"] as! String
-            let descript = each["description"] as! Bool
-            let img = each["image"] as! String
-            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: "\(name)", isOpen: descript, enableInfoButton: true, image: (UIImage(named: img))!.resizedImage(withBounds: CGSize(width: 40.0, height: 40.0)))
+        for each in coords {
+            let coordinate = CLLocationCoordinate2D(latitude: (each.location?.latitude)!, longitude: (each.location?.longitude)!)
+            let name = each.name
+            let descript = each.isOpen
+            let img = each.icon
+            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: name!, isOpen: descript!, enableInfoButton: true, image: img!.resizedImage(withBounds: CGSize(width: 40.0, height: 40.0)))
             
             annotations.append(annotation)
             
