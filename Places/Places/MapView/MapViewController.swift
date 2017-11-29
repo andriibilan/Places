@@ -102,6 +102,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManagerConfigurate()
 
         viewForFilter.setCorenerAndShadow(viewForFilter)
+
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
@@ -114,6 +115,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     func locationManagerConfigurate(){
+
         if (CLLocationManager.locationServicesEnabled())
         {
             locationManager = CLLocationManager()
@@ -297,20 +299,26 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             performSegue(withIdentifier: "detailVC", sender: view)
         }
     }
-    
-    
-    
-    
-    
-    
-    /////////////////////////////////////////////////////////////////////////
-    
-    let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
-    let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
-    let colorCellArray = [#colorLiteral(red: 0.862745098, green: 0.07843137255, blue: 0.2352941176, alpha: 1),#colorLiteral(red: 0.816177428, green: 0.3087009804, blue: 0.3607843137, alpha: 1),#colorLiteral(red: 1, green: 0.4054285386, blue: 0.3137254902, alpha: 1),#colorLiteral(red: 0.9803921569, green: 0.5019607843, blue: 0.4470588235, alpha: 1),#colorLiteral(red: 1, green: 0.6470588235, blue: 0, alpha: 1),#colorLiteral(red: 1, green: 0.8431372549, blue: 0, alpha: 1),#colorLiteral(red: 0.6039215686, green: 0.8039215686, blue: 0.1960784314, alpha: 1),#colorLiteral(red: 0.6784313725, green: 1, blue: 0.1843137255, alpha: 1),#colorLiteral(red: 0, green: 1, blue: 0, alpha: 1),#colorLiteral(red: 0, green: 1, blue: 0.4980392157, alpha: 1),#colorLiteral(red: 0.2352941176, green: 0.7019607843, blue: 0.4431372549, alpha: 1),#colorLiteral(red: 0.1254901961, green: 0.6980392157, blue: 0.6666666667, alpha: 1),#colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1),#colorLiteral(red: 0.4823529412, green: 0.4078431373, blue: 0.9333333333, alpha: 1),#colorLiteral(red: 1, green: 0.5478362439, blue: 0.7764705882, alpha: 1),#colorLiteral(red: 1, green: 0.4463541667, blue: 0.7960784314, alpha: 1),#colorLiteral(red: 0.8549019608, green: 0.4392156863, blue: 0.8392156863, alpha: 1)]
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+
+        
+
+        
+
+    func colorForIndex(index: Int) -> UIColor {
+        let nameCount = nameFilterArray.count - 1
+        let val = (CGFloat(index) / CGFloat(nameCount)) * 0.9
+        print(val)
+        return UIColor(red: 1.0, green: val, blue: 0.0, alpha: 1.0)
     }
+
+        /////////////////////////////////////////////////////////////////////////
+        
+        let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
+        let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
+     func numberOfSections(in tableView: UITableView) -> Int {
+            return 1
+        }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nameFilterArray.count
@@ -325,7 +333,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         filterCell.nameFilter.text = nameFilterArray[indexPath.row]
         filterCell.iconFilter.image = iconFilterArray[indexPath.row]
-        filterCell.backgroundColor = colorCellArray[indexPath.row]
+        //filterCell.backgroundColor = colorCellArray[indexPath.row]
+        filterCell.backgroundColor = colorForIndex(index: indexPath.row)
         filterCell.accessoryType = accessory
         filterCell.selectionStyle = .none
         return filterCell
@@ -354,8 +363,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             selectedCell.add(indexPath.row)
             accessory = .checkmark
             print("choose filter: \(nameFilterArray[indexPath.row])")
-        }
-        
+            }
+
+
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = accessory
         }
@@ -380,5 +390,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
 }
+
 
 
