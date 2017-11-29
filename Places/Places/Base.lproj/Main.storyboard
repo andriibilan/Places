@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tGC-2i-N8v">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -17,10 +17,25 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="DbA-2p-925">
+            <objects>
+                <navigationController hidesBottomBarWhenPushed="YES" navigationBarHidden="YES" id="tGC-2i-N8v" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PBQ-kg-lTP">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="zvQ-cS-cZO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oTN-RS-ne0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-78" y="-1"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="main" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="Places" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Places" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,6 +103,7 @@
                                         </constraints>
                                         <state key="normal" image="2703062-64"/>
                                         <connections>
+                                            <action selector="profileButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U2e-ki-YKv"/>
                                             <segue destination="xjy-Hw-8Ed" kind="presentation" identifier="ShowLogin" id="Fjh-DJ-O0e"/>
                                         </connections>
                                     </button>
@@ -175,10 +191,10 @@
                                 </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpA-aE-Hki">
-                                <rect key="frame" x="0.0" y="90" width="160" height="477"/>
+                                <rect key="frame" x="0.0" y="120" width="160" height="447"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dvC-Vm-Gg7">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="477"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="447"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="sectionIndexColor" red="0.95623749489999998" green="0.3225761056" blue="0.33518427610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -234,7 +250,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ny9-BK-1UC" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
                                 <rect key="frame" x="20" y="587" width="60" height="60"/>
-                                <color key="backgroundColor" red="0.22745098039215686" green="0.67843137254901964" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.2275260389" green="0.67915946250000003" blue="0.54944974179999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="1jz-4w-A1J"/>
                                     <constraint firstAttribute="width" constant="60" id="EVs-DU-mTi"/>
@@ -274,7 +290,7 @@
                         <constraints>
                             <constraint firstItem="HFl-mO-hU1" firstAttribute="leading" secondItem="5Pq-cN-7gF" secondAttribute="leading" id="2hc-jg-V0F"/>
                             <constraint firstItem="HFl-mO-hU1" firstAttribute="top" secondItem="5Pq-cN-7gF" secondAttribute="top" id="8RG-rd-MgE"/>
-                            <constraint firstItem="jpA-aE-Hki" firstAttribute="top" secondItem="J1c-lw-TzP" secondAttribute="top" constant="70" id="CaG-X2-HKE"/>
+                            <constraint firstItem="jpA-aE-Hki" firstAttribute="top" secondItem="J1c-lw-TzP" secondAttribute="top" constant="100" id="CaG-X2-HKE"/>
                             <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="Ny9-BK-1UC" secondAttribute="bottom" constant="20" id="Faf-pQ-j1Y"/>
                             <constraint firstAttribute="trailing" secondItem="HFl-mO-hU1" secondAttribute="trailing" id="Jgj-z7-C4o"/>
                             <constraint firstItem="Ny9-BK-1UC" firstAttribute="leading" secondItem="J1c-lw-TzP" secondAttribute="leading" constant="20" id="NSy-qv-bgw"/>

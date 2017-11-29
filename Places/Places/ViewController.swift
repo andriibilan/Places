@@ -10,8 +10,6 @@ import UIKit
 
 class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     
-    
-    
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
     @IBOutlet weak var menuView: UIViewX!
@@ -29,7 +27,12 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
             break
         }
     }
-	
+    
+    @IBAction func profileButton(_ sender: Any) {
+//        let appDel : AppDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDel.showProfile()
+    }
+    
 	private let transition = CustomTransitionAnimator()
     
     override func viewDidLoad() {

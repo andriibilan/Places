@@ -85,15 +85,36 @@ struct AuthService {
         }
     }
     
-    func updateUserInfo(userName: String, email: String, phone: String) {
+    func updateUserInfo(userName: String, email: String, phone: String, profileImage: UIImage) {
         let userID : String = (Auth.auth().currentUser?.uid)!
-        let currentUserInfo = ["userName": userName,
-                               "email": email,
-                               "phone": phone]
-//                               "photoURL": String(describing: userID.photoURL!)]
+        let imageName = NSUUID().uuidString
         
-        let userRef = dataBaseReference.child("Users").child(userID)
-        userRef.updateChildValues(currentUserInfo)
+        let storedImage = storageReference.child("photoURL").child(imageName)
+        let pictureData = UIImageJPEGRepresentation(profileImage, 0.20)
+        
+        if let uploadData = pictureData {
+            storedImage.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                storedImage.downloadURL(completion: { (url, error) in
+                    if error != nil {
+                        print(error!)
+                        return
+                    }
+                    if let urlText = url?.absoluteString {
+                        let currentUserInfo = ["userName": userName,
+                                               "email": email,
+                                               "phone": phone,
+                                               "photoURL": urlText]
+                        
+                self.dataBaseReference.child("Users").child(userID).updateChildValues(currentUserInfo)
+                        
+                    }
+                })
+            })
+        }
     }
     
     func logIn(email: String, password: String) {
