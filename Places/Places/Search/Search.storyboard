@@ -26,7 +26,7 @@
                                     <outlet property="delegate" destination="gqa-D5-kcz" id="oWt-f4-OIC"/>
                                 </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vFq-on-3n0">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vFq-on-3n0" customClass="UITableViewExplicit" customModule="Places" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="56" width="375" height="611"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -138,7 +138,7 @@
                         <viewLayoutGuide key="safeArea" id="2xU-KL-TTi"/>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="vFq-on-3n0" id="Nib-gW-u8e"/>
+                        <outlet property="tableViewForPlaces" destination="vFq-on-3n0" id="Pdx-RV-aWY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H9R-rR-Ibo" userLabel="First Responder" sceneMemberID="firstResponder"/>
