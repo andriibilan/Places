@@ -80,6 +80,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         isSideMenuHidden = !isSideMenuHidden
     }
+    // long press action
+    
+    
+    
+    
+    
+    
+   @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
+    
+    let annotation = MKPointAnnotation()
+    let pressPoint = sender.location(in: map)
+    let pressCoordinate = map.convert(pressPoint, toCoordinateFrom: map)
+    annotation.coordinate = pressCoordinate
+    annotation.title = "Selected place"
+    annotation.subtitle = "Add another place"
+    map.addAnnotation(annotation)
+    
+    let loc = CLLocation(latitude: pressCoordinate.latitude as CLLocationDegrees, longitude: pressCoordinate.longitude as CLLocationDegrees)
+    addRadiusCircle(location: loc)
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

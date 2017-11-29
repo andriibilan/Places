@@ -311,9 +311,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6B-D0-qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Pcr-ak-bxN">
+                <pongPressGestureRecognizer cancelsTouchesInView="NO" allowableMovement="10" minimumPressDuration="0.5" id="Pcr-ak-bxN">
                     <connections>
-                        <action selector="addAnnotation:" destination="6eg-wI-33n" id="TCb-Z6-QW7"/>
+                        <action selector="longPress:" destination="6eg-wI-33n" id="fC5-zy-ud9"/>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
