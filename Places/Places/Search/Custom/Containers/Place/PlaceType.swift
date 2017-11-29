@@ -26,4 +26,7 @@ enum PlaceType: String{
     case cemetery
     case park
     case gym
+	
+	static let allValues = [bar,cafe,restaurant,bank,night_club,museum,beauty_salon,pharmacy,hospital,bus_station,gas_station,university,police,church,cemetery,park,gym]
+	
 }
