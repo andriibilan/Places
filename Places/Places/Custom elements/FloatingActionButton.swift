@@ -2,8 +2,8 @@
 //  FloatingActionButton.swift
 //  Places
 //
-//  Created by Andrew on 11/21/17.
-//  Copyright © 2017 Andrew. All rights reserved.
+//  Created by Andrew Konchak on 11/21/17.
+//  Copyright © 2017 Andrew Konchak. All rights reserved.
 //
 
 import UIKit
