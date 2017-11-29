@@ -12,7 +12,12 @@ import CoreLocation
 
 
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
+    func updateData() {
+        locationManagerConfigurate()
+        
+    }
+    
     //var list : ListViewController?
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
@@ -50,6 +55,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+    
+    }
     
     
     @IBOutlet weak var settingsButton: UIButton!

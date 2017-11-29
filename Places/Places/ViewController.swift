@@ -10,6 +10,9 @@ import UIKit
 
 class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     
+    var map : MapViewController?
+    var list : ListViewController?
+    
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
     @IBOutlet weak var menuView: UIViewX!
@@ -45,6 +48,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        print("fgh")
     }
     
     @IBAction func menuTapped(_ sender: FloatingActionButton) {
@@ -86,8 +90,28 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
 			secondVC.transitioningDelegate = self
 			secondVC.modalPresentationStyle = .custom
 		}
+        if segue.identifier == "MapView" {
+            map = segue.destination as? MapViewController
+        }
+        if segue.identifier == "ListView" {
+            list = segue.destination as? ListViewController
+        }
 
 	}
     
+    @IBAction func unwindFromSettings(segue: UIStoryboardSegue) {
+        
+        if mapView.isHidden == false {
+            map?.updateData()
+        } else {
+            list?.updateData()
+        }
+    }
+    
+    
+    
 }
 
+protocol OutputInterface {
+    func updateData()
+}
