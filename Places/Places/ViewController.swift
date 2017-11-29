@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     
@@ -34,9 +35,14 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
 
     
     @IBAction func profileButton(_ sender: Any) {
-//        let appDel : AppDelegate = UIApplication.shared.delegate as! AppDelegate
-//        appDel.showProfile()
-    }
+		if Auth.auth().currentUser != nil {
+			performSegue(withIdentifier: "ShowProfile", sender: nil)
+		}
+		else {
+			performSegue(withIdentifier: "ShowLogin", sender: nil)
+		}
+		
+	}
     
 
     
@@ -86,6 +92,13 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
 			secondVC.transitioningDelegate = self
 			secondVC.modalPresentationStyle = .custom
 		}
+		
+		if segue.identifier == "ShowProfile" {
+			let secondVC = segue.destination as! ProfileViewController
+			secondVC.transitioningDelegate = self
+			secondVC.modalPresentationStyle = .custom
+		}
+		
 		if segue.identifier == "ShowLogin" {
 			let secondVC = segue.destination as! LoginViewController
 			secondVC.transitioningDelegate = self
