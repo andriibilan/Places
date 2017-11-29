@@ -58,28 +58,40 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9L-rH-oF0" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FCO-nx-2rI">
                                         <rect key="frame" x="138.66666666666666" y="0.0" width="98" height="98"/>
-                                        <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <subviews>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9L-rH-oF0" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
+                                                <rect key="frame" x="0.33333333333334281" y="0.0" width="98" height="98"/>
+                                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="dismiss"/>
+                                                <connections>
+                                                    <action selector="dismissAction:" destination="Je1-fC-mgn" eventType="touchUpInside" id="Nbg-pW-cev"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="C9L-rH-oF0" secondAttribute="height" multiplier="1:1" id="vFD-Kr-KdP"/>
+                                            <constraint firstItem="C9L-rH-oF0" firstAttribute="leading" secondItem="FCO-nx-2rI" secondAttribute="leading" id="OBJ-aM-d9v"/>
+                                            <constraint firstItem="C9L-rH-oF0" firstAttribute="top" secondItem="FCO-nx-2rI" secondAttribute="top" id="Zec-7Z-2FI"/>
+                                            <constraint firstAttribute="trailing" secondItem="C9L-rH-oF0" secondAttribute="trailing" id="hJs-qB-rfj"/>
+                                            <constraint firstAttribute="bottom" secondItem="C9L-rH-oF0" secondAttribute="bottom" id="ofb-3d-cpv"/>
+                                            <constraint firstAttribute="width" secondItem="FCO-nx-2rI" secondAttribute="height" multiplier="1:1" id="rPd-R3-eyo"/>
                                         </constraints>
-                                        <state key="normal" title="dismiss"/>
-                                    </button>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="C9L-rH-oF0" firstAttribute="top" secondItem="sJP-ek-g6e" secondAttribute="top" id="5cZ-Iv-yHn"/>
+                                    <constraint firstItem="j77-ku-2oi" firstAttribute="leading" secondItem="FCO-nx-2rI" secondAttribute="trailing" id="2gO-bN-iZu"/>
+                                    <constraint firstItem="FCO-nx-2rI" firstAttribute="centerX" secondItem="sJP-ek-g6e" secondAttribute="centerX" id="6tH-To-RlE"/>
                                     <constraint firstItem="rhf-FE-fKu" firstAttribute="leading" secondItem="sJP-ek-g6e" secondAttribute="leading" id="BTB-sE-kAf"/>
                                     <constraint firstAttribute="bottom" secondItem="j77-ku-2oi" secondAttribute="bottom" id="FAf-z6-WHn"/>
-                                    <constraint firstItem="C9L-rH-oF0" firstAttribute="centerY" secondItem="sJP-ek-g6e" secondAttribute="centerY" id="H0h-sm-2JL"/>
-                                    <constraint firstItem="C9L-rH-oF0" firstAttribute="leading" secondItem="rhf-FE-fKu" secondAttribute="trailing" id="McK-Hj-fi0"/>
-                                    <constraint firstAttribute="bottom" secondItem="C9L-rH-oF0" secondAttribute="bottom" id="aq9-Y6-O8Z"/>
-                                    <constraint firstItem="j77-ku-2oi" firstAttribute="leading" secondItem="C9L-rH-oF0" secondAttribute="trailing" id="b65-th-fIj"/>
+                                    <constraint firstAttribute="bottom" secondItem="FCO-nx-2rI" secondAttribute="bottom" id="Jo5-Lr-st4"/>
+                                    <constraint firstItem="FCO-nx-2rI" firstAttribute="top" secondItem="sJP-ek-g6e" secondAttribute="top" id="M0g-OV-xE3"/>
                                     <constraint firstItem="rhf-FE-fKu" firstAttribute="top" secondItem="sJP-ek-g6e" secondAttribute="top" id="jhI-O8-oLn"/>
                                     <constraint firstAttribute="trailing" secondItem="j77-ku-2oi" secondAttribute="trailing" id="lgy-gY-ajG"/>
                                     <constraint firstAttribute="bottom" secondItem="rhf-FE-fKu" secondAttribute="bottom" id="nKI-YU-ZiY"/>
-                                    <constraint firstItem="C9L-rH-oF0" firstAttribute="centerX" secondItem="sJP-ek-g6e" secondAttribute="centerX" id="rHa-H0-fbM"/>
+                                    <constraint firstItem="FCO-nx-2rI" firstAttribute="leading" secondItem="rhf-FE-fKu" secondAttribute="trailing" id="xWj-QD-R6K"/>
                                     <constraint firstItem="j77-ku-2oi" firstAttribute="top" secondItem="sJP-ek-g6e" secondAttribute="top" id="zWd-V0-ghF"/>
                                 </constraints>
                             </view>
@@ -215,7 +227,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="62.666666666666664" height="62.333333333333336"/>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vz7-FP-h52">
-                                                                        <rect key="frame" x="15.333333333333334" y="15.666666666666627" width="31.333333333333329" height="31.333333333333329"/>
+                                                                        <rect key="frame" x="15.666666666666666" y="15.666666666666629" width="31.333333333333336" height="31"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <color key="textColor" red="0.40000000600000002" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -403,7 +415,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AgK-Rx-LlU" userLabel="Current Photo Image View">
-                                                    <rect key="frame" x="0.66666666666665719" y="-0.66666666666668561" width="300" height="534.33333333333348"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="534.33333333333337"/>
                                                 </imageView>
                                             </subviews>
                                         </view>

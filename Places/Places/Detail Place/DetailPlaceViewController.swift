@@ -48,7 +48,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         super.viewDidLoad()
         
         //
-        dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.5
+        dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.3
    //     print("123 \(dismissButton.cornerRadius)")
         
         
@@ -78,6 +78,13 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
 
         
         placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((placeRattingView?.frame.height)!), currentRate: testPlace.ratting!))
+        
+        
+        
+        //
+        print("height: \( placeRattingView?.frame.height)")
+        print("width: \( placeRattingView?.frame.width)")
+        //
         
         
         
@@ -113,7 +120,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         if let phone = placePhone?.text{
        //     UIApplication.sharedApplication.openURL(NSURL(string: "telprompt://\(phone)")!)
             
-            
+
             
             let phoneURL = NSURL(string: "telprompt://\(phone)")! as URL
             UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
@@ -128,6 +135,10 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     
+    @IBAction func dismissAction(_ sender: UIButtonX) {
+        print("123321")
+        dismiss(animated: true, completion: nil)
+    }
     
 
     
