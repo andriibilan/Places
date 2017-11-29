@@ -50,11 +50,8 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         //
         dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.5
    //     print("123 \(dismissButton.cornerRadius)")
-        //
         
-//        feedbackTableView.estimatedRowHeight = 147
-//        feedbackTableView.rowHeight = UITableViewAutomaticDimension
-//        heightConstaintForReviewTable.constant = feedbackTableView.rowHeight
+        
         
         //
         testPlace.installDefaultValues()
@@ -83,61 +80,22 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((placeRattingView?.frame.height)!), currentRate: testPlace.ratting!))
         
         
-      
-        
-        DispatchQueue.main.async {
-
-            self.PhotoCollectionView.delegate = self
-            self.PhotoCollectionView.dataSource = self
-            print("DISPATCH")
-        }
         
         
-        DispatchQueue.main.async {
-            
-            self.feedbackTableView.delegate = self
-            self.feedbackTableView.dataSource = self
-            self.feedbackTableView.estimatedRowHeight = 300
-            self.feedbackTableView.rowHeight = UITableViewAutomaticDimension
-            print("DISPATCH")
-        }
-
-//            feedbackTableView.delegate = self
-//            feedbackTableView.dataSource = self
-        
-//        DispatchQueue.main.async {
-//            //TODO:!@#123
-//            self.heightConstaintForReviewTable.constant = self.feedbackTableView.contentSize.height
-//        }
-        
- 
+    feedbackTableView.reloadData()
+    heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
+    
+    
     }
     
-    
-   
+  
     
     override func viewDidAppear(_ animated: Bool) {
-        
-       
-//        print("pre-end: \(heightTable)")
-//        DispatchQueue.main.async {
-//            self.heightConstaintForReviewTable.constant = self.heightTable
-//        }
-//        print("end: \(heightTable)")
-//
-        //
-        /*
-        feedbackTableView.estimatedRowHeight = 147
-        feedbackTableView.rowHeight = UITableViewAutomaticDimension
-        heightConstaintForReviewTable.constant = feedbackTableView.rowHeight
-         heightConstaintForReviewTable.constant = 147
-        print("constraint: \(feedbackTableView.rowHeight)")
-         */
-        
-        
-        feedbackTableView.reloadData()
+     
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
-        print("123 ; \(heightConstaintForReviewTable.constant)")
+        
+        
+        
     }
     
     @IBAction func openWebsite(_ sender: UIButton) {
@@ -157,8 +115,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
             
             
             
-       //     let phoneURL = NSURL(string: "telprompt://\(phone)")! as URL
-            let phoneURL = NSURL(string: "telprompt://1234567891")! as URL
+            let phoneURL = NSURL(string: "telprompt://\(phone)")! as URL
             UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
         }
     }
@@ -203,7 +160,6 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     //function for returning number of items in section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print( testPlace.image.count)
         return testPlace.image.count
     }
     
@@ -216,32 +172,14 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         }else{
             cell?.photoImageView?.image = #imageLiteral(resourceName: "noPhotoIcon")
         }
-        //
-        
-        print("Collection is used")
-        
         return cell!
     }
     
-    ///
- 
-    
-    //
-    
-    
-    var heightTable :CGFloat = 0.0
-    //
-    
-  
-    //DELETE
-    var counter = 0
-    //
-    
+   
     
     //MARK: Table View Data Source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("count: \(testPlace.forReview.count)")
         return testPlace.forReview.count
     }
 
@@ -251,33 +189,16 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         let cell  = feedbackTableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as! ReviewTableViewCell
         
         cell.labelForReview.text = review.review
+        
         if review.isanonymous {
             cell.labelForReviewer.text = "Anonymous"
         }else{
             cell.labelForReviewer.text = review.reviewer
         }
+        
         //TODO:RATTING
-        //TODO: go in class addSibview
+        //TODO: go in class addSubview
         cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: testPlace.forReview[indexPath.row].reviewRatting!))
-        
-        
-        
-        
-        
-        //       heightTable += cell.labelForReviewer.frame.height + cell.labelForReview.frame.height
-        
-        heightTable += cell.frame.height
-        
-        print("cell:-_____\(cell.frame.height)")
-        
-        print("table:______\(feedbackTableView.rowHeight)")
-        
-        print("reviewer: \(cell.labelForReviewer.frame.height)")
-        print("review: \(cell.labelForReview.frame.height)")
-       
-        
-        print("\nheight _____\(indexPath.row): \(heightTable)\n")
-        
         
         
         
@@ -287,12 +208,9 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     }
     
-    @IBAction func someAction(_ sender: UIButton) {
-        heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
-        print("123 ; \(heightConstaintForReviewTable.constant)")
-    }
+  
     
-    
+   
     
     
     

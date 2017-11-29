@@ -24,7 +24,7 @@ class Review{
         """
         
         isanonymous = false
-        reviewRatting = 2.3
+        reviewRatting = 2
     }
     
     init(_ : Int){
@@ -37,7 +37,14 @@ class Review{
         """
         
         isanonymous = true
-        reviewRatting = 4.7
+        reviewRatting = 4
+    }
+    init(_ : Bool){
+        reviewer = "Reviewer"
+        review = "123456789012345678901234567890123456789012345678901234567890123456789012345678912345678901234567890123456789012345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 1234567890"
+        
+        isanonymous = false
+        reviewRatting = 1
     }
     
     
@@ -80,9 +87,11 @@ class TestPlace{
         //TODO: Review!!!
         forReview.append(Review(4))
         forReview.append(Review())
-        forReview.append(Review(4))
+        forReview.append(Review(true))
         forReview.append(Review())
         forReview.append(Review(4))
+        forReview.append(Review())
+        forReview.append(Review(true))
         forReview.append(Review())
     }
     

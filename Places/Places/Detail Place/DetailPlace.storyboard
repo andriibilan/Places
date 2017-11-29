@@ -29,9 +29,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Uv-Pt-pg6" userLabel="Navigation Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="69" height="98"/>
                                                 <state key="normal" image="path"/>
-                                                <connections>
-                                                    <action selector="someAction:" destination="Je1-fC-mgn" eventType="touchUpInside" id="Yrg-3j-yRf"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHN-Ho-O7s" userLabel="Phone Button">
                                                 <rect key="frame" x="69" y="0.0" width="69" height="98"/>
@@ -122,6 +119,10 @@
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Je1-fC-mgn" id="tfJ-ai-XfQ"/>
+                                            <outlet property="delegate" destination="Je1-fC-mgn" id="mgl-QL-9xh"/>
+                                        </connections>
                                     </collectionView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OeB-a3-OS7" userLabel="Feedback Table View">
                                         <rect key="frame" x="0.0" y="669" width="375" height="121"/>
@@ -187,6 +188,10 @@
                                             </tableViewCell>
                                         </prototypes>
                                         <sections/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Je1-fC-mgn" id="oFB-7j-BPC"/>
+                                            <outlet property="delegate" destination="Je1-fC-mgn" id="p1S-qN-B59"/>
+                                        </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYB-9b-9aW" userLabel="Label View">
                                         <rect key="frame" x="0.0" y="294" width="375" height="375"/>
