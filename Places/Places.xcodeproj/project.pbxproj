@@ -24,6 +24,24 @@
 		49E3C00D1FC6D1A000400A06 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */; };
 		49E3C00F1FC6E12800400A06 /* UIImageViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00E1FC6E12800400A06 /* UIImageViewX.swift */; };
 		521CFD741FCCCE3800CD86DD /* ExtensionForUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521CFD731FCCCE3800CD86DD /* ExtensionForUIImage.swift */; };
+		528825AA1FCEF53700C29BFE /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B9A11FCEE9D500415051 /* SearchVC.swift */; };
+		528825AB1FCEF53A00C29BFE /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B99F1FCEE9D500415051 /* ItemCell.swift */; };
+		528825AC1FCEF53D00C29BFE /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2505B9A01FCEE9D500415051 /* Search.storyboard */; };
+		528825AD1FCEF54800C29BFE /* UIImageViewExplicit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B9871FCEE9D500415051 /* UIImageViewExplicit.swift */; };
+		528825AE1FCEF54B00C29BFE /* UITableViewExplicit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B9881FCEE9D500415051 /* UITableViewExplicit.swift */; };
+		528825AF1FCEF54E00C29BFE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B98A1FCEE9D500415051 /* Location.swift */; };
+		528825B01FCEF55000C29BFE /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B98C1FCEE9D500415051 /* Place.swift */; };
+		528825B11FCEF55300C29BFE /* PlaceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B98D1FCEE9D500415051 /* PlaceType.swift */; };
+		528825B21FCEF55600C29BFE /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B98F1FCEE9D500415051 /* Double.swift */; };
+		528825B31FCEF55800C29BFE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B9901FCEE9D500415051 /* Int.swift */; };
+		528825CB1FCF0EA400C29BFE /* GooglePlacesManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825BE1FCF0EA400C29BFE /* GooglePlacesManagerDelegate.swift */; };
+		528825CC1FCF0EA400C29BFE /* GooglePlacesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C01FCF0EA400C29BFE /* GooglePlacesManager.swift */; };
+		528825CD1FCF0EA400C29BFE /* AddNewPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C31FCF0EA400C29BFE /* AddNewPlace.swift */; };
+		528825CE1FCF0EA400C29BFE /* FetchByName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C51FCF0EA400C29BFE /* FetchByName.swift */; };
+		528825CF1FCF0EA400C29BFE /* FetchAdditionalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C71FCF0EA400C29BFE /* FetchAdditionalData.swift */; };
+		528825D01FCF0EA400C29BFE /* FetchBasicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C81FCF0EA400C29BFE /* FetchBasicData.swift */; };
+		528825D11FCF0EA400C29BFE /* FetchDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C91FCF0EA400C29BFE /* FetchDistance.swift */; };
+		528825D21FCF0EA400C29BFE /* FetchPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825CA1FCF0EA400C29BFE /* FetchPhotos.swift */; };
 		529191691FC715A0008FD5AB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529191681FC71598008FD5AB /* CoreLocation.framework */; };
 		5291916B1FCC1E02008FD5AB /* myAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5291916A1FCC1E02008FD5AB /* myAnnotation.swift */; };
 		52E5577C1FCA4E90000B7FFC /* CustomTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5577B1FCA4E90000B7FFC /* CustomTransitionAnimator.swift */; };
@@ -62,14 +80,6 @@
 		2505B98D1FCEE9D500415051 /* PlaceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceType.swift; sourceTree = "<group>"; };
 		2505B98F1FCEE9D500415051 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		2505B9901FCEE9D500415051 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
-		2505B9921FCEE9D500415051 /* GooglePlacesManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesManagerDelegate.swift; sourceTree = "<group>"; };
-		2505B9941FCEE9D500415051 /* GooglePlacesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
-		2505B9971FCEE9D500415051 /* AddNewPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPlace.swift; sourceTree = "<group>"; };
-		2505B9991FCEE9D500415051 /* FetchByName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchByName.swift; sourceTree = "<group>"; };
-		2505B99B1FCEE9D500415051 /* FetchAdditionalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAdditionalData.swift; sourceTree = "<group>"; };
-		2505B99C1FCEE9D500415051 /* FetchBasicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBasicData.swift; sourceTree = "<group>"; };
-		2505B99D1FCEE9D500415051 /* FetchDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDistance.swift; sourceTree = "<group>"; };
-		2505B99E1FCEE9D500415051 /* FetchPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPhotos.swift; sourceTree = "<group>"; };
 		2505B99F1FCEE9D500415051 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		2505B9A01FCEE9D500415051 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		2505B9A11FCEE9D500415051 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
@@ -90,6 +100,14 @@
 		49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		49E3C00E1FC6E12800400A06 /* UIImageViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewX.swift; sourceTree = "<group>"; };
 		521CFD731FCCCE3800CD86DD /* ExtensionForUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionForUIImage.swift; sourceTree = "<group>"; };
+		528825BE1FCF0EA400C29BFE /* GooglePlacesManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesManagerDelegate.swift; sourceTree = "<group>"; };
+		528825C01FCF0EA400C29BFE /* GooglePlacesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
+		528825C31FCF0EA400C29BFE /* AddNewPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewPlace.swift; sourceTree = "<group>"; };
+		528825C51FCF0EA400C29BFE /* FetchByName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchByName.swift; sourceTree = "<group>"; };
+		528825C71FCF0EA400C29BFE /* FetchAdditionalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAdditionalData.swift; sourceTree = "<group>"; };
+		528825C81FCF0EA400C29BFE /* FetchBasicData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchBasicData.swift; sourceTree = "<group>"; };
+		528825C91FCF0EA400C29BFE /* FetchDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchDistance.swift; sourceTree = "<group>"; };
+		528825CA1FCF0EA400C29BFE /* FetchPhotos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchPhotos.swift; sourceTree = "<group>"; };
 		529191681FC71598008FD5AB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5291916A1FCC1E02008FD5AB /* myAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myAnnotation.swift; sourceTree = "<group>"; };
 		52E5577B1FCA4E90000B7FFC /* CustomTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionAnimator.swift; sourceTree = "<group>"; };
@@ -141,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				2505B9851FCEE9D500415051 /* Custom */,
-				2505B9911FCEE9D500415051 /* Google Places API Manager */,
 				2505B99F1FCEE9D500415051 /* ItemCell.swift */,
 				2505B9A01FCEE9D500415051 /* Search.storyboard */,
 				2505B9A11FCEE9D500415051 /* SearchVC.swift */,
@@ -195,61 +212,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		2505B9911FCEE9D500415051 /* Google Places API Manager */ = {
-			isa = PBXGroup;
-			children = (
-				2505B9921FCEE9D500415051 /* GooglePlacesManagerDelegate.swift */,
-				2505B9931FCEE9D500415051 /* Manager */,
-			);
-			path = "Google Places API Manager";
-			sourceTree = "<group>";
-		};
-		2505B9931FCEE9D500415051 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				2505B9941FCEE9D500415051 /* GooglePlacesManager.swift */,
-				2505B9951FCEE9D500415051 /* Managing Extensions  */,
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
-		2505B9951FCEE9D500415051 /* Managing Extensions  */ = {
-			isa = PBXGroup;
-			children = (
-				2505B9961FCEE9D500415051 /* AddNewPlace */,
-				2505B9981FCEE9D500415051 /* FetchByName */,
-				2505B99A1FCEE9D500415051 /* FetchByRadius */,
-			);
-			path = "Managing Extensions ";
-			sourceTree = "<group>";
-		};
-		2505B9961FCEE9D500415051 /* AddNewPlace */ = {
-			isa = PBXGroup;
-			children = (
-				2505B9971FCEE9D500415051 /* AddNewPlace.swift */,
-			);
-			path = AddNewPlace;
-			sourceTree = "<group>";
-		};
-		2505B9981FCEE9D500415051 /* FetchByName */ = {
-			isa = PBXGroup;
-			children = (
-				2505B9991FCEE9D500415051 /* FetchByName.swift */,
-			);
-			path = FetchByName;
-			sourceTree = "<group>";
-		};
-		2505B99A1FCEE9D500415051 /* FetchByRadius */ = {
-			isa = PBXGroup;
-			children = (
-				2505B99B1FCEE9D500415051 /* FetchAdditionalData.swift */,
-				2505B99C1FCEE9D500415051 /* FetchBasicData.swift */,
-				2505B99D1FCEE9D500415051 /* FetchDistance.swift */,
-				2505B99E1FCEE9D500415051 /* FetchPhotos.swift */,
-			);
-			path = FetchByRadius;
-			sourceTree = "<group>";
-		};
 		258B06541FC8377B003A09B8 /* AddPlace */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +256,61 @@
 				49E3C0081FC6D18E00400A06 /* UIButtonX.swift */,
 			);
 			path = "Custom elements";
+			sourceTree = "<group>";
+		};
+		528825BD1FCF0EA400C29BFE /* Google Places API Manager */ = {
+			isa = PBXGroup;
+			children = (
+				528825BE1FCF0EA400C29BFE /* GooglePlacesManagerDelegate.swift */,
+				528825BF1FCF0EA400C29BFE /* Manager */,
+			);
+			path = "Google Places API Manager";
+			sourceTree = "<group>";
+		};
+		528825BF1FCF0EA400C29BFE /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				528825C01FCF0EA400C29BFE /* GooglePlacesManager.swift */,
+				528825C11FCF0EA400C29BFE /* Managing Extensions  */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		528825C11FCF0EA400C29BFE /* Managing Extensions  */ = {
+			isa = PBXGroup;
+			children = (
+				528825C21FCF0EA400C29BFE /* AddNewPlace */,
+				528825C41FCF0EA400C29BFE /* FetchByName */,
+				528825C61FCF0EA400C29BFE /* FetchByRadius */,
+			);
+			path = "Managing Extensions ";
+			sourceTree = "<group>";
+		};
+		528825C21FCF0EA400C29BFE /* AddNewPlace */ = {
+			isa = PBXGroup;
+			children = (
+				528825C31FCF0EA400C29BFE /* AddNewPlace.swift */,
+			);
+			path = AddNewPlace;
+			sourceTree = "<group>";
+		};
+		528825C41FCF0EA400C29BFE /* FetchByName */ = {
+			isa = PBXGroup;
+			children = (
+				528825C51FCF0EA400C29BFE /* FetchByName.swift */,
+			);
+			path = FetchByName;
+			sourceTree = "<group>";
+		};
+		528825C61FCF0EA400C29BFE /* FetchByRadius */ = {
+			isa = PBXGroup;
+			children = (
+				528825C71FCF0EA400C29BFE /* FetchAdditionalData.swift */,
+				528825C81FCF0EA400C29BFE /* FetchBasicData.swift */,
+				528825C91FCF0EA400C29BFE /* FetchDistance.swift */,
+				528825CA1FCF0EA400C29BFE /* FetchPhotos.swift */,
+			);
+			path = FetchByRadius;
 			sourceTree = "<group>";
 		};
 		52E5577A1FCA4868000B7FFC /* CustomTransition */ = {
@@ -365,6 +382,7 @@
 		8A8C5C741FC57F3E00A834EA /* Places */ = {
 			isa = PBXGroup;
 			children = (
+				528825BD1FCF0EA400C29BFE /* Google Places API Manager */,
 				2505B9841FCEE9D500415051 /* Search */,
 				258B06541FC8377B003A09B8 /* AddPlace */,
 				2BCDF2341FC847ED00EA96F0 /* Extensions */,
@@ -496,6 +514,7 @@
 				75F7EB7B1FC59F33002F169E /* Login.storyboard in Resources */,
 				2B4BA9131FC5EC0E00B5E598 /* DetailPlace.storyboard in Resources */,
 				8AAC34041FC6D3BE0060C3A2 /* Settings.storyboard in Resources */,
+				528825AC1FCEF53D00C29BFE /* Search.storyboard in Resources */,
 				258B06581FC861A1003A09B8 /* high.jpg in Resources */,
 				75F7EB7F1FC59F58002F169E /* Profile.storyboard in Resources */,
 				8A8C5C7B1FC57F3E00A834EA /* Main.storyboard in Resources */,
@@ -563,29 +582,46 @@
 				7510D9711FCD77A9004B83CD /* AvatarImageView.swift in Sources */,
 				258B065A1FC861D6003A09B8 /* AddNewPlaceController.swift in Sources */,
 				49E3C0091FC6D18E00400A06 /* UIButtonX.swift in Sources */,
+				528825AA1FCEF53700C29BFE /* SearchVC.swift in Sources */,
+				528825AE1FCEF54B00C29BFE /* UITableViewExplicit.swift in Sources */,
 				8A9C7C791FCB1AE8009B9C86 /* SliderTransition.swift in Sources */,
+				528825CF1FCF0EA400C29BFE /* FetchAdditionalData.swift in Sources */,
+				528825AD1FCEF54800C29BFE /* UIImageViewExplicit.swift in Sources */,
 				75F7EB741FC59B75002F169E /* LoginViewController.swift in Sources */,
+				528825B11FCEF55300C29BFE /* PlaceType.swift in Sources */,
+				528825CC1FCF0EA400C29BFE /* GooglePlacesManager.swift in Sources */,
 				2BCDF2361FC8481B00EA96F0 /* Extension for Double.swift in Sources */,
 				757042221FCB09450075FC87 /* Validator.swift in Sources */,
 				2B4BA9161FC5EC0E00B5E598 /* PhotoPagingViewController.swift in Sources */,
+				528825CE1FCF0EA400C29BFE /* FetchByName.swift in Sources */,
 				757042261FCB097B0075FC87 /* AuthService.swift in Sources */,
+				528825B31FCEF55800C29BFE /* Int.swift in Sources */,
 				2BCDF2331FC83DE500EA96F0 /* TestModelPlace.swift in Sources */,
+				528825D01FCF0EA400C29BFE /* FetchBasicData.swift in Sources */,
 				49E3C00B1FC6D19300400A06 /* UIViewX.swift in Sources */,
 				52E5577C1FCA4E90000B7FFC /* CustomTransitionAnimator.swift in Sources */,
 				8A8C5C781FC57F3E00A834EA /* ViewController.swift in Sources */,
+				528825B01FCEF55000C29BFE /* Place.swift in Sources */,
+				528825AF1FCEF54E00C29BFE /* Location.swift in Sources */,
+				528825CD1FCF0EA400C29BFE /* AddNewPlace.swift in Sources */,
 				521CFD741FCCCE3800CD86DD /* ExtensionForUIImage.swift in Sources */,
+				528825D11FCF0EA400C29BFE /* FetchDistance.swift in Sources */,
 				49E3C00D1FC6D1A000400A06 /* FloatingActionButton.swift in Sources */,
 				8AA21ED51FC8446B0046202F /* MapFilterTableViewCell.swift in Sources */,
+				528825AB1FCEF53A00C29BFE /* ItemCell.swift in Sources */,
 				8A8C5C881FC5A1B000A834EA /* MapViewController.swift in Sources */,
 				8A9BF77C1FC6F89A002E970C /* ListTableViewCell.swift in Sources */,
 				25ACDC721FCC227400695896 /* Rating.swift in Sources */,
 				8A9BF7781FC6E22E002E970C /* SettingTableViewController.swift in Sources */,
 				49D395C11FCD85A8003FCC29 /* SlideMenuActionButton.swift in Sources */,
 				2B4BA9151FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift in Sources */,
+				528825D21FCF0EA400C29BFE /* FetchPhotos.swift in Sources */,
 				8A8C5C8A1FC5A1C100A834EA /* ListViewController.swift in Sources */,
+				528825B21FCEF55600C29BFE /* Double.swift in Sources */,
 				8A9C7C7B1FCB371A009B9C86 /* Extension for view.swift in Sources */,
 				49E3C00F1FC6E12800400A06 /* UIImageViewX.swift in Sources */,
 				8A8C5C761FC57F3E00A834EA /* AppDelegate.swift in Sources */,
+				528825CB1FCF0EA400C29BFE /* GooglePlacesManagerDelegate.swift in Sources */,
 				757042241FCB09620075FC87 /* User.swift in Sources */,
 				8A9BF77E1FC72238002E970C /* SettingsViewController.swift in Sources */,
 				75F7EB761FC59B84002F169E /* SignUpViewController.swift in Sources */,
@@ -729,7 +765,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 947J5M2JCF;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Places/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -748,7 +784,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 947J5M2JCF;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Places/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

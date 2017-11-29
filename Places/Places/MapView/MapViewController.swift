@@ -28,19 +28,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //Walker Art Gallery
         ["name": "Walker Art Gallery",
          "image" : "pet.png",
-         "description" : "It is a very cool church",
+         "description" : true,
          "latitude": 37.769366,
          "longitude": -122.421464],
         //Liver Buildings
         ["name": "Liver Buildings",
          "image" : "mops.png",
-         "description" : "It is a very cool church",
+         "description" : false,
          "latitude": 37.774115,
          "longitude": -122.427129],
         //St George's Hall
         ["name": "St George's Hall",
          "image" : "mops.png",
-         "description" : "It is a very cool church",
+         "description" : false,
          "latitude": 37.788888,
          "longitude": -122.400000]
     ]
@@ -50,15 +50,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var viewForFilter: UIView!
     
     @IBAction func currentLocation(_ sender: Any) {
+        
         if region != nil {
             locationManagerConfigurate()
 //            self.map.setRegion(region!, animated: true)
 //            locationManager.startUpdatingLocation()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-    
     }
     
     
@@ -266,9 +263,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let longitude = CLLocationDegrees(each["longitude"] as! Double)
             let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let name = each["name"] as! String
-            let descript = each["description"] as! String
+            let descript = each["description"] as! Bool
             let img = each["image"] as! String
-            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: "\(name)", subtitle: "\(descript)", enableInfoButton: true, image: (UIImage(named: img))!.resizedImage(withBounds: CGSize(width: 40.0, height: 40.0)))
+            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: "\(name)", isOpen: descript, enableInfoButton: true, image: (UIImage(named: img))!.resizedImage(withBounds: CGSize(width: 40.0, height: 40.0)))
             
             annotations.append(annotation)
             
@@ -364,8 +361,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         /////////////////////////////////////////////////////////////////////////
         
         let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
-
-        let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "Church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
+        let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
 
 
      func numberOfSections(in tableView: UITableView) -> Int {
