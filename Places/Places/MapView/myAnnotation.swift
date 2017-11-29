@@ -14,15 +14,21 @@ class CustomAnnotation : NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
+    var isOpen : Bool
     var enableInfoButton : Bool
     var image : UIImage?
     
-    init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, enableInfoButton : Bool, image: UIImage) {
+    init(coordinate: CLLocationCoordinate2D, title: String, isOpen: Bool, enableInfoButton : Bool, image: UIImage) {
         self.coordinate = coordinate
         self.title = title
-        self.subtitle = subtitle
+        self.isOpen = isOpen
         self.enableInfoButton = enableInfoButton;
         self.image = image
+        if isOpen == true{
+            subtitle = "Open now"
+        } else {
+            subtitle = "Closed"
+        }
     }
     
     func annotationView() -> MKAnnotationView {
