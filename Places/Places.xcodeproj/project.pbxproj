@@ -18,6 +18,7 @@
 		2B8608061FCC4DB10007B777 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8608051FCC4DB10007B777 /* ReviewTableViewCell.swift */; };
 		2BCDF2331FC83DE500EA96F0 /* TestModelPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCDF2321FC83DE500EA96F0 /* TestModelPlace.swift */; };
 		2BCDF2361FC8481B00EA96F0 /* Extension for Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCDF2351FC8481B00EA96F0 /* Extension for Double.swift */; };
+		49D395C11FCD85A8003FCC29 /* SlideMenuActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D395C01FCD85A8003FCC29 /* SlideMenuActionButton.swift */; };
 		49E3C0091FC6D18E00400A06 /* UIButtonX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C0081FC6D18E00400A06 /* UIButtonX.swift */; };
 		49E3C00B1FC6D19300400A06 /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00A1FC6D19300400A06 /* UIViewX.swift */; };
 		49E3C00D1FC6D1A000400A06 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */; };
@@ -65,6 +66,7 @@
 		2B8608051FCC4DB10007B777 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		2BCDF2321FC83DE500EA96F0 /* TestModelPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModelPlace.swift; sourceTree = "<group>"; };
 		2BCDF2351FC8481B00EA96F0 /* Extension for Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension for Double.swift"; sourceTree = "<group>"; };
+		49D395C01FCD85A8003FCC29 /* SlideMenuActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuActionButton.swift; sourceTree = "<group>"; };
 		49E3C0081FC6D18E00400A06 /* UIButtonX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonX.swift; sourceTree = "<group>"; };
 		49E3C00A1FC6D19300400A06 /* UIViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
 		49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */,
+				49D395C01FCD85A8003FCC29 /* SlideMenuActionButton.swift */,
 				49E3C00A1FC6D19300400A06 /* UIViewX.swift */,
 				49E3C00E1FC6E12800400A06 /* UIImageViewX.swift */,
 				49E3C0081FC6D18E00400A06 /* UIButtonX.swift */,
@@ -445,6 +448,7 @@
 				8A9BF77C1FC6F89A002E970C /* ListTableViewCell.swift in Sources */,
 				25ACDC721FCC227400695896 /* Rating.swift in Sources */,
 				8A9BF7781FC6E22E002E970C /* SettingTableViewController.swift in Sources */,
+				49D395C11FCD85A8003FCC29 /* SlideMenuActionButton.swift in Sources */,
 				2B4BA9151FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift in Sources */,
 				8A8C5C8A1FC5A1C100A834EA /* ListViewController.swift in Sources */,
 				8A9C7C7B1FCB371A009B9C86 /* Extension for view.swift in Sources */,
