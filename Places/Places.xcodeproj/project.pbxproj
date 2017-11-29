@@ -163,8 +163,7 @@
 				2505C0431FCEF6F600415051 /* Search.storyboard */,
 				2505C0501FCEF6F700415051 /* SearchVC.swift */,
 			);
-			name = Search;
-			path = "New Group";
+			path = Search;
 			sourceTree = "<group>";
 		};
 		2505C0351FCEF6F600415051 /* Google Places API Manager */ = {
