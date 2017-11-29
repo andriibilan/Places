@@ -61,12 +61,12 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		if sortingByName {
 			sender.setImage( #imageLiteral(resourceName: "name-sorting"), for: .normal)
 			sortingByName = false
-			places.sort(by: {$0.name < $1.name})
+			places.sort(by: {($0.name ?? "") < ($1.name ?? "")})
 			
 		} else {
 			sender.setImage(#imageLiteral(resourceName: "distance-sorting"), for: .normal)
 			sortingByName = true
-			places.sort(by: {$0.distance < $1.distance})
+			places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
 		}
 		
 		//perform scale animation
@@ -105,13 +105,14 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 	
 	
 	
-	public var places:[PlaceTemp] = []
-	private var openPlaces: [PlaceTemp] = []
+	public var places:[Place] = []
+	private var openPlaces: [Place] = []
 	private var filterOpenOnly = false
 	private var sortingByName = true
 	private var task: URLSessionDownloadTask!
 	private var session: URLSession!
 	private var cache:NSCache<AnyObject, AnyObject>!
+	private var googlePlacesManager: GooglePlacesManager!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -132,19 +133,31 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		cache	= NSCache()
 		
 		//[+] for testing only
-		let urlTest = "https://s3-eu-west-1.amazonaws.com/romel/pokemon/"
-		for i in 1...100 {
-			
-			var  open = true
-			if (i % 2 == 0)  {
-				open = true
-			} else {
-				open = false
-			}
-			
-			places.append(PlaceTemp(name: "Name \(i)", isOpen: open , distance: ((Double(i) * 10.456) + 5.345), photos: [urlTest + "\(i).png"],type: "Restorant"))
-		}
+//		let urlTest = "https://s3-eu-west-1.amazonaws.com/romel/pokemon/"
+//		for i in 1...100 {
+//
+//			var  open = true
+//			if (i % 2 == 0)  {
+//				open = true
+//			} else {
+//				open = false
+//			}
+//
+//			places.append(PlaceTemp(name: "Name \(i)", isOpen: open , distance: ((Double(i) * 10.456) + 5.345), photos: [urlTest + "\(i).png"],type: "Restorant"))
+//		}
 		//[-] for testing only
+		
+		googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation(), filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
+			if let foundedPlaces = foundedPlaces {
+				self.places = foundedPlaces
+				
+				DispatchQueue.main.sync {
+					self.updateData()
+				}
+			}
+		}
+		)
+
 		
 		
 	}
@@ -152,7 +165,13 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 	private func refillOpenPlaces() {
 		
 		if filterOpenOnly {
-			openPlaces = places.filter{$0.isOpen! == true}
+			openPlaces = places.filter{
+				if $0.isOpen != nil{
+					return $0.isOpen! == true
+				} else {
+					return false
+				}
+			}
 		} else {
 			openPlaces = places
 		}
@@ -185,9 +204,14 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 			//name
 			cell.name.text		= place.name
 			//distance
-			cell.distance.text	= "\( place.distance.rounded(toPlaces: 2)) м."
+			if let distance = place.distance  {
+				cell.distance.text	= "\( distance) м."
+			} else {
+				cell.distance.text	= ""
+			}
+			
 			//place type
-			cell.type.text		= place.type
+			//cell.type.text		= place.type
 
 			
 			//Open/Closed
@@ -200,8 +224,10 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 				}
 			}
 			
-			let urlString = place.photos![0]
-			let url:URL! = URL(string: place.photos![0])
+			let urlString = "555"
+			let url:URL! = URL(string: "555")
+			//let urlString = place.photos![0]
+			//let url:URL! = URL(string: place.photos![0])
 			
 			//downloading/cashing image from internet
 			if let cachedImage = (self.cache.object(forKey: (urlString as AnyObject) ) as? UIImage ) {
