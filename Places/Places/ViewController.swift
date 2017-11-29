@@ -125,6 +125,9 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
             list?.updateData()
         }
     }
+    @IBAction func unwindFromProfile(segue: UIStoryboardSegue) {
+       
+    }
     
     
     

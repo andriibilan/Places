@@ -38,8 +38,8 @@ class ProfileViewController: UIViewController {
 	}
 	
 	@IBAction func dismissButtonTaped(_ sender: UIButton) {
-		self.dismiss(animated: true, completion: nil)
-	}
+        performSegue(withIdentifier: "unwindFromProfile", sender: self)
+    }
 	
 	private let userID = (Auth.auth().currentUser?.uid)!
     private let ref = Database.database().reference()
@@ -51,6 +51,7 @@ class ProfileViewController: UIViewController {
 //        emailTextField.isUserInteractionEnabled = false
 //        phoneTextField.isUserInteractionEnabled = false
     }
+    @IBAction func unwindHome(segue:UIStoryboardSegue) { }
     
     override func viewDidAppear(_ animated: Bool) {
         // Header - Image
@@ -98,6 +99,7 @@ class ProfileViewController: UIViewController {
         
         
     }
+  
     
     @IBAction func logOutButton(_ sender: Any) {
         if Auth.auth().currentUser != nil {
@@ -105,9 +107,10 @@ class ProfileViewController: UIViewController {
                 try? Auth.auth().signOut()
                 
                 if Auth.auth().currentUser == nil {
-                    let loginVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
-                    
-                    self.present(loginVC, animated: true, completion: nil)
+//                    let loginVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
+//
+//                    self.present(loginVC, animated: true, completion: nil
+                    performSegue(withIdentifier: "unwindFromProfile", sender: self)
                 }
             }
         }

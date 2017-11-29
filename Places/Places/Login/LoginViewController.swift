@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
 	}
 	
 	@IBAction func dismissButtonTaped(_ sender: UIButton) {
-		self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "unwindFromLogin", sender: self)
 	}
 	
     var authService = AuthService()
