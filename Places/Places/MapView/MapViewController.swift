@@ -83,26 +83,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        map.delegate = self
-        map.showsPointsOfInterest = false
-        map.showsCompass = false
-        map.showsBuildings = false
-        map.showsTraffic = false
+        
         changeMapType()
+    
+        
         filterTableView.delegate = self
         filterTableView.dataSource = self
-        map.removeAnnotations(map.annotations)
-        addAnnotations(coords: locationData)
+        
+      
+        
         locationManagerConfigurate()
+        
         viewForFilter.setCorenerAndShadow(viewForFilter)       
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
-        if refresh == true {
-            let loc = CLLocation(latitude: map.userLocation.coordinate.latitude as CLLocationDegrees, longitude: map.userLocation.coordinate.longitude as CLLocationDegrees)
-            addRadiusCircle(location: loc)
-            refresh = false
-        }
+
         sideMenuConstraint.constant = -160
         // Do any additional setup after loading the view.
     }
@@ -131,16 +127,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     // radius / places in radius
     func changeMapType(){
-        let type = 2
+        map.delegate = self
+        map.showsPointsOfInterest = false
+        map.showsCompass = false
+        map.showsBuildings = false
+        map.showsTraffic = false
+        map.removeAnnotations(map.annotations)
+        map.removeOverlays(map.overlays)
+        
+        let type = UserDefaults.standard.integer(forKey: "mapType")
             //UserDefaults.standard.double(forKey: "Radius")
         switch type {
         case 1:
             map.mapType = .standard
         case 2:
-            map.mapType = .mutedStandard
-        case 3:
             map.mapType = .hybridFlyover
         default:
+            map.mapType = .standard
             break
         }
     }
@@ -164,7 +167,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         addRadiusCircle(location: loc)
         let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         addCurrentLocation(coords: coordinate)
-        locationManager.startUpdatingLocation()
+        //locationManager.startUpdatingLocation()
         
     }
     
@@ -358,11 +361,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     func addRadiusCircle(location: CLLocation){
-            for overlay in map.overlays {
-                map.remove(overlay)
+            for overlay in self.map.overlays {
+                self.map.remove(overlay)
             }
             let radius =  UserDefaults.standard.double(forKey: "Radius")
-            self.map.delegate = self
+//            map.delegate = self
             let circle = MKCircle(center: location.coordinate, radius: radius as CLLocationDistance)
             self.map.add(circle)
         }

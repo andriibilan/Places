@@ -27,7 +27,7 @@ class SettingsViewController: UIViewController {
         self.dismiss(animated: false, completion: { () -> Void in
             let vc2: ViewController = self.storyboard?.instantiateViewController(withIdentifier: "main") as! ViewController
             refresh = true
-            //self.present(vc2, animated: false, completion: nil)
+            self.present(vc2, animated: false, completion: nil)
         })
       
         
@@ -87,6 +87,4 @@ class SettingsViewController: UIViewController {
     }
 }
 
-protocol ViewControllerProtocol {
-    func dismissViewController1AndPresentViewController2()
-}
+
