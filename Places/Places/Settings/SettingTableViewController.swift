@@ -29,7 +29,7 @@ class SettingTableViewController: UITableViewController {
         print(Float(defaults.integer(forKey: "Radius")))
 
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             switch indexPath.row {
@@ -51,17 +51,7 @@ class SettingTableViewController: UITableViewController {
             }
         }
     }
-
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.textColor = UIColor.black
-        }
-    }
     
-  
-
-
-
     func changeEmail() {
         let emailAlertController = UIAlertController(title: "e-mail", message: "Please write new e-mail", preferredStyle: .alert)
         changeAlertProperties(alertController: emailAlertController)
@@ -140,26 +130,26 @@ class SettingTableViewController: UITableViewController {
             return false
         }
     }
+    
     func changeMapType() {
         let mapTypeAlertController = UIAlertController(title: "Change map type", message: "Please choose map type", preferredStyle: .alert)
         changeAlertProperties(alertController: mapTypeAlertController)
         let standartType = UIAlertAction(title: "Standart", style: .default) { (action) in
             self.defaults.set(1, forKey: "mapType")
             print(UserDefaults.standard.integer(forKey: "mapType"))
-
+            
         }
         let satelliteType = UIAlertAction(title: "Satellite", style: .default) { (action) in
             self.defaults.set(2, forKey: "mapType")
             print(UserDefaults.standard.integer(forKey: "mapType"))
-
+            
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
-
+        
         mapTypeAlertController.addAction(standartType)
         mapTypeAlertController.addAction(satelliteType)
         mapTypeAlertController.addAction(cancelAction)
         present(mapTypeAlertController, animated: true, completion: nil)
         
     }
- 
 }

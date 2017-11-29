@@ -22,8 +22,14 @@ class SettingsViewController: UIViewController {
 	
 	@IBAction func dismissButtonTaped(_ sender: UIButton) {
         print(UserDefaults.standard.integer(forKey: "Radius"))
-       
-        self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "mapVC", sender: self)
+//        self.dismiss(animated: false, completion: { () -> Void in
+//            let vc2: ViewController = self.storyboard?.instantiateViewController(withIdentifier: "main") as! ViewController
+//
+            //self.present(vc2, animated: false, completion: nil)
+  //      })
+
+
 	}
 	
 	
@@ -78,3 +84,4 @@ class SettingsViewController: UIViewController {
         }
     }
 }
+

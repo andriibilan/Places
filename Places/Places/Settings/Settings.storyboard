@@ -39,6 +39,7 @@
                                 </state>
                                 <connections>
                                     <action selector="dismissButtonTaped:" destination="6Sk-rP-huP" eventType="touchUpInside" id="nug-7y-dSP"/>
+                                    <segue destination="bKo-Vz-rZi" kind="show" identifier="mapVC" id="b73-ga-b0j"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unnamed" translatesAutoresizingMaskIntoConstraints="NO" id="vAK-zJ-Nq7">
@@ -78,16 +79,13 @@
                     <tableView key="view" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="VNu-Il-GFQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="419"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="tintColor" red="0.87322145699999998" green="0.98523384329999997" blue="0.07190831751" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="separatorColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                        <color key="sectionIndexColor" red="0.95623749489999998" green="0.3225761056" blue="0.33518427610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexColor" red="0.87322145699999998" green="0.98523384329999997" blue="0.07190831751" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Map Settings" id="7iq-eh-9VE">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="87" id="eEs-mu-CUX">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="87" id="eEs-mu-CUX">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eEs-mu-CUX" id="LI9-rA-kvM">
@@ -201,6 +199,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MpL-oo-kN4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1176.8" y="-553.67316341829087"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="32K-UQ-Alj">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="bKo-Vz-rZi" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cC8-qc-x0b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="690" y="87"/>
         </scene>
     </scenes>
     <resources>
