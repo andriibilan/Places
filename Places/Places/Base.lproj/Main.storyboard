@@ -27,6 +27,14 @@
             </objects>
             <point key="canvasLocation" x="-78" y="-1"/>
         </scene>
+        <!--Search-->
+        <scene sceneID="eUe-rh-xth">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Search" id="L2b-W7-IFX" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nqy-58-P0E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="262" y="456"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>

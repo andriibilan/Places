@@ -24,7 +24,7 @@ class CustomAnnotation : NSObject, MKAnnotation {
         self.enableInfoButton = enableInfoButton;
         self.image = image
     }
-    
+
     func annotationView() -> MKAnnotationView {
         let view = MKAnnotationView(annotation: self, reuseIdentifier: "CustomAnnotation")
         view.translatesAutoresizingMaskIntoConstraints = false
