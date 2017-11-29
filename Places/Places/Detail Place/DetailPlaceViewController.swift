@@ -196,10 +196,9 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
             cell.labelForReviewer.text = review.reviewer
         }
         
-        //TODO:RATTING
+        
         //TODO: go in class addSubview
         cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: testPlace.forReview[indexPath.row].reviewRatting!))
-        
         
         
         return cell
