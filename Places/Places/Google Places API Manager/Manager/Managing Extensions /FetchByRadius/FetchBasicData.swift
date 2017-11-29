@@ -88,7 +88,7 @@ extension GooglePlacesManager{
                         self?.getIcon(of: place, forIndex: lastPlaceIndex)
                         self?.getPlaceId(of: place, forIndex: lastPlaceIndex)
                         // need to think about api of "getTypes"
-                        self?.getTypes(of: place, forIndex: lastPlaceIndex)
+						self?.getTypes(of: place, forIndex: lastPlaceIndex)
                         self?.getRating(of: place, forIndex: lastPlaceIndex)
                         self?.getStraightDistance(to: lastPlaceIndex)
                 }
@@ -135,6 +135,7 @@ extension GooglePlacesManager{
     /// Loads place icon
     private func getIcon(of place: [String: Any], forIndex index: Int){
         if let iconReference = place["icon"] as? String{
+			foundedPlaces[index].photoReferences = [iconReference]
             if let url = URL(string: iconReference){
                 if let data = try? Data(contentsOf: url){
                     foundedPlaces[index].icon = UIImage(data: data)

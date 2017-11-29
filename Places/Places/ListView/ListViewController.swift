@@ -8,34 +8,23 @@
 
 import UIKit
 
-//MARK:-TEMP
-class PlaceTemp {
-	
-	var name:String = ""
-	var isOpen:Bool?
-	var distance:Double = 0.0
-	var photos:[String]?
-	var type: String
-	
-	
-	init(name: String, isOpen: Bool, distance: Double, photos: [String], type:String ) {
-		
-		self.name = name
-		self.isOpen = isOpen
-		self.distance = distance
-		self.photos = photos
-		self.type = type
-		
-	}
-	
-}
-
-
-
 class ListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, OutputInterface {
     
     func updateData() {
-        tableView.reloadData()
+		
+		googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation(), filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
+			if let foundedPlaces = foundedPlaces {
+				self.places = foundedPlaces
+				self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
+				
+				DispatchQueue.main.sync {
+					self.tableView.reloadData()
+				}
+			}
+		}
+		)
+
+		
     }
     
 	
@@ -150,9 +139,10 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation(), filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
 			if let foundedPlaces = foundedPlaces {
 				self.places = foundedPlaces
+				self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
 				
 				DispatchQueue.main.sync {
-					self.updateData()
+					self.tableView.reloadData()
 				}
 			}
 		}
@@ -211,8 +201,9 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 			}
 			
 			//place type
-			//cell.type.text		= place.type
-
+			if !place.types.isEmpty {
+			cell.type.text		= place.types[0].rawValue.capitalized
+			}
 			
 			//Open/Closed
 			cell.openClosedImageView.image = nil
@@ -224,43 +215,44 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 				}
 			}
 			
-			let urlString = "555"
-			let url:URL! = URL(string: "555")
-			//let urlString = place.photos![0]
-			//let url:URL! = URL(string: place.photos![0])
-			
-			//downloading/cashing image from internet
-			if let cachedImage = (self.cache.object(forKey: (urlString as AnyObject) ) as? UIImage ) {
-				//we are using cashe
-				print("Using cashe - \(urlString)")
-				cell.thumbnailImageView.image = cachedImage
+			if !place.photoReferences.isEmpty {
 				
-			} else {
-				//download image and add to cache
 				
-				task = session.downloadTask(with: url, completionHandler: { (location, response, error) -> Void in
-					if let data = try? Data(contentsOf: url){
-						
-						DispatchQueue.main.async(execute: { () -> Void in
-							//DispatchQueue.global(qos: .background).async {
-							// if the current cell is visible
-							if let updateCell = self.tableView.cellForRow(at: indexPath) as? ListTableViewCell{
-								let img:UIImage! = UIImage(data: data)
-								
-								//DispatchQueue.main.sync {
-									updateCell.thumbnailImageView?.image = img
-								//}
-								self.cache.setObject(img, forKey: urlString as AnyObject)
-								print("adding to cache - \(urlString)")
+				let urlString = place.photoReferences[0]
+				let url:URL! = URL(string: urlString)
+				
+				//downloading/cashing image from internet
+				if let cachedImage = (self.cache.object(forKey: (urlString as AnyObject) ) as? UIImage ) {
+					//we are using cashe
+					print("Using cashe - \(urlString)")
+					cell.thumbnailImageView.image = cachedImage
+					
+				} else {
+					//download image and add to cache
+					
+					task = session.downloadTask(with: url, completionHandler: { (location, response, error) -> Void in
+						if let data = try? Data(contentsOf: url){
+							
+							DispatchQueue.main.async(execute: { () -> Void in
+								//DispatchQueue.global(qos: .background).async {
+								// if the current cell is visible
+								if let updateCell = self.tableView.cellForRow(at: indexPath) as? ListTableViewCell{
+									let img:UIImage! = UIImage(data: data)
+									
+									//DispatchQueue.main.sync {
+									updateCell.thumbnailImageView?.image = img//.resizedImage(withBounds: CGSize(width: 120, height: 120))
+									//}
+									self.cache.setObject(img, forKey: urlString as AnyObject)
+									print("adding to cache - \(urlString)")
+								}
 							}
+							)
 						}
-						)
-					}
-				})
-				task.resume()
-				
+					})
+					task.resume()
+					
+				}
 			}
-			
 			return cell
 		}
 		
@@ -283,6 +275,19 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 	
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		
+		if segue.identifier == "ShowDetailPlace" {
+			if let destVC = segue.destination as? DetailPlaceViewController {
+				let selectedRow = (tableView.indexPathForSelectedRow as NSIndexPath?)?.row ?? 0
+				let place = (filterOpenOnly) ? openPlaces[selectedRow] : places[selectedRow]
+				destVC.place = place
+			}
+		}
+		
+	}
+
 	
 	
 }

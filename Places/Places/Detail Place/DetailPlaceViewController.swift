@@ -36,7 +36,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     let testPlace = TestPlace()
     //
     
-    
+	var place:Place!
     
     
     //TODO: load real image when I'll have choosing place
@@ -50,7 +50,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         
         //
-        placeName?.text = testPlace.name
+        placeName?.text = place.name
         
         placeAddress?.text = testPlace.address
         
