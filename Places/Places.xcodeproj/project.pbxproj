@@ -15,6 +15,7 @@
 		25316AEE1FCDBC6800CE29DE /* CategoriesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25316AED1FCDBC6800CE29DE /* CategoriesViewCell.swift */; };
 		258B06561FC837C6003A09B8 /* NewPlaceBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 258B06551FC837C6003A09B8 /* NewPlaceBoard.storyboard */; };
 		258B065A1FC861D6003A09B8 /* AddNewPlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B06591FC861D6003A09B8 /* AddNewPlaceController.swift */; };
+		258D2B771FCEC448001BC470 /* done.png in Resources */ = {isa = PBXBuildFile; fileRef = 258D2B761FCEC448001BC470 /* done.png */; };
 		25ACDC721FCC227400695896 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ACDC711FCC227400695896 /* Rating.swift */; };
 		2B4BA9131FC5EC0E00B5E598 /* DetailPlace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B4BA90F1FC5EC0E00B5E598 /* DetailPlace.storyboard */; };
 		2B4BA9141FC5EC0E00B5E598 /* DetailPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4BA9101FC5EC0E00B5E598 /* DetailPlaceViewController.swift */; };
@@ -66,6 +67,7 @@
 		25316AED1FCDBC6800CE29DE /* CategoriesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewCell.swift; sourceTree = "<group>"; };
 		258B06551FC837C6003A09B8 /* NewPlaceBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewPlaceBoard.storyboard; sourceTree = "<group>"; };
 		258B06591FC861D6003A09B8 /* AddNewPlaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPlaceController.swift; sourceTree = "<group>"; };
+		258D2B761FCEC448001BC470 /* done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done.png; sourceTree = "<group>"; };
 		25ACDC711FCC227400695896 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		2B4BA90F1FC5EC0E00B5E598 /* DetailPlace.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailPlace.storyboard; sourceTree = "<group>"; };
 		2B4BA9101FC5EC0E00B5E598 /* DetailPlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPlaceViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				25316AEB1FCDBC2500CE29DE /* DlistViewController.swift */,
 				25316AE51FCDB77E00CE29DE /* lviv2.jpg */,
 				25316AE71FCDB80A00CE29DE /* add.jpg */,
+				258D2B761FCEC448001BC470 /* done.png */,
 				25316AE91FCDBA4800CE29DE /* down.jpg */,
 				258B06591FC861D6003A09B8 /* AddNewPlaceController.swift */,
 			);
@@ -359,6 +362,7 @@
 			files = (
 				8A8C5C801FC57F3E00A834EA /* LaunchScreen.storyboard in Resources */,
 				25316AE61FCDB77F00CE29DE /* lviv2.jpg in Resources */,
+				258D2B771FCEC448001BC470 /* done.png in Resources */,
 				75F7EB831FC5A8AD002F169E /* GoogleService-Info.plist in Resources */,
 				258B06561FC837C6003A09B8 /* NewPlaceBoard.storyboard in Resources */,
 				8A8C5C7D1FC57F3E00A834EA /* Assets.xcassets in Resources */,

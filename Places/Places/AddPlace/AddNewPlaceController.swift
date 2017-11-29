@@ -12,6 +12,8 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, SetCategory 
 
     let destination = "toAddBoard"
     
+    let segueToMain = "goBack"
+    
     var phoneFormat: phoneNumberFormatter?
     
     @IBOutlet weak var number: UITextField!
@@ -37,8 +39,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, SetCategory 
         if segue.identifier == destination {
             let childController = segue.destination as? DlistViewController
             childController?.delegate = self
-            print("parent")
-        }
+           }
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
       
@@ -73,12 +74,13 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, SetCategory 
 
     @IBAction func postToGoogle(_ sender: UIButton) {
         let alert = UIAlertController(title: "SORRY", message: "GOOGLE is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: { action in
+            self.performSegue(withIdentifier: self.segueToMain, sender: self)
+        }))
         self.present(alert, animated: true, completion: nil)
     }
     
     func setCategoryText(newText: String){
-        print("segue")
         category.text = newText
         list.isHidden = true
     }
