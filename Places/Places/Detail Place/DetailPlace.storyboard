@@ -23,29 +23,34 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJP-ek-g6e" userLabel="buttons">
                                 <rect key="frame" x="0.0" y="902" width="375" height="98"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Nbb-gi-wwD">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="98"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rhf-FE-fKu" userLabel="Left Button Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="138" height="98"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Uv-Pt-pg6">
-                                                <rect key="frame" x="0.0" y="0.0" width="94" height="98"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Uv-Pt-pg6" userLabel="Navigation Button">
+                                                <rect key="frame" x="0.0" y="0.0" width="69" height="98"/>
                                                 <state key="normal" image="path"/>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHN-Ho-O7s">
-                                                <rect key="frame" x="94" y="0.0" width="93.5" height="98"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHN-Ho-O7s" userLabel="Phone Button">
+                                                <rect key="frame" x="69" y="0.0" width="69" height="98"/>
                                                 <state key="normal" image="phone number"/>
                                                 <connections>
                                                     <action selector="openPhone:" destination="Je1-fC-mgn" eventType="touchUpInside" id="1qB-kk-jBc"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ik9-MU-vOa">
-                                                <rect key="frame" x="187.5" y="0.0" width="94" height="98"/>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="j77-ku-2oi" userLabel="Right Button Stack View">
+                                        <rect key="frame" x="236" y="0.0" width="139" height="98"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ik9-MU-vOa" userLabel="Website Button">
+                                                <rect key="frame" x="0.0" y="0.0" width="69.5" height="98"/>
                                                 <state key="normal" image="website"/>
                                                 <connections>
                                                     <action selector="openWebsite:" destination="Je1-fC-mgn" eventType="touchUpInside" id="gS3-wB-L4l"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KvA-rb-BYI">
-                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="98"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KvA-rb-BYI" userLabel="Share Button">
+                                                <rect key="frame" x="69.5" y="0.0" width="69.5" height="98"/>
                                                 <state key="normal" image="share"/>
                                                 <connections>
                                                     <action selector="sharePlace:" destination="Je1-fC-mgn" eventType="touchUpInside" id="Pq7-dT-A8i"/>
@@ -53,13 +58,29 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9L-rH-oF0" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
+                                        <rect key="frame" x="138" y="0.0" width="98" height="98"/>
+                                        <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="C9L-rH-oF0" secondAttribute="height" multiplier="1:1" id="vFD-Kr-KdP"/>
+                                        </constraints>
+                                        <state key="normal" title="dismiss"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Nbb-gi-wwD" firstAttribute="leading" secondItem="sJP-ek-g6e" secondAttribute="leading" id="En6-n8-zSC"/>
-                                    <constraint firstAttribute="bottom" secondItem="Nbb-gi-wwD" secondAttribute="bottom" id="e67-rX-KL5"/>
-                                    <constraint firstItem="Nbb-gi-wwD" firstAttribute="top" secondItem="sJP-ek-g6e" secondAttribute="top" id="fHi-AT-dlq"/>
-                                    <constraint firstAttribute="trailing" secondItem="Nbb-gi-wwD" secondAttribute="trailing" id="gtO-gO-wF6"/>
+                                    <constraint firstItem="C9L-rH-oF0" firstAttribute="top" secondItem="sJP-ek-g6e" secondAttribute="top" id="5cZ-Iv-yHn"/>
+                                    <constraint firstItem="rhf-FE-fKu" firstAttribute="leading" secondItem="sJP-ek-g6e" secondAttribute="leading" id="BTB-sE-kAf"/>
+                                    <constraint firstAttribute="bottom" secondItem="j77-ku-2oi" secondAttribute="bottom" id="FAf-z6-WHn"/>
+                                    <constraint firstItem="C9L-rH-oF0" firstAttribute="centerY" secondItem="sJP-ek-g6e" secondAttribute="centerY" id="H0h-sm-2JL"/>
+                                    <constraint firstItem="C9L-rH-oF0" firstAttribute="leading" secondItem="rhf-FE-fKu" secondAttribute="trailing" id="McK-Hj-fi0"/>
+                                    <constraint firstAttribute="bottom" secondItem="C9L-rH-oF0" secondAttribute="bottom" id="aq9-Y6-O8Z"/>
+                                    <constraint firstItem="j77-ku-2oi" firstAttribute="leading" secondItem="C9L-rH-oF0" secondAttribute="trailing" id="b65-th-fIj"/>
+                                    <constraint firstItem="rhf-FE-fKu" firstAttribute="top" secondItem="sJP-ek-g6e" secondAttribute="top" id="jhI-O8-oLn"/>
+                                    <constraint firstAttribute="trailing" secondItem="j77-ku-2oi" secondAttribute="trailing" id="lgy-gY-ajG"/>
+                                    <constraint firstAttribute="bottom" secondItem="rhf-FE-fKu" secondAttribute="bottom" id="nKI-YU-ZiY"/>
+                                    <constraint firstItem="C9L-rH-oF0" firstAttribute="centerX" secondItem="sJP-ek-g6e" secondAttribute="centerX" id="rHa-H0-fbM"/>
+                                    <constraint firstItem="j77-ku-2oi" firstAttribute="top" secondItem="sJP-ek-g6e" secondAttribute="top" id="zWd-V0-ghF"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Op3-an-sx1">
@@ -99,7 +120,7 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OeB-a3-OS7" userLabel="Feedback Table View">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OeB-a3-OS7" userLabel="Feedback Table View">
                                         <rect key="frame" x="0.0" y="669" width="375" height="121"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -138,15 +159,15 @@
                                                     <constraints>
                                                         <constraint firstItem="1XC-HV-q7W" firstAttribute="height" secondItem="4Kb-WC-ML2" secondAttribute="height" id="961-F5-AiF"/>
                                                         <constraint firstItem="4Kb-WC-ML2" firstAttribute="leading" secondItem="1XC-HV-q7W" secondAttribute="trailing" id="C0T-lO-xnC"/>
-                                                        <constraint firstAttribute="trailing" secondItem="lUC-JD-kA7" secondAttribute="trailing" id="FYd-Vn-ZmQ"/>
-                                                        <constraint firstItem="lUC-JD-kA7" firstAttribute="top" secondItem="4Kb-WC-ML2" secondAttribute="bottom" id="IH1-66-2ni"/>
+                                                        <constraint firstItem="lUC-JD-kA7" firstAttribute="leading" secondItem="f1h-hr-SEV" secondAttribute="leading" id="FPl-rz-TiK"/>
                                                         <constraint firstItem="4Kb-WC-ML2" firstAttribute="top" secondItem="f1h-hr-SEV" secondAttribute="top" id="KIA-mC-Hhp"/>
                                                         <constraint firstItem="4Kb-WC-ML2" firstAttribute="height" secondItem="f1h-hr-SEV" secondAttribute="height" multiplier="0.2" id="RKm-tN-vqO"/>
+                                                        <constraint firstAttribute="trailing" secondItem="lUC-JD-kA7" secondAttribute="trailing" id="U6V-pC-bid"/>
                                                         <constraint firstItem="1XC-HV-q7W" firstAttribute="leading" secondItem="f1h-hr-SEV" secondAttribute="leading" id="V1c-WU-1dN"/>
+                                                        <constraint firstAttribute="bottom" secondItem="lUC-JD-kA7" secondAttribute="bottom" id="b6M-Dr-P5f"/>
                                                         <constraint firstAttribute="trailing" secondItem="4Kb-WC-ML2" secondAttribute="trailing" id="bDM-4K-0Nj"/>
-                                                        <constraint firstAttribute="bottom" secondItem="lUC-JD-kA7" secondAttribute="bottom" id="bNQ-ou-q2K"/>
                                                         <constraint firstItem="1XC-HV-q7W" firstAttribute="top" secondItem="f1h-hr-SEV" secondAttribute="top" id="eda-ZK-Jfz"/>
-                                                        <constraint firstItem="lUC-JD-kA7" firstAttribute="leading" secondItem="f1h-hr-SEV" secondAttribute="leading" id="v2x-tn-kjr"/>
+                                                        <constraint firstItem="lUC-JD-kA7" firstAttribute="top" secondItem="1XC-HV-q7W" secondAttribute="bottom" id="iWo-lo-qEJ"/>
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -329,6 +350,7 @@
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="PhotoCollectionView" destination="FYY-uH-e9T" id="Ivj-1g-yb3"/>
+                        <outlet property="dismissButton" destination="C9L-rH-oF0" id="1yN-6i-huU"/>
                         <outlet property="feedbackTableView" destination="OeB-a3-OS7" id="uR8-cR-CFT"/>
                         <outlet property="heightConstaintForReviewTable" destination="dJ7-X1-pyT" id="U81-GH-al6"/>
                         <outlet property="placeAddress" destination="onf-AG-GAx" id="sWZ-Sp-dEC"/>

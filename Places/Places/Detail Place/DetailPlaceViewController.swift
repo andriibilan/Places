@@ -31,6 +31,8 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var feedbackTableView: UITableView!
     
     
+    @IBOutlet weak var dismissButton: UIButtonX!
+    
     
     //
     let testPlace = TestPlace()
@@ -39,10 +41,20 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var heightConstaintForReviewTable: NSLayoutConstraint!
     
+   
     
     //TODO: load real image when I'll have choosing place
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //
+        dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.5
+   //     print("123 \(dismissButton.cornerRadius)")
+        //
+        
+//        feedbackTableView.estimatedRowHeight = 147
+//        feedbackTableView.rowHeight = UITableViewAutomaticDimension
+//        heightConstaintForReviewTable.constant = feedbackTableView.rowHeight
         
         //
         testPlace.installDefaultValues()
@@ -71,24 +83,34 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((placeRattingView?.frame.height)!), currentRate: testPlace.ratting!))
         
         
+      
         
-            PhotoCollectionView.delegate = self
-            PhotoCollectionView.dataSource = self
-         
-        
-        
-        //
-       
-       
-            feedbackTableView.delegate = self
-            feedbackTableView.dataSource = self
-        
-        
+        DispatchQueue.main.async {
 
+            self.PhotoCollectionView.delegate = self
+            self.PhotoCollectionView.dataSource = self
+            print("DISPATCH")
+        }
         
-   
         
+        DispatchQueue.main.async {
+            
+            self.feedbackTableView.delegate = self
+            self.feedbackTableView.dataSource = self
+            self.feedbackTableView.estimatedRowHeight = 200
+            self.feedbackTableView.rowHeight = UITableViewAutomaticDimension
+            print("DISPATCH")
+        }
+
+//            feedbackTableView.delegate = self
+//            feedbackTableView.dataSource = self
         
+//        DispatchQueue.main.async {
+//            //TODO:!@#123
+//            self.heightConstaintForReviewTable.constant = self.feedbackTableView.contentSize.height
+//        }
+        
+ 
     }
     
     
@@ -96,9 +118,26 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewDidAppear(_ animated: Bool) {
         
-        print("pre-end: \(heightTable)")
-        heightConstaintForReviewTable.constant = heightTable
-        print("end: \(heightTable)")
+       
+//        print("pre-end: \(heightTable)")
+//        DispatchQueue.main.async {
+//            self.heightConstaintForReviewTable.constant = self.heightTable
+//        }
+//        print("end: \(heightTable)")
+//
+        //
+        /*
+        feedbackTableView.estimatedRowHeight = 147
+        feedbackTableView.rowHeight = UITableViewAutomaticDimension
+        heightConstaintForReviewTable.constant = feedbackTableView.rowHeight
+         heightConstaintForReviewTable.constant = 147
+        print("constraint: \(feedbackTableView.rowHeight)")
+         */
+        
+        
+        feedbackTableView.reloadData()
+        heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
+        print("123 ; \(heightConstaintForReviewTable.constant)")
     }
     
     @IBAction func openWebsite(_ sender: UIButton) {
@@ -133,7 +172,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     
     
-    
+
     
  
     
@@ -171,8 +210,6 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     //function for filling my cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell
-       // cell?.frame.size = feedbackTableView.estimatedRowHeight
- //       cell?.sizeToFit()
         
         if testPlace.image.count != 0{
             cell?.photoImageView?.image = testPlace.image[indexPath.row]
@@ -181,6 +218,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         }
         //
         
+        print("Collection is used")
         
         return cell!
     }
@@ -195,6 +233,10 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     //
     
   
+    //DELETE
+    var counter = 0
+    //
+    
     
     //MARK: Table View Data Source
     
@@ -209,39 +251,22 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         let cell  = feedbackTableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as! ReviewTableViewCell
         
         cell.labelForReview.text = review.review
-        if review.isanonymous{
+        if review.isanonymous {
             cell.labelForReviewer.text = "Anonymous"
         }else{
             cell.labelForReviewer.text = review.reviewer
         }
         //TODO:RATTING
         cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: testPlace.forReview[indexPath.row].reviewRatting!))
-        
-        
-//
-//
-        
-       
-        
-        
-        
-        
-        heightTable += cell.labelForReviewer.frame.height + cell.labelForReview.frame.height
-        
-        
-        
-        
-      
-       
-        //
-        
-        print("reviewer: \(cell.labelForReviewer.frame.height)")
-        print("reviewer: \(cell.labelForReview.frame.height)")
-        print("height: \(heightTable)")
-        
-        
-        heightConstaintForReviewTable.constant = heightTable
         return cell
+   
+    
+    
     }
+    
+   
+    
+    
+    
     
 }
