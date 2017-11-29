@@ -14,11 +14,11 @@ class CustomAnnotation : NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
-    var isOpen : Bool
+    var isOpen : Bool?
     var enableInfoButton : Bool
     var image : UIImage?
     
-    init(coordinate: CLLocationCoordinate2D, title: String, isOpen: Bool, enableInfoButton : Bool, image: UIImage) {
+    init(coordinate: CLLocationCoordinate2D, title: String?, isOpen: Bool?, enableInfoButton : Bool, image: UIImage?) {
         self.coordinate = coordinate
         self.title = title
         self.isOpen = isOpen
