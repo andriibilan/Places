@@ -10,8 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-var changerad = false
-var refresh = Bool()
+
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
     //var list : ListViewController?
@@ -98,11 +97,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
-        if refresh == true {
-            let loc = CLLocation(latitude: map.userLocation.coordinate.latitude as CLLocationDegrees, longitude: map.userLocation.coordinate.longitude as CLLocationDegrees)
-            addRadiusCircle(location: loc)
-            refresh = false
-        }
+        
         sideMenuConstraint.constant = -160
         // Do any additional setup after loading the view.
     }
@@ -131,14 +126,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     // radius / places in radius
     func changeMapType(){
-        let type = 2
-            //UserDefaults.standard.double(forKey: "Radius")
+        let type = UserDefaults.standard.double(forKey: "mapType")
         switch type {
         case 1:
             map.mapType = .standard
         case 2:
-            map.mapType = .mutedStandard
-        case 3:
             map.mapType = .hybridFlyover
         default:
             break
