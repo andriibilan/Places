@@ -29,6 +29,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Uv-Pt-pg6" userLabel="Navigation Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="69" height="98"/>
                                                 <state key="normal" image="path"/>
+                                                <connections>
+                                                    <action selector="someAction:" destination="Je1-fC-mgn" eventType="touchUpInside" id="Yrg-3j-yRf"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHN-Ho-O7s" userLabel="Phone Button">
                                                 <rect key="frame" x="69" y="0.0" width="69" height="98"/>

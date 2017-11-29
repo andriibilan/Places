@@ -97,7 +97,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
             
             self.feedbackTableView.delegate = self
             self.feedbackTableView.dataSource = self
-            self.feedbackTableView.estimatedRowHeight = 200
+            self.feedbackTableView.estimatedRowHeight = 300
             self.feedbackTableView.rowHeight = UITableViewAutomaticDimension
             print("DISPATCH")
         }
@@ -257,14 +257,42 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
             cell.labelForReviewer.text = review.reviewer
         }
         //TODO:RATTING
+        //TODO: go in class addSibview
         cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: testPlace.forReview[indexPath.row].reviewRatting!))
+        
+        
+        
+        
+        
+        //       heightTable += cell.labelForReviewer.frame.height + cell.labelForReview.frame.height
+        
+        heightTable += cell.frame.height
+        
+        print("cell:-_____\(cell.frame.height)")
+        
+        print("table:______\(feedbackTableView.rowHeight)")
+        
+        print("reviewer: \(cell.labelForReviewer.frame.height)")
+        print("review: \(cell.labelForReview.frame.height)")
+       
+        
+        print("\nheight _____\(indexPath.row): \(heightTable)\n")
+        
+        
+        
+        
         return cell
    
     
     
     }
     
-   
+    @IBAction func someAction(_ sender: UIButton) {
+        heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
+        print("123 ; \(heightConstaintForReviewTable.constant)")
+    }
+    
+    
     
     
     

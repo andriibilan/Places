@@ -84,8 +84,6 @@ class TestPlace{
         forReview.append(Review())
         forReview.append(Review(4))
         forReview.append(Review())
-        forReview.append(Review(4))
-        forReview.append(Review())
     }
     
     
