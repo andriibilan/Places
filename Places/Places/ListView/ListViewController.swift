@@ -32,7 +32,12 @@ class PlaceTemp {
 
 
 
-class ListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
+class ListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, OutputInterface {
+    
+    func updateData() {
+        tableView.reloadData()
+    }
+    
 	
 	@IBOutlet weak var tableView: UITableView!
 	

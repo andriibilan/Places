@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kGH-RH-c2b">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kGH-RH-c2b">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -180,9 +180,11 @@
                         <outlet property="emailTextField" destination="bbL-KY-9zT" id="dga-In-58Y"/>
                         <outlet property="logoImage" destination="dXP-vM-Qlc" id="zdA-Cn-uKE"/>
                         <outlet property="passwordTextfield" destination="f5p-Sg-uwl" id="Hil-Hc-FDS"/>
+                        <segue destination="Kik-Ih-YKc" kind="unwind" identifier="unwindFromLogin" unwindAction="unwindFromProfileWithSegue:" id="gwW-n9-p3f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jng-BR-sRN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Kik-Ih-YKc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="190.25487256371815"/>
         </scene>
@@ -509,11 +511,20 @@
                         <outlet property="passwordTextField" destination="VJR-ne-QPh" id="cU2-Hb-mnM"/>
                         <outlet property="phoneTextField" destination="Ve7-HY-hn4" id="3gp-mB-KBe"/>
                         <outlet property="profileImage" destination="5vz-Ec-PT9" id="eo8-R0-luU"/>
+                        <segue destination="MWf-8f-DvQ" kind="presentation" identifier="ShowProfileVC" id="Dmf-tx-uE8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F9J-cc-Wv9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1280.8" y="189.3553223388306"/>
+            <point key="canvasLocation" x="970" y="190"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="0fZ-St-a0p">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="MWf-8f-DvQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pe4-PB-Uho" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1823" y="427"/>
         </scene>
     </scenes>
     <resources>

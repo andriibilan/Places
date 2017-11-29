@@ -10,9 +10,7 @@ import UIKit
 
 
 class SettingsViewController: UIViewController {
-	
-	
-	
+
 	@IBOutlet weak var tableview: UITableView!
 	
 	@IBOutlet weak var dismissButton: UIButton!{
@@ -24,7 +22,10 @@ class SettingsViewController: UIViewController {
 	
 	@IBAction func dismissButtonTaped(_ sender: UIButton) {
         print(UserDefaults.standard.integer(forKey: "Radius"))
-        self.dismiss(animated: true, completion: nil)
+
+       performSegue(withIdentifier: "exitFromSettingsSegue", sender: self)
+        
+
 	}
 	
 	
@@ -79,3 +80,4 @@ class SettingsViewController: UIViewController {
         }
     }
 }
+

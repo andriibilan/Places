@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
 	}
 	
 	@IBAction func dismissButtonTaped(_ sender: UIButton) {
-		self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "unwindFromLogin", sender: self)
 	}
 	
     var authService = AuthService()
@@ -34,18 +34,11 @@ class LoginViewController: UIViewController {
         
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        if Auth.auth().currentUser != nil {
-//            let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
-//            self.present(profileVC, animated: true, completion: nil)
-//        }
-//    }
-    
     @IBAction func loginAction(_ sender: Any) {
-        let email = emailTextField.text
-        let password = passwordTextfield.text
+        guard let email = emailTextField.text else { return}
+        guard let password = passwordTextfield.text else { return}
         
-        if (email?.isEmpty)! || (password?.isEmpty)! {
+        if email.isEmpty || password.isEmpty {
             
             let alertController = UIAlertController(title: "Error", message: "Please enter an email and password.", preferredStyle: .alert)
             
@@ -55,7 +48,7 @@ class LoginViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
             
         } else {
-            authService.logIn(email: emailTextField.text!, password: passwordTextfield.text!)
+            authService.logIn(email: email, password: password)
         }
     }
     
