@@ -26,12 +26,13 @@ struct Location{
         manager.requestWhenInUseAuthorization()
         
         let location = manager.location
+        
         if location != nil {
             return Location(latitude: location!.coordinate.latitude,
-                            longitude: location!.coordinate.longitude)
-        } else {
+                        longitude: location!.coordinate.longitude)
+        }
+        else {
             return Location(latitude: 49.841856, longitude: 24.031530)
         }
-        
     }
 }
