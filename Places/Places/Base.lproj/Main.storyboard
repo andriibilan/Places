@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -33,7 +32,7 @@
                 <viewControllerPlaceholder storyboardName="Search" id="L2b-W7-IFX" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nqy-58-P0E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="262" y="456"/>
+            <point key="canvasLocation" x="438" y="429"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -113,7 +112,7 @@
                                         <rect key="frame" x="120" y="29" width="50" height="50"/>
                                         <state key="normal" image="314478-64"/>
                                         <connections>
-                                            <segue destination="Ilh-Ai-EtW" kind="show" id="HM1-jN-0VC"/>
+                                            <segue destination="VtT-ZX-Drn" kind="presentation" identifier="ShowSearch" id="uKT-uA-JyV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFa-2t-k8b">
@@ -326,6 +325,7 @@
                         <outlet property="sideMenuConstraint" destination="pP2-3r-bkg" id="RRV-nQ-R41"/>
                         <outlet property="viewForFilter" destination="jpA-aE-Hki" id="vd5-dV-Au0"/>
                         <segue destination="w39-4y-S2s" kind="show" identifier="detailVC" id="okD-G1-lk4"/>
+                        <segue destination="Ilh-Ai-EtW" kind="show" identifier="addPlace" id="zlP-iY-Zpe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6B-D0-qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -353,7 +353,7 @@
                 <viewControllerPlaceholder storyboardName="NewPlaceBoard" referencedIdentifier="NewPlace" id="Ilh-Ai-EtW" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pq2-t9-vhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3480" y="-355"/>
+            <point key="canvasLocation" x="2902" y="-822"/>
         </scene>
         <!--Login-->
         <scene sceneID="db3-A5-2i2">
@@ -494,6 +494,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QTz-Ho-Zm2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1881" y="420"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="Jcq-qp-T5s">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Search" id="VtT-ZX-Drn" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BYA-Pw-6Ul" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3513" y="86"/>
         </scene>
         <!--Profile-->
         <scene sceneID="MRD-Fa-J2J">
