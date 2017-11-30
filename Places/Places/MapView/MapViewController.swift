@@ -57,8 +57,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //            locationManager.startUpdatingLocation()
         }
     }
-    
-    
+    private var googlePlacesManager: GooglePlacesManager!
+    public var places:[Place] = []
     @IBOutlet weak var settingsButton: UIButton!
     
     
@@ -152,7 +152,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
-        
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation(), filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
+            if let foundedPlaces = foundedPlaces {
+                self.places = foundedPlaces
+                
+                DispatchQueue.main.sync {
+                    self.updateData()
+                }
+            }
+        }
+        )
 
         sideMenuConstraint.constant = -160
         // Do any additional setup after loading the view.
@@ -218,7 +227,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             map.removeAnnotation(annotation)
             
         }
-        
+//        let radius =  UserDefaults.standard.integer(forKey: "Radius")
+     
         addRadiusCircle(location: loc)
         let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         addCurrentLocation(coords: coordinate)
@@ -233,7 +243,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         myAnnotation.title = "Current location"
         map.setRegion(region!, animated: true)
         map.addAnnotation(myAnnotation)
-        addAnnotations(coords: locationData)
+        addAnnotations(coords: places)
+        //addAnnotations(coords: locationData)
         
     }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -254,17 +265,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    func addAnnotations(coords: [[String : Any]]){
+    func addAnnotations(coords: [Place]){
         //map.removeAnnotations(map.annotations)
+        var img = UIImage()
         var annotations = [CustomAnnotation]()
-        for each in locationData {
-            let latitude = CLLocationDegrees(each["latitude"] as! Double)
-            let longitude = CLLocationDegrees(each["longitude"] as! Double)
-            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let name = each["name"] as! String
-            let descript = each["description"] as! Bool
-            let img = each["image"] as! String
-            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: "\(name)", isOpen: descript, enableInfoButton: true, image: (UIImage(named: img))!.resizedImage(withBounds: CGSize(width: 40.0, height: 40.0)))
+        for each in coords {
+            let coordinate = CLLocationCoordinate2D(latitude: (each.location?.latitude)!, longitude: (each.location?.longitude)!)
+            let name = each.name
+            var descript = Bool()
+            if each.icon != nil {
+                img = each.icon!
+            } else {
+                img = #imageLiteral(resourceName: "mops")
+            }
+            if each.isOpen != nil {
+                descript = each.isOpen!
+            } else {
+                descript = false
+            }
+            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: name!, isOpen: descript, enableInfoButton: true, image: img.resizedImage(withBounds: CGSize(width: 40.0, height: 40.0)))
             
             annotations.append(annotation)
             
@@ -363,6 +382,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "Church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
 
 
+
      func numberOfSections(in tableView: UITableView) -> Int {
             return 1
         }
@@ -381,7 +401,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         filterCell.nameFilter.text = nameFilterArray[indexPath.row]
         filterCell.iconFilter.image = iconFilterArray[indexPath.row]
-        //filterCell.backgroundColor = colorCellArray[indexPath.row]
+     
         filterCell.backgroundColor = colorForIndex(index: indexPath.row)
         filterCell.accessoryType = accessory
         filterCell.selectionStyle = .none
