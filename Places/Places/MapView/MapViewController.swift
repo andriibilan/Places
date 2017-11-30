@@ -35,7 +35,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
     var menu = ViewController()
-
+    let mapDynamic = Dynamic()
+   
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var filterTableView: UITableView!
     @IBOutlet weak var viewForFilter: UIView!
@@ -51,7 +52,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     private var googlePlacesManager: GooglePlacesManager!
     public var places:[Place] = []
     @IBOutlet weak var settingsButton: UIButton!
+
     
+    
+    
+    
+    
+    @IBOutlet weak var compassButton: UIButton!
+    @IBOutlet weak var filterButton: UIButton!
     
     @IBOutlet weak var profileButton: UIButton!
     
@@ -64,19 +72,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     var isSideMenuHidden = true
     
-    @IBAction func showSideMenu(_ sender: Any) {
+    @IBAction func showSideMenu(_ sender: UIButton) {
+       
         if isSideMenuHidden {
             sideMenuConstraint.constant = -3
-            UIView.animate(withDuration: 0.5, animations:
-                { self.view.layoutIfNeeded()}
-                
-            )
+            UIView.animate(withDuration: 0.3, animations: {
+                if sender.transform == .identity {
+                    sender.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+                    sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
+                    self.view.layoutIfNeeded()
+                }})
         } else {
             sideMenuConstraint.constant = -160
-            UIView.animate(withDuration: 0.5, animations: { self.view.layoutIfNeeded()})
+            UIView.animate(withDuration: 0.3, animations: {
+                sender.transform = .identity
+                sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
+                self.view.layoutIfNeeded()
+            })
         }
         isSideMenuHidden = !isSideMenuHidden
     }
+    
     // long press action
     
     
@@ -145,9 +161,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        mapDynamic.dynamicFilter(button: filterButton, parView: self.view)
+        mapDynamic.dynamicCompass(button: compassButton, parView: self.view)
         changeMapType()
-    
+       
         
         filterTableView.delegate = self
         filterTableView.dataSource = self
@@ -352,16 +369,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func colorForIndex(index: Int) -> UIColor {
         let nameCount = nameFilterArray.count - 1
         let val = (CGFloat(index) / CGFloat(nameCount)) * 0.9
-        print(val)
+       
         return UIColor(red: 1.0, green: val, blue: 0.0, alpha: 1.0)
     }
 
         /////////////////////////////////////////////////////////////////////////
         
         let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
-        let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "Church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
-
-
+        let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
 
      func numberOfSections(in tableView: UITableView) -> Int {
             return 1
@@ -381,7 +396,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         filterCell.nameFilter.text = nameFilterArray[indexPath.row]
         filterCell.iconFilter.image = iconFilterArray[indexPath.row]
-     
         filterCell.backgroundColor = colorForIndex(index: indexPath.row)
         filterCell.accessoryType = accessory
         filterCell.selectionStyle = .none
