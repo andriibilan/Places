@@ -27,7 +27,12 @@ struct Location{
         
         let location = manager.location
         
-        return Location(latitude: location!.coordinate.latitude,
+        if location != nil {
+            return Location(latitude: location!.coordinate.latitude,
                         longitude: location!.coordinate.longitude)
+        }
+        else {
+            return Location(latitude: 49.841856, longitude: 24.031530)
+        }
     }
 }

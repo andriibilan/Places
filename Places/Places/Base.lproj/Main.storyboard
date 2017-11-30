@@ -112,6 +112,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWU-LE-cGY">
                                         <rect key="frame" x="120" y="29" width="50" height="50"/>
                                         <state key="normal" image="314478-64"/>
+                                        <connections>
+                                            <segue destination="Ilh-Ai-EtW" kind="show" id="HM1-jN-0VC"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFa-2t-k8b">
                                         <rect key="frame" x="32" y="120" width="50" height="50"/>
