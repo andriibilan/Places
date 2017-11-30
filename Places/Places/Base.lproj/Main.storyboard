@@ -179,6 +179,14 @@
             </objects>
             <point key="canvasLocation" x="677.60000000000002" y="-0.44977511244377816"/>
         </scene>
+        <!--NewPlaceBoard-->
+        <scene sceneID="mwH-0h-LqM">
+            <objects>
+                <viewControllerPlaceholder storyboardName="NewPlaceBoard" id="1EG-L3-ZuQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AkO-Nz-UH9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1180" y="-595"/>
+        </scene>
         <!--Map View Controller-->
         <scene sceneID="N6v-sr-aB5">
             <objects>
