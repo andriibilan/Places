@@ -254,7 +254,7 @@
                                     <constraint firstItem="dvC-Vm-Gg7" firstAttribute="top" secondItem="jpA-aE-Hki" secondAttribute="top" id="zzV-mA-AdY"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ny9-BK-1UC" customClass="SlideMenuActionButton" customModule="Places" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ny9-BK-1UC">
                                 <rect key="frame" x="20" y="587" width="60" height="60"/>
                                 <color key="backgroundColor" red="0.2275260389" green="0.67915946250000003" blue="0.54944974179999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -320,6 +320,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="DAY-vo-2an"/>
                     <connections>
+                        <outlet property="compassButton" destination="fZ7-mN-XYi" id="2Be-zB-wcz"/>
+                        <outlet property="filterButton" destination="Ny9-BK-1UC" id="Gcr-P0-B9h"/>
                         <outlet property="filterTableView" destination="dvC-Vm-Gg7" id="6Y1-3v-t36"/>
                         <outlet property="map" destination="HFl-mO-hU1" id="dop-oM-jhB"/>
                         <outlet property="sideMenuConstraint" destination="pP2-3r-bkg" id="RRV-nQ-R41"/>
@@ -531,6 +533,6 @@
         <image name="filter" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NOk-4w-6xs"/>
+        <segue reference="okD-G1-lk4"/>
     </inferredMetricsTieBreakers>
 </document>

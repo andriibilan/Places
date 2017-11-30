@@ -9,9 +9,9 @@
 import UIKit
 
 class SlideMenuActionButton: UIButtonX {
-    
+
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-        
+
         UIView.animate(withDuration: 0.3, animations: {
             if self.transform == .identity {
                 self.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
@@ -21,7 +21,8 @@ class SlideMenuActionButton: UIButtonX {
                 self.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
             }
         })
-        
+
         return super.beginTracking(touch, with: event)
     }
 }
+

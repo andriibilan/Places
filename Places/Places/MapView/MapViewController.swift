@@ -22,7 +22,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
     var menu = ViewController()
-    
+    let mapDynamic = Dynamic()
     let locationData = [
         //Walker Art Gallery
         ["name": "Walker Art Gallery",
@@ -59,7 +59,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     private var googlePlacesManager: GooglePlacesManager!
     public var places:[Place] = []
     @IBOutlet weak var settingsButton: UIButton!
+
     
+    
+    
+    
+    
+    @IBOutlet weak var compassButton: UIButton!
+    @IBOutlet weak var filterButton: UIButton!
     
     @IBOutlet weak var profileButton: UIButton!
     
@@ -72,19 +79,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     var isSideMenuHidden = true
     
-    @IBAction func showSideMenu(_ sender: Any) {
+    @IBAction func showSideMenu(_ sender: UIButton) {
+       
         if isSideMenuHidden {
             sideMenuConstraint.constant = -3
-            UIView.animate(withDuration: 0.5, animations:
-                { self.view.layoutIfNeeded()}
-                
-            )
+            UIView.animate(withDuration: 0.3, animations: {
+                if sender.transform == .identity {
+                    sender.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+                    sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
+                    self.view.layoutIfNeeded()
+                }})
         } else {
             sideMenuConstraint.constant = -160
-            UIView.animate(withDuration: 0.5, animations: { self.view.layoutIfNeeded()})
+            UIView.animate(withDuration: 0.3, animations: {
+                sender.transform = .identity
+                sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
+                self.view.layoutIfNeeded()
+            })
         }
         isSideMenuHidden = !isSideMenuHidden
     }
+    
     // long press action
     
     
@@ -110,9 +125,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        mapDynamic.dynamicFilter(button: filterButton, parView: self.view)
+        mapDynamic.dynamicCompass(button: compassButton, parView: self.view)
         changeMapType()
-    
+       
         
         filterTableView.delegate = self
         filterTableView.dataSource = self
@@ -346,7 +362,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func colorForIndex(index: Int) -> UIColor {
         let nameCount = nameFilterArray.count - 1
         let val = (CGFloat(index) / CGFloat(nameCount)) * 0.9
-        print(val)
+       
         return UIColor(red: 1.0, green: val, blue: 0.0, alpha: 1.0)
     }
 
