@@ -31,17 +31,30 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var feedbackTableView: UITableView!
     
     
+    @IBOutlet weak var dismissButton: UIButtonX!
+    
     
     //
     let testPlace = TestPlace()
     //
     
+   
+    @IBOutlet weak var heightConstaintForReviewTable: NSLayoutConstraint!
+
 	var place:Place!
-    
+
+   
+   
     
     //TODO: load real image when I'll have choosing place
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //
+        dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.3
+   //     print("123 \(dismissButton.cornerRadius)")
+        
+        
         
         //
         testPlace.installDefaultValues()
@@ -65,21 +78,35 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         placePhone?.text = testPlace.phone
         //
         
+
+        
+        placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((placeRattingView?.frame.height)!), currentRate: testPlace.ratting!))
         
         
-        PhotoCollectionView.delegate = self
-        PhotoCollectionView.dataSource = self
         
-        
+        //
+        print("height: \( placeRattingView?.frame.height)")
+        print("width: \( placeRattingView?.frame.width)")
         //
         
         
-        feedbackTableView.delegate = self
-        feedbackTableView.dataSource = self
         
-        //
+        
+    feedbackTableView.reloadData()
+    heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
+    
+    
     }
     
+  
+    
+    override func viewDidAppear(_ animated: Bool) {
+     
+        heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
+        
+        
+        
+    }
     
     @IBAction func openWebsite(_ sender: UIButton) {
         guard let website = testPlace.website else{
@@ -96,10 +123,9 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         if let phone = placePhone?.text{
        //     UIApplication.sharedApplication.openURL(NSURL(string: "telprompt://\(phone)")!)
             
+
             
-            
-       //     let phoneURL = NSURL(string: "telprompt://\(phone)")! as URL
-            let phoneURL = NSURL(string: "telprompt://1234567891")! as URL
+            let phoneURL = NSURL(string: "telprompt://\(phone)")! as URL
             UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
         }
     }
@@ -112,12 +138,14 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     
+    @IBAction func dismissAction(_ sender: UIButtonX) {
+        print("123321")
+        dismiss(animated: true, completion: nil)
+    }
     
+
     
-    
-    
-    
-    
+ 
     
     
 
@@ -161,34 +189,43 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         return cell!
     }
     
-    ///
-    
-    
-  
+   
     
     //MARK: Table View Data Source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("count:\(String(describing: testPlace.forReview.count))")
-        return (testPlace.forReview.count)
+        return testPlace.forReview.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let review = testPlace.forReview[indexPath.row]
         
         let cell  = feedbackTableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as! ReviewTableViewCell
         
         cell.labelForReview.text = review.review
-        if review.isanonymous{
+        
+        if review.isanonymous {
             cell.labelForReviewer.text = "Anonymous"
         }else{
             cell.labelForReviewer.text = review.reviewer
         }
-        //TODO:RATTING
         
+        
+        //TODO: go in class addSubview
+        cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: testPlace.forReview[indexPath.row].reviewRatting!))
         
         
         return cell
+   
+    
+    
     }
+    
+  
+    
+   
+    
+    
+    
     
 }

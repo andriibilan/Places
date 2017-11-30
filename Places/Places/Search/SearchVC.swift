@@ -52,8 +52,22 @@ class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     var googlePlacesManager: GooglePlacesManager!
     
     @IBOutlet weak var tableViewForPlaces: UITableViewExplicit!
-    
-    
+
+	
+	@IBOutlet weak var dismissButton: UIButton!{
+		didSet{
+			dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
+			dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+		}
+	}
+	
+	@IBAction func dismissButtonTaped(_ sender: UIButton) {
+		print(UserDefaults.standard.integer(forKey: "Radius"))
+		
+		performSegue(withIdentifier: "exitFromSearch", sender: self)
+		
+		
+	}
 }
 
 

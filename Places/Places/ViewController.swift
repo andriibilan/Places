@@ -13,11 +13,12 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     
     var map : MapViewController?
     var list : ListViewController?
-    
+   
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
     @IBOutlet weak var menuView: UIViewX!
     
+    @IBOutlet weak var segment: UISegmentedControl!
     
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -53,7 +54,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         super.viewDidLoad()
         listView.isHidden = true
         menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-        
+ 
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +104,14 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
 			secondVC.modalPresentationStyle = .custom
 		}
 		
+		if segue.identifier == "ShowSearch" {
+			let secondVC = segue.destination as! SearchVC
+			secondVC.transitioningDelegate = self
+			secondVC.modalPresentationStyle = .custom
+		}
+
+		
+		
 		if segue.identifier == "ShowLogin" {
 			let secondVC = segue.destination as! LoginViewController
 			secondVC.transitioningDelegate = self
@@ -129,7 +138,9 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
        
     }
     
-    
+	@IBAction func unwindFromSearch(segue: UIStoryboardSegue) {
+		
+	}
     
 }
 
