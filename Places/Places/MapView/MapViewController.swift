@@ -15,7 +15,6 @@ import CoreLocation
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
     func updateData() {
         locationManagerConfigurate()
-        
     }
     
     //var list : ListViewController?
