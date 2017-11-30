@@ -23,10 +23,15 @@ class Rating: UIView {
     var tralingPoint: CGPoint = CGPoint()
     var ratingRule: CGFloat = 0
     
-    init (x: Double, y: Double, height: Double, currentRate: Double){
+    var firstColor: CGColor = UIColor.golden.cgColor
+    var secondColor: CGColor = UIColor.white.cgColor
+    
+    init (x: Double, y: Double, height: Double, currentRate: Double, mainColor: CGColor = UIColor.golden.cgColor, backColor: CGColor = UIColor.white.cgColor) {
         let frame = CGRect(x: x, y: y, width: height * 5, height: height)
         super.init(frame: frame)
         backgroundColor = UIColor.clear
+        firstColor = mainColor
+        secondColor = backColor
         starSize = CGFloat(height)
         rating = currentRate
     }
@@ -66,21 +71,43 @@ class Rating: UIView {
     
     func drawStar(context: CGContext, split: CGFloat) {
         
-        if split > 0 && split < 1 {
+        if split > 0 && split < 0.5 {
             setFilledHalfArray(split)
-            context.beginPath()
-            context.setFillColor(UIColor.white.cgColor)
-            context.move(to: emptyHalf[0])
             
-            for dot in emptyHalf {
+            context.beginPath()
+            context.setFillColor(firstColor)
+            context.move(to: starPoints[0])
+            for dot in starPoints {
                 context.addLine(to: dot)
             }
-            
             context.closePath()
             context.fillPath()
             
             context.beginPath()
-            context.setFillColor(UIColor(patternImage: UIImage(named: "gold.jpg")!).cgColor)
+            context.setFillColor(secondColor)
+            context.move(to: emptyHalf[0])
+            for dot in emptyHalf{
+                context.addLine(to: dot)
+            }
+            context.closePath()
+            context.fillPath()
+            
+        }
+        if ( split > 0.5 || split == 0.5 ) && split < 1 {
+            setFilledHalfArray(split)
+            
+            context.beginPath()
+            context.setFillColor(secondColor)
+            context.move(to: starPoints[0])
+            
+            for dot in starPoints {
+                context.addLine(to: dot)
+            }
+            context.closePath()
+            context.fillPath()
+            
+            context.beginPath()
+            context.setFillColor(firstColor)
             context.move(to: filledHalf[0])
             
             for dot in filledHalf{
@@ -92,7 +119,7 @@ class Rating: UIView {
         
         if split == 0 || split < 0 {
             context.beginPath()
-            context.setFillColor(UIColor.white.cgColor)
+            context.setFillColor(firstColor)
             context.move(to: starPoints[0])
             
             for dot in starPoints {
@@ -104,7 +131,7 @@ class Rating: UIView {
         
         if split > 1 || split == 1 {
             context.beginPath()
-            context.setFillColor(UIColor(patternImage: UIImage(named: "gold.jpg")!).cgColor)
+            context.setFillColor(secondColor)
             context.move(to: starPoints[0])
             
             for dot in starPoints {
@@ -121,9 +148,10 @@ class Rating: UIView {
         
         filledHalf.append(starPoints[0])
         
-        for currentIndex in 1...9 {
-            if  ( starPoints[currentIndex].x > splitPoint.x && starPoints[currentIndex - 1].x < splitPoint.x ) ||
-                ( starPoints[currentIndex].x < splitPoint.x && starPoints[currentIndex - 1].x > splitPoint.x ) {
+        for currentIndex in 1...10 {
+            
+            if  ( ( starPoints[currentIndex].x > splitPoint.x || starPoints[currentIndex].x == splitPoint.x) && starPoints[currentIndex - 1].x < splitPoint.x ) ||
+                ( starPoints[currentIndex].x < splitPoint.x && ( starPoints[currentIndex - 1].x > splitPoint.x || starPoints[currentIndex - 1].x == splitPoint.x ) ){
                 
                 splitPoint.y = ( (splitPoint.x - starPoints[currentIndex - 1].x) / (starPoints[currentIndex].x - starPoints[currentIndex - 1].x) ) * (starPoints[currentIndex].y - starPoints[currentIndex - 1].y) + starPoints[currentIndex - 1].y
                 
@@ -140,10 +168,6 @@ class Rating: UIView {
                 emptyHalf.append(starPoints[currentIndex])
             }
         }
-    }
-    
-    func setEmptyHalfArray(_ split: CGFloat){
-        
     }
     
     func setStarPointsArray(centralPoint: CGPoint, longBeam: CGFloat, shortBeam: CGFloat) {
@@ -167,11 +191,17 @@ class Rating: UIView {
              CGPoint(x: offsetX(coordinate: 126) * longBeam  + centralPoint.x,
                      y: offsetY(coordinate: 126) * longBeam + centralPoint.y),
              CGPoint(x: offsetX(coordinate: 162) * shortBeam  + centralPoint.x,
-                     y: offsetY(coordinate: 162) * shortBeam + centralPoint.y) ]
+                     y: offsetY(coordinate: 162) * shortBeam + centralPoint.y),
+             CGPoint(x: offsetX(coordinate: -162) * longBeam + centralPoint.x,
+                     y: offsetY(coordinate: -162) * longBeam + centralPoint.y)]
         
         leadingPoint = starPoints[0]
         tralingPoint = starPoints[4]
         ratingRule = tralingPoint.x - leadingPoint.x
     }
 
+}
+
+extension UIColor{
+    static var golden = UIColor(patternImage: UIImage(named: "gold.jpg")!)
 }
