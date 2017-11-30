@@ -103,6 +103,14 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
 			secondVC.modalPresentationStyle = .custom
 		}
 		
+		if segue.identifier == "ShowSearch" {
+			let secondVC = segue.destination as! SearchVC
+			secondVC.transitioningDelegate = self
+			secondVC.modalPresentationStyle = .custom
+		}
+
+		
+		
 		if segue.identifier == "ShowLogin" {
 			let secondVC = segue.destination as! LoginViewController
 			secondVC.transitioningDelegate = self
@@ -129,7 +137,9 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
        
     }
     
-    
+	@IBAction func unwindFromSearch(segue: UIStoryboardSegue) {
+		
+	}
     
 }
 

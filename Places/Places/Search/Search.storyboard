@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -19,14 +20,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" barStyle="blackTranslucent" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="pHN-vr-WDg">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                <rect key="frame" x="20" y="20" width="335" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="gqa-D5-kcz" id="oWt-f4-OIC"/>
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vFq-on-3n0" customClass="UITableViewExplicit" customModule="Places" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="375" height="611"/>
+                                <rect key="frame" x="0.0" y="76" width="375" height="591"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Item" rowHeight="200" id="Zz8-G4-WdW" customClass="ItemCell" customModule="Places" customModuleProvider="target">
@@ -123,29 +124,51 @@
                                     <outlet property="delegate" destination="gqa-D5-kcz" id="pqg-HS-5bz"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E49-AE-yqn">
+                                <rect key="frame" x="295" y="587" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.29411764709999999" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="iUx-Lg-0Yc"/>
+                                    <constraint firstAttribute="width" constant="60" id="lgt-Sh-1Eg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <color key="tintColor" red="0.93500250579999999" green="0.94593256709999995" blue="0.95562154050000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="211602-64">
+                                    <color key="titleColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissButtonTaped:" destination="gqa-D5-kcz" eventType="touchUpInside" id="PdD-Uu-qM4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="2xU-KL-TTi" firstAttribute="trailing" secondItem="E49-AE-yqn" secondAttribute="trailing" constant="20" id="BqO-WB-JlL"/>
                             <constraint firstItem="vFq-on-3n0" firstAttribute="top" secondItem="pHN-vr-WDg" secondAttribute="bottom" id="H37-O9-Cfa"/>
-                            <constraint firstItem="pHN-vr-WDg" firstAttribute="leading" secondItem="YvU-VS-jNN" secondAttribute="leading" id="PPx-uH-9RA"/>
+                            <constraint firstItem="pHN-vr-WDg" firstAttribute="leading" secondItem="2xU-KL-TTi" secondAttribute="leading" constant="20" id="PPx-uH-9RA"/>
                             <constraint firstItem="vFq-on-3n0" firstAttribute="bottom" secondItem="2xU-KL-TTi" secondAttribute="bottom" id="h01-dA-dup"/>
-                            <constraint firstItem="pHN-vr-WDg" firstAttribute="top" secondItem="YvU-VS-jNN" secondAttribute="top" id="hKt-13-c9D"/>
+                            <constraint firstItem="pHN-vr-WDg" firstAttribute="top" secondItem="2xU-KL-TTi" secondAttribute="top" id="hKt-13-c9D"/>
+                            <constraint firstItem="2xU-KL-TTi" firstAttribute="bottom" secondItem="E49-AE-yqn" secondAttribute="bottom" constant="20" id="nmg-lF-hXH"/>
                             <constraint firstItem="vFq-on-3n0" firstAttribute="trailing" secondItem="2xU-KL-TTi" secondAttribute="trailing" id="sPC-hp-tdb"/>
-                            <constraint firstAttribute="trailing" secondItem="pHN-vr-WDg" secondAttribute="trailing" id="sYe-NA-SCw"/>
+                            <constraint firstItem="2xU-KL-TTi" firstAttribute="trailing" secondItem="pHN-vr-WDg" secondAttribute="trailing" constant="20" id="sYe-NA-SCw"/>
                             <constraint firstItem="vFq-on-3n0" firstAttribute="leading" secondItem="2xU-KL-TTi" secondAttribute="leading" id="smI-f0-CKh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2xU-KL-TTi"/>
                     </view>
                     <connections>
+                        <outlet property="dismissButton" destination="E49-AE-yqn" id="Am8-Lt-JgP"/>
                         <outlet property="tableViewForPlaces" destination="vFq-on-3n0" id="Pdx-RV-aWY"/>
+                        <segue destination="bw2-5c-Z5X" kind="unwind" identifier="exitFromSearch" unwindAction="unwindFromSearchWithSegue:" id="Ary-zS-DbB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H9R-rR-Ibo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="bw2-5c-Z5X" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-151.19999999999999" y="7.6461769115442282"/>
         </scene>
     </scenes>
     <resources>
+        <image name="211602-64" width="32" height="32"/>
         <image name="questionMark" width="250" height="250"/>
     </resources>
 </document>

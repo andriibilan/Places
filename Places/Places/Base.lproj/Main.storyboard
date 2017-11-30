@@ -112,6 +112,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWU-LE-cGY">
                                         <rect key="frame" x="120" y="29" width="50" height="50"/>
                                         <state key="normal" image="314478-64"/>
+                                        <connections>
+                                            <segue destination="VtT-ZX-Drn" kind="presentation" identifier="ShowSearch" id="uKT-uA-JyV"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFa-2t-k8b">
                                         <rect key="frame" x="32" y="120" width="50" height="50"/>
@@ -344,6 +347,14 @@
             </objects>
             <point key="canvasLocation" x="3449" y="30"/>
         </scene>
+        <!--NewPlace-->
+        <scene sceneID="r1e-E3-STE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="NewPlaceBoard" referencedIdentifier="NewPlace" id="Ilh-Ai-EtW" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pq2-t9-vhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3480" y="-355"/>
+        </scene>
         <!--Login-->
         <scene sceneID="db3-A5-2i2">
             <objects>
@@ -484,6 +495,14 @@
             </objects>
             <point key="canvasLocation" x="1881" y="420"/>
         </scene>
+        <!--Search-->
+        <scene sceneID="Jcq-qp-T5s">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Search" id="VtT-ZX-Drn" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BYA-Pw-6Ul" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3513" y="86"/>
+        </scene>
         <!--Profile-->
         <scene sceneID="MRD-Fa-J2J">
             <objects>
@@ -513,6 +532,6 @@
         <image name="filter" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="okD-G1-lk4"/>
+        <segue reference="NOk-4w-6xs"/>
     </inferredMetricsTieBreakers>
 </document>
