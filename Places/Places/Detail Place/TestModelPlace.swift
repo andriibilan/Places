@@ -11,7 +11,7 @@ import UIKit
 
 
 
-class Review{
+class ReviewTest{
     var reviewer : String?
     var review : String?
     var isanonymous : Bool!
@@ -60,7 +60,7 @@ class TestPlace{
     var hours : String?
     var phone : String?
     //
-    var forReview : [Review] = []
+    var forReview : [ReviewTest] = []
     
     func installDefaultValues(){
         //
@@ -85,14 +85,11 @@ class TestPlace{
         phone = "380925839548"
         //
         //TODO: Review!!!
-        forReview.append(Review(4))
-        forReview.append(Review())
-        forReview.append(Review(true))
-        forReview.append(Review())
-        forReview.append(Review(4))
-        forReview.append(Review())
-        forReview.append(Review(true))
-        forReview.append(Review())
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest())
+
     }
     
     
