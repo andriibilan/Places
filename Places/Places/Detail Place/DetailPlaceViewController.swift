@@ -39,13 +39,12 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     let testPlace = TestPlace()
     //
     
-
-    
+   
     @IBOutlet weak var heightConstaintForReviewTable: NSLayoutConstraint!
 
 	var place:Place!
 
-    
+   
    
     
     //TODO: load real image when I'll have choosing place

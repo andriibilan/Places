@@ -12,17 +12,19 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
     
     func updateData() {
 		
-		googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation(), filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
-			if let foundedPlaces = foundedPlaces {
-				self.places = foundedPlaces
-				self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-				
-				DispatchQueue.main.sync {
-					self.tableView.reloadData()
-				}
-			}
-		}
-		)
+
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
+            
+            if let foundedPlaces = foundedPlaces {
+                self.places = foundedPlaces
+                self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
+                
+                DispatchQueue.main.sync {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        )
 
 		
     }
@@ -136,7 +138,9 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 //		}
 		//[-] for testing only
 		
-		googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation(), filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
+
+		googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
+
 			if let foundedPlaces = foundedPlaces {
 				self.places = foundedPlaces
 				self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})

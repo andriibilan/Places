@@ -11,8 +11,19 @@ import UIKit
 
 extension GooglePlacesManager{
     /// Loads distance from "currentLocation" to place location (by distancematrix request)
-    func getRealDistance(to placeIndex: Int){
-        if let destination = foundedPlaces[placeIndex].location{
+    func getRealDistance(toPlaceIndex placeIndex: Int?, toPlace place: Place?, completion: @escaping (Place?) -> ()){
+        let index: Int
+        
+        if placeIndex != nil{
+            index = placeIndex!
+        } else if let givenPlace = place{
+            if let indexOfGivenPlace = foundedPlaces.index(where: { $0.placeId ?? "empty" == givenPlace.placeId }) {
+                index = indexOfGivenPlace
+            } else { return }
+        } else { return }
+        
+        
+        if let destination = foundedPlaces[index].location{
             let origin = currentLocation
             
             let mode = "walking"
@@ -44,13 +55,10 @@ extension GooglePlacesManager{
                                     let distance = element["distance"] as! [String: Any]
                                     let distanceValue = distance["value"] as! Int
                                     
-                                    self?.foundedPlaces[placeIndex].distance = distanceValue
-                                    self?.foundedPlaces[placeIndex].distanceFromLocation = self?.currentLocation
+                                    self?.foundedPlaces[index].distance = distanceValue
+                                    self?.foundedPlaces[index].distanceFromLocation = self?.currentLocation
                                     
-                                    self?.delegate?.loadedAllPlaces?()
-                                    // need to resolve it
-                                    //                                    self?.delegate?.loadedDataAt(index: placeIndex, dataName: "distance")
-//                                    self?.updateUI?((self?.foundedPlaces)!, placeIndex, "distance")
+                                    completion(self?.foundedPlaces[index])
                                 }
                             }
                         }
