@@ -107,6 +107,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.59805757705479456" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="b4c-YW-7Ft" secondAttribute="trailing" id="ALY-Nd-WsN"/>
                             <constraint firstAttribute="bottom" secondItem="b4c-YW-7Ft" secondAttribute="bottom" id="NnK-bM-cF2"/>
