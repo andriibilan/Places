@@ -27,7 +27,7 @@ class phoneNumberFormatter {
         
         var i = 0
         
-        for char in strStr{
+        for char in strStr {
             curStr.append(char)
             if char == replChar {
                 position.append(i)
@@ -35,19 +35,21 @@ class phoneNumberFormatter {
             i += 1
         }
     }
-    
-    func backspace(){
+    //textField.position(from: selectedRange.start, offset: -1)
+    func backspace() {
         if current > 0 {
             current -= 1
             curStr[position[current]] = "_"
+            //display.position(from: display.beginningOfDocument, offset: position[current])
         }
         display.text = String(curStr)
     }
     
-    func printNumber(newDigit: Character){
+    func printNumber(newDigit: Character) {
         if current < position.count {
             curStr[position[current]] = newDigit
             current += 1
+            //display.position(from: display.beginningOfDocument, offset: position[current])
         }
         display.text = String(curStr)
     }
