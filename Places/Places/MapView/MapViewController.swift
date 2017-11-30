@@ -108,6 +108,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         actionSheet.addAction(UIAlertAction.init(title: "Add new place", style: UIAlertActionStyle.default, handler: { (action) in
+            self.performSegue(withIdentifier: "addPlace", sender: nil)
         }))
         
         actionSheet.addAction(UIAlertAction.init(title: "Show selected place", style: UIAlertActionStyle.default, handler: { (action) in
@@ -459,26 +460,26 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
 }
 
-extension UIColor {
-    convenience init(hex: String) {
-        let scanner = Scanner(string: hex)
-        scanner.scanLocation = 0
-        
-        var rgbValue: UInt64 = 0
-        
-        scanner.scanHexInt64(&rgbValue)
-        
-        let r = (rgbValue & 0xff0000) >> 16
-        let g = (rgbValue & 0xff00) >> 8
-        let b = rgbValue & 0xff
-        
-        self.init(
-            red: CGFloat(r) / 0xff,
-            green: CGFloat(g) / 0xff,
-            blue: CGFloat(b) / 0xff, alpha: 1
-        )
-    }
-}
+//extension UIColor {
+//    convenience init(hex: String) {
+//        let scanner = Scanner(string: hex)
+//        scanner.scanLocation = 0
+//        
+//        var rgbValue: UInt64 = 0
+//        
+//        scanner.scanHexInt64(&rgbValue)
+//        
+//        let r = (rgbValue & 0xff0000) >> 16
+//        let g = (rgbValue & 0xff00) >> 8
+//        let b = rgbValue & 0xff
+//        
+//        self.init(
+//            red: CGFloat(r) / 0xff,
+//            green: CGFloat(g) / 0xff,
+//            blue: CGFloat(b) / 0xff, alpha: 1
+//        )
+//    }
+//}
 
 
 
