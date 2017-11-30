@@ -119,7 +119,7 @@ class Rating: UIView {
         
         if split == 0 || split < 0 {
             context.beginPath()
-            context.setFillColor(firstColor)
+            context.setFillColor(secondColor)
             context.move(to: starPoints[0])
             
             for dot in starPoints {
@@ -131,7 +131,7 @@ class Rating: UIView {
         
         if split > 1 || split == 1 {
             context.beginPath()
-            context.setFillColor(secondColor)
+            context.setFillColor(firstColor)
             context.move(to: starPoints[0])
             
             for dot in starPoints {
