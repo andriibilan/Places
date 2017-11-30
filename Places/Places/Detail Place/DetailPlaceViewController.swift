@@ -57,6 +57,10 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         
         
+        
+ 
+        
+        
         //
         testPlace.installDefaultValues()
         //
