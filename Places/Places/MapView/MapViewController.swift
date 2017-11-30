@@ -14,7 +14,19 @@ import CoreLocation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
     func updateData() {
-        locationManagerConfigurate()
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation(), filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
+            if let foundedPlaces = foundedPlaces {
+                self.places = foundedPlaces
+                
+                DispatchQueue.main.sync {
+                    self.locationManagerConfigurate()
+                    //                    self.updateData()
+                }
+            }
+        }
+        )
+//        locationManagerConfigurate()
+        changeMapType()
         
     }
     
@@ -22,29 +34,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
     var menu = ViewController()
-    let longPressRecognizer = UILongPressGestureRecognizer()
-    
-    let locationData = [
-        //Walker Art Gallery
-        ["name": "Walker Art Gallery",
-         "image" : "pet.png",
-         "description" : true,
-         "latitude": 37.769366,
-         "longitude": -122.421464],
-        //Liver Buildings
-        ["name": "Liver Buildings",
-         "image" : "mops.png",
-         "description" : false,
-         "latitude": 37.774115,
-         "longitude": -122.427129],
-        //St George's Hall
-        ["name": "St George's Hall",
-         "image" : "mops.png",
-         "description" : false,
-         "latitude": 37.788888,
-         "longitude": -122.400000]
-    ]
-    
+
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var filterTableView: UITableView!
     @IBOutlet weak var viewForFilter: UIView!
@@ -53,8 +43,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         if region != nil {
             locationManagerConfigurate()
-//            self.map.setRegion(region!, animated: true)
-//            locationManager.startUpdatingLocation()
         }
     }
     private var googlePlacesManager: GooglePlacesManager!
@@ -145,24 +133,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterTableView.dataSource = self
         
       
-        
-        locationManagerConfigurate()
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation(), filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
+            if let foundedPlaces = foundedPlaces {
+                self.places = foundedPlaces
+                
+                DispatchQueue.main.sync {
+                    self.locationManagerConfigurate()
+                    //                    self.updateData()
+                }
+            }
+        }
+        )
+        //locationManagerConfigurate()
 
         viewForFilter.setCorenerAndShadow(viewForFilter)
 
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation(), filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
-            if let foundedPlaces = foundedPlaces {
-                self.places = foundedPlaces
-                
-                DispatchQueue.main.sync {
-                    self.updateData()
-                }
-            }
-        }
-        )
+        
 
         sideMenuConstraint.constant = -160
         // Do any additional setup after loading the view.
@@ -184,6 +173,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             } else {
                 locationManager!.requestWhenInUseAuthorization()
             }
+      
         }
         
     }
@@ -233,6 +223,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         addRadiusCircle(location: loc)
         let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         addCurrentLocation(coords: coordinate)
+        locationManager.stopUpdatingLocation()
         //locationManager.startUpdatingLocation()
         
     }
@@ -267,39 +258,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func addAnnotations(coords: [Place]){
-        //map.removeAnnotations(map.annotations)
-        var img = UIImage()
-        var annotations = [CustomAnnotation]()
         for each in coords {
-            let coordinate = CLLocationCoordinate2D(latitude: (each.location?.latitude)!, longitude: (each.location?.longitude)!)
-            let name = each.name
-            var descript = Bool()
-            if each.icon != nil {
-                img = each.icon!
-            } else {
-                img = #imageLiteral(resourceName: "mops")
-            }
-            if each.isOpen != nil {
-                descript = each.isOpen!
-            } else {
-                descript = false
-            }
-            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: name!, isOpen: descript, enableInfoButton: true, image: img.resizedImage(withBounds: CGSize(width: 40.0, height: 40.0)))
-            
+        var annotations = [CustomAnnotation]()
+        let annotation : CustomAnnotation = CustomAnnotation(place: each)
             annotations.append(annotation)
-            
-        }
         map.addAnnotations(annotations)
+        }
+
     }
     
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
-    {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error \(error)")
     }
-    
-    
-    
     
     func mapView(_ map: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKCircle {
@@ -318,57 +288,47 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         if annotation is MKUserLocation {
-            let identifier = "pin"
-            var view: MKPinAnnotationView
-            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            view.canShowCallout = true
-            view.image = UIImage(named: "address.png")
-            return view
+            return nil
         } else {
-            
-            if let annotation = annotation as? CustomAnnotation {
+           if let annotation = annotation as? CustomAnnotation {
                 let identifier = "pin"
                 var view: MKPinAnnotationView
-                
                 if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
                     as? MKPinAnnotationView { // 2
-                    dequeuedView.annotation = annotation
+                    dequeuedView.annotation = annotation as CustomAnnotation
                     view = dequeuedView
-                    
-                    
                 } else {
                     // 3
                     view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                     view.canShowCallout = true
-                    view.image = UIImage(named: "address.png")
-                    
                     view.calloutOffset = CGPoint(x: -5, y: 5)
                     view.leftCalloutAccessoryView = UIImageView(image: annotation.image!)
                     view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
-                    
                 }
-                
-                
                 return view
             }
             return nil
         }
-        
     }
     
     
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView || control == view.detailCalloutAccessoryView || control == view.leftCalloutAccessoryView {
-            
             //Perform a segue here to navigate to another viewcontroller
-            performSegue(withIdentifier: "detailVC", sender: view)
+            let g = view.annotation as! CustomAnnotation
+            performSegue(withIdentifier: "detailVC", sender: g.place)
         }
     }
 
         
 
-        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailVC" {
+            let d = segue.destination as? DetailPlaceViewController
+            d?.place = sender as! Place
+    }
+    }
 
     func colorForIndex(index: Int) -> UIColor {
         let nameCount = nameFilterArray.count - 1
