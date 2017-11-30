@@ -27,6 +27,14 @@
             </objects>
             <point key="canvasLocation" x="-78" y="-1"/>
         </scene>
+        <!--Search-->
+        <scene sceneID="eUe-rh-xth">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Search" id="L2b-W7-IFX" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nqy-58-P0E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="262" y="456"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -244,7 +252,7 @@
                                     <constraint firstItem="dvC-Vm-Gg7" firstAttribute="top" secondItem="jpA-aE-Hki" secondAttribute="top" id="zzV-mA-AdY"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ny9-BK-1UC" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ny9-BK-1UC" customClass="SlideMenuActionButton" customModule="Places" customModuleProvider="target">
                                 <rect key="frame" x="20" y="587" width="60" height="60"/>
                                 <color key="backgroundColor" red="0.2275260389" green="0.67915946250000003" blue="0.54944974179999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -318,9 +326,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6B-D0-qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Pcr-ak-bxN">
+                <pongPressGestureRecognizer cancelsTouchesInView="NO" allowableMovement="10" minimumPressDuration="0.5" id="Pcr-ak-bxN">
                     <connections>
-                        <action selector="addAnnotation:" destination="6eg-wI-33n" id="TCb-Z6-QW7"/>
+                        <action selector="longPress:" destination="6eg-wI-33n" id="fC5-zy-ud9"/>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>

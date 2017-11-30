@@ -123,8 +123,9 @@ struct AuthService {
             if error == nil {
                 print("You have successfully logged in")
                 
-                let appDel : AppDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDel.showProfile()
+//                let appDel : AppDelegate = UIApplication.shared.delegate as! AppDelegate
+//                appDel.showProfile()
+               
             } else {
                 print(error!.localizedDescription)
             }

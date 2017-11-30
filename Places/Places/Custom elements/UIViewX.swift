@@ -1,9 +1,9 @@
 //
 //  UIViewX.swift
-//  DesignableX
+//  Places
 //
-//  Created by Mark Moeykens on 12/31/16.
-//  Copyright © 2017 Andrew. All rights reserved.
+//  Created by Andrew Konchak on 11/21/17.
+//  Copyright © 2017 Andrew Konchak. All rights reserved.
 //
 
 import UIKit

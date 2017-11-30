@@ -27,19 +27,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //Walker Art Gallery
         ["name": "Walker Art Gallery",
          "image" : "pet.png",
-         "description" : "It is a very cool church",
+         "description" : true,
          "latitude": 37.769366,
          "longitude": -122.421464],
         //Liver Buildings
         ["name": "Liver Buildings",
          "image" : "mops.png",
-         "description" : "It is a very cool church",
+         "description" : false,
          "latitude": 37.774115,
          "longitude": -122.427129],
         //St George's Hall
         ["name": "St George's Hall",
          "image" : "mops.png",
-         "description" : "It is a very cool church",
+         "description" : false,
          "latitude": 37.788888,
          "longitude": -122.400000]
     ]
@@ -49,17 +49,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var viewForFilter: UIView!
     
     @IBAction func currentLocation(_ sender: Any) {
+        
         if region != nil {
-            self.map.setRegion(region!, animated: true)
-            locationManager.startUpdatingLocation()
+            locationManagerConfigurate()
+//            self.map.setRegion(region!, animated: true)
+//            locationManager.startUpdatingLocation()
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-    
-    }
-    
-    
+    private var googlePlacesManager: GooglePlacesManager!
+    public var places:[Place] = []
     @IBOutlet weak var settingsButton: UIButton!
     
     
@@ -87,6 +85,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         isSideMenuHidden = !isSideMenuHidden
     }
+    // long press action
+    
+    
+    
+    
+    
+    
+   @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
+    
+    let annotation = MKPointAnnotation()
+    let pressPoint = sender.location(in: map)
+    let pressCoordinate = map.convert(pressPoint, toCoordinateFrom: map)
+    annotation.coordinate = pressCoordinate
+    annotation.title = "Selected place"
+    annotation.subtitle = "Add another place"
+    map.addAnnotation(annotation)
+    
+    let loc = CLLocation(latitude: pressCoordinate.latitude as CLLocationDegrees, longitude: pressCoordinate.longitude as CLLocationDegrees)
+    addRadiusCircle(location: loc)
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,7 +126,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
-        
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation(), filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
+            if let foundedPlaces = foundedPlaces {
+                self.places = foundedPlaces
+                
+                DispatchQueue.main.sync {
+                    self.updateData()
+                }
+            }
+        }
+        )
 
         sideMenuConstraint.constant = -160
         // Do any additional setup after loading the view.
@@ -172,7 +201,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             map.removeAnnotation(annotation)
             
         }
-        
+//        let radius =  UserDefaults.standard.integer(forKey: "Radius")
+     
         addRadiusCircle(location: loc)
         let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         addCurrentLocation(coords: coordinate)
@@ -187,7 +217,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         myAnnotation.title = "Current location"
         map.setRegion(region!, animated: true)
         map.addAnnotation(myAnnotation)
-        addAnnotations(coords: locationData)
+        addAnnotations(coords: places)
+        //addAnnotations(coords: locationData)
         
     }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -208,17 +239,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    func addAnnotations(coords: [[String : Any]]){
+    func addAnnotations(coords: [Place]){
         //map.removeAnnotations(map.annotations)
+        var img = UIImage()
         var annotations = [CustomAnnotation]()
-        for each in locationData {
-            let latitude = CLLocationDegrees(each["latitude"] as! Double)
-            let longitude = CLLocationDegrees(each["longitude"] as! Double)
-            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let name = each["name"] as! String
-            let descript = each["description"] as! String
-            let img = each["image"] as! String
-            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: "\(name)", subtitle: "\(descript)", enableInfoButton: true, image: (UIImage(named: img))!.resizedImage(withBounds: CGSize(width: 40.0, height: 40.0)))
+        for each in coords {
+            let coordinate = CLLocationCoordinate2D(latitude: (each.location?.latitude)!, longitude: (each.location?.longitude)!)
+            let name = each.name
+            var descript = Bool()
+            if each.icon != nil {
+                img = each.icon!
+            } else {
+                img = #imageLiteral(resourceName: "mops")
+            }
+            if each.isOpen != nil {
+                descript = each.isOpen!
+            } else {
+                descript = false
+            }
+            let annotation : CustomAnnotation = CustomAnnotation(coordinate: coordinate, title: name!, isOpen: descript, enableInfoButton: true, image: img.resizedImage(withBounds: CGSize(width: 40.0, height: 40.0)))
             
             annotations.append(annotation)
             
@@ -315,7 +354,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
 
-        let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
+        let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "Church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
+
 
      func numberOfSections(in tableView: UITableView) -> Int {
             return 1

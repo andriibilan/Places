@@ -1,5 +1,5 @@
 //
-//  FloatingActionButton.swift
+//  SlideMenuActionButton.swift
 //  Places
 //
 //  Created by Andrew Konchak on 11/21/17.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-class FloatingActionButton: UIButtonX {
+class SlideMenuActionButton: UIButtonX {
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         
         UIView.animate(withDuration: 0.3, animations: {
             if self.transform == .identity {
                 self.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
-                self.backgroundColor = #colorLiteral(red: 0.8338858485, green: 0.2595152557, blue: 0.3878593445, alpha: 1)
+                self.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
             } else {
                 self.transform = .identity
-                self.backgroundColor = #colorLiteral(red: 0.9351765513, green: 0.296548903, blue: 0.4392450452, alpha: 1)
+                self.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
             }
         })
         

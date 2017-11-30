@@ -8,29 +8,64 @@
 
 import UIKit
 
-class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate, SearchManagerDelegate {
+class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate, GooglePlacesManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        googlePlacesManager = GooglePlacesManager(
+            apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ",
+            radius: 50.m,
+            currentLocation: Location.currentLocation(),
+            filters: [PlaceType](),
+            delegate: nil
+        ){_ in
+            DispatchQueue.main.async { [weak self] in
+                self?.tableViewForPlaces.reloadData()
+            }
+        }
     }
-    @IBOutlet weak var tableView: UITableView!
     
-    var places = [Place]()
+    var googlePlacesManager: GooglePlacesManager!
     
-    var searchManager = SearchManager(
-        apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ",
-        radius: 50.m,
-        currentLocation: Location.currentLocation(),
-        delegate: self as? SearchManagerDelegate
-    )
+    @IBOutlet weak var tableViewForPlaces: UITableViewExplicit!
+    
+    func updateUIMaker() -> ([Place], Int?, String?) -> (){
+        let passedTableView = tableViewForPlaces!
+        
+        func updateUI(foundedPlaces: [Place], placeIndex: Int?, valueName: String?){
+            if let index = placeIndex{
+                let places = googlePlacesManager.foundedPlaces
+                
+                DispatchQueue.main.async {
+                    if passedTableView.numberOfRows(inSection: 1) == places.count{
+                        let indexPath = IndexPath(row: index + 1, section: 1)
+                        
+                        print(index)
+                        passedTableView.reloadRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            }else {
+                DispatchQueue.main.async {
+                    passedTableView.reloadData()
+                }
+            }
+        }
+
+        return updateUI
+    }
 }
+
 
 extension SearchVC{
     // MARK: - TableView DataSource methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return places.count
+        tableViewForPlaces.numberOfViewedRows = 0
+        return googlePlacesManager.getFoundedPlaces.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let places = googlePlacesManager.getFoundedPlaces
+        
         if places.isEmpty {
             return tableView.dequeueReusableCell(withIdentifier: "No Item", for: indexPath)
         } else {
@@ -52,30 +87,38 @@ extension SearchVC{
                 cell.distanceToPlace.text = "unknown m."
             }
             
-            // need to upload all photos from array (in scrollView, I think)
-            if !place.photos.isEmpty{
-                cell.previewImage.image = place.photos[0]
+            if let titlePhoto = place.icon{
+                cell.previewImage.image = titlePhoto
             } else{
                 cell.previewImage.image = cell.previewImage.defaultImage
             }
+            
+            tableViewForPlaces.numberOfViewedRows += 1
             
             return cell
         }
     }
     
-    // MARK: - SearchManagerDelegate methods
-    func reloadRowAt(index: Int) {
-        places = searchManager.foundedPlaces
-        
-        let indexPath = IndexPath(row: index, section: 1)
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+    // MARK: - GooglePlacesManagerDelegate methods
+
+    func loadedDataAt(index: Int, dataName: String?) {
+        DispatchQueue.main.async { [weak self] in
+            dataName // used for debuging
+            if self?.tableViewForPlaces.numberOfViewedRows == self?.googlePlacesManager.getFoundedPlaces.count{
+                let indexPath = IndexPath(row: index + 1, section: 1)
+                
+                print(index)
+                self?.tableViewForPlaces.reloadRows(at: [indexPath], with: .automatic)
+            }
+        }
     }
     
-    func reloadAllData() {
-        places = searchManager.foundedPlaces
-        
-        tableView.reloadData()
+    func loadedAllPlaces() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableViewForPlaces.reloadData()
+        }
     }
+    
     
     /*
     // MARK: - SearchBar Delegate methods
