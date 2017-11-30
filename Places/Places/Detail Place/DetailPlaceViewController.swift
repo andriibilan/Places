@@ -62,7 +62,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         placeHours?.text = testPlace.hours
         
-        placePhone?.text = testPlace.phone
+        placePhone?.text = testPlace.phoneNumber
         //
         
         
