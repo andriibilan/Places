@@ -38,8 +38,12 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     let testPlace = TestPlace()
     //
     
+
     
     @IBOutlet weak var heightConstaintForReviewTable: NSLayoutConstraint!
+
+	var place:Place!
+
     
    
     
@@ -60,7 +64,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         
         //
-        placeName?.text = testPlace.name
+        placeName?.text = place.name
         
         placeAddress?.text = testPlace.address
         

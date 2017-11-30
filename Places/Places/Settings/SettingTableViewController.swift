@@ -1,5 +1,5 @@
 //
-//  UserSettingTableViewController.swift
+//  TableViewController.swift
 //  Places
 //
 //  Created by andriibilan on 11/23/17.
@@ -8,40 +8,63 @@
 
 import UIKit
 
-class UserSettingTableViewController: UITableViewController {
+class SettingTableViewController: UITableViewController {
+    let defaults = UserDefaults.standard
     
-   
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return  1
+    
+    @IBOutlet weak var searchRadius: UILabel!
+    @IBOutlet weak var sliderValue: UISlider!
+    
+    @IBAction func sliderRadius(_ sender: UISlider) {
+        let slider = lroundf(sender.value)
+        searchRadius.text = "Search Radius: \(slider) m"
+        defaults.set(slider, forKey: "Radius")
+        
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+    override func viewDidLoad() {
+        super.viewDidLoad()
+            sliderValue.setValue(Float(defaults.integer(forKey: "Radius")) ,animated: true)
+            searchRadius.text = "Search Radius: \(String(defaults.integer(forKey: "Radius"))) m"
+        print(Float(defaults.integer(forKey: "Radius")))
+
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0 :
-            changeEmail()
-        case 1:
-            changePassword()
-        default:
-            break
+        if indexPath.section == 1 {
+            switch indexPath.row {
+            case 0 :
+                print("touch 1 row")
+                changeEmail()
+            case 1:
+                print("touch 2 row")
+                changePassword()
+            default:
+                break
+            }
+        } else {
+            switch indexPath.row {
+            case 1:
+                changeMapType()
+            default:
+                break
+            }
         }
     }
-    
-
     
     func changeEmail() {
         let emailAlertController = UIAlertController(title: "e-mail", message: "Please write new e-mail", preferredStyle: .alert)
         changeAlertProperties(alertController: emailAlertController)
         emailAlertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (alert: UIAlertAction) in
-            if self.ValidatorForEmail(isEmail: emailAlertController.textFields![0].text!){
+            if self.ValidatorForEmail(isEmail: emailAlertController.textFields![0].text!) {
                 print("All is okay. email is good")
                 self.changeIsGood()
                 
                 
-            }else{  print("Fucking error. try again, looser")}
+            } else {
+                print("Fucking error. try again, looser")
+                
+            }
             
             
             
@@ -54,7 +77,7 @@ class UserSettingTableViewController: UITableViewController {
         present(emailAlertController, animated: true, completion: nil)
     }
     
- 
+    
     
     func  changePassword() {
         let passwordAllertController = UIAlertController(title: "Password", message: "Please write new password", preferredStyle: .alert)
@@ -107,15 +130,26 @@ class UserSettingTableViewController: UITableViewController {
             return false
         }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
     
-
+    func changeMapType() {
+        let mapTypeAlertController = UIAlertController(title: "Change map type", message: "Please choose map type", preferredStyle: .alert)
+        changeAlertProperties(alertController: mapTypeAlertController)
+        let standartType = UIAlertAction(title: "Standart", style: .default) { (action) in
+            self.defaults.set(1, forKey: "mapType")
+            print(UserDefaults.standard.integer(forKey: "mapType"))
+            
+        }
+        let satelliteType = UIAlertAction(title: "Satellite", style: .default) { (action) in
+            self.defaults.set(2, forKey: "mapType")
+            print(UserDefaults.standard.integer(forKey: "mapType"))
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        
+        mapTypeAlertController.addAction(standartType)
+        mapTypeAlertController.addAction(satelliteType)
+        mapTypeAlertController.addAction(cancelAction)
+        present(mapTypeAlertController, animated: true, completion: nil)
+        
+    }
 }

@@ -9,10 +9,8 @@
 import UIKit
 
 
-class SettingsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate{
-	
-	
-	
+class SettingsViewController: UIViewController {
+
 	@IBOutlet weak var tableview: UITableView!
 	
 	@IBOutlet weak var dismissButton: UIButton!{
@@ -23,7 +21,11 @@ class SettingsViewController: UIViewController,UITableViewDataSource,UITableView
 	}
 	
 	@IBAction func dismissButtonTaped(_ sender: UIButton) {
-			self.dismiss(animated: true, completion: nil)
+        print(UserDefaults.standard.integer(forKey: "Radius"))
+
+       performSegue(withIdentifier: "exitFromSettingsSegue", sender: self)
+        
+
 	}
 	
 	
@@ -49,8 +51,7 @@ class SettingsViewController: UIViewController,UITableViewDataSource,UITableView
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
 		
-		tableview.dataSource = self
-		tableview.delegate = self 
+		
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -79,3 +80,4 @@ class SettingsViewController: UIViewController,UITableViewDataSource,UITableView
         }
     }
 }
+
