@@ -13,6 +13,7 @@ import CoreLocation
 
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
+    
     func updateData() {
         googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation(), filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
             if let foundedPlaces = foundedPlaces {
@@ -40,9 +41,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var viewForFilter: UIView!
     
     @IBAction func currentLocation(_ sender: Any) {
-        
+        self.map.removeAnnotations(self.map.annotations)
+        self.map.removeOverlays(self.map.overlays)
         if region != nil {
-            locationManagerConfigurate()
+            updateData()
+//            locationManagerConfigurate()
         }
     }
     private var googlePlacesManager: GooglePlacesManager!
@@ -100,7 +103,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }))
         
         actionSheet.addAction(UIAlertAction.init(title: "Show selected place", style: UIAlertActionStyle.default, handler: { (action) in
-            
+            self.map.removeAnnotations(self.map.annotations)
+            self.map.removeOverlays(self.map.overlays)
+           
             let annotation = MKPointAnnotation()
             annotation.coordinate = pressCoordinate
             annotation.title = "Selected place"
@@ -108,6 +113,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.map.addAnnotation(annotation)
             
             let loc = CLLocation(latitude: pressCoordinate.latitude as CLLocationDegrees, longitude: pressCoordinate.longitude as CLLocationDegrees)
+            let loc1 = Location(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude )
+
+            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: loc1 , filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
+                if let foundedPlaces = foundedPlaces {
+                    self.places = foundedPlaces
+                    
+                    DispatchQueue.main.sync {
+                       // self.locationManagerConfigurate()
+                        //                    self.updateData()
+                        self.addAnnotations(coords: foundedPlaces)
+                    }
+                }
+            }
+            )
+            
             self.addRadiusCircle(location: loc)
             
         }))
@@ -288,7 +308,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         if annotation is MKUserLocation {
-            return nil
+           return nil
         } else {
            if let annotation = annotation as? CustomAnnotation {
                 let identifier = "pin"
@@ -297,6 +317,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     as? MKPinAnnotationView { // 2
                     dequeuedView.annotation = annotation as CustomAnnotation
                     view = dequeuedView
+                    view.pinTintColor = #colorLiteral(red: 0.9201840758, green: 0.2923389375, blue: 0.4312838316, alpha: 1)
                 } else {
                     // 3
                     view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
@@ -304,10 +325,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     view.calloutOffset = CGPoint(x: -5, y: 5)
                     view.leftCalloutAccessoryView = UIImageView(image: annotation.image!)
                     view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+                    view.pinTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
                 }
+            
                 return view
             }
-            return nil
+            let identifier = "pin"
+            var view: MKPinAnnotationView
+            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            //view.pinTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+            view.pinTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+            view.canShowCallout = false
+                return view
+            //return nil
         }
     }
     
