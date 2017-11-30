@@ -30,6 +30,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var feedbackTableView: UITableView!
     
+    @IBOutlet weak var placeType: UILabel?
     
     @IBOutlet weak var dismissButton: UIButtonX!
     
@@ -50,7 +51,6 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     //TODO: load real image when I'll have choosing place
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //
         dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.3
    //     print("123 \(dismissButton.cornerRadius)")
@@ -64,34 +64,38 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         
         //
-        placeName?.text = place.name
+        //TODO: height 0 if data is null
+        placeName?.text = place.name ?? "Lol"
+        placeAddress?.text = place.address ?? "lol"
+        placeAddress?.frame.size.height = 0.0
         
-        placeAddress?.text = testPlace.address
-        
-        if let ratting = testPlace.ratting{
+        if let ratting = place.rating{
             let ratting = ratting.rounded(toPlaces: 1)
-            placeRattingLabel?.text = String(ratting.rounded(toPlaces: 1))
+            placeRattingLabel?.text = "★ " + String(ratting.rounded(toPlaces: 1))
+            placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((placeRattingView?.frame.height)!), currentRate: ratting))
         }
-        placeWebsite?.text = testPlace.website
         
-        placeHours?.text = testPlace.hours
+        placeWebsite?.text = place.website
         
-        placePhone?.text = testPlace.phone
+        placeHours?.text = place.isOpen! ? "Open" : "Close"
+        placePhone?.text = place.phoneNumber
+        var str = ""
+        
+        for type in place.types{
+            str += type.rawValue + ", "
+        }
+        str.removeLast()
+        str.removeLast()
+        placeType?.text = str
+        
         //
         
 
         
-        placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((placeRattingView?.frame.height)!), currentRate: testPlace.ratting!))
         
         
         
-        //
-        print("height: \( placeRattingView?.frame.height)")
-        print("width: \( placeRattingView?.frame.width)")
-        //
-        
-        
-        
+     
         
     feedbackTableView.reloadData()
     heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
