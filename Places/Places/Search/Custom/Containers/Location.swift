@@ -15,12 +15,14 @@ struct Location{
     // довгота
     var longitude: Double
     
-    static func Lviv() -> Location{
+    /// Gets location of Lviv city
+    static var Lviv: Location{
         // probably need to swap values
         return Location(latitude: 49.841856, longitude: 24.031530)
     }
     
-    static func currentLocation() -> Location{
+    /// Gets user's current location
+    static var currentLocation: Location{
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()

@@ -6,53 +6,54 @@
 //  Copyright © 2017 Andrew. All rights reserved.
 //
 
+/*
+ 'NSInternalInconsistencyException', reason: 'attempt to delete row 1 from section 1, but there are only 1 sections before the update'
+ 
+ what is that ???!
+*/
+
+
 import UIKit
 
-class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate, GooglePlacesManagerDelegate {
+class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
         googlePlacesManager = GooglePlacesManager(
             apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ",
-            radius: 50.m,
-            currentLocation: Location.currentLocation(),
-            filters: [PlaceType](),
-            delegate: nil
-        ){_ in
-            DispatchQueue.main.async { [weak self] in
-                self?.tableViewForPlaces.reloadData()
+            radius: 100.m,
+            currentLocation: Location.Lviv,
+            filters: [.restaurant, .bar],
+            completion: {_ in
+                DispatchQueue.main.async { [weak self] in
+                    self?.tableViewForPlaces.reloadData()
+                }
+        })
+        
+        /*
+        Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false){ [weak self] _ in
+            if self == nil { return }
+            
+            if (self?.tableViewForPlaces.numberOfViewedRows)! >= 1 {
+                self?.googlePlacesManager.getRealDistance(toPlaceIndex: 0, toPlace: nil){_ in
+                    DispatchQueue.main.async { [weak self] in
+                        self?.tableViewForPlaces.reloadData()
+                    }
+                }
+                self?.googlePlacesManager.getPhotos(ofPlaceIndex: nil, ofPlace: self?.googlePlacesManager.foundedPlaces[0]){_ in
+                    self?.googlePlacesManager
+                    print("\n\tcheck now!")
+                }
             }
         }
+         */
     }
     
     var googlePlacesManager: GooglePlacesManager!
     
     @IBOutlet weak var tableViewForPlaces: UITableViewExplicit!
     
-    func updateUIMaker() -> ([Place], Int?, String?) -> (){
-        let passedTableView = tableViewForPlaces!
-        
-        func updateUI(foundedPlaces: [Place], placeIndex: Int?, valueName: String?){
-            if let index = placeIndex{
-                let places = googlePlacesManager.foundedPlaces
-                
-                DispatchQueue.main.async {
-                    if passedTableView.numberOfRows(inSection: 1) == places.count{
-                        let indexPath = IndexPath(row: index + 1, section: 1)
-                        
-                        print(index)
-                        passedTableView.reloadRows(at: [indexPath], with: .automatic)
-                    }
-                }
-            }else {
-                DispatchQueue.main.async {
-                    passedTableView.reloadData()
-                }
-            }
-        }
-
-        return updateUI
-    }
+    
 }
 
 
@@ -72,13 +73,19 @@ extension SearchVC{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Item", for: indexPath) as! ItemCell
             let place = places[indexPath.row]
             
-            // Load the cell with data
+            // Loading cell with data
             cell.placeName.text = place.name ?? "no name"
             
             switch place.isOpen{
-            case true?: cell.placeOpenStatus.text = "Open now"
-            case false?: cell.placeOpenStatus.text = "Closed now"
-            case nil: cell.placeOpenStatus.text = "Unknown"
+            case true?:
+                cell.placeOpenStatus.text = "Open"
+                // switch color
+            case false?:
+                cell.placeOpenStatus.text = "Closed"
+                // switch color
+            case nil:
+                cell.placeOpenStatus.text = "Unknown"
+                // switch color
             }
             
             if let distance = place.distance{
@@ -99,27 +106,7 @@ extension SearchVC{
         }
     }
     
-    // MARK: - GooglePlacesManagerDelegate methods
 
-    func loadedDataAt(index: Int, dataName: String?) {
-        DispatchQueue.main.async { [weak self] in
-            dataName // used for debuging
-            if self?.tableViewForPlaces.numberOfViewedRows == self?.googlePlacesManager.getFoundedPlaces.count{
-                let indexPath = IndexPath(row: index + 1, section: 1)
-                
-                print(index)
-                self?.tableViewForPlaces.reloadRows(at: [indexPath], with: .automatic)
-            }
-        }
-    }
-    
-    func loadedAllPlaces() {
-        DispatchQueue.main.async { [weak self] in
-            self?.tableViewForPlaces.reloadData()
-        }
-    }
-    
-    
     /*
     // MARK: - SearchBar Delegate methods
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
