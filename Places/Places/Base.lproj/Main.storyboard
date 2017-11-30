@@ -324,7 +324,7 @@
                         <outlet property="map" destination="HFl-mO-hU1" id="dop-oM-jhB"/>
                         <outlet property="sideMenuConstraint" destination="pP2-3r-bkg" id="RRV-nQ-R41"/>
                         <outlet property="viewForFilter" destination="jpA-aE-Hki" id="vd5-dV-Au0"/>
-                        <segue destination="w39-4y-S2s" kind="show" identifier="detailVC" id="okD-G1-lk4"/>
+                        <segue destination="w39-4y-S2s" kind="presentation" identifier="detailVC" id="okD-G1-lk4"/>
                         <segue destination="Ilh-Ai-EtW" kind="show" identifier="addPlace" id="zlP-iY-Zpe"/>
                     </connections>
                 </viewController>

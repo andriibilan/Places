@@ -277,14 +277,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    func addAnnotations(coords: [Place]){
-        for each in coords {
+    func addAnnotations(coords: [Place]) {
         var annotations = [CustomAnnotation]()
+        for each in coords {
         let annotation : CustomAnnotation = CustomAnnotation(place: each)
-            annotations.append(annotation)
-        map.addAnnotations(annotations)
+            annotations.append(annotation as CustomAnnotation)
         }
-
+        map.addAnnotations(annotations)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -313,29 +312,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
            if let annotation = annotation as? CustomAnnotation {
                 let identifier = "pin"
                 var view: MKPinAnnotationView
-                if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-                    as? MKPinAnnotationView { // 2
-                    dequeuedView.annotation = annotation as CustomAnnotation
-                    view = dequeuedView
+            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.leftCalloutAccessoryView = UIImageView(image: annotation.image!)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
                     view.pinTintColor = #colorLiteral(red: 0.9201840758, green: 0.2923389375, blue: 0.4312838316, alpha: 1)
-                } else {
-                    // 3
-                    view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                    view.canShowCallout = true
-                    view.calloutOffset = CGPoint(x: -5, y: 5)
-                    view.leftCalloutAccessoryView = UIImageView(image: annotation.image!)
-                    view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
-                    view.pinTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
-                }
-            
                 return view
             }
             let identifier = "pin"
             var view: MKPinAnnotationView
             view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            //view.pinTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
             view.pinTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
-            view.canShowCallout = false
+            view.canShowCallout = true
                 return view
             //return nil
         }
