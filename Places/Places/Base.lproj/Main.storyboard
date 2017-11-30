@@ -27,10 +27,18 @@
             </objects>
             <point key="canvasLocation" x="-78" y="-1"/>
         </scene>
+        <!--Search-->
+        <scene sceneID="eUe-rh-xth">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Search" id="L2b-W7-IFX" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nqy-58-P0E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="262" y="456"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Places" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="main" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="Places" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -38,7 +46,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epZ-6t-w9F">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
-                                    <segue destination="6eg-wI-33n" kind="embed" id="Tmn-Th-8TH"/>
+                                    <segue destination="6eg-wI-33n" kind="embed" identifier="MapView" id="Tmn-Th-8TH"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRz-UB-V2K">
@@ -99,12 +107,14 @@
                                         <state key="normal" image="2703062-64"/>
                                         <connections>
                                             <action selector="profileButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U2e-ki-YKv"/>
-                                            <segue destination="xjy-Hw-8Ed" kind="presentation" identifier="ShowLogin" id="Fjh-DJ-O0e"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWU-LE-cGY">
                                         <rect key="frame" x="120" y="29" width="50" height="50"/>
                                         <state key="normal" image="314478-64"/>
+                                        <connections>
+                                            <segue destination="VtT-ZX-Drn" kind="presentation" identifier="ShowSearch" id="uKT-uA-JyV"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFa-2t-k8b">
                                         <rect key="frame" x="32" y="120" width="50" height="50"/>
@@ -164,6 +174,8 @@
                         <outlet property="listView" destination="WRz-UB-V2K" id="PgK-q7-BnM"/>
                         <outlet property="mapView" destination="epZ-6t-w9F" id="rzk-cb-Pgw"/>
                         <outlet property="menuView" destination="C0Q-sZ-dW2" id="v4X-mG-Z8J"/>
+                        <segue destination="G2v-qH-lE5" kind="presentation" identifier="ShowProfile" id="FZl-Th-4OR"/>
+                        <segue destination="xjy-Hw-8Ed" kind="presentation" identifier="ShowLogin" id="4YD-0r-gCP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -242,7 +254,7 @@
                                     <constraint firstItem="dvC-Vm-Gg7" firstAttribute="top" secondItem="jpA-aE-Hki" secondAttribute="top" id="zzV-mA-AdY"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ny9-BK-1UC" customClass="UIButtonX" customModule="Places" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ny9-BK-1UC" customClass="SlideMenuActionButton" customModule="Places" customModuleProvider="target">
                                 <rect key="frame" x="20" y="587" width="60" height="60"/>
                                 <color key="backgroundColor" red="0.2275260389" green="0.67915946250000003" blue="0.54944974179999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -316,9 +328,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6B-D0-qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Pcr-ak-bxN">
+                <pongPressGestureRecognizer cancelsTouchesInView="NO" allowableMovement="10" minimumPressDuration="0.5" id="Pcr-ak-bxN">
                     <connections>
-                        <action selector="addAnnotation:" destination="6eg-wI-33n" id="TCb-Z6-QW7"/>
+                        <action selector="longPress:" destination="6eg-wI-33n" id="fC5-zy-ud9"/>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
@@ -332,7 +344,15 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kle-i7-qUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3481" y="-432"/>
+            <point key="canvasLocation" x="3449" y="30"/>
+        </scene>
+        <!--NewPlace-->
+        <scene sceneID="r1e-E3-STE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="NewPlaceBoard" referencedIdentifier="NewPlace" id="Ilh-Ai-EtW" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pq2-t9-vhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3480" y="-355"/>
         </scene>
         <!--Login-->
         <scene sceneID="db3-A5-2i2">
@@ -340,7 +360,7 @@
                 <viewControllerPlaceholder storyboardName="Login" id="xjy-Hw-8Ed" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CaS-yi-BHX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3472" y="-479"/>
+            <point key="canvasLocation" x="3434" y="-23"/>
         </scene>
         <!--List View Controller-->
         <scene sceneID="zcY-Zo-fQE">
@@ -474,6 +494,22 @@
             </objects>
             <point key="canvasLocation" x="1881" y="420"/>
         </scene>
+        <!--Search-->
+        <scene sceneID="Jcq-qp-T5s">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Search" id="VtT-ZX-Drn" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BYA-Pw-6Ul" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3513" y="86"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="MRD-Fa-J2J">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="G2v-qH-lE5" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M56-u0-Qs5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3434" y="-81"/>
+        </scene>
         <!--DetailPlace-->
         <scene sceneID="dVY-x5-2jD">
             <objects>
@@ -495,6 +531,6 @@
         <image name="filter" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="okD-G1-lk4"/>
+        <segue reference="NOk-4w-6xs"/>
     </inferredMetricsTieBreakers>
 </document>

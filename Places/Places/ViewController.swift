@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
+    
+    var map : MapViewController?
+    var list : ListViewController?
     
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
@@ -34,9 +38,14 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
 
     
     @IBAction func profileButton(_ sender: Any) {
-//        let appDel : AppDelegate = UIApplication.shared.delegate as! AppDelegate
-//        appDel.showProfile()
-    }
+		if Auth.auth().currentUser != nil {
+			performSegue(withIdentifier: "ShowProfile", sender: nil)
+		}
+		else {
+			performSegue(withIdentifier: "ShowLogin", sender: nil)
+		}
+		
+	}
     
 
     
@@ -50,6 +59,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        print("fgh")
     }
     
     @IBAction func menuTapped(_ sender: FloatingActionButton) {
@@ -86,13 +96,53 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
 			secondVC.transitioningDelegate = self
 			secondVC.modalPresentationStyle = .custom
 		}
+		
+		if segue.identifier == "ShowProfile" {
+			let secondVC = segue.destination as! ProfileViewController
+			secondVC.transitioningDelegate = self
+			secondVC.modalPresentationStyle = .custom
+		}
+		
+		if segue.identifier == "ShowSearch" {
+			let secondVC = segue.destination as! SearchVC
+			secondVC.transitioningDelegate = self
+			secondVC.modalPresentationStyle = .custom
+		}
+
+		
+		
 		if segue.identifier == "ShowLogin" {
 			let secondVC = segue.destination as! LoginViewController
 			secondVC.transitioningDelegate = self
 			secondVC.modalPresentationStyle = .custom
 		}
+        if segue.identifier == "MapView" {
+            map = segue.destination as? MapViewController
+        }
+        if segue.identifier == "ListView" {
+            list = segue.destination as? ListViewController
+        }
 
+	}
+    
+    @IBAction func unwindFromSettings(segue: UIStoryboardSegue) {
+        
+        if mapView.isHidden == false {
+            map?.updateData()
+        } else {
+            list?.updateData()
+        }
+    }
+    @IBAction func unwindFromProfile(segue: UIStoryboardSegue) {
+       
+    }
+    
+	@IBAction func unwindFromSearch(segue: UIStoryboardSegue) {
+		
 	}
     
 }
 
+protocol OutputInterface {
+    func updateData()
+}

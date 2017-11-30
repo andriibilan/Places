@@ -68,6 +68,7 @@ class SignUpViewController: UIViewController {
         {
             let pictureData = UIImageJPEGRepresentation(self.profileImage.image!, 0.20)
             authService.createUser(userName: firstNameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, password: passwordTextField.text!, pictureData: pictureData!)
+            performSegue(withIdentifier: "ShowProfileVC", sender: nil)
         }
     }
     

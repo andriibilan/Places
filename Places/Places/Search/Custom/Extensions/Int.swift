@@ -12,4 +12,6 @@ extension Int{
     var mm: Int{return self / 1000}
     var m: Int{return self}
     var km: Int{return self * 1000}
+    
+    var pow2: Int{return self*self}
 }

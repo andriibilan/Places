@@ -22,13 +22,9 @@ class SettingsViewController: UIViewController {
 	
 	@IBAction func dismissButtonTaped(_ sender: UIButton) {
         print(UserDefaults.standard.integer(forKey: "Radius"))
-        performSegue(withIdentifier: "mapVC", sender: self)
-//        self.dismiss(animated: false, completion: { () -> Void in
-//            let vc2: ViewController = self.storyboard?.instantiateViewController(withIdentifier: "main") as! ViewController
-//
-            //self.present(vc2, animated: false, completion: nil)
-  //      })
 
+       performSegue(withIdentifier: "exitFromSettingsSegue", sender: self)
+        
 
 	}
 	
