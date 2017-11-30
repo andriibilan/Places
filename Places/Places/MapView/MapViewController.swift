@@ -81,19 +81,45 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     
-   @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
-    
-    let annotation = MKPointAnnotation()
-    let pressPoint = sender.location(in: map)
-    let pressCoordinate = map.convert(pressPoint, toCoordinateFrom: map)
-    annotation.coordinate = pressCoordinate
-    annotation.title = "Selected place"
-    annotation.subtitle = "Add another place"
-    map.addAnnotation(annotation)
-    
-    let loc = CLLocation(latitude: pressCoordinate.latitude as CLLocationDegrees, longitude: pressCoordinate.longitude as CLLocationDegrees)
-    addRadiusCircle(location: loc)
+    @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
+        
+        let pressPoint = sender.location(in: map)
+        let pressCoordinate = map.convert(pressPoint, toCoordinateFrom: map)
+        let actionSheet = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        if let subview = actionSheet.view.subviews.first, let actionSheet = subview.subviews.first {
+            for innerView in actionSheet.subviews {
+                innerView.backgroundColor = #colorLiteral(red: 0.9201840758, green: 0.2923389375, blue: 0.4312838316, alpha: 1)
+                innerView.layer.cornerRadius = 15.0
+                innerView.clipsToBounds = true
+            }
+        }
+        
+        actionSheet.addAction(UIAlertAction.init(title: "Add new place", style: UIAlertActionStyle.default, handler: { (action) in
+            self.performSegue(withIdentifier: "addPlace", sender: nil)
+        }))
+        
+        actionSheet.addAction(UIAlertAction.init(title: "Show selected place", style: UIAlertActionStyle.default, handler: { (action) in
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = pressCoordinate
+            annotation.title = "Selected place"
+            annotation.subtitle = "Add another place"
+            self.map.addAnnotation(annotation)
+            
+            let loc = CLLocation(latitude: pressCoordinate.latitude as CLLocationDegrees, longitude: pressCoordinate.longitude as CLLocationDegrees)
+            self.addRadiusCircle(location: loc)
+            
+        }))
+        
+        actionSheet.addAction(UIAlertAction.init(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (action) in
+        }))
+        
+        actionSheet.view.tintColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
+        
+        self.present(actionSheet, animated: true, completion: nil)
     }
+    
     
     
     
@@ -314,8 +340,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         /////////////////////////////////////////////////////////////////////////
         
         let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
-
-
         let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "Church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
 
 
@@ -395,6 +419,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
 }
+
+//extension UIColor {
+//    convenience init(hex: String) {
+//        let scanner = Scanner(string: hex)
+//        scanner.scanLocation = 0
+//        
+//        var rgbValue: UInt64 = 0
+//        
+//        scanner.scanHexInt64(&rgbValue)
+//        
+//        let r = (rgbValue & 0xff0000) >> 16
+//        let g = (rgbValue & 0xff00) >> 8
+//        let b = rgbValue & 0xff
+//        
+//        self.init(
+//            red: CGFloat(r) / 0xff,
+//            green: CGFloat(g) / 0xff,
+//            blue: CGFloat(b) / 0xff, alpha: 1
+//        )
+//    }
+//}
 
 
 

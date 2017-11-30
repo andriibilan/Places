@@ -33,7 +33,7 @@
                 <viewControllerPlaceholder storyboardName="Search" id="L2b-W7-IFX" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nqy-58-P0E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="262" y="456"/>
+            <point key="canvasLocation" x="438" y="429"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -326,6 +326,7 @@
                         <outlet property="sideMenuConstraint" destination="pP2-3r-bkg" id="RRV-nQ-R41"/>
                         <outlet property="viewForFilter" destination="jpA-aE-Hki" id="vd5-dV-Au0"/>
                         <segue destination="w39-4y-S2s" kind="show" identifier="detailVC" id="okD-G1-lk4"/>
+                        <segue destination="Ilh-Ai-EtW" kind="show" identifier="addPlace" id="zlP-iY-Zpe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6B-D0-qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -350,10 +351,10 @@
         <!--NewPlace-->
         <scene sceneID="r1e-E3-STE">
             <objects>
-                <viewControllerPlaceholder storyboardName="NewPlaceBoard" referencedIdentifier="NewPlace" id="Ilh-Ai-EtW" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pq2-t9-vhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="NewPlaceBoard" referencedIdentifier="NewPlace" id="Ilh-Ai-EtW" sceneMemberID="viewController"/>
             </objects>
-            <point key="canvasLocation" x="3480" y="-355"/>
+            <point key="canvasLocation" x="2902" y="-822"/>
         </scene>
         <!--Login-->
         <scene sceneID="db3-A5-2i2">
@@ -532,6 +533,6 @@
         <image name="filter" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NOk-4w-6xs"/>
+        <segue reference="okD-G1-lk4"/>
     </inferredMetricsTieBreakers>
 </document>
