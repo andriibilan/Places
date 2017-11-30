@@ -347,6 +347,14 @@
             </objects>
             <point key="canvasLocation" x="3449" y="30"/>
         </scene>
+        <!--NewPlace-->
+        <scene sceneID="r1e-E3-STE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="NewPlaceBoard" referencedIdentifier="NewPlace" id="Ilh-Ai-EtW" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pq2-t9-vhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3480" y="-355"/>
+        </scene>
         <!--Login-->
         <scene sceneID="db3-A5-2i2">
             <objects>
