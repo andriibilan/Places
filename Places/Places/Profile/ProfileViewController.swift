@@ -29,10 +29,12 @@ class ProfileViewController: UIViewController {
     @IBOutlet var headerImageView:UIImageView!
     @IBOutlet var headerBlurImageView:UIImageView!
     var blurredHeaderImageView:UIImageView?
+   
     private let userID = (Auth.auth().currentUser?.uid)!
     private let ref = Database.database().reference()
     var authService = AuthService()
-	@IBOutlet weak var dismissButton: UIButton!{
+	
+    @IBOutlet weak var dismissButton: UIButton!{
 		didSet{
 			dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
 			dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
