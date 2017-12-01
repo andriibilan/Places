@@ -30,20 +30,27 @@ class Dynamic {
         box = button
         parentView = parView
         animator = UIDynamicAnimator(referenceView: parentView!)
-         originalCenter = box?.center
+        originalCenter = box?.center
+        print("centerCompass: \(String(describing: originalCenterCompass))")
         snap = UISnapBehavior(item: box!, snapTo: originalCenter!)
+        print("center filter \(String(describing: originalCenter))" )
+        
         self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(panning))
         self.box?.addGestureRecognizer(panGesture!)
     }
-    
+ //   CGPoint(x: (self.greenBox?.bounds.midX)!, y: (self.greenBox?.bounds.midY)!)
     func dynamicCompass (button: UIButton, parView: UIView) {
         compass = button
         parentView = parView
         animator = UIDynamicAnimator(referenceView: parentView!)
+        //let  compasCenter = CGPoint(x: (compass?.bounds.origin.x)! + (compass?.bounds.size.width)!/2,  y: (compass?.bounds.origin.y)! + (compass?.bounds.size.height)!/2)
+        //originalCenterCompass = compass?.convert(compasCenter, to: parentView)
+       // originalCenterCompass = compass?.bounds
         originalCenterCompass = compass?.center
         snapCompass = UISnapBehavior(item: compass!, snapTo: originalCenterCompass!)
         self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(panCompass))
         self.compass?.addGestureRecognizer(panGesture!)
+        print("center Compass \(String(describing: originalCenterCompass))")
     }
     
     
