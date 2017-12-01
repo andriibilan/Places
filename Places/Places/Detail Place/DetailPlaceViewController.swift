@@ -141,7 +141,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     
     @IBAction func sharePlace(_ sender: UIButton) {
-        let shareInfo = UIActivityViewController(activityItems: [testPlace.image[0] , "Name: \(String(describing: placeName?.text))"], applicationActivities: nil)
+        let shareInfo = UIActivityViewController(activityItems: [testPlace.image[0] , "Name: \(String(describing: placeName?.text))", "\(((placeType?.text) != nil) ? ", Type: " + (placeType?.text)! : "")", "\(((placeRattingLabel?.text) != nil) ? "Ratting: " + (placeRattingLabel?.text)! : "");"], applicationActivities: nil)
         self.present(shareInfo, animated: true, completion: nil)
     }
     
