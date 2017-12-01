@@ -10,40 +10,60 @@ import Foundation
 import UIKit
 
 extension GooglePlacesManager{
-    /// Loads place photos (up to 10); (by details request)
-    func getPhotos(of placeIndex: Int, maxWidth: Int = 500, maxHeight: Int = 500){
-        let place = foundedPlaces[placeIndex]
+    /// Loads place photos (up to 10); (by photo requests)
+    func getPhotos(ofPlaceIndex placeIndex: Int?, ofPlace place: Place?, maxWidth: Int = 500, maxHeight: Int = 500, completion: @escaping (Place?) -> ()){
+        let index: Int
         
-        for photoReference in place.photoReferences{
-            let jsonPhotoRequest = """
-            https://maps.googleapis.com/maps/api/place/photo?\
-            maxwidth=\(maxWidth)&\
-            maxheight=\(maxHeight)&\
-            photoreference=\(photoReference)&\
-            key=\(apiKey)
-            """
+        if placeIndex != nil{
+            index = placeIndex!
+        } else if let givenPlace = place{
+            if let indexOfGivenPlace = foundedPlaces.index(where: { $0.placeId ?? "empty" == givenPlace.placeId }) {
+                index = indexOfGivenPlace
+            } else { return }
+        } else { return }
+        
+        
+        let placeFromFoundedPlaces = foundedPlaces[index]
+        
+        func loadPhotos(of foundedPlace: Place?){
+            if foundedPlace == nil { return }
             
-            if let url = URL(string: jsonPhotoRequest){
-                URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
-                    if error != nil{
-                        print("\n\tdataTask in \"get image from getPhotos\": ")
-                        print(error!)
-                        return
-                    }
-                    if self == nil {return}
-                    
-                    print("\nPhotoRequest: " + jsonPhotoRequest)
-                    
-                    if let dataImage = data{
-                        if let image = UIImage(data: dataImage){
-                            self?.foundedPlaces[placeIndex].photos.append(image)
-                            
-                            self?.delegate?.loadedDataAt?(index: placeIndex, dataName: "photos")
-//                            self?.updateUI?((self?.foundedPlaces)!, placeIndex, "photos")
+            for photoReference in foundedPlace!.photoReferences{
+                let jsonPhotoRequest = """
+                https://maps.googleapis.com/maps/api/place/photo?\
+                maxwidth=\(maxWidth)&\
+                maxheight=\(maxHeight)&\
+                photoreference=\(photoReference)&\
+                key=\(apiKey)
+                """
+                
+                if let url = URL(string: jsonPhotoRequest){
+                    URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+                        if error != nil{
+                            print("\n\tdataTask in \"get image from getPhotos\": ")
+                            print(error!)
+                            return
                         }
-                    }
-                    }.resume()
+                        if self == nil {return}
+                        
+                        print("\nPhotoRequest: " + jsonPhotoRequest)
+                        
+                        if let dataImage = data{
+                            if let image = UIImage(data: dataImage){
+                                self?.foundedPlaces[index].photos.append(image)
+                                
+                                completion(self?.foundedPlaces[index])
+                            }
+                        }
+                        }.resume()
+                }
             }
+        }
+        
+        if placeFromFoundedPlaces.reviews.isEmpty{
+            getAdditionalData(ofPlaceIndex: index, ofPlace: nil, completion: loadPhotos)
+        } else{
+            loadPhotos(of: placeFromFoundedPlaces)
         }
     }
 }

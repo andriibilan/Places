@@ -25,6 +25,7 @@ class Place{
     var website: String? = nil
     var icon: UIImage? = nil
     var workingSchedule: [String]? = nil
+    var reviews = [Review]()
     
     var photoReferences = [String]()
 }

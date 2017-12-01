@@ -11,10 +11,22 @@ import UIKit
 
 extension GooglePlacesManager{
     // MARK: - Fetching additional data
-    
-    /// Loads additional data for every Place in [Place]
-    func getAdditionalData(of placeIndex: Int, completion: @escaping ([Place]?) -> Void){
-        let placeId = foundedPlaces[placeIndex].placeId!
+
+    /// Loads additional data: phone number, address, website, working schedule, photo references(used for fetching photos in future), reviews
+    func getAdditionalData(ofPlaceIndex placeIndex: Int?, ofPlace place: Place?, completion: @escaping (Place?) -> ()){
+        let placeId: String
+        let index: Int
+        
+        if placeIndex != nil{
+            placeId = foundedPlaces[placeIndex!].placeId!
+            index = placeIndex!
+        } else if let givenPlace = place{
+            placeId = givenPlace.placeId!
+            if let indexOfGivenPlace = foundedPlaces.index(where: { $0.placeId ?? "nil" == placeId }) {
+                index = indexOfGivenPlace
+            } else { return }
+        } else { return }
+        
         
         // place detail request
         let jsonPlaceRequest = """
@@ -38,14 +50,14 @@ extension GooglePlacesManager{
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                     let dictionary = json as! [String: Any]
                     if let place = dictionary["result"] as? [String: Any]{
-                        self?.getPhoneNumber(of: place, forIndex: placeIndex)
-                        self?.getAddress(of: place, forIndex: placeIndex)
-                        self?.getWebsite(of: place, forIndex: placeIndex)
-                        self?.getWorkingSchedule(of: place, forIndex: placeIndex)
-                        self?.getPhotoReferences(of: place, forIndex: placeIndex)
+                        self?.getPhoneNumber(of: place, forIndex: index)
+                        self?.getAddress(of: place, forIndex: index)
+                        self?.getWebsite(of: place, forIndex: index)
+                        self?.getWorkingSchedule(of: place, forIndex: index)
+                        self?.getPhotoReferences(of: place, forIndex: index)
+                        self?.getReviews(of: place, forIndex: index)
                     }
-                    self?.delegate?.loadedDataAt?(index: placeIndex, dataName: nil)
-                    completion(self?.foundedPlaces)
+                    completion(self?.foundedPlaces[index])
                 } catch let jsonError{
                     print("\n\tcatched in \"getAdditionalData\": ")
                     print(jsonError)
@@ -89,4 +101,20 @@ extension GooglePlacesManager{
             }
         }
     }
+    /// Loads place reviews
+    private func getReviews(of place: [String: Any], forIndex index: Int){
+        if let reviews = place["reviews"] as? [[String: Any]]{
+            for review in reviews{
+                let fetchedReview = Review(
+                    author: review["author_name"] as? String,
+                    profilePhotoUrl: review["profile_photo_url"] as? String,
+                    rating: review["rating"] as? Int,
+                    text: review["text"] as? String
+                )
+
+                foundedPlaces[index].reviews.append(fetchedReview)
+            }
+        }
+    }
+    
 }
