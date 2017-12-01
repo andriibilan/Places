@@ -15,7 +15,7 @@ import CoreLocation
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
     
     func updateData() {
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation(), filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 
@@ -31,7 +31,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     }
     
-    //var list : ListViewController?
+    
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
     var menu = ViewController()
@@ -52,11 +52,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     private var googlePlacesManager: GooglePlacesManager!
     public var places:[Place] = []
     @IBOutlet weak var settingsButton: UIButton!
+ 
+    
+    
+    
 
-    
-    
-    
-    
     
     @IBOutlet weak var compassButton: UIButton!
     @IBOutlet weak var filterButton: UIButton!
@@ -109,7 +109,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
-        
+        locationManager.stopUpdatingLocation()
         let pressPoint = sender.location(in: map)
         let pressCoordinate = map.convert(pressPoint, toCoordinateFrom: map)
         let actionSheet = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -139,7 +139,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let loc = CLLocation(latitude: pressCoordinate.latitude as CLLocationDegrees, longitude: pressCoordinate.longitude as CLLocationDegrees)
             let loc1 = Location(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude )
 
-            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: loc1 , filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
+            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: loc1 , filters: PlaceType.all, completion: { (foundedPlaces) in
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
                     
@@ -178,7 +178,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterTableView.dataSource = self
         
       
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation(), filters: PlaceType.allValues, delegate: nil, completion: { (foundedPlaces) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 
@@ -196,7 +196,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
-        
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
+            if let foundedPlaces = foundedPlaces {
+                self.places = foundedPlaces
+                
+                DispatchQueue.main.sync {
+                    self.updateData()
+                }
+            }
+        }
+        )
 
         sideMenuConstraint.constant = -160
         // Do any additional setup after loading the view.
@@ -268,7 +277,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         addRadiusCircle(location: loc)
         let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         addCurrentLocation(coords: coordinate)
-        locationManager.stopUpdatingLocation()
+       locationManager.stopUpdatingLocation()
         //locationManager.startUpdatingLocation()
         
     }
@@ -302,14 +311,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    func addAnnotations(coords: [Place]){
-        for each in coords {
-        var annotations = [CustomAnnotation]()
-        let annotation : CustomAnnotation = CustomAnnotation(place: each)
-            annotations.append(annotation)
-        map.addAnnotations(annotations)
-        }
 
+    func addAnnotations(coords: [Place]) {
+        var annotations = [CustomAnnotation]()
+        for each in coords {
+        let annotation : CustomAnnotation = CustomAnnotation(place: each)
+            annotations.append(annotation as CustomAnnotation)
+        }
+        map.addAnnotations(annotations)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -338,29 +347,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
            if let annotation = annotation as? CustomAnnotation {
                 let identifier = "pin"
                 var view: MKPinAnnotationView
-                if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-                    as? MKPinAnnotationView { // 2
-                    dequeuedView.annotation = annotation as CustomAnnotation
-                    view = dequeuedView
+            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.leftCalloutAccessoryView = UIImageView(image: annotation.image!)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
                     view.pinTintColor = #colorLiteral(red: 0.9201840758, green: 0.2923389375, blue: 0.4312838316, alpha: 1)
-                } else {
-                    // 3
-                    view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                    view.canShowCallout = true
-                    view.calloutOffset = CGPoint(x: -5, y: 5)
-                    view.leftCalloutAccessoryView = UIImageView(image: annotation.image!)
-                    view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
-                    view.pinTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
-                }
-            
                 return view
             }
             let identifier = "pin"
             var view: MKPinAnnotationView
             view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            //view.pinTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
             view.pinTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
-            view.canShowCallout = false
+            view.canShowCallout = true
                 return view
             //return nil
         }
@@ -389,7 +388,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let nameCount = nameFilterArray.count - 1
         let val = (CGFloat(index) / CGFloat(nameCount)) * 0.9
        
-        return UIColor(red: 1.0, green: val, blue: 0.0, alpha: 1.0)
+        return UIColor(red: val, green: 1.0, blue: 0.8, alpha: 0.7)
     }
 
         /////////////////////////////////////////////////////////////////////////

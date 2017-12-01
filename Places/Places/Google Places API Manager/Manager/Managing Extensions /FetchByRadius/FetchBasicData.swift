@@ -13,39 +13,29 @@ import CoreLocation
 extension GooglePlacesManager{
     // MARK: - Fetching methods
     /// Loads basic place data in given radius;
-    /// loaded data: name, isOpen, location, icon, placeId, types, rating, photo, distance
-    func fetchPlaces(completion: @escaping ([Place]?) -> Void){
+    /// loaded data: name, isOpen, location, icon, placeId, types, rating, photo, straightDistance
+    func fetchPlaces(completion: @escaping ([Place]?) -> ()){
         foundedPlaces.removeAll()
         allPlacesLoaded = false
+        loadedPlaceTypes = 0
         
-        var jsonPlacesInRadiusRequest = """
+        let jsonPlacesInRadiusRequest = """
         https://maps.googleapis.com/maps/api/place/nearbysearch/json?\
         location=\(currentLocation.latitude),\(currentLocation.longitude)&\
         radius=\(radius)&
         """
         
-        if filters.isEmpty{
-            jsonPlacesInRadiusRequest.append("key=\(apiKey)")
+        for filter in filters{
+            let requestForCertainType = jsonPlacesInRadiusRequest +
+            "type=\(filter.rawValue)&" +
+            "key=\(apiKey)"
             
-            print("\nPlaces in Radius: " + jsonPlacesInRadiusRequest)
+            print("\nPlaces in Radius: " + requestForCertainType)
             
-            if let url = URL(string: jsonPlacesInRadiusRequest){
+            if let url = URL(string: requestForCertainType){
                 getBasicData(from: url, completion: completion)
             } else{
                 print("\nerror converting json \"Places in Radius\" request to URL")
-            }
-        } else{
-            for filter in filters{
-                jsonPlacesInRadiusRequest.append("type=\(filter.rawValue)&")
-                jsonPlacesInRadiusRequest.append("key=\(apiKey)")
-                
-                print("\nPlaces in Radius: " + jsonPlacesInRadiusRequest)
-                
-                if let url = URL(string: jsonPlacesInRadiusRequest){
-                    getBasicData(from: url, completion: completion)
-                } else{
-                    print("\nerror converting json \"Places in Radius\" request to URL")
-                }
             }
         }
     }
@@ -54,7 +44,7 @@ extension GooglePlacesManager{
     // MARK: - Fetching basic data
     
     /// Loads basic data values (by nearbysearch request): name, openingStatus, location, icon, placeId, types, rating, photo
-    private func getBasicData(from url: URL, completion: @escaping ([Place]?) -> Void){
+    private func getBasicData(from url: URL, completion: @escaping ([Place]?) -> ()){
         URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
             if error != nil{
                 print("\n\tdataTask in \"fetchPlaces\": ")
@@ -68,10 +58,9 @@ extension GooglePlacesManager{
                 let dictionary = json as! [String: Any]
                 let results = dictionary["results"] as! [[String: Any]]
                 
-                
-                
                 addingNewPlace:
                     for place in results{
+                        
                         for existingPlace in (self?.foundedPlaces)!{
                             if self?.getPlaceId(of: place) == existingPlace.placeId{
                                 continue addingNewPlace
@@ -92,9 +81,9 @@ extension GooglePlacesManager{
                         self?.getRating(of: place, forIndex: lastPlaceIndex)
                         self?.getStraightDistance(to: lastPlaceIndex)
                 }
-                self?.allPlacesLoaded = true
+                self?.loadedPlaceTypes += 1
+                self?.allPlacesLoaded = self?.loadedPlaceTypes == self?.filters.count
                 
-                self?.delegate?.loadedAllPlaces?()
                 completion(self?.foundedPlaces)
             } catch let jsonError{
                 print("\n\tcatched in \"fetchPlaces\": ")
@@ -177,7 +166,7 @@ extension GooglePlacesManager{
         }
     }
     /// Loads place photo (only 1)
-    private func getPhoto(of place: [String: Any], forIndex index: Int, completion: ([Place], Int?, String?) -> Void){
+    private func getPhoto(of place: [String: Any], forIndex index: Int, completion: @escaping (Place?) -> ()){
         if let photos = place["photos"] as? [[String: Any]]{
             if !photos.isEmpty{
                 if let photoReference = photos[0]["photo_reference"] as? String{
@@ -204,8 +193,7 @@ extension GooglePlacesManager{
                                 if let image = UIImage(data: dataImage){
                                     self?.foundedPlaces[index].photo = image
                                     
-                                    self?.delegate?.loadedDataAt?(index: index, dataName: "photo")
-//                                    self?.updateUI?((self?.foundedPlaces)!, index, "photo")
+                                    completion(self?.foundedPlaces[index])
                                 }
                             }
                             }.resume()
