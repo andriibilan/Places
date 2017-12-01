@@ -27,8 +27,9 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionViewFlowLayout.itemSize.width = 300
+        collectionViewFlowLayout.itemSize = currentPhotoCollectionView.frame.size
         print(currentPhotoCollectionView.frame.width)
+        print(currentPhotoCollectionView.frame.size)
         
         
         
@@ -55,7 +56,9 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
         return cell!
     }
     
-
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        print("123321")
+    }
     /*
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         currentPhotoCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)

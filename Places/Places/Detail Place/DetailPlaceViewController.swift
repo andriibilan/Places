@@ -58,14 +58,14 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         testPlace.installDefaultValues()
         //
         
-        
+        /*
         
         //
         //TODO: height 0 if data is null
         placeName?.text = place.name ?? "Lol"
         placeAddress?.text = place.address ?? "lol"
         placeAddress?.frame.size.height = 0.0
-        
+ 
         if let ratting = place.rating{
             let ratting = ratting.rounded(toPlaces: 1)
             placeRattingLabel?.text = "★ " + String(ratting.rounded(toPlaces: 1))
@@ -88,7 +88,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         str.removeLast()
         str.removeLast()
         placeType?.text = str
-        
+        */
         //
         
     feedbackTableView.reloadData()
@@ -187,20 +187,28 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         let cell  = feedbackTableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as! ReviewTableViewCell
         
         cell.labelForReview.text = review.review
+        cell.labelForReview.backgroundColor? = UIColor(red:   1.0,green: 0.7, blue:  CGFloat(indexPath.row) / CGFloat(testPlace.forReview.count - 1) * 0.8,alpha: 1.0)
         
+        
+        
+        
+        
+        print("cell: \(cell.labelForReview.backgroundColor)")
+        print( "index: \(indexPath.row)")
         if review.isanonymous {
             cell.labelForReviewer.text = "Anonymous"
         }else{
             cell.labelForReviewer.text = review.reviewer
         }
         
+        /*
         if let icon = place.icon{
             cell.ImageViewForIcon?.image = icon
         }else{
             //TODO: Maybe  width = 0
             cell.ImageViewForIcon?.isHidden = true
         }
-        
+        */
         
         //TODO: go in class addSubview
         cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: testPlace.forReview[indexPath.row].reviewRatting!))
