@@ -138,14 +138,17 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 //		}
 		//[-] for testing only
 		
-
+        tableView.reloadData()
 		googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
 
 			if let foundedPlaces = foundedPlaces {
 				self.places = foundedPlaces
+                
+                
 				self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
 				
 				DispatchQueue.main.sync {
+                    self.updateData()
 					self.tableView.reloadData()
 				}
 			}
@@ -187,13 +190,14 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		
-		if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
+		 if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
 			
 			let place = (filterOpenOnly) ? openPlaces[indexPath.row] : places[indexPath.row]
 			
 			
 			//placeholder image
 			cell.thumbnailImageView.image = #imageLiteral(resourceName: "marker")
+            
 			
 			//name
 			cell.name.text		= place.name
@@ -218,50 +222,51 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 					cell.openClosedImageView.image = #imageLiteral(resourceName: "closed-sign")
 				}
 			}
-			
-			if !place.photoReferences.isEmpty {
-				
-				
-				let urlString = place.photoReferences[0]
-				let url:URL! = URL(string: urlString)
-				
-				//downloading/cashing image from internet
-				if let cachedImage = (self.cache.object(forKey: (urlString as AnyObject) ) as? UIImage ) {
-					//we are using cashe
-					print("Using cashe - \(urlString)")
-					cell.thumbnailImageView.image = cachedImage
-					
-				} else {
-					//download image and add to cache
-					
-					task = session.downloadTask(with: url, completionHandler: { (location, response, error) -> Void in
-						if let data = try? Data(contentsOf: url){
-							
-							DispatchQueue.main.async(execute: { () -> Void in
-								//DispatchQueue.global(qos: .background).async {
-								// if the current cell is visible
-								if let updateCell = self.tableView.cellForRow(at: indexPath) as? ListTableViewCell{
-									let img:UIImage! = UIImage(data: data)
-									
-									//DispatchQueue.main.sync {
-									updateCell.thumbnailImageView?.image = img//.resizedImage(withBounds: CGSize(width: 120, height: 120))
-									//}
-									self.cache.setObject(img, forKey: urlString as AnyObject)
-									print("adding to cache - \(urlString)")
-								}
-							}
-							)
-						}
-					})
-					task.resume()
-					
-				}
-			}
+            
+            if !place.photoReferences.isEmpty {
+
+
+                let urlString = place.photoReferences[0]
+                let url:URL! = URL(string: urlString)
+
+                //downloading/cashing image from internet
+                if let cachedImage = (self.cache.object(forKey: (urlString as AnyObject) ) as? UIImage ) {
+                    //we are using cashe
+                    print("Using cashe - \(urlString)")
+                    cell.thumbnailImageView.image = cachedImage
+
+                } else {
+                    //download image and add to cache
+
+                    task = session.downloadTask(with: url, completionHandler: { (location, response, error) -> Void in
+                        if let data = try? Data(contentsOf: url){
+
+                            DispatchQueue.main.async(execute: { () -> Void in
+                                //DispatchQueue.global(qos: .background).async {
+                                // if the current cell is visible
+                                if let updateCell = self.tableView.cellForRow(at: indexPath) as? ListTableViewCell{
+                                    let img:UIImage! = UIImage(data: data)
+
+                                    //DispatchQueue.main.sync {
+                                    updateCell.thumbnailImageView?.image = img//.resizedImage(withBounds: CGSize(width: 120, height: 120))
+                                    //}
+                                    self.cache.setObject(img, forKey: urlString as AnyObject)
+                                    print("adding to cache - \(urlString)")
+                                }
+                            }
+                            )
+                        }
+                    })
+                    task.resume()
+
+                }
+            }
+            
 			return cell
-		}
-		
-		return UITableViewCell()
-		
+        }
+
+        return UITableViewCell()
+
 		
 	}
 	

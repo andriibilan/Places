@@ -169,8 +169,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapDynamic.dynamicFilter(button: filterButton, parView: self.view)
-        mapDynamic.dynamicCompass(button: compassButton, parView: self.view)
+        mapDynamic.dynamicFilter(button: filterButton, parView: view)
+        mapDynamic.dynamicCompass(button: compassButton, parView: view)
+        print(view.bounds)
         changeMapType()
        
         
@@ -381,7 +382,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if segue.identifier == "detailVC" {
             let d = segue.destination as? DetailPlaceViewController
             d?.place = sender as! Place
-    }
+        }
     }
 
     func colorForIndex(index: Int) -> UIColor {
