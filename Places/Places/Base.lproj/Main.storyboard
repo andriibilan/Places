@@ -61,7 +61,7 @@
                                     <segment title="Map"/>
                                     <segment title="List"/>
                                 </segments>
-                                <color key="tintColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.92156862745098034" green="0.29411764705882354" blue="0.43137254901960786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="segmentControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="oVJ-iD-v0a"/>
                                 </connections>
@@ -326,7 +326,7 @@
                         <outlet property="sideMenuConstraint" destination="pP2-3r-bkg" id="RRV-nQ-R41"/>
                         <outlet property="viewForFilter" destination="jpA-aE-Hki" id="vd5-dV-Au0"/>
                         <segue destination="w39-4y-S2s" kind="presentation" identifier="detailVC" id="okD-G1-lk4"/>
-                        <segue destination="Ilh-Ai-EtW" kind="show" identifier="addPlace" id="zlP-iY-Zpe"/>
+                        <segue destination="Ilh-Ai-EtW" kind="presentation" identifier="addPlace" id="fj7-XN-Q0T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6B-D0-qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>

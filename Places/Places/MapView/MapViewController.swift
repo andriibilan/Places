@@ -15,7 +15,7 @@ import CoreLocation
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
     
     func updateData() {
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 
@@ -31,7 +31,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     }
     
-    //var list : ListViewController?
+    
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
     var menu = ViewController()
@@ -76,15 +76,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
        
         if isSideMenuHidden {
             sideMenuConstraint.constant = -3
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
                 if sender.transform == .identity {
                     sender.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
                     sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
                     self.view.layoutIfNeeded()
-                }})
+                }}
+                , completion: nil)
+            
+//            UIView.animate(withDuration: 0.3, animations: {
+//                if sender.transform == .identity {
+//                    sender.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+//                    sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
+//                    self.view.layoutIfNeeded()
+//                }})
         } else {
             sideMenuConstraint.constant = -160
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.3,animations: {
                 sender.transform = .identity
                 sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
                 self.view.layoutIfNeeded()
@@ -101,7 +109,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
-        
+        locationManager.stopUpdatingLocation()
         let pressPoint = sender.location(in: map)
         let pressCoordinate = map.convert(pressPoint, toCoordinateFrom: map)
         let actionSheet = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -131,7 +139,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let loc = CLLocation(latitude: pressCoordinate.latitude as CLLocationDegrees, longitude: pressCoordinate.longitude as CLLocationDegrees)
             let loc1 = Location(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude )
 
-            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: loc1 , filters: PlaceType.all, completion: { (foundedPlaces) in
+            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: loc1 , filters: PlaceType.all, completion: { (foundedPlaces) in
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
                     
@@ -170,7 +178,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterTableView.dataSource = self
         
       
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 
@@ -188,7 +196,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 
@@ -269,7 +277,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         addRadiusCircle(location: loc)
         let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         addCurrentLocation(coords: coordinate)
-        locationManager.stopUpdatingLocation()
+       locationManager.stopUpdatingLocation()
         //locationManager.startUpdatingLocation()
         
     }
@@ -363,6 +371,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if control == view.rightCalloutAccessoryView || control == view.detailCalloutAccessoryView || control == view.leftCalloutAccessoryView {
             //Perform a segue here to navigate to another viewcontroller
             let g = view.annotation as! CustomAnnotation
+            
+            
+            
+            
+            
             performSegue(withIdentifier: "detailVC", sender: g.place)
         }
     }
@@ -384,9 +397,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
 
         /////////////////////////////////////////////////////////////////////////
-        
+
         let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
         let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
+
 
      func numberOfSections(in tableView: UITableView) -> Int {
             return 1
@@ -409,7 +423,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterCell.backgroundColor = colorForIndex(index: indexPath.row)
         filterCell.accessoryType = accessory
         filterCell.selectionStyle = .none
+  
         return filterCell
+       
     }
     
     

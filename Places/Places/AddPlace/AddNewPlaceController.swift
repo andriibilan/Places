@@ -14,7 +14,13 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, SetCategory 
     
     let segueToMain = "goBack"
     
+    let phoneTemplate = "+380(_-_) _-_-_ _-_ _-_"
+    
     var phoneFormat: phoneNumberFormatter?
+    
+    @IBOutlet weak var name: UITextField!
+    
+    @IBOutlet weak var addres: UITextField!
     
     @IBOutlet weak var number: UITextField!
    
@@ -22,13 +28,14 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, SetCategory 
     
     @IBOutlet weak var category: UITextField!
     
+    @IBOutlet weak var website: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         number.delegate = self
         category.delegate = self
-        
         list.isHidden = true
-        phoneFormat = phoneNumberFormatter(field: number, ins: "+380(_-_) _-_-_ _-_ _-_", replacmentCharacter: "_")
+        phoneFormat = phoneNumberFormatter(field: number, ins: phoneTemplate, replacmentCharacter: "_")
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,18 +52,13 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, SetCategory 
       
     }
     
-
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == category{
             list.isHidden = false
         }
         return true
     }
-    /*
-    @IBAction func categoryTouched(_ sender: UITextField) {
-        print("---------------")
-    }*/
-    
+      
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
         if textField == number {
@@ -73,9 +75,60 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, SetCategory 
     }
 
     @IBAction func postToGoogle(_ sender: UIButton) {
-        let alert = UIAlertController(title: "SORRY", message: "GOOGLE is temporarily unavailable", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.cancel, handler: { action in
-            self.performSegue(withIdentifier: self.segueToMain, sender: self)
+        /*
+        POST https://maps.googleapis.com/maps/api/place/add/json?key=YOUR_API_KEY HTTP/1.1
+        Host: maps.googleapis.com
+        
+        {
+            "location": {
+                "lat": -33.8669710,
+                "lng": 151.1958750
+            },
+            "accuracy": 50,
+            "name": "Google Shoes!",
+            "phone_number": "(02) 9374 4000",
+            "address": "48 Pirrama Road, Pyrmont, NSW 2009, Australia",
+            "types": ["shoe_store"],
+            "website": "http://www.google.com.au/",
+            "language": "en-AU"
+        }*/
+         //////////
+        let location: [String: Double] = [
+            "lat": 49.841856,
+            "lng": 24.031530
+        ]
+        
+        let jsonArray: [String: Any] =
+             ["location": location,
+             "accuracy": 200,
+             "name": name.text,
+             "phone_number": number.text,
+             "address": addres.text,
+             "types": category,
+             "language": "en-AU"]
+         
+        let jsonData = try? JSONSerialization.data(withJSONObject: jsonArray)
+       // let YOUR_API_KEY: Int = 0
+        let url = URL(string: "https://maps.googleapis.com/maps/api/place/add/json?key=AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+         
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+               print(error?.localizedDescription ?? "No data")
+            return
+            }
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any] {
+               print(responseJSON)
+            }
+        }
+        task.resume()
+       
+        let alert = UIAlertController(title: "YOUR REQUEST WAS SENDED", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: { action in
+            self.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)
     }

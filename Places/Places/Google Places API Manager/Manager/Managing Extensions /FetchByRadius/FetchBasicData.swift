@@ -61,6 +61,7 @@ extension GooglePlacesManager{
                 addingNewPlace:
                     for place in results{
                         
+                        if self == nil {return}
                         for existingPlace in (self?.foundedPlaces)!{
                             if self?.getPlaceId(of: place) == existingPlace.placeId{
                                 continue addingNewPlace
@@ -69,6 +70,7 @@ extension GooglePlacesManager{
                         
                         self?.foundedPlaces.append(Place())
                         
+                        if self == nil {return}
                         let lastPlaceIndex = (self?.foundedPlaces.count)! - 1
                         
                         self?.getName(of: place, forPlaceIndex: lastPlaceIndex)
