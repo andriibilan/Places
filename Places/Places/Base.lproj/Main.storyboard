@@ -61,7 +61,7 @@
                                     <segment title="Map"/>
                                     <segment title="List"/>
                                 </segments>
-                                <color key="tintColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.92156862745098034" green="0.29411764705882354" blue="0.43137254901960786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="segmentControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="oVJ-iD-v0a"/>
                                 </connections>
@@ -533,6 +533,6 @@
         <image name="filter" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="okD-G1-lk4"/>
+        <segue reference="NOk-4w-6xs"/>
     </inferredMetricsTieBreakers>
 </document>
