@@ -12,46 +12,45 @@ import Foundation
 import UIKit
 
 class GooglePlacesManager{
-    var delegate: GooglePlacesManagerDelegate?
-    
     // places storage
-    internal var foundedPlaces = [Place]()
+     var foundedPlaces = [Place]()
     var getFoundedPlaces: [Place]{
         return foundedPlaces
     }
     // * * *
     
-    internal var apiKey: String = "none"
+     var apiKey: String = "none"
     var getApiKey: String{
         return apiKey
     }
     
-    internal var radius: Int = 100.m
+     var radius: Int = 100.m
     var getRadius: Int{
         return radius
     }
-    internal var currentLocation = Location.currentLocation()
+     var currentLocation = Location.currentLocation
     var getCurrentLocation: Location{
         return currentLocation
     }
-    internal var filters = [PlaceType]()
+     var filters = [PlaceType]()
     var getFilters: [PlaceType]{
         return filters
     }
     
-    internal var allPlacesLoaded = false
+     var allPlacesLoaded = false
     var isAllPlacesLoaded: Bool{
         return allPlacesLoaded
     }
     
+     var loadedPlaceTypes = 0
+    
     // MARK: - Init
     /// Initialization of nearby search
-    init(apiKey: String, radius: Int, currentLocation: Location, filters: [PlaceType], delegate: GooglePlacesManagerDelegate?, completion: @escaping ([Place]?) -> Void) {
+    init(apiKey: String, radius: Int, currentLocation: Location, filters: [PlaceType], completion: @escaping ([Place]?) -> ()) {
         self.apiKey = apiKey
         self.radius = radius
         self.currentLocation = currentLocation
         self.filters = filters
-        self.delegate = delegate
         
         fetchPlaces(completion: completion)
     }

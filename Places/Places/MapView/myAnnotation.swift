@@ -18,6 +18,7 @@ class CustomAnnotation : NSObject, MKAnnotation {
     var image : UIImage?
     var place:Place?
     
+
     init(place: Place) {
         self.coordinate = CLLocationCoordinate2DMake((place.location?.latitude)!, (place.location?.longitude)!)
         self.place = place
