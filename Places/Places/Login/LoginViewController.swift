@@ -9,12 +9,12 @@
 import UIKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, AuthServiceDelegate{
     
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-	
+	var authService = AuthService()
 	
 	@IBOutlet weak var dismissButton: UIButton!{
 		didSet{
@@ -26,12 +26,15 @@ class LoginViewController: UIViewController {
 	@IBAction func dismissButtonTaped(_ sender: UIButton) {
         performSegue(withIdentifier: "unwindFromLogin", sender: self)
 	}
-	
-    var authService = AuthService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+         authService.delegate = self
+    }
+    
+    func transitionToProfile() {
+        let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
+        self.present(profileVC, animated: true, completion: nil)
     }
     
     @IBAction func loginAction(_ sender: Any) {

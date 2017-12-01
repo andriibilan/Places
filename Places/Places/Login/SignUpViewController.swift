@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, AuthServiceDelegate {
     
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
@@ -27,6 +27,7 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        authService.delegate = self
     }
     
     @IBAction func selectProfileImage(_ sender: Any) {
@@ -36,6 +37,11 @@ class SignUpViewController: UIViewController {
     @IBAction func selectSignInButton(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
         self.present(vc!, animated: true, completion: nil)
+    }
+    
+    func transitionToProfile() {
+        let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
+        self.present(profileVC, animated: true, completion: nil)
     }
     
     @IBAction func registerAction(_ sender: Any) {
@@ -68,7 +74,7 @@ class SignUpViewController: UIViewController {
         {
             let pictureData = UIImageJPEGRepresentation(self.profileImage.image!, 0.20)
             authService.createUser(userName: firstNameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, password: passwordTextField.text!, pictureData: pictureData!)
-            performSegue(withIdentifier: "ShowProfileVC", sender: nil)
+//            performSegue(withIdentifier: "ShowProfileVC", sender: nil)
         }
     }
     

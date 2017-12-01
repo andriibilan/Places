@@ -29,7 +29,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet var headerImageView:UIImageView!
     @IBOutlet var headerBlurImageView:UIImageView!
     var blurredHeaderImageView:UIImageView?
-    
+    private let userID = (Auth.auth().currentUser?.uid)!
+    private let ref = Database.database().reference()
+    var authService = AuthService()
 	@IBOutlet weak var dismissButton: UIButton!{
 		didSet{
 			dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
@@ -38,24 +40,23 @@ class ProfileViewController: UIViewController {
 	}
 	
 	@IBAction func dismissButtonTaped(_ sender: UIButton) {
+          authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
         performSegue(withIdentifier: "unwindFromProfile", sender: self)
+       
     }
-	
-	private let userID = (Auth.auth().currentUser?.uid)!
-    private let ref = Database.database().reference()
-    var authService = AuthService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getProfileData()
-//        emailTextField.isUserInteractionEnabled = false
-//        phoneTextField.isUserInteractionEnabled = false
+
     }
     @IBAction func unwindHome(segue:UIStoryboardSegue) { }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        getProfileData()
+//    }
     override func viewDidAppear(_ animated: Bool) {
         // Header - Image
-        
         headerImageView = UIImageView(frame: header.bounds)
         headerImageView?.image = UIImage(named: "lviv")
         headerImageView?.contentMode = UIViewContentMode.scaleAspectFill
@@ -107,9 +108,6 @@ class ProfileViewController: UIViewController {
                 try? Auth.auth().signOut()
                 
                 if Auth.auth().currentUser == nil {
-//                    let loginVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
-//
-//                    self.present(loginVC, animated: true, completion: nil
                     performSegue(withIdentifier: "unwindFromProfile", sender: self)
                 }
             }
@@ -120,11 +118,8 @@ class ProfileViewController: UIViewController {
         chooseImage()
     }
     @IBAction func editButton(_ sender: Any) {
-        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
-//        nameTextField.isUserInteractionEnabled = true
-//        emailTextField.isUserInteractionEnabled = true
-//        phoneTextField.isUserInteractionEnabled = true
-//        editButton.isHidden = true
+//        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
+        performSegue(withIdentifier: "unwindFromProfile", sender: self)
     }
     
     @IBAction func saveToFirebase(_ sender: Any) {
