@@ -326,7 +326,7 @@
                         <outlet property="sideMenuConstraint" destination="pP2-3r-bkg" id="RRV-nQ-R41"/>
                         <outlet property="viewForFilter" destination="jpA-aE-Hki" id="vd5-dV-Au0"/>
                         <segue destination="w39-4y-S2s" kind="presentation" identifier="detailVC" id="okD-G1-lk4"/>
-                        <segue destination="Ilh-Ai-EtW" kind="show" identifier="addPlace" id="zlP-iY-Zpe"/>
+                        <segue destination="Ilh-Ai-EtW" kind="presentation" identifier="addPlace" id="fj7-XN-Q0T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6B-D0-qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -533,6 +533,6 @@
         <image name="filter" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NOk-4w-6xs"/>
+        <segue reference="okD-G1-lk4"/>
     </inferredMetricsTieBreakers>
 </document>

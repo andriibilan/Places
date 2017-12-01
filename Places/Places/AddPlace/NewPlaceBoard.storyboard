@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6QS-wL-RXk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -20,14 +19,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zPG-e1-D3M" customClass="UIImageViewX" customModule="Places" customModuleProvider="target">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zPG-e1-D3M" customClass="UIImageViewX" customModule="Places" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="375" height="293.66666666666669"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="2"/>
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="7"/>
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -127,9 +126,12 @@
                         <viewLayoutGuide key="safeArea" id="rAr-4V-gAC"/>
                     </view>
                     <connections>
+                        <outlet property="addres" destination="xav-yF-dD8" id="SME-6a-gr8"/>
                         <outlet property="category" destination="NbS-f2-U0h" id="X4S-Ky-XZP"/>
                         <outlet property="list" destination="Ral-kK-WS9" id="MdW-kt-gOT"/>
+                        <outlet property="name" destination="Ttn-Wg-0Nh" id="TTv-ax-uLs"/>
                         <outlet property="number" destination="dbx-Zd-WOM" id="fOr-ac-vPU"/>
+                        <outlet property="website" destination="cMF-Qo-bSv" id="5Ep-4h-cpt"/>
                         <segue destination="PI0-X9-7m9" kind="show" identifier="goBack" id="uxw-9o-seC"/>
                     </connections>
                 </viewController>
