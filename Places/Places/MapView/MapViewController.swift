@@ -31,7 +31,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     }
     
-    //var list : ListViewController?
+    
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
     var menu = ViewController()
@@ -101,7 +101,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
-        
+        locationManager.stopUpdatingLocation()
         let pressPoint = sender.location(in: map)
         let pressCoordinate = map.convert(pressPoint, toCoordinateFrom: map)
         let actionSheet = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -260,7 +260,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         addRadiusCircle(location: loc)
         let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         addCurrentLocation(coords: coordinate)
-        locationManager.stopUpdatingLocation()
+       locationManager.stopUpdatingLocation()
         //locationManager.startUpdatingLocation()
         
     }
