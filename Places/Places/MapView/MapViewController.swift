@@ -76,15 +76,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
        
         if isSideMenuHidden {
             sideMenuConstraint.constant = -3
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
                 if sender.transform == .identity {
                     sender.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
                     sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
                     self.view.layoutIfNeeded()
-                }})
+                }}
+                , completion: nil)
+            
+//            UIView.animate(withDuration: 0.3, animations: {
+//                if sender.transform == .identity {
+//                    sender.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+//                    sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
+//                    self.view.layoutIfNeeded()
+//                }})
         } else {
             sideMenuConstraint.constant = -160
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.3,animations: {
                 sender.transform = .identity
                 sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
                 self.view.layoutIfNeeded()
@@ -385,8 +393,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
         /////////////////////////////////////////////////////////////////////////
         
-        let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
+        let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beauty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
         let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
+    
 
      func numberOfSections(in tableView: UITableView) -> Int {
             return 1
@@ -409,7 +418,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterCell.backgroundColor = colorForIndex(index: indexPath.row)
         filterCell.accessoryType = accessory
         filterCell.selectionStyle = .none
+  
         return filterCell
+       
     }
     
     
