@@ -241,7 +241,7 @@
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noPhotoIcon" translatesAutoresizingMaskIntoConstraints="NO" id="L5G-6v-flb">
                                                         <rect key="frame" x="0.0" y="0.0" width="62.5" height="62.5"/>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TEx-j0-9j8">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="TEx-j0-9j8">
                                                         <rect key="frame" x="62.5" y="0.0" width="312.5" height="62.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -259,7 +259,7 @@
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LHx-HL-zNF">
                                                         <rect key="frame" x="0.0" y="0.0" width="62.5" height="62.5"/>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E88-ja-mcb">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="E88-ja-mcb">
                                                         <rect key="frame" x="62.5" y="0.0" width="312.5" height="62.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -277,7 +277,7 @@
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GQe-5R-O4z">
                                                         <rect key="frame" x="0.0" y="0.0" width="62.5" height="62.5"/>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRl-Tm-9Tw">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="yRl-Tm-9Tw">
                                                         <rect key="frame" x="62.5" y="0.0" width="312.5" height="62.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -528,7 +528,6 @@
                                         <color key="backgroundColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="dismiss"/>
                                         <connections>
-                                            <action selector="dismissAction:" destination="Je1-fC-mgn" eventType="touchUpInside" id="Qnv-hD-KK3"/>
                                             <segue destination="Je1-fC-mgn" kind="show" id="V3h-2y-1bh"/>
                                         </connections>
                                     </button>
@@ -562,6 +561,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="collectionViewFlowLayout" destination="7z1-Rq-gwv" id="iNv-1n-NS7"/>
                         <outlet property="currentPhotoCollectionView" destination="ZDN-i6-Ylp" id="1ps-QO-cbL"/>
                     </connections>
                 </viewController>
