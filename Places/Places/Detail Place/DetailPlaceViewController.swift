@@ -52,12 +52,6 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         super.viewDidLoad()
         //
         dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.3
-   //     print("123 \(dismissButton.cornerRadius)")
-        
-        
-        
-        
- 
         
         
         //
@@ -80,7 +74,11 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         placeWebsite?.text = place.website
         
-        placeHours?.text = place.isOpen! ? "Open" : "Close"
+        switch place.isOpen{
+        case   true?:  placeHours?.text = "Open"
+        case false?:  placeHours?.text = "Close"
+        default: placeHours?.text = "nil" //TODO: height 0
+        }
         placePhone?.text = place.phoneNumber
         var str = ""
         
@@ -93,35 +91,21 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         //
         
-
-        
-        
-        
-        
-     
-        
     feedbackTableView.reloadData()
     heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
-    
-    
     }
     
   
     
     override func viewDidAppear(_ animated: Bool) {
-     
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
-        
-        
-        
     }
     
     @IBAction func openWebsite(_ sender: UIButton) {
-        guard let website = testPlace.website else{
-            return
+        if let website = place.website {
+            let websiteURL = NSURL(string: "\(website)")! as URL
+            UIApplication.shared.open(websiteURL, options: [:], completionHandler: nil)
         }
-        let websiteURL = NSURL(string: "http://\(website)")! as URL
-        UIApplication.shared.open(websiteURL, options: [:], completionHandler: nil)
     }
     
     
@@ -129,10 +113,6 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     //TODO: Check it on device
     @IBAction func openPhone(_ sender: UIButton) {
         if let phone = placePhone?.text{
-       //     UIApplication.sharedApplication.openURL(NSURL(string: "telprompt://\(phone)")!)
-            
-
-            
             let phoneURL = NSURL(string: "telprompt://\(phone)")! as URL
             UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
         }
@@ -141,26 +121,19 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     
     @IBAction func sharePlace(_ sender: UIButton) {
-        let shareInfo = UIActivityViewController(activityItems: [testPlace.image[0] , "Name: \(String(describing: placeName?.text))", "\(((placeType?.text) != nil) ? ", Type: " + (placeType?.text)! : "")", "\(((placeRattingLabel?.text) != nil) ? "Ratting: " + (placeRattingLabel?.text)! : "");"], applicationActivities: nil)
+        let shareInfo = UIActivityViewController(activityItems: [place.icon ?? "" , "Name: \(String(describing: placeName?.text))", "\(((placeType?.text) != nil) ? ", Type: " + (placeType?.text)! : "")", "\(((placeRattingLabel?.text) != nil) ? "Ratting: " + (placeRattingLabel?.text)! : "");"], applicationActivities: nil)
         self.present(shareInfo, animated: true, completion: nil)
     }
     
     
     @IBAction func dismissAction(_ sender: UIButtonX) {
-        print("123321")
         dismiss(animated: true, completion: nil)
     }
     
 
     
- 
-    
-    
-
-    //TODO: IF item is selected than go to PhotoPagingViewController
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //TODO: here must returning current image with current image but not today
         performSegue(withIdentifier: "DetailToPhoto", sender:  indexPath)
     }
     
@@ -171,6 +144,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
             for temp in testPlace.image{
                 photoVC.photoArray.append(temp)
             }
+            //TODO: REAL IMAGE
             photoVC.photoArray = self.testPlace.image
             photoVC.indexPath = sender as? IndexPath
         }
@@ -189,11 +163,13 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell
         
+        
         if testPlace.image.count != 0{
             cell?.photoImageView?.image = testPlace.image[indexPath.row]
         }else{
             cell?.photoImageView?.image = #imageLiteral(resourceName: "noPhotoIcon")
         }
+        
         return cell!
     }
     
@@ -218,22 +194,16 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
             cell.labelForReviewer.text = review.reviewer
         }
         
+        if let icon = place.icon{
+            cell.ImageViewForIcon?.image = icon
+        }else{
+            //TODO: Maybe  width = 0
+            cell.ImageViewForIcon?.isHidden = true
+        }
+        
         
         //TODO: go in class addSubview
         cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: testPlace.forReview[indexPath.row].reviewRatting!))
-        
-        
         return cell
-   
-    
-    
     }
-    
-  
-    
-   
-    
-    
-    
-    
 }
