@@ -126,9 +126,12 @@
                         <viewLayoutGuide key="safeArea" id="rAr-4V-gAC"/>
                     </view>
                     <connections>
+                        <outlet property="addres" destination="xav-yF-dD8" id="SME-6a-gr8"/>
                         <outlet property="category" destination="NbS-f2-U0h" id="X4S-Ky-XZP"/>
                         <outlet property="list" destination="Ral-kK-WS9" id="MdW-kt-gOT"/>
+                        <outlet property="name" destination="Ttn-Wg-0Nh" id="TTv-ax-uLs"/>
                         <outlet property="number" destination="dbx-Zd-WOM" id="fOr-ac-vPU"/>
+                        <outlet property="website" destination="cMF-Qo-bSv" id="5Ep-4h-cpt"/>
                         <segue destination="PI0-X9-7m9" kind="show" identifier="goBack" id="uxw-9o-seC"/>
                     </connections>
                 </viewController>
