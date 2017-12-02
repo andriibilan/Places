@@ -10,9 +10,9 @@ import UIKit
 import Firebase
 
 class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
-  
+   
     var map : MapViewController?
-    var list : ListViewController?
+    var listObj : ListViewController?
    
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
@@ -54,7 +54,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         super.viewDidLoad()
         listView.isHidden = true
         menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
- 
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -122,8 +122,8 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
             map = segue.destination as? MapViewController
         }
         if segue.identifier == "ListView" {
-            list = segue.destination as? ListViewController
-        
+           listObj = segue.destination as? ListViewController
+          
         }
 
 	}
@@ -131,9 +131,14 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     @IBAction func unwindFromSettings(segue: UIStoryboardSegue) {
         if mapView.isHidden == false {
             map?.updateData()
+             print("List hiidden? \(listView.isHidden)")
         } else {
-            print("List hiidden? \(listView.isHidden)")
-            list?.updateData()
+            if let listVC = listObj {
+                print("List hiidden? \(self.listView.isHidden)")
+                listVC.updateData()
+            }else{
+                print("ERRRORR")
+            }
         }
 
     }

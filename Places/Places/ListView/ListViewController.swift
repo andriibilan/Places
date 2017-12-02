@@ -96,7 +96,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		tableView.tableFooterView = UIView()
 		//tableView.estimatedRowHeight = 120
 		//tableView.rowHeight = UITableViewAutomaticDimension
-
+        
 		session = URLSession.shared
 		task 	= URLSessionDownloadTask()
 		cache	= NSCache()
