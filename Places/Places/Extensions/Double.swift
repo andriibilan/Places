@@ -9,6 +9,12 @@
 import Foundation
 
 extension Double {
+    var mm: Double{return self / 1000}
+    var m: Double{return self}
+    var km: Double{return self * 1000}
+    
+    var pow2: Double{return self*self}
+    
     func rounded(toPlaces places:Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor

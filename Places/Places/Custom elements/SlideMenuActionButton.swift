@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SlideMenuActionButton: UIButtonX {
+class SlideMenuActionButton: UIButtonExplicit {
 
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
 

@@ -32,7 +32,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var placeType: UILabel?
     
-    @IBOutlet weak var dismissButton: UIButtonX!
+    @IBOutlet weak var dismissButton: UIButtonExplicit!
     
     
     //
@@ -126,7 +126,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     
-    @IBAction func dismissAction(_ sender: UIButtonX) {
+    @IBAction func dismissAction(_ sender: UIButtonExplicit) {
         dismiss(animated: true, completion: nil)
     }
     

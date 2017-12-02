@@ -13,7 +13,7 @@ extension GooglePlacesManager{
     // MARK: - Fetching additional data
 
     /// Loads additional data: phone number, address, website, working schedule, photo references(used for fetching photos in future), reviews
-    func getAdditionalData(ofPlaceIndex placeIndex: Int?, ofPlace place: Place?, completion: @escaping (Place?) -> ()){
+    func getAdditionalData(ofPlaceIndex placeIndex: Int?, ofPlace place: Place?, completion: @escaping (Place?, String?) -> ()){
         let placeId: String
         let index: Int
         
@@ -49,6 +49,12 @@ extension GooglePlacesManager{
                     
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                     let dictionary = json as! [String: Any]
+                    
+                    if let errorMessage = dictionary["error_message"] as? String{
+                        completion(self?.foundedPlaces[index], "Additional Data gives: " + errorMessage)
+                        return
+                    }
+                    
                     if let place = dictionary["result"] as? [String: Any]{
                         self?.getPhoneNumber(of: place, forIndex: index)
                         self?.getAddress(of: place, forIndex: index)
@@ -57,7 +63,7 @@ extension GooglePlacesManager{
                         self?.getPhotoReferences(of: place, forIndex: index)
                         self?.getReviews(of: place, forIndex: index)
                     }
-                    completion(self?.foundedPlaces[index])
+                    completion(self?.foundedPlaces[index], nil)
                 } catch let jsonError{
                     print("\n\tcatched in \"getAdditionalData\": ")
                     print(jsonError)
