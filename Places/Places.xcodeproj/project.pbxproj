@@ -747,7 +747,6 @@
 				49E3C00F1FC6E12800400A06 /* UIImageViewX.swift in Sources */,
 				8A8C5C761FC57F3E00A834EA /* AppDelegate.swift in Sources */,
 				25316AEE1FCDBC6800CE29DE /* CategoriesViewCell.swift in Sources */,
-				528825CB1FCF0EA400C29BFE /* GooglePlacesManagerDelegate.swift in Sources */,
 				757042241FCB09620075FC87 /* User.swift in Sources */,
 				8A9BF77E1FC72238002E970C /* SettingsViewController.swift in Sources */,
 				25316AE41FCDB52B00CE29DE /* phoneFormatter.swift in Sources */,
