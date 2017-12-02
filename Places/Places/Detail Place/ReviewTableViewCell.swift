@@ -17,6 +17,8 @@ class ReviewTableViewCell: UITableViewCell {
     
     @IBOutlet weak var viewForRatting: UIView?
     
+    @IBOutlet weak var ImageViewForIcon: UIImageView?
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
