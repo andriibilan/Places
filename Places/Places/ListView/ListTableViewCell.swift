@@ -13,8 +13,8 @@ class ListTableViewCell: UITableViewCell {
 	
 	@IBOutlet weak var thumbnailImageView: UIImageView! {
 		didSet {
-			thumbnailImageView.layer.cornerRadius = thumbnailImageView.bounds.width / 2
-			thumbnailImageView.clipsToBounds = true
+//            thumbnailImageView.layer.cornerRadius = thumbnailImageView.bounds.width / 2
+//            thumbnailImageView.clipsToBounds = true
 		}
 	}
 	

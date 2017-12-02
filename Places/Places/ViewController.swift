@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
-    
+  
     var map : MapViewController?
     var list : ListViewController?
    
@@ -60,6 +60,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        
         print("fgh")
     }
     
@@ -122,18 +123,21 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         }
         if segue.identifier == "ListView" {
             list = segue.destination as? ListViewController
+        
         }
 
 	}
     
     @IBAction func unwindFromSettings(segue: UIStoryboardSegue) {
-        
         if mapView.isHidden == false {
             map?.updateData()
         } else {
+            print("List hiidden? \(listView.isHidden)")
             list?.updateData()
         }
+
     }
+    
     @IBAction func unwindFromProfile(segue: UIStoryboardSegue) {
        
     }
@@ -147,3 +151,4 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
 protocol OutputInterface {
     func updateData()
 }
+

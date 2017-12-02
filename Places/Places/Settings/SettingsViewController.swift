@@ -29,23 +29,6 @@ class SettingsViewController: UIViewController {
 	}
 	
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 2
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
-		if indexPath.row == 0 {
-			 return tableView.dequeueReusableCell(withIdentifier: "mapcell", for: indexPath)
-		} else {
-			return tableView.dequeueReusableCell(withIdentifier: "usercell", for: indexPath)
-		}
-		
-		return UITableViewCell()
-	}
-	
-	
-	
     
     override func viewDidLoad() {
         super.viewDidLoad()
