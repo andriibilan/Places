@@ -34,6 +34,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="kGH-RH-c2b" id="QLW-Bv-YNJ"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fht-dV-p8k">
                                 <rect key="frame" x="112.5" y="360" width="150" height="40"/>
@@ -66,7 +69,10 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="kGH-RH-c2b" id="DaD-12-qgW"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Epx-Ec-9vY">
                                 <rect key="frame" x="295" y="587" width="60" height="60"/>
@@ -108,7 +114,7 @@
                         <outlet property="emailTextField" destination="bbL-KY-9zT" id="dga-In-58Y"/>
                         <outlet property="logoImage" destination="dXP-vM-Qlc" id="zdA-Cn-uKE"/>
                         <outlet property="passwordTextfield" destination="f5p-Sg-uwl" id="Hil-Hc-FDS"/>
-                        <segue destination="Kik-Ih-YKc" kind="unwind" identifier="unwindFromLogin" unwindAction="unwindFromProfileWithSegue:" id="gwW-n9-p3f"/>
+                        <segue destination="Kik-Ih-YKc" kind="unwind" identifier="unwindToLogin" unwindAction="unwindFromProfileWithSegue:" id="gwW-n9-p3f"/>
                         <segue destination="MWf-8f-DvQ" kind="presentation" identifier="ShowProfile" id="clc-qp-B7p"/>
                     </connections>
                 </viewController>
@@ -496,6 +502,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
+                                                            <action selector="selectProfileImage:" destination="y1D-2B-g8X" eventType="touchUpInside" id="CBG-Xk-uhH"/>
                                                             <action selector="selectProfileImage:" destination="d7a-qM-Njr" eventType="touchUpInside" id="Cs9-u1-LWh"/>
                                                         </connections>
                                                     </button>
@@ -531,7 +538,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <connections>
-                                                            <outlet property="delegate" destination="d7a-qM-Njr" id="tvR-Uh-cri"/>
+                                                            <outlet property="delegate" destination="y1D-2B-g8X" id="6uD-xy-a2P"/>
                                                         </connections>
                                                     </textField>
                                                 </subviews>
@@ -566,6 +573,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="y1D-2B-g8X" id="f81-61-0bi"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -587,16 +597,16 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8Q-7S-x2I">
                                                 <rect key="frame" x="25" y="275" width="330" height="45"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+380 xx xxx-xx-xx" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2uX-cg-baM">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+38 (xxx) xx-xx-xxx" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2uX-cg-baM">
                                                         <rect key="frame" x="52" y="7" width="270" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="pYI-oW-kIf"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                                         <connections>
-                                                            <outlet property="delegate" destination="d7a-qM-Njr" id="MDD-iM-GP8"/>
+                                                            <outlet property="delegate" destination="y1D-2B-g8X" id="T0Q-nx-Kyu"/>
                                                         </connections>
                                                     </textField>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="old-typical-phone (2)" translatesAutoresizingMaskIntoConstraints="NO" id="o6W-Ed-hzi">
@@ -633,7 +643,10 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="y1D-2B-g8X" id="SzF-6P-7Wg"/>
+                                                        </connections>
                                                     </textField>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon - Password" translatesAutoresizingMaskIntoConstraints="NO" id="75g-Nm-Yev">
                                                         <rect key="frame" x="12" y="12" width="25" height="20"/>
@@ -672,6 +685,7 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="registerAction:" destination="y1D-2B-g8X" eventType="touchUpInside" id="JTH-Lq-cTB"/>
                                                     <action selector="registerAction:" destination="d7a-qM-Njr" eventType="touchUpInside" id="iPF-Ct-6uT"/>
                                                 </connections>
                                             </button>
@@ -685,7 +699,10 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="y1D-2B-g8X" id="t8z-kt-KvO"/>
+                                                        </connections>
                                                     </textField>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon - Password" translatesAutoresizingMaskIntoConstraints="NO" id="HdG-PC-Epg">
                                                         <rect key="frame" x="12" y="12" width="25" height="20"/>
@@ -780,7 +797,14 @@
                         <viewLayoutGuide key="safeArea" id="bHz-Yu-JsW"/>
                     </view>
                     <connections>
+                        <outlet property="confirmPassTextField" destination="XMF-9Y-UG5" id="1cV-Zh-ffN"/>
                         <outlet property="dismissButton" destination="ywi-8k-SP1" id="xMk-52-ndC"/>
+                        <outlet property="emailTextField" destination="jaS-Iw-Lhy" id="IGJ-LE-c1I"/>
+                        <outlet property="firstNameTextField" destination="Ff9-GJ-Qyt" id="h3o-YM-Uz8"/>
+                        <outlet property="passwordTextField" destination="3VP-xA-Ilx" id="4Vq-Xo-tJL"/>
+                        <outlet property="phoneTextField" destination="2uX-cg-baM" id="NcS-pr-RsT"/>
+                        <outlet property="profileImage" destination="ByN-84-xUx" id="QQt-Sd-30n"/>
+                        <outlet property="scrollView" destination="Gpl-Fq-Sdh" id="bl7-pQ-vRa"/>
                         <segue destination="MWf-8f-DvQ" kind="presentation" identifier="ShowProfileVC" id="01y-6W-2o8"/>
                         <segue destination="0Zf-z8-Y8Y" kind="unwind" identifier="unwindFromSignUp" unwindAction="unwindFromSignUpWithSegue:" id="mTW-R3-N0i"/>
                     </connections>
@@ -800,6 +824,6 @@
         <image name="street-map (1)" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="clc-qp-B7p"/>
+        <segue reference="01y-6W-2o8"/>
     </inferredMetricsTieBreakers>
 </document>

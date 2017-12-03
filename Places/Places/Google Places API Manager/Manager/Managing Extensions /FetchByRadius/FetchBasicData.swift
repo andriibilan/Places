@@ -12,9 +12,10 @@ import CoreLocation
 
 extension GooglePlacesManager{
     // MARK: - Fetching methods
+    
     /// Loads basic place data in given radius;
     /// loaded data: name, isOpen, location, icon, placeId, types, rating, photo, straightDistance
-    func fetchPlaces(completion: @escaping ([Place]?) -> ()){
+    func fetchPlaces(completion: @escaping ([Place]?, String?) -> ()){
         foundedPlaces.removeAll()
         allPlacesLoaded = false
         loadedPlaceTypes = 0
@@ -44,18 +45,23 @@ extension GooglePlacesManager{
     // MARK: - Fetching basic data
     
     /// Loads basic data values (by nearbysearch request): name, openingStatus, location, icon, placeId, types, rating, photo
-    private func getBasicData(from url: URL, completion: @escaping ([Place]?) -> ()){
+    private func getBasicData(from url: URL, completion: @escaping ([Place]?, String?) -> ()){
         URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
             if error != nil{
                 print("\n\tdataTask in \"fetchPlaces\": ")
                 print(error!)
                 return
             }
-            if self == nil {return}
             
             do{
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                 let dictionary = json as! [String: Any]
+                
+                if let errorMessage = dictionary["error_message"] as? String{
+                    completion(self?.foundedPlaces, "Basic Data gives: " + errorMessage)
+                    return
+                }
+                
                 let results = dictionary["results"] as! [[String: Any]]
                 
                 addingNewPlace:
@@ -86,7 +92,7 @@ extension GooglePlacesManager{
                 self?.loadedPlaceTypes += 1
                 self?.allPlacesLoaded = self?.loadedPlaceTypes == self?.filters.count
                 
-                completion(self?.foundedPlaces)
+                completion(self?.foundedPlaces, nil)
             } catch let jsonError{
                 print("\n\tcatched in \"fetchPlaces\": ")
                 print(jsonError)
@@ -168,7 +174,7 @@ extension GooglePlacesManager{
         }
     }
     /// Loads place photo (only 1)
-    private func getPhoto(of place: [String: Any], forIndex index: Int, completion: @escaping (Place?) -> ()){
+    private func getPhoto(of place: [String: Any], forIndex index: Int, completion: @escaping (Place?, String?) -> ()){
         if let photos = place["photos"] as? [[String: Any]]{
             if !photos.isEmpty{
                 if let photoReference = photos[0]["photo_reference"] as? String{
@@ -187,15 +193,13 @@ extension GooglePlacesManager{
                                 print(error!)
                                 return
                             }
-                            if self == nil {return}
-                            
                             print("\nPhotoRequest: " + jsonPhotoRequest)
                             
                             if let dataImage = data{
                                 if let image = UIImage(data: dataImage){
                                     self?.foundedPlaces[index].photo = image
                                     
-                                    completion(self?.foundedPlaces[index])
+                                    completion(self?.foundedPlaces[index], nil)
                                 }
                             }
                             }.resume()

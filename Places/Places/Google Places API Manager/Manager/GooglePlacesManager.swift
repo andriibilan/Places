@@ -13,40 +13,20 @@ import UIKit
 
 class GooglePlacesManager{
     // places storage
-     var foundedPlaces = [Place]()
-    var getFoundedPlaces: [Place]{
-        return foundedPlaces
-    }
+    var foundedPlaces = [Place]()
     // * * *
     
-     var apiKey: String = "none"
-    var getApiKey: String{
-        return apiKey
-    }
+    var apiKey: String = "none"
+    var radius: Int = 100.m
+    var currentLocation = Location.currentLocation
+    var filters = [PlaceType]()
     
-     var radius: Int = 100.m
-    var getRadius: Int{
-        return radius
-    }
-     var currentLocation = Location.currentLocation
-    var getCurrentLocation: Location{
-        return currentLocation
-    }
-     var filters = [PlaceType]()
-    var getFilters: [PlaceType]{
-        return filters
-    }
-    
-     var allPlacesLoaded = false
-    var isAllPlacesLoaded: Bool{
-        return allPlacesLoaded
-    }
-    
-     var loadedPlaceTypes = 0
+    var allPlacesLoaded = false
+    var loadedPlaceTypes = 0
     
     // MARK: - Init
     /// Initialization of nearby search
-    init(apiKey: String, radius: Int, currentLocation: Location, filters: [PlaceType], completion: @escaping ([Place]?) -> ()) {
+    init(apiKey: String, radius: Int, currentLocation: Location, filters: [PlaceType], completion: @escaping ([Place]?, String?) -> ()) {
         self.apiKey = apiKey
         self.radius = radius
         self.currentLocation = currentLocation

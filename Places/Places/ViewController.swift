@@ -10,13 +10,13 @@ import UIKit
 import Firebase
 
 class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
-    
+   
     var map : MapViewController?
-    var list : ListViewController?
+    var listObj : ListViewController?
    
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
-    @IBOutlet weak var menuView: UIViewX!
+    @IBOutlet weak var menuView: UIViewExplicit!
     
     @IBOutlet weak var segment: UISegmentedControl!
     
@@ -54,12 +54,13 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         super.viewDidLoad()
         listView.isHidden = true
         menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
- 
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        
         print("fgh")
     }
     
@@ -121,19 +122,27 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
             map = segue.destination as? MapViewController
         }
         if segue.identifier == "ListView" {
-            list = segue.destination as? ListViewController
+           listObj = segue.destination as? ListViewController
+          
         }
 
 	}
     
     @IBAction func unwindFromSettings(segue: UIStoryboardSegue) {
-        
         if mapView.isHidden == false {
             map?.updateData()
+             print("List hiidden? \(listView.isHidden)")
         } else {
-            list?.updateData()
+            if let listVC = listObj {
+                print("List hiidden? \(self.listView.isHidden)")
+                listVC.updateData()
+            }else{
+                print("ERRRORR")
+            }
         }
+
     }
+    
     @IBAction func unwindFromProfile(segue: UIStoryboardSegue) {
        
     }
@@ -147,3 +156,4 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
 protocol OutputInterface {
     func updateData()
 }
+

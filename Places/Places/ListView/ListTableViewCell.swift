@@ -11,10 +11,10 @@ import UIKit
 
 class ListTableViewCell: UITableViewCell {
 	
-	@IBOutlet weak var thumbnailImageView: UIImageView! {
+	@IBOutlet weak var thumbnailImageView: UIImageViewExplicit! {
 		didSet {
-			thumbnailImageView.layer.cornerRadius = thumbnailImageView.bounds.width / 2
-			thumbnailImageView.clipsToBounds = true
+//            thumbnailImageView.layer.cornerRadius = thumbnailImageView.bounds.width / 2
+//            thumbnailImageView.clipsToBounds = true
 		}
 	}
 	
@@ -30,7 +30,7 @@ class ListTableViewCell: UITableViewCell {
 			type.numberOfLines = 0
 		}
 	}
-	@IBOutlet weak var openClosedImageView: UIImageView!
+	@IBOutlet weak var openClosedImageView: UIImageViewExplicit!
 	@IBOutlet weak var distance: UILabel!
 		{
 		didSet {

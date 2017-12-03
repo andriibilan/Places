@@ -26,12 +26,13 @@ class LoginViewController: UIViewController, AuthServiceDelegate,UIViewControlle
 	}
 	
 	@IBAction func dismissButtonTaped(_ sender: UIButton) {
-        performSegue(withIdentifier: "unwindFromLogin", sender: self)
+        performSegue(withIdentifier: "unwindToLogin", sender: self)
 	}
     
     override func viewDidLoad() {
         super.viewDidLoad()
          authService.delegate = self
+        self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
     }
     
     func transitionToProfile() {
@@ -76,6 +77,10 @@ class LoginViewController: UIViewController, AuthServiceDelegate,UIViewControlle
     @IBAction func unwindFromSignUp(segue: UIStoryboardSegue) {
     }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     @IBAction func signUpButton(_ sender: Any) {
         performSegue(withIdentifier: "ShowSignUp", sender: nil)
     }
@@ -92,8 +97,20 @@ class LoginViewController: UIViewController, AuthServiceDelegate,UIViewControlle
             secondVC.modalPresentationStyle = .custom
         }
     }
-        
-
     
+}
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+}
+// MARK: hidden keyboard when button tap
+extension UIViewController {
+    func hideKeyboardOnTap(_ selector: Selector) {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: selector)
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
 }
 

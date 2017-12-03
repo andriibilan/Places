@@ -29,11 +29,13 @@ class ProfileViewController: UIViewController {
     @IBOutlet var headerImageView:UIImageView!
     @IBOutlet var headerBlurImageView:UIImageView!
     var blurredHeaderImageView:UIImageView?
-   
+    
+    private var messageText : String!
     private let userID = (Auth.auth().currentUser?.uid)!
     private let ref = Database.database().reference()
     var authService = AuthService()
-	
+	var validator = Validator()
+    
     @IBOutlet weak var dismissButton: UIButton!{
 		didSet{
 			dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
@@ -42,7 +44,7 @@ class ProfileViewController: UIViewController {
 	}
 	
 	@IBAction func dismissButtonTaped(_ sender: UIButton) {
-          authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
+        updateProfile()
         performSegue(withIdentifier: "unwindFromProfile", sender: self)
        
     }
@@ -95,8 +97,35 @@ class ProfileViewController: UIViewController {
                 self.profileImage.image = UIImage(data: data!)
             }
         })
+    }
+    
+    func updateProfile() {
+        if (nameTextField.text?.isEmpty)! {
+            messageText = "Please complete all fields."
+            alertAction(messageText)
+            
+            return
+        }
+        if !validator.isValidEmail(email: emailTextField.text!) {
+            messageText = "Please enter your correct email."
+            alertAction(messageText)
+            
+            return
+        }
+         authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
         
-        
+//        if !validator.isValidPhoneNumber(testStr: phoneTextField.text!) {
+//            messageText = "Please enter your correct phone number."
+//            alertAction(messageText)
+//        } else {
+//            
+//        }
+    }
+    
+    func alertAction(_ message: String) {
+        let alertMessage = UIAlertController(title: "Oops!", message: message , preferredStyle: .alert)
+        alertMessage.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertMessage, animated: true, completion: nil)
     }
   
     
@@ -117,10 +146,10 @@ class ProfileViewController: UIViewController {
     @IBAction func chooseImage(_ sender: Any) {
         chooseImage()
     }
-//    @IBAction func editButton(_ sender: Any) {
-////        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
-//        performSegue(withIdentifier: "unwindFromProfile", sender: self)
-//    }
+    @IBAction func editButton(_ sender: Any) {
+//        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
+        performSegue(withIdentifier: "unwindFromProfile", sender: self)
+    }
     
 }
 

@@ -16,19 +16,24 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
     @IBOutlet private weak var passwordTextField: UITextField!
     @IBOutlet private weak var confirmPassTextField: UITextField!
     @IBOutlet private weak var firstNameTextField: UITextField!
-    @IBOutlet private weak var lastNameTextField: UITextField!
     @IBOutlet private weak var phoneTextField: UITextField!
     
     @IBOutlet private weak var profileImage: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     private var messageText : String!
     var authService = AuthService()
     var validator = Validator()
-    
+    var activeField: UITextField?
     override func viewDidLoad() {
         super.viewDidLoad()
         authService.delegate = self
+        self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
+        
     }
+    
+    
+    
     @IBOutlet weak var dismissButton: UIButton!{
         didSet{
             dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
@@ -36,17 +41,17 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
         }
     }
     @IBAction func dismissButtonTaped(_ sender: UIButton) {
-          performSegue(withIdentifier: "unwindFromSignUp", sender: self)
+        performSegue(withIdentifier: "unwindFromSignUp", sender: self)
     }
     
     @IBAction func selectProfileImage(_ sender: Any) {
         chooseImage()
     }
     
-    @IBAction func selectSignInButton(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
-        self.present(vc!, animated: true, completion: nil)
-    }
+    //    @IBAction func selectSignInButton(_ sender: Any) {
+    //        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
+    //        self.present(vc!, animated: true, completion: nil)
+    //    }
     
     func transitionToProfile() {
         let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
@@ -58,33 +63,45 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
         if (firstNameTextField.text?.isEmpty)! {
             messageText = "Please complete all fields."
             alertAction(messageText)
+            
+            return
         }
         if !validator.isValidEmail(email: emailTextField.text!) {
             messageText = "Please enter your correct email."
             alertAction(messageText)
+            
+            return
         }
-        if !validator.isValidPhoneNumber(testStr: phoneTextField.text!) {
-            messageText = "Please enter your correct phone number."
-            alertAction(messageText)
-        }
+        //        if !validator.isValidPhoneNumber(testStr: phoneTextField.text!) {
+        //            messageText = "Please enter your correct phone number."
+        //            alertAction(messageText)
+        //
+        //            return
+        //        }
         if !validator.isValidPassword(password: passwordTextField.text!) && passwordTextField.text!.count <= 8 {
             messageText = "Passwords must contain at least 8 characters."
             alertAction(messageText)
+            
+            return
         }
         if passwordTextField.text != confirmPassTextField.text {
             messageText = "Confirmed password not matched please try again."
             alertAction(messageText)
+            
+            return
         }
         if profileImage.image == nil {
             messageText = "You need to add photo, If you want create user !"
             alertAction(messageText)
+            
+            return
         }
-        else
-        {
-            let pictureData = UIImageJPEGRepresentation(self.profileImage.image!, 0.20)
-            authService.createUser(userName: firstNameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, password: passwordTextField.text!, pictureData: pictureData!)
-//            performSegue(withIdentifier: "ShowProfileVC", sender: nil)
-        }
+        //        else
+        //        {
+        let pictureData = UIImageJPEGRepresentation(self.profileImage.image!, 0.20)
+        authService.createUser(userName: firstNameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, password: passwordTextField.text!, pictureData: pictureData!)
+        //            performSegue(withIdentifier: "ShowProfileVC", sender: nil)
+        //        }
     }
     
     func alertAction(_ message: String) {
@@ -93,12 +110,17 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
         present(alertMessage, animated: true, completion: nil)
     }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    
 }
 
 //MARK: ImagePickerController
 extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-     func chooseImage() {
+    func chooseImage() {
         
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -147,6 +169,27 @@ extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationCo
 //MARK: TextField
 extension SignUpViewController: UITextFieldDelegate {
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == passwordTextField {
+            let scrollPoint : CGPoint = CGPoint.init(x:0, y: passwordTextField.frame.origin.y + 30)
+            scrollView.setContentOffset(scrollPoint, animated: true)
+        }
+        else if textField == confirmPassTextField {
+            let scrollPoint : CGPoint = CGPoint.init(x:0, y: confirmPassTextField.frame.origin.y + 90)
+            scrollView.setContentOffset(scrollPoint, animated: true)
+        }
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint.zero, animated: true)
+    }
+    
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         switch textField {
@@ -155,12 +198,8 @@ extension SignUpViewController: UITextFieldDelegate {
             let newLength = text.count + string.count - range.length
             return newLength <= 10
             
-        case lastNameTextField:
-            guard let text = lastNameTextField.text else { return true }
-            let newLength = text.count + string.count - range.length
-            return newLength <= 15
-            
         case phoneTextField:
+            
             var originalText = textField.text
             
             if (originalText?.count)! == 0
@@ -196,6 +235,8 @@ extension SignUpViewController: UITextFieldDelegate {
         }
         return true
     }
+    
 }
+
 
 
