@@ -189,10 +189,10 @@
                                 </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpA-aE-Hki">
-                                <rect key="frame" x="0.0" y="90" width="160" height="487"/>
+                                <rect key="frame" x="0.0" y="100" width="160" height="477"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dvC-Vm-Gg7">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="487"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dvC-Vm-Gg7">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="477"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="sectionIndexColor" red="0.95623749489999998" green="0.3225761056" blue="0.33518427610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -297,7 +297,7 @@
                         <constraints>
                             <constraint firstItem="HFl-mO-hU1" firstAttribute="leading" secondItem="5Pq-cN-7gF" secondAttribute="leading" id="2hc-jg-V0F"/>
                             <constraint firstItem="HFl-mO-hU1" firstAttribute="top" secondItem="5Pq-cN-7gF" secondAttribute="top" id="8RG-rd-MgE"/>
-                            <constraint firstItem="jpA-aE-Hki" firstAttribute="top" secondItem="J1c-lw-TzP" secondAttribute="top" constant="70" id="CaG-X2-HKE"/>
+                            <constraint firstItem="jpA-aE-Hki" firstAttribute="top" secondItem="J1c-lw-TzP" secondAttribute="top" constant="80" id="CaG-X2-HKE"/>
                             <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="Ny9-BK-1UC" secondAttribute="bottom" constant="20" id="Faf-pQ-j1Y"/>
                             <constraint firstAttribute="trailing" secondItem="HFl-mO-hU1" secondAttribute="trailing" id="Jgj-z7-C4o"/>
                             <constraint firstItem="Ny9-BK-1UC" firstAttribute="leading" secondItem="J1c-lw-TzP" secondAttribute="leading" constant="20" id="NSy-qv-bgw"/>

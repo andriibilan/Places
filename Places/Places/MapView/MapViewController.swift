@@ -139,6 +139,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let loc = CLLocation(latitude: pressCoordinate.latitude as CLLocationDegrees, longitude: pressCoordinate.longitude as CLLocationDegrees)
             let loc1 = Location(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude )
 
+
             self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: loc1 , filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
@@ -439,22 +440,32 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
        
     }
     
+    var preventAnimation = Set<IndexPath>()
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.alpha = 0
+        print(preventAnimation.count)
         // first version
         //cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
-        
+        //print(indexPath.row)
         //second version
-        cell.layer.transform = CATransform3DScale(CATransform3DIdentity, -1, 1, 1)
-        UIView.animate(withDuration: 0.7) {
-            cell.alpha = 1
-            cell.layer.transform = CATransform3DIdentity
+        if !preventAnimation.contains(indexPath) {
+            cell.alpha = 0
+            preventAnimation.insert(indexPath)
+            DispatchQueue.main.async {
+                cell.layer.transform = CATransform3DScale(CATransform3DIdentity, -1, 1, 1)
+                UIView.animate(withDuration: 0.7) {
+                    cell.alpha = 1
+                    cell.layer.transform = CATransform3DIdentity
+                }
+            }
         }
+        
+        
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var accessory = UITableViewCellAccessoryType.none
-        
+       
         if selectedCell.contains(indexPath.row) {
             selectedCell.remove(indexPath.row)
             print("cancel filter: \(nameFilterArray[indexPath.row])")
@@ -463,17 +474,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             accessory = .checkmark
             print("choose filter: \(nameFilterArray[indexPath.row])")
             }
-
-
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = accessory
         }
         
     }
+   
+    var lastContentOffset: CGFloat = 0
     
-    
-    
-    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+         self.lastContentOffset = scrollView.contentOffset.y
+        //print(lastContentOffset)
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (self.lastContentOffset < scrollView.contentOffset.y) {
+            print("Move to botton")
+            // moved to top
+        } else if (self.lastContentOffset > scrollView.contentOffset.y) {
+              print("Move to top")
+            
+            // moved to bottom
+        } else {
+            // didn't move
+        }
+    }
     
     
     func addRadiusCircle(location: CLLocation){

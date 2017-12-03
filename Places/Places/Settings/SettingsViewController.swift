@@ -11,7 +11,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
-	@IBOutlet weak var tableview: UITableView!
+
 	
 	@IBOutlet weak var dismissButton: UIButton!{
 		didSet{
@@ -27,9 +27,7 @@ class SettingsViewController: UIViewController {
         
 
 	}
-	
-	
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
@@ -44,7 +42,7 @@ class SettingsViewController: UIViewController {
 
     
     
-
+   
 
 
 	
