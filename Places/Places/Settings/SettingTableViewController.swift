@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 class SettingTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
     
@@ -41,7 +41,7 @@ class SettingTableViewController: UITableViewController {
     }
     
     func valueForMetres() {
-        let radiusValue = defaults.integer(forKey: "Radius") //UserDefaults.standard.integer(forKey: "Radius")
+        let radiusValue = defaults.integer(forKey: "Radius")
         if radiusValue < 1000 {
             searchRadius.text = "Search Radius: \(radiusValue ) m"
         } else {
@@ -68,11 +68,22 @@ class SettingTableViewController: UITableViewController {
         super.viewDidLoad()
        updateSliderValue(distanceIsKms: UserDefaults.standard.bool(forKey: "distanceIskm"))
         print(Float(defaults.double(forKey: "Radius")))
-
     }
+    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             headerView.textLabel?.textColor = UIColor.black
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            guard Auth.auth().currentUser != nil else {
+                return ""
+            }
+                return "User Settings"
+        } else {
+            return "Map Settings"
         }
     }
     
@@ -96,7 +107,41 @@ class SettingTableViewController: UITableViewController {
                 break
             }
         }
- 
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 1 {
+            guard Auth.auth().currentUser != nil else {
+                return 0.0001
+            }
+            return UITableViewAutomaticDimension
+        } else {
+            return UITableViewAutomaticDimension
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 1 {
+            guard Auth.auth().currentUser != nil else {
+                return 0.0001
+            }
+            return UITableViewAutomaticDimension
+        } else {
+            return UITableViewAutomaticDimension
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 {
+            guard Auth.auth().currentUser != nil else {
+                return 0.0001
+            }
+            return UITableViewAutomaticDimension
+        } else {
+            return UITableViewAutomaticDimension
+            
+        }
     }
     
     func changeEmail() {
