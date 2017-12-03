@@ -182,9 +182,6 @@
                                             <constraint firstAttribute="height" constant="40" id="loU-tR-IPe"/>
                                         </constraints>
                                         <state key="normal" image="edit_user_filled"/>
-                                        <connections>
-                                            <action selector="editButton:" destination="DC1-Lf-80d" eventType="touchUpInside" id="MP6-58-c15"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yP1-1M-vsR">
                                         <rect key="frame" x="29" y="103" width="120" height="125"/>
@@ -258,7 +255,6 @@
                     <size key="freeformSize" width="600" height="900"/>
                     <connections>
                         <outlet property="dismissButton" destination="IQY-Px-P9W" id="5CZ-Pi-0hN"/>
-                        <outlet property="editButton" destination="m6i-Jm-5Gq" id="SRn-6L-ACG"/>
                         <outlet property="emailTextField" destination="0Fq-qv-GL1" id="6kg-eV-aIc"/>
                         <outlet property="header" destination="rDF-65-yGB" id="fRt-zj-nPL"/>
                         <outlet property="headerLabel" destination="00X-5M-ylQ" id="Y2O-oD-1g6"/>
@@ -267,6 +263,7 @@
                         <outlet property="profileImage" destination="3jV-vF-b8J" id="7kR-fh-qu3"/>
                         <outlet property="scrollView" destination="ocR-hJ-o4L" id="Niu-hx-uxO"/>
                         <segue destination="eTI-dH-yYF" kind="unwind" identifier="unwindFromProfile" unwindAction="unwindFromProfileWithSegue:" id="DTd-If-flW"/>
+                        <segue destination="eTI-dH-yYF" kind="unwind" identifier="unwindLogOut" unwindAction="unwindFromSignUpWithSegue:" id="4aG-fO-Zdb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cMn-CM-ILM" userLabel="First Responder" sceneMemberID="firstResponder"/>

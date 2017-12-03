@@ -29,6 +29,15 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
         super.viewDidLoad()
         authService.delegate = self
     }
+    @IBOutlet weak var dismissButton: UIButton!{
+        didSet{
+            dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
+            dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+        }
+    }
+    @IBAction func dismissButtonTaped(_ sender: UIButton) {
+          performSegue(withIdentifier: "unwindFromSignUp", sender: self)
+    }
     
     @IBAction func selectProfileImage(_ sender: Any) {
         chooseImage()

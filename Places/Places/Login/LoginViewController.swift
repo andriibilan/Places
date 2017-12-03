@@ -9,13 +9,15 @@
 import UIKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController, AuthServiceDelegate{
+class LoginViewController: UIViewController, AuthServiceDelegate,UIViewControllerTransitioningDelegate {
     
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-	var authService = AuthService()
 	
+    var authService = AuthService()
+	private let transition = CustomTransitionAnimator()
+    
 	@IBOutlet weak var dismissButton: UIButton!{
 		didSet{
 			dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
@@ -33,8 +35,7 @@ class LoginViewController: UIViewController, AuthServiceDelegate{
     }
     
     func transitionToProfile() {
-        let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
-        self.present(profileVC, animated: true, completion: nil)
+         performSegue(withIdentifier: "ShowProfile", sender: nil)
     }
     
     @IBAction func loginAction(_ sender: Any) {
@@ -54,6 +55,45 @@ class LoginViewController: UIViewController, AuthServiceDelegate{
             authService.logIn(email: email, password: password)
         }
     }
+    
+    //MARK:- Custom Transition
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .present
+        transition.startingPoint = dismissButton.center
+        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        
+        return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .dismiss
+        transition.startingPoint = dismissButton.center
+        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        
+        return transition
+    }
+    
+    @IBAction func unwindFromSignUp(segue: UIStoryboardSegue) {
+    }
+    
+    @IBAction func signUpButton(_ sender: Any) {
+        performSegue(withIdentifier: "ShowSignUp", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowSignUp" {
+            let secondVC = segue.destination as! SignUpViewController
+            secondVC.transitioningDelegate = self
+            secondVC.modalPresentationStyle = .custom
+        }
+        if segue.identifier == "ShowProfile" {
+            let secondVC = segue.destination as! ProfileViewController
+            secondVC.transitioningDelegate = self
+            secondVC.modalPresentationStyle = .custom
+        }
+    }
+        
+
     
 }
 

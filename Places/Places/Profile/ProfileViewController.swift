@@ -52,11 +52,7 @@ class ProfileViewController: UIViewController {
         getProfileData()
 
     }
-    @IBAction func unwindHome(segue:UIStoryboardSegue) { }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        getProfileData()
-//    }
+  
     override func viewDidAppear(_ animated: Bool) {
         // Header - Image
         headerImageView = UIImageView(frame: header.bounds)
@@ -110,7 +106,9 @@ class ProfileViewController: UIViewController {
                 try? Auth.auth().signOut()
                 
                 if Auth.auth().currentUser == nil {
-                    performSegue(withIdentifier: "unwindFromProfile", sender: self)
+//                    performSegue(withIdentifier: "unwindLogOut", sender: self)
+                    let profileVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
+                            self.present(profileVC, animated: true, completion: nil)
                 }
             }
         }
@@ -119,14 +117,10 @@ class ProfileViewController: UIViewController {
     @IBAction func chooseImage(_ sender: Any) {
         chooseImage()
     }
-    @IBAction func editButton(_ sender: Any) {
-//        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
-        performSegue(withIdentifier: "unwindFromProfile", sender: self)
-    }
-    
-    @IBAction func saveToFirebase(_ sender: Any) {
-        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
-    }
+//    @IBAction func editButton(_ sender: Any) {
+////        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
+//        performSegue(withIdentifier: "unwindFromProfile", sender: self)
+//    }
     
 }
 
