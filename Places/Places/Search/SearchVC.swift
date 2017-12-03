@@ -24,7 +24,12 @@ class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
             radius: 100.m,
             currentLocation: Location.Lviv,
             filters: [.restaurant, .bar],
-            completion: {_ in
+            completion: {_, errorMessage  in
+                if errorMessage != nil{
+                    print("\t\(errorMessage!)")
+                    self.showAlert(message: "Cannot load places! Try it tomorrow ;)")
+                }
+                
                 DispatchQueue.main.async { [weak self] in
                     self?.tableViewForPlaces.reloadData()
                 }
@@ -65,9 +70,7 @@ class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
 		print(UserDefaults.standard.integer(forKey: "Radius"))
 		
 		performSegue(withIdentifier: "exitFromSearch", sender: self)
-		
-		
-	}
+    }
 }
 
 
@@ -75,44 +78,38 @@ extension SearchVC{
     // MARK: - TableView DataSource methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableViewForPlaces.numberOfViewedRows = 0
-        return googlePlacesManager.getFoundedPlaces.count
+        return googlePlacesManager.foundedPlaces.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let places = googlePlacesManager.getFoundedPlaces
+        let places = googlePlacesManager.foundedPlaces
         
         if places.isEmpty {
             return tableView.dequeueReusableCell(withIdentifier: "No Item", for: indexPath)
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Item", for: indexPath) as! ItemCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Item", for: indexPath) as! ListTableViewCell
             let place = places[indexPath.row]
             
             // Loading cell with data
-            cell.placeName.text = place.name ?? "no name"
+            
+            cell.name.text = place.name ?? "No name"
             
             switch place.isOpen{
             case true?:
-                cell.placeOpenStatus.text = "Open"
-                // switch color
+                cell.openClosedImageView.image = #imageLiteral(resourceName: "open-sign")
             case false?:
-                cell.placeOpenStatus.text = "Closed"
-                // switch color
+                cell.openClosedImageView.image = #imageLiteral(resourceName: "closed-sign")
             case nil:
-                cell.placeOpenStatus.text = "Unknown"
-                // switch color
+                cell.openClosedImageView.image = #imageLiteral(resourceName: "questionMark")
             }
             
             if let distance = place.distance{
-                cell.distanceToPlace.text = String(describing: distance)
+                cell.distance.text = String(describing: distance)
             } else{
-                cell.distanceToPlace.text = "unknown m."
+                cell.distance.text = "unknown m."
             }
             
-            if let titlePhoto = place.icon{
-                cell.previewImage.image = titlePhoto
-            } else{
-                cell.previewImage.image = cell.previewImage.defaultImage
-            }
+            cell.thumbnailImageView.image = place.icon ?? cell.thumbnailImageView.defaultImage
             
             tableViewForPlaces.numberOfViewedRows += 1
             

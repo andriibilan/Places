@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class UIImageViewX: UIImageView {
+class UIImageViewExplicit: UIImageView {
     
     // MARK: - Properties
     
@@ -61,6 +61,9 @@ class UIImageViewX: UIImageView {
             //layer.shadowOffset.height = shadowOffsetY
         }
     }
+    
+    @IBInspectable
+    var defaultImage: UIImage? = nil
 
     // MARK: - FUNCTIONS
     override func layoutSubviews() {

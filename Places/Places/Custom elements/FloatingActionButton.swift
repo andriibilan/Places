@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FloatingActionButton: UIButtonX {
+class FloatingActionButton: UIButtonExplicit {
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         

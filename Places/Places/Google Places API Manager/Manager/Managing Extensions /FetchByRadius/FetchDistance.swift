@@ -11,7 +11,7 @@ import UIKit
 
 extension GooglePlacesManager{
     /// Loads distance from "currentLocation" to place location (by distancematrix request)
-    func getRealDistance(toPlaceIndex placeIndex: Int?, toPlace place: Place?, completion: @escaping (Place?) -> ()){
+    func getRealDistance(toPlaceIndex placeIndex: Int?, toPlace place: Place?, completion: @escaping (Place?, String?) -> ()){
         let index: Int
         
         if placeIndex != nil{
@@ -43,11 +43,15 @@ extension GooglePlacesManager{
                         print(error!)
                         return
                     }
-                    if self == nil {return}
                     
                     do{
                         let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                         if let dictionary = json as? [String: Any]{
+                            if let errorMessage = dictionary["error_message"] as? String{
+                                completion(self?.foundedPlaces[index], "Distance gives: " + errorMessage)
+                                return
+                            }
+                            
                             if let rows = dictionary["rows"] as? [[String: Any]]{
                                 if !rows.isEmpty{
                                     let elements = rows[0]["elements"] as! [[String: Any]]
@@ -58,7 +62,7 @@ extension GooglePlacesManager{
                                     self?.foundedPlaces[index].distance = distanceValue
                                     self?.foundedPlaces[index].distanceFromLocation = self?.currentLocation
                                     
-                                    completion(self?.foundedPlaces[index])
+                                    completion(self?.foundedPlaces[index], nil)
                                 }
                             }
                         }

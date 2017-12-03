@@ -16,7 +16,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
    
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
-    @IBOutlet weak var menuView: UIViewX!
+    @IBOutlet weak var menuView: UIViewExplicit!
     
     @IBOutlet weak var segment: UISegmentedControl!
     
