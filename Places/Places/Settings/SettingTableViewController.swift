@@ -12,21 +12,62 @@ class SettingTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
     
     
+    @IBOutlet weak var distanceSegment: UISegmentedControl!
     @IBOutlet weak var searchRadius: UILabel!
     @IBOutlet weak var sliderValue: UISlider!
     
     @IBAction func sliderRadius(_ sender: UISlider) {
+        let isDistanceAreKms = defaults.bool(forKey: "distanceIskm")
         let slider = lroundf(sender.value)
-        searchRadius.text = "Search Radius: \(slider) m"
         defaults.set(slider, forKey: "Radius")
-        
+        if isDistanceAreKms == true {
+            valueForMetres()
+        } else {
+           valueForMiles()
+        }
+    }
+    
+    @IBAction func changeDistance(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            defaults.set(true, forKey: "distanceIskm")
+            valueForMetres()
+        case 1:
+            defaults.set(false, forKey: "distanceIskm")
+            valueForMiles()
+        default:
+            break
+        }
+    }
+    
+    func valueForMetres() {
+        let radiusValue = defaults.integer(forKey: "Radius") //UserDefaults.standard.integer(forKey: "Radius")
+        if radiusValue < 1000 {
+            searchRadius.text = "Search Radius: \(radiusValue ) m"
+        } else {
+            searchRadius.text = "Search Radius: \( (Double(radiusValue).kilometr).rounded(toPlaces: 2) ) km"
+        }
+    }
+    
+    func valueForMiles() {
+        searchRadius.text = "Search Radius: \(String((defaults.double(forKey: "Radius").miles).rounded(toPlaces: 2))) mi"
+    }
+    
+    func updateSliderValue (distanceIsKms: Bool) {
+        sliderValue.setValue(Float(defaults.integer(forKey: "Radius")) ,animated: true)
+        if distanceIsKms == true {
+            distanceSegment.selectedSegmentIndex = 0
+            valueForMetres()
+        } else {
+            distanceSegment.selectedSegmentIndex = 1
+           valueForMiles()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            sliderValue.setValue(Float(defaults.integer(forKey: "Radius")) ,animated: true)
-            searchRadius.text = "Search Radius: \(String(defaults.integer(forKey: "Radius"))) m"
-        print(Float(defaults.integer(forKey: "Radius")))
+       updateSliderValue(distanceIsKms: UserDefaults.standard.bool(forKey: "distanceIskm"))
+        print(Float(defaults.double(forKey: "Radius")))
 
     }
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -55,6 +96,7 @@ class SettingTableViewController: UITableViewController {
                 break
             }
         }
+ 
     }
     
     func changeEmail() {
@@ -157,4 +199,14 @@ class SettingTableViewController: UITableViewController {
         present(mapTypeAlertController, animated: true, completion: nil)
         
     }
+    
+
+
+
 }
+
+
+
+
+
+
