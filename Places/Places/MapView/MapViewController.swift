@@ -27,8 +27,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     self.addCurrentLocation(coords: center)
                 }}
             
-            
-
+        
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 if self.googlePlacesManager.allPlacesLoaded{
@@ -81,10 +80,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     @IBOutlet weak var profileButton: UIButton!
     
-    @IBAction func profileButtonAction(_ sender: Any) {
-        let appDel : AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDel.showProfile()
-    }
+//    @IBAction func profileButtonAction(_ sender: Any) {
+//        let appDel : AppDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDel.showProfile()
+//    }
     
     @IBOutlet weak var sideMenuConstraint: NSLayoutConstraint!
     
@@ -215,13 +214,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         filterTableView.delegate = self
         filterTableView.dataSource = self
-        
-      
 
 
         googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
+
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
+
                 print("\t\(errorMessage!)")
                 self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                 DispatchQueue.main.sync {
@@ -247,6 +246,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
+
 
         sideMenuConstraint.constant = -160
         // Do any additional setup after loading the view.

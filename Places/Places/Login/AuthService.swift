@@ -14,6 +14,7 @@ import FirebaseAuth
 
 protocol AuthServiceDelegate: class {
     func transitionToProfile()
+    func showAlertAction(text: String)
 }
 
 class AuthService {
@@ -32,6 +33,7 @@ class AuthService {
                 self.setUserInfo(userName: userName, email: email, phone: phone, password: password,pictureData: pictureData, user: user)
             } else {
                 print(error?.localizedDescription as Any)
+                self.delegate?.showAlertAction(text: (error?.localizedDescription)!)
             }
         }
     }
@@ -128,7 +130,8 @@ class AuthService {
                 print("You have successfully logged in")
                 self.delegate?.transitionToProfile()
             } else {
-                print(error!.localizedDescription)
+                print("Error \(error!.localizedDescription)")
+                self.delegate?.showAlertAction(text: error!.localizedDescription)
             }
         }
     }
