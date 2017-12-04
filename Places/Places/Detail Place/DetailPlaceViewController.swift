@@ -58,7 +58,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         testPlace.installDefaultValues()
         //
         
-        /*
+        
         
         //
         //TODO: height 0 if data is null
@@ -88,7 +88,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         str.removeLast()
         str.removeLast()
         placeType?.text = str
-        */
+ 
         //
         
     feedbackTableView.reloadData()
