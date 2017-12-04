@@ -15,10 +15,8 @@ var pressCoordinate = Location(latitude: 49.841856, longitude: 24.031530)
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
     
     func updateData() {
-
       let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
-
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
                 print("\t\(errorMessage!)")
@@ -162,7 +160,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 
 
-            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
+            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: self.checkFilter(filter: self.filterArray), completion: { (foundedPlaces, errorMessage) in
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
                     if self.googlePlacesManager.allPlacesLoaded{
@@ -219,7 +217,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterTableView.dataSource = self
 
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
@@ -501,7 +499,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
         }
     }
+    
+    func checkFilter(filter: [PlaceType]) -> [PlaceType] {
+        if filter .isEmpty {
+            return PlaceType.all
+        } else {
+            return filter
+        }
+    }
+    
     var filterArray = [PlaceType]()
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var accessory = UITableViewCellAccessoryType.none
       // print(selectedCell)
