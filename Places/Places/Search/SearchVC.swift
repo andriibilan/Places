@@ -20,7 +20,7 @@ class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
         super.viewDidLoad()
         
         googlePlacesManager = GooglePlacesManager(
-            apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc",
+            apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM",
             radius: 100.m,
             currentLocation: Location.Lviv,
             filters: [.restaurant, .bar],
