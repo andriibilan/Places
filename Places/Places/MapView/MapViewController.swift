@@ -10,20 +10,30 @@ import UIKit
 import MapKit
 import CoreLocation
 
-var pressCoordinate = CLLocationCoordinate2D()
+var pressCoordinate = Location(latitude: 49.841856, longitude: 24.031530)
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
     
     func updateData() {
-
-        let location = Location(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude )
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: location, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
-
+      let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
+            if errorMessage != nil {
+                //self.locationManagerConfigurate()
+                print("\t\(errorMessage!)")
+                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+                DispatchQueue.main.sync {
+                    //self.addAnnotations(coords: self.places)
+                    self.addCurrentLocation(coords: center)
+                }}
+            
+            
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 if self.googlePlacesManager.allPlacesLoaded{
                     DispatchQueue.main.sync {
-                        self.addAnnotations(coords: foundedPlaces)
+                        self.addAnnotations(coords: self.places)
+                        self.addCurrentLocation(coords: center)
+                       
                         //                    self.updateData()
                     }
                 }
@@ -115,7 +125,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
         locationManager.stopUpdatingLocation()
         let pressPoint = sender.location(in: map)
-        pressCoordinate = map.convert(pressPoint, toCoordinateFrom: map)
+        let location = map.convert(pressPoint, toCoordinateFrom: map)
         let actionSheet = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
         
         if let subview = actionSheet.view.subviews.first, let actionSheet = subview.subviews.first {
@@ -135,22 +145,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.map.removeOverlays(self.map.overlays)
            
             let annotation = MKPointAnnotation()
-            annotation.coordinate = pressCoordinate
+            annotation.coordinate = location
             annotation.title = "Selected place"
             annotation.subtitle = "Add another place"
             self.map.addAnnotation(annotation)
             
-            let loc = CLLocation(latitude: pressCoordinate.latitude as CLLocationDegrees, longitude: pressCoordinate.longitude as CLLocationDegrees)
-            let loc1 = Location(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude )
+            let loc = CLLocation(latitude: location.latitude as CLLocationDegrees, longitude: location.longitude as CLLocationDegrees)
+            pressCoordinate = Location(latitude: location.latitude, longitude: location.longitude )
 
 
 
-            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: loc1 , filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
                     if self.googlePlacesManager.allPlacesLoaded{
                         DispatchQueue.main.sync {
-                            self.addAnnotations(coords: foundedPlaces)
+                            self.addAnnotations(coords: self.places)
                             //                    self.updateData()
                         }
                     }
@@ -186,11 +196,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
       
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
-            if errorMessage != nil{
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
+            if errorMessage != nil {
+                //self.locationManagerConfigurate()
                 print("\t\(errorMessage!)")
                 self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
-            }
+                DispatchQueue.main.sync {
+                    self.locationManagerConfigurate()
+                }}
 
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
@@ -198,7 +211,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 if self.googlePlacesManager.allPlacesLoaded{
                     DispatchQueue.main.sync {
                         self.locationManagerConfigurate()
-                        //                    self.updateData()
+                        //                  self.updateData()
                     }
                 }
             }
@@ -267,10 +280,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         //map.removeAnnotations(map.annotations)
-        let location = locations.last! as CLLocation
-        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        let loc = locations.last! as CLLocation
+        pressCoordinate = Location(latitude: loc.coordinate.latitude, longitude: loc.coordinate.longitude)
+        let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
         region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        let loc = CLLocation(latitude: location.coordinate.latitude as CLLocationDegrees, longitude: location.coordinate.longitude as CLLocationDegrees)
+        
         
         if map.annotations.count != 0 {
             let annotation = self.map.annotations[0]
@@ -280,8 +294,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //        let radius =  UserDefaults.standard.integer(forKey: "Radius")
      
         addRadiusCircle(location: loc)
-        let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-        addCurrentLocation(coords: coordinate)
+        addCurrentLocation(coords: center)
+        addAnnotations(coords: places)
        locationManager.stopUpdatingLocation()
         //locationManager.startUpdatingLocation()
         
@@ -295,6 +309,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         map.setRegion(region!, animated: true)
         map.addAnnotation(myAnnotation)
         addAnnotations(coords: places)
+        let center = CLLocation(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
+        addRadiusCircle(location: center)
         //addAnnotations(coords: locationData)
         
     }
@@ -302,13 +318,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         switch status {
         case .notDetermined:
-            let coordinate = Location(latitude: 49.841856, longitude: 24.031530)
+            let coordinate = pressCoordinate
             print("NotDetermined")
         case .restricted:
-            let coordinate = Location(latitude: 49.841856, longitude: 24.031530)
+            let coordinate = pressCoordinate
             print("Restricted")
         case .denied:
-            let coordinate = Location(latitude: 49.841856, longitude: 24.031530)
+            let coordinate = pressCoordinate
             print("Denied")
         case .authorizedAlways:
             print("AuthorizedAlways")
@@ -407,7 +423,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         /////////////////////////////////////////////////////////////////////////
 
 
-        let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
+        let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beauty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
 
         let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
 
