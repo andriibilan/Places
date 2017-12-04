@@ -18,6 +18,9 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet weak var searchRadius: UILabel!
     @IBOutlet weak var sliderValue: UISlider!
     
+    
+    @IBOutlet weak var mapTypeSegment: UISegmentedControl!
+    
     @IBAction func sliderRadius(_ sender: UISlider) {
         let isDistanceAreKms = defaults.bool(forKey: "distanceIskm")
         let slider = lroundf(sender.value)
@@ -66,15 +69,40 @@ class SettingTableViewController: UITableViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       updateSliderValue(distanceIsKms: UserDefaults.standard.bool(forKey: "distanceIskm"))
-        print(Float(defaults.double(forKey: "Radius")))
+    
+    @IBAction func changeMapType(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            self.defaults.set(1, forKey: "mapType")
+        case 1:
+            self.defaults.set(2, forKey: "mapType")
+        default:
+            break
+        }
     }
     
+    func updateMapTypeValue(map: Int) {
+        switch map {
+        case 1:
+            mapTypeSegment.selectedSegmentIndex = 0
+        case 2:
+            mapTypeSegment.selectedSegmentIndex = 1
+        default:
+            break
+        }
+    }
+    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateSliderValue(distanceIsKms: defaults.bool(forKey: "distanceIskm"))
+        updateMapTypeValue(map: defaults.integer(forKey: "mapType"))
+        print(Float(defaults.double(forKey: "Radius")))
+    }
+
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.textColor = UIColor.black
+            headerView.textLabel?.textColor = UIColor.white
         }
     }
     
@@ -93,23 +121,13 @@ class SettingTableViewController: UITableViewController {
         if indexPath.section == 1 {
             switch indexPath.row {
             case 0 :
-                print("touch 1 row")
                 changeEmail()
             case 1:
-                print("touch 2 row")
                 changePassword()
             default:
                 break
             }
-        } else {
-            switch indexPath.row {
-            case 1:
-                changeMapType()
-            default:
-                break
-            }
         }
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -148,7 +166,7 @@ class SettingTableViewController: UITableViewController {
     
     func changeEmail() {
         let emailAlertController = UIAlertController(title: "e-mail", message: "Please write new e-mail", preferredStyle: .alert)
-        changeAlertProperties(alertController: emailAlertController, color: .green)
+        changeAlertProperties(alertController: emailAlertController, color: .white)
         emailAlertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (alert: UIAlertAction) in
             if self.ValidatorForEmail(isEmail: emailAlertController.textFields![0].text!) {
                 self.updateMail(mailString: emailAlertController.textFields![0].text!)
@@ -179,7 +197,7 @@ class SettingTableViewController: UITableViewController {
         var newPassword = ""
         var confirmPassword = ""
         let passwordAllertController = UIAlertController(title: "Password", message: "Please write new password", preferredStyle: .alert)
-        changeAlertProperties(alertController: passwordAllertController, color: .green)
+        changeAlertProperties(alertController: passwordAllertController, color: .white)
         passwordAllertController.addAction(UIAlertAction(title: "Save", style: .default, handler: {(alert: UIAlertAction) in
             newPassword = passwordAllertController.textFields![0].text!
             confirmPassword = passwordAllertController.textFields![1].text!
@@ -216,15 +234,6 @@ class SettingTableViewController: UITableViewController {
         }
     }
     
-    func changeAlertProperties(alertController: UIAlertController, color: UIColor) {
-        let subview = alertController.view.subviews.first! as UIView
-        let alertContentView = subview.subviews.first! as UIView
-        alertContentView.backgroundColor = color
-        alertContentView.layer.cornerRadius = 15;
-        alertContentView.layer.borderWidth = 3;
-        alertContentView.layer.borderColor = UIColor.white.cgColor
-    }
-    
     func resultAlert(text: String, message: String?, color: UIColor) {
         let alertBad = UIAlertController(title: text, message: message, preferredStyle: .alert)
         changeAlertProperties(alertController: alertBad, color: color)
@@ -232,6 +241,15 @@ class SettingTableViewController: UITableViewController {
             sleep(1)
             self.dismiss(animated: true, completion: nil)
         })
+    }
+    
+    func changeAlertProperties(alertController: UIAlertController, color: UIColor) {
+        let subview = alertController.view.subviews.first! as UIView
+        let alertContentView = subview.subviews.first! as UIView
+        alertContentView.backgroundColor = color
+        alertContentView.layer.cornerRadius = 15;
+        alertContentView.layer.borderWidth = 3;
+        alertContentView.layer.borderColor = UIColor.white.cgColor
     }
     
     func ValidatorForEmail( isEmail: String)-> Bool {
@@ -242,29 +260,7 @@ class SettingTableViewController: UITableViewController {
             return false
         }
     }
-    
-    
-    func changeMapType() {
-        let mapTypeAlertController = UIAlertController(title: "Change map type", message: "Please choose map type", preferredStyle: .alert)
-        changeAlertProperties(alertController: mapTypeAlertController, color: .green)
-        let standartType = UIAlertAction(title: "Standart", style: .default) { (action) in
-            self.defaults.set(1, forKey: "mapType")
-            print(UserDefaults.standard.integer(forKey: "mapType"))
-        }
-        let satelliteType = UIAlertAction(title: "Satellite", style: .default) { (action) in
-            self.defaults.set(2, forKey: "mapType")
-            print(UserDefaults.standard.integer(forKey: "mapType"))
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
-        
-        mapTypeAlertController.addAction(standartType)
-        mapTypeAlertController.addAction(satelliteType)
-        mapTypeAlertController.addAction(cancelAction)
-        present(mapTypeAlertController, animated: true, completion: nil)
-    }
-    
-    
-    
+
 
 }
 
