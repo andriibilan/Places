@@ -44,6 +44,7 @@
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon User" translatesAutoresizingMaskIntoConstraints="NO" id="3jV-vF-b8J" userLabel="Avatar Image" customClass="UIImageViewExplicit" customModule="Places" customModuleProvider="target">
                                         <rect key="frame" x="29" y="103" width="120" height="125"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="QPj-IO-c5o"/>
                                             <constraint firstAttribute="height" constant="125" id="j09-kk-prJ"/>
@@ -94,7 +95,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
-                                                    <outlet property="delegate" destination="DC1-Lf-80d" id="Ml9-JQ-T6N"/>
+                                                    <outlet property="delegate" destination="DC1-Lf-80d" id="FJ8-p7-koc"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
@@ -138,6 +139,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="DC1-Lf-80d" id="SGX-AI-Ytm"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -167,25 +171,17 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c1P-sa-CjL">
-                                        <rect key="frame" x="174" y="193" width="176" height="35"/>
+                                        <rect key="frame" x="174" y="193" width="406" height="35"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="176" id="aKw-ca-orF"/>
                                             <constraint firstAttribute="height" constant="35" id="ufO-RK-z1b"/>
                                         </constraints>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="25"/>
                                         <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6i-Jm-5Gq">
-                                        <rect key="frame" x="552" y="130" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="loU-tR-IPe"/>
-                                        </constraints>
-                                        <state key="normal" image="edit_user_filled"/>
                                         <connections>
-                                            <action selector="editButton:" destination="DC1-Lf-80d" eventType="touchUpInside" id="MP6-58-c15"/>
+                                            <outlet property="delegate" destination="DC1-Lf-80d" id="twW-Q9-9Ba"/>
                                         </connections>
-                                    </button>
+                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yP1-1M-vsR">
                                         <rect key="frame" x="29" y="103" width="120" height="125"/>
                                         <connections>
@@ -198,18 +194,16 @@
                                     <constraint firstItem="1Zf-EL-ONB" firstAttribute="leading" secondItem="iTJ-QA-lo9" secondAttribute="leading" id="1zn-qv-POx"/>
                                     <constraint firstItem="yP1-1M-vsR" firstAttribute="leading" secondItem="3jV-vF-b8J" secondAttribute="leading" id="80T-Bt-OWa"/>
                                     <constraint firstItem="iTJ-QA-lo9" firstAttribute="centerX" secondItem="ocR-hJ-o4L" secondAttribute="centerX" id="EHd-aY-Vd6"/>
+                                    <constraint firstAttribute="trailing" secondItem="c1P-sa-CjL" secondAttribute="trailing" constant="20" id="FaB-cS-Vby"/>
                                     <constraint firstItem="5hl-8S-7XP" firstAttribute="centerX" secondItem="ocR-hJ-o4L" secondAttribute="centerX" constant="272" id="Fzj-J2-QFk"/>
                                     <constraint firstItem="iTJ-QA-lo9" firstAttribute="leading" secondItem="ocR-hJ-o4L" secondAttribute="leading" id="GtG-AT-yNP"/>
                                     <constraint firstItem="XuK-vI-200" firstAttribute="top" secondItem="ocR-hJ-o4L" secondAttribute="top" constant="470" id="PpJ-fa-AKd"/>
-                                    <constraint firstItem="m6i-Jm-5Gq" firstAttribute="top" secondItem="5hl-8S-7XP" secondAttribute="bottom" constant="45" id="Q8G-9m-aL2"/>
                                     <constraint firstItem="yP1-1M-vsR" firstAttribute="bottom" secondItem="3jV-vF-b8J" secondAttribute="bottom" id="Rsg-12-siB"/>
                                     <constraint firstAttribute="bottom" secondItem="XuK-vI-200" secondAttribute="bottom" id="Um4-MQ-aES"/>
                                     <constraint firstItem="yP1-1M-vsR" firstAttribute="trailing" secondItem="3jV-vF-b8J" secondAttribute="trailing" id="VWU-Qk-tBi"/>
                                     <constraint firstItem="yP1-1M-vsR" firstAttribute="top" secondItem="3jV-vF-b8J" secondAttribute="top" id="WFy-26-Uw3"/>
                                     <constraint firstAttribute="trailing" secondItem="XuK-vI-200" secondAttribute="trailing" id="bAo-nI-tNo"/>
-                                    <constraint firstItem="m6i-Jm-5Gq" firstAttribute="trailing" secondItem="5hl-8S-7XP" secondAttribute="trailing" id="e0B-Ma-W7h"/>
                                     <constraint firstItem="iTJ-QA-lo9" firstAttribute="top" secondItem="c1P-sa-CjL" secondAttribute="bottom" constant="30" id="eju-5P-r6y"/>
-                                    <constraint firstItem="m6i-Jm-5Gq" firstAttribute="leading" secondItem="5hl-8S-7XP" secondAttribute="leading" id="f0K-wj-f8c"/>
                                     <constraint firstAttribute="trailing" secondItem="iTJ-QA-lo9" secondAttribute="trailing" id="h80-4T-ty5"/>
                                     <constraint firstItem="XuK-vI-200" firstAttribute="leading" secondItem="ocR-hJ-o4L" secondAttribute="leading" id="jOr-hA-wyq"/>
                                     <constraint firstItem="3jV-vF-b8J" firstAttribute="leading" secondItem="ocR-hJ-o4L" secondAttribute="leading" constant="29" id="lmo-rO-oL3"/>
@@ -258,7 +252,6 @@
                     <size key="freeformSize" width="600" height="900"/>
                     <connections>
                         <outlet property="dismissButton" destination="IQY-Px-P9W" id="5CZ-Pi-0hN"/>
-                        <outlet property="editButton" destination="m6i-Jm-5Gq" id="SRn-6L-ACG"/>
                         <outlet property="emailTextField" destination="0Fq-qv-GL1" id="6kg-eV-aIc"/>
                         <outlet property="header" destination="rDF-65-yGB" id="fRt-zj-nPL"/>
                         <outlet property="headerLabel" destination="00X-5M-ylQ" id="Y2O-oD-1g6"/>
@@ -267,6 +260,8 @@
                         <outlet property="profileImage" destination="3jV-vF-b8J" id="7kR-fh-qu3"/>
                         <outlet property="scrollView" destination="ocR-hJ-o4L" id="Niu-hx-uxO"/>
                         <segue destination="eTI-dH-yYF" kind="unwind" identifier="unwindFromProfile" unwindAction="unwindFromProfileWithSegue:" id="DTd-If-flW"/>
+                        <segue destination="eTI-dH-yYF" kind="unwind" identifier="logOut" unwindAction="unwindFromSignUpWithSegue:" id="gaN-3r-pXy"/>
+                        <segue destination="72d-gh-mKX" kind="presentation" identifier="showLoginAfterLogOut" id="HOo-N1-CEE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cMn-CM-ILM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -274,11 +269,18 @@
             </objects>
             <point key="canvasLocation" x="1008" y="-429.08545727136436"/>
         </scene>
+        <!--Login-->
+        <scene sceneID="c2z-Yx-tkz">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" id="72d-gh-mKX" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kuP-D2-uw9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2237" y="-448"/>
+        </scene>
     </scenes>
     <resources>
         <image name="211602-64" width="32" height="32"/>
         <image name="Icon - Mail" width="24" height="18"/>
-        <image name="edit_user_filled" width="37" height="37"/>
         <image name="exit" width="39" height="39"/>
         <image name="icon User" width="100" height="100"/>
         <image name="old-typical-phone (2)" width="512" height="512"/>

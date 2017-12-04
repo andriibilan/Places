@@ -63,7 +63,6 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
         
-        print("fgh")
     }
     
     @IBAction func menuTapped(_ sender: FloatingActionButton) {
