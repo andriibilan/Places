@@ -13,7 +13,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
  
     func updateData() {
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
             
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
@@ -103,7 +103,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		cache	= NSCache()
 		
         
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
@@ -159,7 +159,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
             
             //place type
             if place?.types != nil {
-                cell.type.text = place?.types[0].rawValue.capitalized
+               // cell.type.text = place?.types[0].rawValue
             }
             
             //Open/Closed
