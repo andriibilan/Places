@@ -283,9 +283,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZ7-mN-XYi">
-                                <rect key="frame" x="291" y="366" width="64" height="64"/>
+                                <rect key="frame" x="300" y="529" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="fZ7-mN-XYi" secondAttribute="height" multiplier="1:1" id="pGR-Ud-0Nd"/>
+                                    <constraint firstAttribute="width" constant="50" id="351-uj-XzJ"/>
+                                    <constraint firstAttribute="height" constant="50" id="Sph-DJ-NkD"/>
                                 </constraints>
                                 <state key="normal" image="2703073-64"/>
                                 <connections>
@@ -298,11 +299,11 @@
                             <constraint firstItem="HFl-mO-hU1" firstAttribute="leading" secondItem="5Pq-cN-7gF" secondAttribute="leading" id="2hc-jg-V0F"/>
                             <constraint firstItem="HFl-mO-hU1" firstAttribute="top" secondItem="5Pq-cN-7gF" secondAttribute="top" id="8RG-rd-MgE"/>
                             <constraint firstItem="jpA-aE-Hki" firstAttribute="top" secondItem="J1c-lw-TzP" secondAttribute="top" constant="80" id="CaG-X2-HKE"/>
+                            <constraint firstItem="J1c-lw-TzP" firstAttribute="trailing" secondItem="fZ7-mN-XYi" secondAttribute="trailing" constant="25" id="DIr-LL-aal"/>
                             <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="Ny9-BK-1UC" secondAttribute="bottom" constant="20" id="Faf-pQ-j1Y"/>
                             <constraint firstAttribute="trailing" secondItem="HFl-mO-hU1" secondAttribute="trailing" id="Jgj-z7-C4o"/>
                             <constraint firstItem="Ny9-BK-1UC" firstAttribute="leading" secondItem="J1c-lw-TzP" secondAttribute="leading" constant="20" id="NSy-qv-bgw"/>
-                            <constraint firstAttribute="bottom" secondItem="fZ7-mN-XYi" secondAttribute="bottom" constant="237" id="SH7-Be-cpf"/>
-                            <constraint firstAttribute="trailing" secondItem="fZ7-mN-XYi" secondAttribute="trailing" constant="20" id="X3v-DB-vqH"/>
+                            <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="fZ7-mN-XYi" secondAttribute="bottom" constant="88" id="edw-Lr-Q0u"/>
                             <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="jpA-aE-Hki" secondAttribute="bottom" constant="90" id="nOX-EX-x6c"/>
                             <constraint firstItem="jpA-aE-Hki" firstAttribute="leading" secondItem="J1c-lw-TzP" secondAttribute="leading" id="pP2-3r-bkg"/>
                             <constraint firstAttribute="bottom" secondItem="HFl-mO-hU1" secondAttribute="bottom" id="x6g-nc-txe"/>
@@ -312,6 +313,7 @@
                     <navigationItem key="navigationItem" id="DAY-vo-2an"/>
                     <connections>
                         <outlet property="compassButton" destination="fZ7-mN-XYi" id="2Be-zB-wcz"/>
+                        <outlet property="compassButtonConstraint" destination="edw-Lr-Q0u" id="zTz-AF-u7O"/>
                         <outlet property="filterButton" destination="Ny9-BK-1UC" id="Gcr-P0-B9h"/>
                         <outlet property="filterTableView" destination="dvC-Vm-Gg7" id="6Y1-3v-t36"/>
                         <outlet property="map" destination="HFl-mO-hU1" id="dop-oM-jhB"/>
@@ -525,6 +527,6 @@
         <image name="filter" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NOk-4w-6xs"/>
+        <segue reference="okD-G1-lk4"/>
     </inferredMetricsTieBreakers>
 </document>

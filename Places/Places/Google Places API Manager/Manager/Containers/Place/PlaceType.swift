@@ -9,23 +9,23 @@
 import Foundation
 
 enum PlaceType: String{
-    case bar
-    case cafe
-    case restaurant
-    case bank
-    case night_club
-    case museum
-    case beauty_salon
-    case pharmacy
-    case hospital
-    case bus_station
-    case gas_station
-    case university
-    case police
-    case church
-    case cemetery
-    case park
-    case gym
+    case bar  //"Bar"
+    case cafe  //"Cafe"
+    case restaurant  //"Restaurant"
+    case bank  //"Bank"
+    case night_club = "Night Club"
+    case museum = "Museum"
+    case beauty_salon = "Beauty Salon"
+    case pharmacy = "Pharmacy"
+    case hospital = "Hospital"
+    case bus_station = "Bus Station"
+    case gas_station = "Gas Station"
+    case university = "University"
+    case police = "Police"
+    case church = "Church"
+    case cemetery = "Cemetery"
+    case park = "Park"
+    case gym = "Gym"
     
     static var all: [PlaceType]{
         return [

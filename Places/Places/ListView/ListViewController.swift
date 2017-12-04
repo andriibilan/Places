@@ -102,6 +102,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		task 	= URLSessionDownloadTask()
 		cache	= NSCache()
 		
+
         
         googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
             if let foundedPlaces = foundedPlaces {
@@ -132,6 +133,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return filterOpenOnly ? openPlaces.count : places.count
@@ -159,7 +161,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
             
             //place type
             if place?.types != nil {
-                cell.type.text = place?.types[0].rawValue.capitalized
+               // cell.type.text = place?.types[0].rawValue
             }
             
             //Open/Closed
