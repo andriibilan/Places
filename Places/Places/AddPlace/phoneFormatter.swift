@@ -37,18 +37,28 @@ class phoneNumberFormatter {
     }
     
     func backspace() {
+        var pos: Int = 0
         if current > 0 {
             current -= 1
             curStr[position[current]] = "_"
+            pos = position[current] - 1
         }
         display.text = String(curStr)
+        if let cursorPosition = display.position(from: display.beginningOfDocument, offset: pos) {
+            display.selectedTextRange = display.textRange(from: cursorPosition, to: cursorPosition)
+        }
     }
     
     func printNumber(newDigit: Character) {
+        var pos: Int = 0
         if current < position.count {
+            pos = position[current] + 1
             curStr[position[current]] = newDigit
             current += 1
         }
         display.text = String(curStr)
+        if let cursorPosition = display.position(from: display.beginningOfDocument, offset: pos) {
+            display.selectedTextRange = display.textRange(from: cursorPosition, to: cursorPosition)
+        }
     }
 }

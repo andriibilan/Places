@@ -145,7 +145,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
                 photoVC.photoArray.append(temp)
             }
             //TODO: REAL IMAGE
-            photoVC.photoArray = self.testPlace.image
+            photoVC.photoArray = self.place.photos
             photoVC.indexPath = sender as? IndexPath
         }
     }

@@ -41,7 +41,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fht-dV-p8k">
                                 <rect key="frame" x="112.5" y="360" width="150" height="40"/>
-                                <color key="backgroundColor" red="0.2275260389" green="0.67915946250000003" blue="0.54944974179999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.22745098039215686" green="0.67915946250000003" blue="0.54944974179999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="PEc-Xc-qeS"/>
                                     <constraint firstAttribute="width" constant="150" id="vqi-nO-K3z"/>
