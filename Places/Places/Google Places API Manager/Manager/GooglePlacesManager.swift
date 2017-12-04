@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andrew. All rights reserved.
 //
 
-// json nearby request example: https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.7858956,-122.4067728&radius=50&key=AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM
+// json nearby request example: https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.7858956,-122.4067728&radius=50&key=AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ
 
 import Foundation
 import UIKit

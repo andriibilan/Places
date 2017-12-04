@@ -72,7 +72,7 @@ extension GooglePlacesManager{
             }
         }
         
-        if placeFromFoundedPlaces.photoReferences.isEmpty{
+        if placeFromFoundedPlaces.reviews.isEmpty{
             getAdditionalData(ofPlaceIndex: index, ofPlace: nil, completion: loadPhotos)
         } else{
             loadPhotos(of: placeFromFoundedPlaces, errorMessage: nil)

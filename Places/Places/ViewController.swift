@@ -63,7 +63,6 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
         
-        print("fgh")
     }
     
     @IBAction func menuTapped(_ sender: FloatingActionButton) {
@@ -143,7 +142,6 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         }
         if segue.identifier == "ListView" {
            listObj = segue.destination as? ListViewController
-          
         }
 	}
     
@@ -159,17 +157,13 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
                 print("ERRRORR")
             }
         }
-        
     }
     
     @IBAction func unwindFromProfile(segue: UIStoryboardSegue) {
-       
     }
     
 	@IBAction func unwindFromSearch(segue: UIStoryboardSegue) {
-		
 	}
-    
 }
 
 protocol OutputInterface {
