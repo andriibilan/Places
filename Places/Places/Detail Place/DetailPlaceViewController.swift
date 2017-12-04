@@ -58,7 +58,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         testPlace.installDefaultValues()
         //
         
-        /*
+        
         
         //
         //TODO: height 0 if data is null
@@ -88,7 +88,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         str.removeLast()
         str.removeLast()
         placeType?.text = str
-        */
+ 
         //
         
     feedbackTableView.reloadData()
@@ -145,7 +145,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
                 photoVC.photoArray.append(temp)
             }
             //TODO: REAL IMAGE
-            photoVC.photoArray = self.testPlace.image
+            photoVC.photoArray = self.place.photos
             photoVC.indexPath = sender as? IndexPath
         }
     }
@@ -156,7 +156,8 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     //function for returning number of items in section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return testPlace.image.count
+        print("photos counter: \(place.photos.count)")
+        return place.photos.count
     }
     
     //function for filling my cell
@@ -164,8 +165,9 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell
         
         
-        if testPlace.image.count != 0{
-            cell?.photoImageView?.image = testPlace.image[indexPath.row]
+        if place.photos.count != 0{
+        //    cell?.photoImageView?.image = testPlace.image[indexPath.row]
+            cell?.photoImageView?.image = place.photos[indexPath.row]
         }else{
             cell?.photoImageView?.image = #imageLiteral(resourceName: "noPhotoIcon")
         }
@@ -178,14 +180,28 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     //MARK: Table View Data Source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testPlace.forReview.count
+        print("review count:\(place.reviews.count)")
+        return place.reviews.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let review = testPlace.forReview[indexPath.row]
+        
+        
+        //let review = testPlace.forReview[indexPath.row]
+        let review = place.reviews[indexPath.row]
+        
         
         let cell  = feedbackTableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as! ReviewTableViewCell
         
+        
+        cell.labelForReview.text = review.text
+        cell.labelForReview.backgroundColor? = UIColor(red:   1.0,green: 0.7, blue:  CGFloat(indexPath.row) / CGFloat(testPlace.forReview.count - 1) * 0.8,alpha: 1.0)
+        cell.labelForReviewer.text = review.author
+        cell.labelForReviewer.textColor = UIColor.white
+        cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: Double(review.rating!)))
+        cell.ImageViewForIcon?.image = loadImageFromPath(path: review.profilePhotoUrl!)
+        
+        /*
         cell.labelForReview.text = review.review
         cell.labelForReview.backgroundColor? = UIColor(red:   1.0,green: 0.7, blue:  CGFloat(indexPath.row) / CGFloat(testPlace.forReview.count - 1) * 0.8,alpha: 1.0)
         
@@ -212,6 +228,29 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         //TODO: go in class addSubview
         cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: testPlace.forReview[indexPath.row].reviewRatting!))
+        
+        */
         return cell
     }
+}
+/*
+func loadImageFromPath(path: String) -> UIImage? {
+    let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+    let imageURL = URL(fileURLWithPath: documentDirectoryPath.appendingPathComponent(path))
+    do {
+        let imageData = try Data(contentsOf: imageURL)
+        return UIImage(data: imageData)
+    } catch {
+        print(error.localizedDescription)
+    }
+    return nil
+}
+*/
+func loadImageFromPath(path: String) -> UIImage? {
+    if let url = URL(string: path){
+        if let urlContents = try? Data(contentsOf: url){
+            return UIImage(data: urlContents)
+        }
+    }
+    return nil
 }

@@ -13,7 +13,8 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
    
     var map : MapViewController?
     var listObj : ListViewController?
-   
+    var menuIsOpen = false
+    
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
     @IBOutlet weak var menuView: UIViewExplicit!
@@ -32,6 +33,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
             break
         }
     }
+    
 
 	
    
@@ -61,10 +63,10 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
         
-        print("fgh")
     }
     
     @IBAction func menuTapped(_ sender: FloatingActionButton) {
+        animateThemeView(expand: !menuIsOpen)
         UIView.animate(withDuration: 0.3, animations: {
             if self.menuView.transform == .identity {
                 self.menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
@@ -72,6 +74,23 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
                 self.menuView.transform = .identity
             }
         })
+    }
+    
+    //MARK:- Custom compass animations
+    
+    func animateThemeView(expand: Bool) {
+        menuIsOpen = expand
+        if menuIsOpen == true {
+            map?.compassButtonConstraint.constant = 200
+            UIView.animate(withDuration: 2.0, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        } else {
+            map?.compassButtonConstraint.constant = 90
+            UIView.animate(withDuration: 2.0, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
     }
 	
 	
@@ -123,7 +142,6 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         }
         if segue.identifier == "ListView" {
            listObj = segue.destination as? ListViewController
-          
         }
 
 	}
@@ -140,17 +158,13 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
                 print("ERRRORR")
             }
         }
-
     }
     
     @IBAction func unwindFromProfile(segue: UIStoryboardSegue) {
-       
     }
     
 	@IBAction func unwindFromSearch(segue: UIStoryboardSegue) {
-		
 	}
-    
 }
 
 protocol OutputInterface {
