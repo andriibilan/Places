@@ -31,6 +31,9 @@
 		493649111FD0646B00C95EDC /* Places In Current Location.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 493649051FD0646B00C95EDC /* Places In Current Location.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		493649171FD0649F00C95EDC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 493649161FD0649F00C95EDC /* MainInterface.storyboard */; };
 		493649191FD064C700C95EDC /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493649181FD064C700C95EDC /* TodayTableViewCell.swift */; };
+		496189ED1FD593D200C99499 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493649091FD0646B00C95EDC /* TodayViewController.swift */; };
+		496189EE1FD593DB00C99499 /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493649181FD064C700C95EDC /* TodayTableViewCell.swift */; };
+		496189F21FD5969400C99499 /* Unknown.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 496189F11FD5969300C99499 /* Unknown.jpeg */; };
 		49D395C11FCD85A8003FCC29 /* SlideMenuActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D395C01FCD85A8003FCC29 /* SlideMenuActionButton.swift */; };
 		49E3C0091FC6D18E00400A06 /* UIButtonExplicit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C0081FC6D18E00400A06 /* UIButtonExplicit.swift */; };
 		49E3C00B1FC6D19300400A06 /* UIViewExplicit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00A1FC6D19300400A06 /* UIViewExplicit.swift */; };
@@ -142,6 +145,7 @@
 		4936490E1FD0646B00C95EDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		493649161FD0649F00C95EDC /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		493649181FD064C700C95EDC /* TodayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTableViewCell.swift; sourceTree = "<group>"; };
+		496189F11FD5969300C99499 /* Unknown.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Unknown.jpeg; sourceTree = "<group>"; };
 		49D395C01FCD85A8003FCC29 /* SlideMenuActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuActionButton.swift; sourceTree = "<group>"; };
 		49E3C0081FC6D18E00400A06 /* UIButtonExplicit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExplicit.swift; sourceTree = "<group>"; };
 		49E3C00A1FC6D19300400A06 /* UIViewExplicit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExplicit.swift; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				493649091FD0646B00C95EDC /* TodayViewController.swift */,
+				496189F11FD5969300C99499 /* Unknown.jpeg */,
 				493649181FD064C700C95EDC /* TodayTableViewCell.swift */,
 				493649161FD0649F00C95EDC /* MainInterface.storyboard */,
 				4936490E1FD0646B00C95EDC /* Info.plist */,
@@ -585,6 +590,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				496189F21FD5969400C99499 /* Unknown.jpeg in Resources */,
 				493649171FD0649F00C95EDC /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -695,6 +701,7 @@
 				528825CE1FCF0EA400C29BFE /* FetchByName.swift in Sources */,
 				757042261FCB097B0075FC87 /* AuthService.swift in Sources */,
 				25316AEC1FCDBC2500CE29DE /* DlistViewController.swift in Sources */,
+				496189ED1FD593D200C99499 /* TodayViewController.swift in Sources */,
 				528825B31FCEF55800C29BFE /* Int.swift in Sources */,
 				8A8FBD861FD0129A00C1F397 /* Dynamic.swift in Sources */,
 				2BCDF2331FC83DE500EA96F0 /* TestModelPlace.swift in Sources */,
@@ -718,6 +725,7 @@
 				49D395C11FCD85A8003FCC29 /* SlideMenuActionButton.swift in Sources */,
 				2B4BA9151FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift in Sources */,
 				528825D21FCF0EA400C29BFE /* FetchPhotos.swift in Sources */,
+				496189EE1FD593DB00C99499 /* TodayTableViewCell.swift in Sources */,
 				8A8C5C8A1FC5A1C100A834EA /* ListViewController.swift in Sources */,
 				8A9C7C7B1FCB371A009B9C86 /* UIView.swift in Sources */,
 				49E3C00F1FC6E12800400A06 /* UIImageViewExplicit.swift in Sources */,

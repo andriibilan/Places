@@ -11,9 +11,10 @@ import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataSource, UITableViewDelegate {
     
-    var name = ["Meet & Burger", "Meet & Burger", "Meet & Burger", "Meet & Burger"]
-    var distance = ["123m", "123m", "123m", "123m"]
-    var open = ["Open", "Open", "Open", "Open"]
+
+    var name = ["Meet & Burger", "Meet & Burger", "Meet & Burger", "Meet & Burger", "Meet & Burger"]
+    var distance = ["123m", "123m", "123m", "123m", "123m"]
+    var open = ["Open", "Open", "Open", "Open", "Open"]
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +46,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
         if activeDisplayMode == .compact {
             self.preferredContentSize = maxSize
         } else if activeDisplayMode == .expanded {
-            self.preferredContentSize = CGSize(width: maxSize.width, height: 150)
+            self.preferredContentSize = CGSize(width: maxSize.width, height: 410)
         }
     }
 
