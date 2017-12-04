@@ -149,6 +149,7 @@ class SettingTableViewController: UITableViewController {
         changeAlertProperties(alertController: emailAlertController)
         emailAlertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (alert: UIAlertAction) in
             if self.ValidatorForEmail(isEmail: emailAlertController.textFields![0].text!) {
+                
                 print("All is okay. email is good")
                 self.changeIsGood()
                 
