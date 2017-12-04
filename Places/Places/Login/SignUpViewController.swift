@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class SignUpViewController: UIViewController, AuthServiceDelegate {
+class SignUpViewController: UIViewController, AuthServiceDelegate ,UIViewControllerTransitioningDelegate {
     
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
@@ -22,17 +22,17 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     
     private var messageText : String!
+    private let transition = CustomTransitionAnimator()
     var authService = AuthService()
     var validator = Validator()
     var activeField: UITextField?
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         authService.delegate = self
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
         
     }
-    
-    
     
     @IBOutlet weak var dismissButton: UIButton!{
         didSet{
@@ -54,22 +54,23 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
     //    }
     
     func transitionToProfile() {
-        let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
-        self.present(profileVC, animated: true, completion: nil)
+//        let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
+//        self.present(profileVC, animated: true, completion: nil)
+         performSegue(withIdentifier: "ShowProfileVC", sender: nil)
     }
     
     @IBAction func registerAction(_ sender: Any) {
         
         if (firstNameTextField.text?.isEmpty)! {
             messageText = "Please complete all fields."
-            alertAction(messageText)
-            
+//            alertAction(messageText)
+            showAlertAction(text: messageText)
             return
         }
         if !validator.isValidEmail(email: emailTextField.text!) {
             messageText = "Please enter your correct email."
-            alertAction(messageText)
-            
+//            alertAction(messageText)
+            showAlertAction(text: messageText)
             return
         }
         //        if !validator.isValidPhoneNumber(testStr: phoneTextField.text!) {
@@ -80,32 +81,34 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
         //        }
         if !validator.isValidPassword(password: passwordTextField.text!) && passwordTextField.text!.count <= 8 {
             messageText = "Passwords must contain at least 8 characters."
-            alertAction(messageText)
-            
+//            alertAction(messageText)
+            showAlertAction(text: messageText)
             return
         }
         if passwordTextField.text != confirmPassTextField.text {
             messageText = "Confirmed password not matched please try again."
-            alertAction(messageText)
-            
+//            alertAction(messageText)
+            showAlertAction(text: messageText)
             return
         }
         if profileImage.image == nil {
             messageText = "You need to add photo, If you want create user !"
-            alertAction(messageText)
-            
+//            alertAction(messageText)
+            showAlertAction(text: messageText)
             return
         }
-        //        else
-        //        {
         let pictureData = UIImageJPEGRepresentation(self.profileImage.image!, 0.20)
         authService.createUser(userName: firstNameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, password: passwordTextField.text!, pictureData: pictureData!)
-        //            performSegue(withIdentifier: "ShowProfileVC", sender: nil)
-        //        }
     }
     
-    func alertAction(_ message: String) {
-        let alertMessage = UIAlertController(title: "Oops!", message: message , preferredStyle: .alert)
+//    func alertAction(_ message: String) {
+//        let alertMessage = UIAlertController(title: "Oops!", message: message , preferredStyle: .alert)
+//        alertMessage.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+//        present(alertMessage, animated: true, completion: nil)
+//    }
+    
+    func showAlertAction(text: String) {
+        let alertMessage = UIAlertController(title: "Oops!", message: text , preferredStyle: .alert)
         alertMessage.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alertMessage, animated: true, completion: nil)
     }
@@ -113,7 +116,29 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    //MARK:- Custom Transition
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .present
+        transition.startingPoint = dismissButton.center
+        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        
+        return transition
+    }
     
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .dismiss
+        transition.startingPoint = dismissButton.center
+        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        
+        return transition
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowProfileVC" {
+            let secondVC = segue.destination as! ProfileViewController
+            secondVC.transitioningDelegate = self
+            secondVC.modalPresentationStyle = .custom
+        }
+    }
     
 }
 
@@ -199,6 +224,8 @@ extension SignUpViewController: UITextFieldDelegate {
             return newLength <= 10
             
         case phoneTextField:
+            let allowedCharacters = CharacterSet.decimalDigits
+            let characterSet = CharacterSet(charactersIn: string)
             
             var originalText = textField.text
             
@@ -229,7 +256,7 @@ extension SignUpViewController: UITextFieldDelegate {
                 return newLength <= 19
             }
             phoneTextField.text = originalText
-            
+            return allowedCharacters.isSuperset(of: characterSet)
         default:
             break
         }

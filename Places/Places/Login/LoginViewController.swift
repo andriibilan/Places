@@ -57,6 +57,11 @@ class LoginViewController: UIViewController, AuthServiceDelegate,UIViewControlle
         }
     }
     
+    func showAlertAction(text: String) {
+        let alertMessage = UIAlertController(title: "Oops!", message: text , preferredStyle: .alert)
+        alertMessage.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertMessage, animated: true, completion: nil)
+    }
     //MARK:- Custom Transition
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .present
