@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
-
+import Firebase
 
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
@@ -123,7 +123,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         actionSheet.addAction(UIAlertAction.init(title: "Add new place", style: UIAlertActionStyle.default, handler: { (action) in
-            self.performSegue(withIdentifier: "addPlace", sender: nil)
+            if Auth.auth().currentUser != nil {
+                self.performSegue(withIdentifier: "addPlace", sender: nil)//add coords
+            }
+            else {
+                self.performSegue(withIdentifier: "toLogin", sender: nil)
+            }
         }))
         
         actionSheet.addAction(UIAlertAction.init(title: "Show selected place", style: UIAlertActionStyle.default, handler: { (action) in
@@ -140,7 +145,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let loc1 = Location(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude )
 
 
-            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: loc1 , filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: loc1 , filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
                     
@@ -268,7 +273,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             break
         }
     }
-    
+    /*
+         func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+             transition.transitionMode = .present
+             transition.startingPoint = menuView.center
+             transition.circleColor = menuView.backgroundColor!
+     
+             return transition
+             }
+     
+             func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+             transition.transitionMode = .dismiss
+             transition.startingPoint = menuView.center
+             transition.circleColor = menuView.backgroundColor!
+     
+             return transition
+         }
+ 
+ */
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
