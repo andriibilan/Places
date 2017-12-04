@@ -109,7 +109,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, SetCategory 
          
         let jsonData = try? JSONSerialization.data(withJSONObject: jsonArray)
        // let YOUR_API_KEY: Int = 0
-        let url = URL(string: "https://maps.googleapis.com/maps/api/place/add/json?key=AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM")!
+        let url = URL(string: "https://maps.googleapis.com/maps/api/place/add/json?key=AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = jsonData

@@ -17,7 +17,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func updateData() {
 
       let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: [PlaceType.bus_station], completion: { (foundedPlaces, errorMessage) in
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
                 print("\t\(errorMessage!)")
@@ -115,7 +115,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
                 self.view.layoutIfNeeded()
             })
+            updateData()
             preventAnimation.removeAll()
+            
         }
         isSideMenuHidden = !isSideMenuHidden
     }
@@ -160,7 +162,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 
 
-            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
+            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
                     if self.googlePlacesManager.allPlacesLoaded{
@@ -219,7 +221,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
       
 
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
                 print("\t\(errorMessage!)")
