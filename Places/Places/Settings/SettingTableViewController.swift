@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
+
 class SettingTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
     
@@ -146,73 +148,90 @@ class SettingTableViewController: UITableViewController {
     
     func changeEmail() {
         let emailAlertController = UIAlertController(title: "e-mail", message: "Please write new e-mail", preferredStyle: .alert)
-        changeAlertProperties(alertController: emailAlertController)
+        changeAlertProperties(alertController: emailAlertController, color: .green)
         emailAlertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (alert: UIAlertAction) in
             if self.ValidatorForEmail(isEmail: emailAlertController.textFields![0].text!) {
-                
-                print("All is okay. email is good")
-                self.changeIsGood()
-                
-                
+                self.updateMail(mailString: emailAlertController.textFields![0].text!)
             } else {
-                print("Fucking error. try again, looser")
-                
+                self.resultAlert(text: "Error", message: "Please write correct e-mail", color: .red)
             }
-            
-            
-            
         }))
         emailAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         emailAlertController.addTextField{(emailTextFiled) in
-            emailTextFiled.text = ""
-            
+            emailTextFiled.placeholder = "please write new e-mail"
         }
         present(emailAlertController, animated: true, completion: nil)
     }
     
-    
+    func updateMail (mailString: String) {
+        if let user = Auth.auth().currentUser {
+            user.updateEmail(to: mailString, completion: { (error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    self.resultAlert(text: "DONE", message: "You have successfully updated your email", color: .red)
+                }
+            })
+        }
+    }
     
     func  changePassword() {
+        var newPassword = ""
+        var confirmPassword = ""
         let passwordAllertController = UIAlertController(title: "Password", message: "Please write new password", preferredStyle: .alert)
-        changeAlertProperties(alertController: passwordAllertController)
+        changeAlertProperties(alertController: passwordAllertController, color: .green)
         passwordAllertController.addAction(UIAlertAction(title: "Save", style: .default, handler: {(alert: UIAlertAction) in
-            
-            
-            
-            
+            newPassword = passwordAllertController.textFields![0].text!
+            confirmPassword = passwordAllertController.textFields![1].text!
+            if newPassword == confirmPassword {
+                self.updatePassword(password: newPassword)
+            } else {
+                self.resultAlert(text: "Please write correct  confirm password", message: nil, color: .red)
+            }
         }))
         passwordAllertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         passwordAllertController.addTextField { (passwordTextField)  in
-            passwordTextField.text = ""
             passwordTextField.placeholder = "New password"
             passwordTextField.isSecureTextEntry = true
-            
+            newPassword = passwordTextField.text!
         }
         
         passwordAllertController.addTextField { (confirmPasswordTextField)  in
-            confirmPasswordTextField.text = ""
             confirmPasswordTextField.placeholder = "Confirm password"
             confirmPasswordTextField.isSecureTextEntry = true
-            
-            
+            confirmPassword = confirmPasswordTextField.text!
         }
-        
         present(passwordAllertController, animated: true, completion: nil)
     }
     
+    func updatePassword(password: String) {
+        if let user = Auth.auth().currentUser {
+            user.updatePassword(to: password, completion: { (error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    self.resultAlert(text: "DONE", message: "You have successfully updated your password", color: .green)
+                }
+            })
+        }
+    }
     
-    func changeAlertProperties(alertController: UIAlertController) {
+    func changeAlertProperties(alertController: UIAlertController, color: UIColor) {
         let subview = alertController.view.subviews.first! as UIView
         let alertContentView = subview.subviews.first! as UIView
-        alertContentView.backgroundColor = UIColor.green
+        alertContentView.backgroundColor = color
         alertContentView.layer.cornerRadius = 15;
         alertContentView.layer.borderWidth = 3;
         alertContentView.layer.borderColor = UIColor.white.cgColor
     }
-    func changeIsGood() {
-        let alert = UIAlertController(title: "DONE", message: nil, preferredStyle: .alert)
-        changeAlertProperties(alertController: alert)
-        self.present(alert, animated: true, completion: {self.dismiss(animated: true, completion: nil)})
+    
+    func resultAlert(text: String, message: String?, color: UIColor) {
+        let alertBad = UIAlertController(title: text, message: message, preferredStyle: .alert)
+        changeAlertProperties(alertController: alertBad, color: color)
+        self.present(alertBad, animated: true, completion: {
+            sleep(1)
+            self.dismiss(animated: true, completion: nil)
+        })
     }
     
     func ValidatorForEmail( isEmail: String)-> Bool {
@@ -224,18 +243,17 @@ class SettingTableViewController: UITableViewController {
         }
     }
     
+    
     func changeMapType() {
         let mapTypeAlertController = UIAlertController(title: "Change map type", message: "Please choose map type", preferredStyle: .alert)
-        changeAlertProperties(alertController: mapTypeAlertController)
+        changeAlertProperties(alertController: mapTypeAlertController, color: .green)
         let standartType = UIAlertAction(title: "Standart", style: .default) { (action) in
             self.defaults.set(1, forKey: "mapType")
             print(UserDefaults.standard.integer(forKey: "mapType"))
-            
         }
         let satelliteType = UIAlertAction(title: "Satellite", style: .default) { (action) in
             self.defaults.set(2, forKey: "mapType")
             print(UserDefaults.standard.integer(forKey: "mapType"))
-            
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
         
@@ -243,11 +261,10 @@ class SettingTableViewController: UITableViewController {
         mapTypeAlertController.addAction(satelliteType)
         mapTypeAlertController.addAction(cancelAction)
         present(mapTypeAlertController, animated: true, completion: nil)
-        
     }
     
-
-
+    
+    
 
 }
 
