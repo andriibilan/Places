@@ -426,7 +426,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             
             
-            googlePlacesManager.getAdditionalData(ofPlaceIndex: nil, ofPlace: g.place){place, errorMessage in
+            googlePlacesManager.getPhotos(ofPlaceIndex: nil, ofPlace: g.place){place, errorMessage in
                 DispatchQueue.main.async{
                     print(errorMessage)
                     self.performSegue(withIdentifier: "detailVC", sender: place)
