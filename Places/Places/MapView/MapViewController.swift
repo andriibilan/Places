@@ -17,7 +17,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func updateData() {
 
       let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
                 print("\t\(errorMessage!)")
@@ -160,7 +160,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 
 
-            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
+            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
                     if self.googlePlacesManager.allPlacesLoaded{
@@ -219,7 +219,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
       
 
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: [PlaceType.bank, PlaceType.bar], completion: { (foundedPlaces, errorMessage) in
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
                 print("\t\(errorMessage!)")
@@ -507,7 +507,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             print("cancel filter: \(nameFilterArray[indexPath.row])")
              var num = 0
             for i in filterArray {
-                if i.rawValue == nameFilterArray[indexPath.row] {
+                if i.rawValue == GooglePlacesManager.makeConforming(type: nameFilterArray[indexPath.row]) {
                     filterArray.remove(at: num)
                 }
                   num += 1
@@ -517,7 +517,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             selectedCell.add(indexPath.row)
             accessory = .checkmark
             print("choose filter: \(nameFilterArray[indexPath.row])")
-            filterArray.append(PlaceType(rawValue: nameFilterArray[indexPath.row])!)
+            filterArray.append(PlaceType(rawValue: GooglePlacesManager.makeConforming(type: nameFilterArray[indexPath.row]))!)
             print(filterArray)
         }
         if let cell = tableView.cellForRow(at: indexPath) {
@@ -557,7 +557,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         self.map.add(circle)
     }
     
-    
+
 }
 
 
