@@ -21,7 +21,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
                 print("\t\(errorMessage!)")
-                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+//                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                 DispatchQueue.main.sync {
                     //self.addAnnotations(coords: self.places)
                     self.addCurrentLocation(coords: center)
@@ -227,7 +227,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 
                 print("\t\(errorMessage!)")
-                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+//                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                 DispatchQueue.main.sync {
                     self.locationManagerConfigurate()
                 }}
