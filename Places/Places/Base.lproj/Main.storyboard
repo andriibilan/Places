@@ -26,14 +26,6 @@
             </objects>
             <point key="canvasLocation" x="-78" y="-1"/>
         </scene>
-        <!--Search-->
-        <scene sceneID="eUe-rh-xth">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Search" id="L2b-W7-IFX" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Nqy-58-P0E" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="438" y="429"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -51,7 +43,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRz-UB-V2K">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
-                                    <segue destination="5id-H3-pCg" kind="embed" id="9uW-v7-4UU"/>
+                                    <segue destination="5id-H3-pCg" kind="embed" identifier="ListView" id="9uW-v7-4UU"/>
                                 </connections>
                             </containerView>
                             <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" horizontalCompressionResistancePriority="890" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nDW-Of-fAx">
@@ -94,7 +86,7 @@
                                     <action selector="menuTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ODb-3z-z3X"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0Q-sZ-dW2" customClass="UIViewX" customModule="Places" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0Q-sZ-dW2" customClass="UIViewExplicit" customModule="Places" customModuleProvider="target">
                                 <rect key="frame" x="180" y="472" width="290" height="290"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHE-yK-Tu7">
@@ -197,10 +189,10 @@
                                 </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpA-aE-Hki">
-                                <rect key="frame" x="0.0" y="90" width="160" height="487"/>
+                                <rect key="frame" x="0.0" y="100" width="160" height="477"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dvC-Vm-Gg7">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="487"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dvC-Vm-Gg7">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="477"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="sectionIndexColor" red="0.95623749489999998" green="0.3225761056" blue="0.33518427610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -305,7 +297,7 @@
                         <constraints>
                             <constraint firstItem="HFl-mO-hU1" firstAttribute="leading" secondItem="5Pq-cN-7gF" secondAttribute="leading" id="2hc-jg-V0F"/>
                             <constraint firstItem="HFl-mO-hU1" firstAttribute="top" secondItem="5Pq-cN-7gF" secondAttribute="top" id="8RG-rd-MgE"/>
-                            <constraint firstItem="jpA-aE-Hki" firstAttribute="top" secondItem="J1c-lw-TzP" secondAttribute="top" constant="70" id="CaG-X2-HKE"/>
+                            <constraint firstItem="jpA-aE-Hki" firstAttribute="top" secondItem="J1c-lw-TzP" secondAttribute="top" constant="80" id="CaG-X2-HKE"/>
                             <constraint firstItem="J1c-lw-TzP" firstAttribute="bottom" secondItem="Ny9-BK-1UC" secondAttribute="bottom" constant="20" id="Faf-pQ-j1Y"/>
                             <constraint firstAttribute="trailing" secondItem="HFl-mO-hU1" secondAttribute="trailing" id="Jgj-z7-C4o"/>
                             <constraint firstItem="Ny9-BK-1UC" firstAttribute="leading" secondItem="J1c-lw-TzP" secondAttribute="leading" constant="20" id="NSy-qv-bgw"/>
@@ -326,7 +318,7 @@
                         <outlet property="sideMenuConstraint" destination="pP2-3r-bkg" id="RRV-nQ-R41"/>
                         <outlet property="viewForFilter" destination="jpA-aE-Hki" id="vd5-dV-Au0"/>
                         <segue destination="w39-4y-S2s" kind="presentation" identifier="detailVC" id="okD-G1-lk4"/>
-                        <segue destination="Ilh-Ai-EtW" kind="show" identifier="addPlace" id="zlP-iY-Zpe"/>
+                        <segue destination="Ilh-Ai-EtW" kind="presentation" identifier="addPlace" id="fj7-XN-Q0T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6B-D0-qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>

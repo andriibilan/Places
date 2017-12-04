@@ -14,6 +14,10 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
 
     @IBOutlet weak var currentPhotoCollectionView: UICollectionView!
     
+    @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
+    
+    
+    
     var photoArray : [UIImage] = []
     
     var indexPath : IndexPath!
@@ -22,7 +26,13 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        collectionViewFlowLayout.itemSize = currentPhotoCollectionView.frame.size
+        print(currentPhotoCollectionView.frame.width)
+        print(currentPhotoCollectionView.frame.size)
+        
+        
+        
         currentPhotoCollectionView.delegate = self
         currentPhotoCollectionView.dataSource = self
     }
@@ -40,10 +50,18 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell
         cell?.photoImageView?.image = photoArray[indexPath.row]
-        
+        print("image: \(cell?.photoImageView?.frame.width)")
+       
 
         return cell!
     }
-   
-
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        print("123321")
+    }
+    /*
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        currentPhotoCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
+    }
+*/
 }

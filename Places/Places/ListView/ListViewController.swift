@@ -8,12 +8,13 @@
 
 import UIKit
 
-class ListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, OutputInterface {
-    
-    func updateData() {
-		
+class ListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,OutputInterface {
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
+ 
+    func updateData() {
+
+
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
             
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
@@ -23,79 +24,62 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
                     self.tableView.reloadData()
                 }
             }
-        }
-        )
-
-		
+        })
+        //AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc
+        //"AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM"
     }
     
 	
-	@IBOutlet weak var tableView: UITableView!
-	
-	@IBOutlet weak var sortingButton: UIButton! {
-		didSet {
-			sortingButton.layer.cornerRadius = sortingButton.bounds.width / 2
-			sortingButton.clipsToBounds = true
-		}
-	}
-	
-	@IBOutlet weak var filteringButton: UIButton!{
-		didSet {
-			filteringButton.layer.cornerRadius = filteringButton.bounds.width / 2
-			filteringButton.clipsToBounds = true
-		}
-	}
-	
-	@IBAction func sortingButtonTapped(_ sender: UIButton) {
-		
-		
-		if sortingByName {
-			sender.setImage( #imageLiteral(resourceName: "name-sorting"), for: .normal)
-			sortingByName = false
-			places.sort(by: {($0.name ?? "") < ($1.name ?? "")})
-			
-		} else {
-			sender.setImage(#imageLiteral(resourceName: "distance-sorting"), for: .normal)
-			sortingByName = true
-			places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-		}
-		
-		//perform scale animation
-		scaleAnimation(onButton: sender)
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sortingButton: UIButton! {
+        didSet {
+            sortingButton.layer.cornerRadius = sortingButton.bounds.width / 2
+            sortingButton.clipsToBounds = true
+        }
+    }
+    @IBOutlet weak var filteringButton: UIButton!{
+        didSet {
+            filteringButton.layer.cornerRadius = filteringButton.bounds.width / 2
+            filteringButton.clipsToBounds = true
+        }
+    }
+    @IBAction func sortingButtonTapped(_ sender: UIButton) {
+        if sortingByName {
+            sender.setImage( #imageLiteral(resourceName: "name-sorting"), for: .normal)
+            sortingByName = false
+            places.sort(by: {($0.name ?? "") < ($1.name ?? "")})
+        } else {
+            sender.setImage(#imageLiteral(resourceName: "distance-sorting"), for: .normal)
+            sortingByName = true
+            places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
+        }
+        //perform scale animation
+        scaleAnimation(onButton: sender)
+        refillOpenPlaces()
+        self.tableView.reloadData()
+    }
+    
+    @IBAction func filteringButtonTapped(_ sender: UIButton) {
+        if !filterOpenOnly {
+            sender.setImage( #imageLiteral(resourceName: "clear-filter"), for: .normal)
+            filterOpenOnly = true
+        } else {
+            sender.setImage(#imageLiteral(resourceName: "filter"), for: .normal)
+            filterOpenOnly = false
+        }
+        //perform scale animation
+        scaleAnimation(onButton: sender)
+        refillOpenPlaces()
+        self.tableView.reloadData()
+    }
+    
+    private func scaleAnimation(onButton button:UIButton)  {
+        button.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        UIView.animate(withDuration: 0.5, delay: 0, options: .allowUserInteraction, animations: {
+            [button] in button.transform = CGAffineTransform.identity
+            }, completion: nil)
+    }
 
-		refillOpenPlaces()
-		
-		self.tableView.reloadData()
-	}
-	
-	@IBAction func filteringButtonTapped(_ sender: UIButton) {
-		
-		if !filterOpenOnly {
-			sender.setImage( #imageLiteral(resourceName: "clear-filter"), for: .normal)
-			filterOpenOnly = true
-		} else {
-			sender.setImage(#imageLiteral(resourceName: "filter"), for: .normal)
-			filterOpenOnly = false
-		}
-		
-		//perform scale animation
-		scaleAnimation(onButton: sender)
-		
-		refillOpenPlaces()
-		
-		self.tableView.reloadData()
-		
-	}
-	
-	private func scaleAnimation(onButton button:UIButton)  {
-		button.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-		UIView.animate(withDuration: 0.5, delay: 0, options: .allowUserInteraction, animations: {
-			[button] in button.transform = CGAffineTransform.identity
-			}, completion: nil)
-	}
-	
-	
-	
 	public var places:[Place] = []
 	private var openPlaces: [Place] = []
 	private var filterOpenOnly = false
@@ -107,164 +91,137 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
 		tableView.delegate = self
 		tableView.dataSource = self
 		
 		tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 148, right: 0)
-		
-		//
 		tableView.tableFooterView = UIView()
 		//tableView.estimatedRowHeight = 120
 		//tableView.rowHeight = UITableViewAutomaticDimension
-		
-		
+        
 		session = URLSession.shared
 		task 	= URLSessionDownloadTask()
 		cache	= NSCache()
 		
-		//[+] for testing only
-//		let urlTest = "https://s3-eu-west-1.amazonaws.com/romel/pokemon/"
-//		for i in 1...100 {
-//
-//			var  open = true
-//			if (i % 2 == 0)  {
-//				open = true
-//			} else {
-//				open = false
-//			}
-//
-//			places.append(PlaceTemp(name: "Name \(i)", isOpen: open , distance: ((Double(i) * 10.456) + 5.345), photos: [urlTest + "\(i).png"],type: "Restorant"))
-//		}
-		//[-] for testing only
-		
 
-		googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
+        
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+            if let foundedPlaces = foundedPlaces {
+                self.places = foundedPlaces
+                self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
+                DispatchQueue.main.sync {
+                    self.tableView.reloadData()
+                }
+            }
+        })
+    }
+    
+    private func refillOpenPlaces() {
+        if filterOpenOnly {
+            openPlaces = places.filter {
+                if $0.isOpen != nil{
+                    return $0.isOpen! == true
+                } else {
+                    return false
+                }
+            }
+        } else {
+            openPlaces = places
+        }
+    }
+    
+    //MARK:- TableView DataSource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 
-			if let foundedPlaces = foundedPlaces {
-				self.places = foundedPlaces
-				self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-				
-				DispatchQueue.main.sync {
-					self.tableView.reloadData()
-				}
-			}
-		}
-		)
-
-		
-		
-	}
-	
-	private func refillOpenPlaces() {
-		
-		if filterOpenOnly {
-			openPlaces = places.filter{
-				if $0.isOpen != nil{
-					return $0.isOpen! == true
-				} else {
-					return false
-				}
-			}
-		} else {
-			openPlaces = places
-		}
-		
-	}
-	
-	//MARK:- TableView DataSource
-	func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
-	}
-	
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return filterOpenOnly ? openPlaces.count : places.count
+      
 	}
-	
-	
+
 	//MARK:- TableView Delegate
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
-		
-		if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
-			
-			let place = (filterOpenOnly) ? openPlaces[indexPath.row] : places[indexPath.row]
-			
-			
-			//placeholder image
-			cell.thumbnailImageView.image = #imageLiteral(resourceName: "marker")
-			
-			//name
-			cell.name.text		= place.name
-			//distance
-			if let distance = place.distance  {
-				cell.distance.text	= "\( distance) м."
-			} else {
-				cell.distance.text	= ""
-			}
-			
-			//place type
-			if !place.types.isEmpty {
-			cell.type.text		= place.types[0].rawValue.capitalized
-			}
-			
-			//Open/Closed
-			cell.openClosedImageView.image = nil
-			if let placeIsOpen = place.isOpen {
-				if placeIsOpen {
-					cell.openClosedImageView.image = #imageLiteral(resourceName: "open-sign")
-				} else {
-					cell.openClosedImageView.image = #imageLiteral(resourceName: "closed-sign")
-				}
-			}
-			
-			if !place.photoReferences.isEmpty {
-				
-				
-				let urlString = place.photoReferences[0]
-				let url:URL! = URL(string: urlString)
-				
-				//downloading/cashing image from internet
-				if let cachedImage = (self.cache.object(forKey: (urlString as AnyObject) ) as? UIImage ) {
-					//we are using cashe
-					print("Using cashe - \(urlString)")
-					cell.thumbnailImageView.image = cachedImage
-					
-				} else {
-					//download image and add to cache
-					
-					task = session.downloadTask(with: url, completionHandler: { (location, response, error) -> Void in
-						if let data = try? Data(contentsOf: url){
-							
-							DispatchQueue.main.async(execute: { () -> Void in
-								//DispatchQueue.global(qos: .background).async {
-								// if the current cell is visible
-								if let updateCell = self.tableView.cellForRow(at: indexPath) as? ListTableViewCell{
-									let img:UIImage! = UIImage(data: data)
-									
-									//DispatchQueue.main.sync {
-									updateCell.thumbnailImageView?.image = img//.resizedImage(withBounds: CGSize(width: 120, height: 120))
-									//}
-									self.cache.setObject(img, forKey: urlString as AnyObject)
-									print("adding to cache - \(urlString)")
-								}
-							}
-							)
-						}
-					})
-					task.resume()
-					
-				}
-			}
+		 if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
+            print(places.count.description)
+            let place = (filterOpenOnly) ? openPlaces[safe: indexPath.row] : places[safe: indexPath.row]
+
+            //placeholder image
+            cell.thumbnailImageView.image = place?.icon // #imageLiteral(resourceName: "marker")
+            
+            //name
+            cell.name.text = place?.name
+            
+            //distance
+            if let distance = place?.distance  {
+                cell.distance.text	= "\( distance) м."
+            } else {
+                cell.distance.text	= ""
+            }
+            
+            //place type
+            if place?.types != nil {
+                cell.type.text = place?.types[0].rawValue.capitalized
+            }
+            
+            //Open/Closed
+            cell.openClosedImageView.image = nil
+            if let placeIsOpen = place?.isOpen {
+                if placeIsOpen {
+                    cell.openClosedImageView.image = #imageLiteral(resourceName: "open-sign")
+                } else {
+                    cell.openClosedImageView.image = #imageLiteral(resourceName: "closed-sign")
+                }
+            }
+            
+    
+//            if place?.photoReferences != nil {
+//
+//                let urlString = place?.photoReferences[0]
+//                let url:URL! = URL(string: urlString!)
+//
+//                //downloading/cashing image from internet
+//                if let cachedImage = (self.cache.object(forKey: (urlString as AnyObject) ) as? UIImage ) {
+//                    //we are using cashe
+//                    print("Using cashe - \(String(describing: urlString))")
+//                    cell.thumbnailImageView.image = cachedImage
+//                }
+//                } else {
+//                    //download image and add to cache
+//
+//                    task = session.downloadTask(with: url, completionHandler: { (location, response, error) -> Void in
+//                        if let data = try? Data(contentsOf: url){
+//
+//                            DispatchQueue.main.async(execute: { () -> Void in
+//                                //DispatchQueue.global(qos: .background).async {
+//                                // if the current cell is visible
+//                                if let updateCell = self.tableView.cellForRow(at: indexPath) as? ListTableViewCell{
+//                                    let img:UIImage! = UIImage(data: data)
+//
+//                                    //DispatchQueue.main.sync {
+//                                    updateCell.thumbnailImageView?.image = img//.resizedImage(withBounds: CGSize(width: 120, height: 120))
+//                                    //}
+//                                   // self.cache.setObject(img, forKey: urlString as AnyObject)
+//                                  //  print("adding to cache - \(urlString)")
+//                                }
+//                            }
+//                            )
+//                        }
+//                    })
+//                    task.resume()
+//
+//                }
+           
+            
 			return cell
-		}
-		
-		return UITableViewCell()
-		
+        }
+
+        return UITableViewCell()
+
 		
 	}
-	
+
 	//MARK: - Fade in effect
 	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		// Define the initial state (Before the animation)
@@ -272,14 +229,12 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		
 		// Define the final state (After the animation)
 		//UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
-				
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
-	
-	
+
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		
 		if segue.identifier == "ShowDetailPlace" {
@@ -289,10 +244,12 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 				destVC.place = place
 			}
 		}
-		
 	}
-
-	
-	
+    
+    
 }
-
+extension Array {
+    subscript (safe index: Int) -> Element? {
+        return indices ~= index ? self[index] : nil
+    }
+}

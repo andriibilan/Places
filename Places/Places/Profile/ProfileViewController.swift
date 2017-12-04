@@ -30,7 +30,13 @@ class ProfileViewController: UIViewController {
     @IBOutlet var headerBlurImageView:UIImageView!
     var blurredHeaderImageView:UIImageView?
     
-	@IBOutlet weak var dismissButton: UIButton!{
+    private var messageText : String!
+    private let userID = (Auth.auth().currentUser?.uid)!
+    private let ref = Database.database().reference()
+    var authService = AuthService()
+	var validator = Validator()
+    
+    @IBOutlet weak var dismissButton: UIButton!{
 		didSet{
 			dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
 			dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
@@ -38,24 +44,19 @@ class ProfileViewController: UIViewController {
 	}
 	
 	@IBAction func dismissButtonTaped(_ sender: UIButton) {
+        updateProfile()
         performSegue(withIdentifier: "unwindFromProfile", sender: self)
+       
     }
-	
-	private let userID = (Auth.auth().currentUser?.uid)!
-    private let ref = Database.database().reference()
-    var authService = AuthService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getProfileData()
-//        emailTextField.isUserInteractionEnabled = false
-//        phoneTextField.isUserInteractionEnabled = false
+
     }
-    @IBAction func unwindHome(segue:UIStoryboardSegue) { }
-    
+  
     override func viewDidAppear(_ animated: Bool) {
         // Header - Image
-        
         headerImageView = UIImageView(frame: header.bounds)
         headerImageView?.image = UIImage(named: "lviv")
         headerImageView?.contentMode = UIViewContentMode.scaleAspectFill
@@ -96,8 +97,35 @@ class ProfileViewController: UIViewController {
                 self.profileImage.image = UIImage(data: data!)
             }
         })
+    }
+    
+    func updateProfile() {
+        if (nameTextField.text?.isEmpty)! {
+            messageText = "Please complete all fields."
+            alertAction(messageText)
+            
+            return
+        }
+        if !validator.isValidEmail(email: emailTextField.text!) {
+            messageText = "Please enter your correct email."
+            alertAction(messageText)
+            
+            return
+        }
+         authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
         
-        
+//        if !validator.isValidPhoneNumber(testStr: phoneTextField.text!) {
+//            messageText = "Please enter your correct phone number."
+//            alertAction(messageText)
+//        } else {
+//            
+//        }
+    }
+    
+    func alertAction(_ message: String) {
+        let alertMessage = UIAlertController(title: "Oops!", message: message , preferredStyle: .alert)
+        alertMessage.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertMessage, animated: true, completion: nil)
     }
   
     
@@ -107,10 +135,9 @@ class ProfileViewController: UIViewController {
                 try? Auth.auth().signOut()
                 
                 if Auth.auth().currentUser == nil {
-//                    let loginVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
-//
-//                    self.present(loginVC, animated: true, completion: nil
-                    performSegue(withIdentifier: "unwindFromProfile", sender: self)
+//                    performSegue(withIdentifier: "unwindLogOut", sender: self)
+                    let profileVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
+                            self.present(profileVC, animated: true, completion: nil)
                 }
             }
         }
@@ -120,15 +147,8 @@ class ProfileViewController: UIViewController {
         chooseImage()
     }
     @IBAction func editButton(_ sender: Any) {
-        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
-//        nameTextField.isUserInteractionEnabled = true
-//        emailTextField.isUserInteractionEnabled = true
-//        phoneTextField.isUserInteractionEnabled = true
-//        editButton.isHidden = true
-    }
-    
-    @IBAction func saveToFirebase(_ sender: Any) {
-        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
+//        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
+        performSegue(withIdentifier: "unwindFromProfile", sender: self)
     }
     
 }

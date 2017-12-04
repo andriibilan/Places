@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class UIButtonX: UIButton {
+class UIButtonExplicit: UIButton {
     
     enum FromDirection:Int {
         case Top = 0

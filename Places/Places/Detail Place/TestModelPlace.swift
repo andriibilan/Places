@@ -20,7 +20,7 @@ class ReviewTest{
     init(){
         reviewer = "Reviewer"
         review = """
-        1234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 12345678900 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 123456789012345678900 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 123456789012345678900 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890
+        1234567890 1234567890 1234567012345678900 12345678901234567890 1234567890 12890 1234567890 12345678901234567890 1234567890 123456789012345678900 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890 1234567890 12345678901234567890
         """
         
         isanonymous = false
@@ -30,9 +30,6 @@ class ReviewTest{
     init(_ : Int){
         reviewer = "Reviewer"
         review = """
-        1234567890 1234567890 1234567890
-        1234567890 1234567890 1234567890
-        1234567890 1234567890 1234567890
         1234567890 1234567890 1234567890
         """
         
@@ -76,6 +73,11 @@ class TestPlace{
         image.append(#imageLiteral(resourceName: "ratting"))
         image.append(#imageLiteral(resourceName: "phone number"))
         image.append(#imageLiteral(resourceName: "website"))
+        image.append(#imageLiteral(resourceName: "street-map (1)"))
+        image.append(#imageLiteral(resourceName: "hospital"))
+        image.append(#imageLiteral(resourceName: "Icon - Mail"))
+        image.append(#imageLiteral(resourceName: "pharmacy"))
+        image.append(#imageLiteral(resourceName: "lviv"))
         //
         name = "Cafe"
         address = "Pasternaka Street"
@@ -85,11 +87,45 @@ class TestPlace{
         phone = "380925839548"
         //
         //TODO: Review!!!
+        forReview.append(ReviewTest(21))
+        forReview.append(ReviewTest(true))
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest(21))
+        forReview.append(ReviewTest(true))
         forReview.append(ReviewTest())
         forReview.append(ReviewTest())
         forReview.append(ReviewTest())
+        forReview.append(ReviewTest(21))
+        forReview.append(ReviewTest(true))
         forReview.append(ReviewTest())
-
+        forReview.append(ReviewTest(true))
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest(21))
+        forReview.append(ReviewTest(true))
+        forReview.append(ReviewTest())
+        
+        forReview.append(ReviewTest(21))
+        forReview.append(ReviewTest(true))
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest(21))
+        forReview.append(ReviewTest(true))
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest(21))
+        forReview.append(ReviewTest(true))
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest(true))
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest())
+        forReview.append(ReviewTest(21))
+        forReview.append(ReviewTest(true))
+        forReview.append(ReviewTest())
     }
     
     

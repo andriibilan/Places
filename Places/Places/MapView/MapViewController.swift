@@ -15,8 +15,10 @@ var pressCoordinate = CLLocationCoordinate2D()
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
     
     func updateData() {
+
         let location = Location(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude )
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: location, filters: PlaceType.all, completion: { (foundedPlaces) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: location, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 if self.googlePlacesManager.allPlacesLoaded{
@@ -141,7 +143,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let loc = CLLocation(latitude: pressCoordinate.latitude as CLLocationDegrees, longitude: pressCoordinate.longitude as CLLocationDegrees)
             let loc1 = Location(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude )
 
-            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: loc1 , filters: PlaceType.all, completion: { (foundedPlaces) in
+
+
+            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: loc1 , filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
                     if self.googlePlacesManager.allPlacesLoaded{
@@ -171,8 +175,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapDynamic.dynamicFilter(button: filterButton, parView: self.view)
-        mapDynamic.dynamicCompass(button: compassButton, parView: self.view)
+        mapDynamic.dynamicFilter(button: filterButton, parView: view)
+        mapDynamic.dynamicCompass(button: compassButton, parView: view)
+        print(view.bounds)
         changeMapType()
        
         
@@ -180,7 +185,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterTableView.dataSource = self
         
       
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces) in
+
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+            if errorMessage != nil{
+                print("\t\(errorMessage!)")
+                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+            }
+
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 
@@ -200,7 +211,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
-   
+       
         sideMenuConstraint.constant = -160
         // Do any additional setup after loading the view.
     }
@@ -383,7 +394,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if segue.identifier == "detailVC" {
             let d = segue.destination as? DetailPlaceViewController
             d?.place = sender as! Place
-    }
+        }
     }
 
     func colorForIndex(index: Int) -> UIColor {
@@ -395,8 +406,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
         /////////////////////////////////////////////////////////////////////////
 
-        
-        let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beauty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
+
+        let nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beuty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
+
         let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
 
 
@@ -426,22 +438,32 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
        
     }
     
+    var preventAnimation = Set<IndexPath>()
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.alpha = 0
+        print(preventAnimation.count)
         // first version
         //cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
-        
+        //print(indexPath.row)
         //second version
-        cell.layer.transform = CATransform3DScale(CATransform3DIdentity, -1, 1, 1)
-        UIView.animate(withDuration: 0.7) {
-            cell.alpha = 1
-            cell.layer.transform = CATransform3DIdentity
+        if !preventAnimation.contains(indexPath) {
+            cell.alpha = 0
+            preventAnimation.insert(indexPath)
+            DispatchQueue.main.async {
+                cell.layer.transform = CATransform3DScale(CATransform3DIdentity, -1, 1, 1)
+                UIView.animate(withDuration: 0.7) {
+                    cell.alpha = 1
+                    cell.layer.transform = CATransform3DIdentity
+                }
+            }
         }
+        
+        
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var accessory = UITableViewCellAccessoryType.none
-        
+       
         if selectedCell.contains(indexPath.row) {
             selectedCell.remove(indexPath.row)
             print("cancel filter: \(nameFilterArray[indexPath.row])")
@@ -450,17 +472,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             accessory = .checkmark
             print("choose filter: \(nameFilterArray[indexPath.row])")
             }
-
-
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = accessory
         }
         
     }
+   
+    var lastContentOffset: CGFloat = 0
     
-    
-    
-    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+         self.lastContentOffset = scrollView.contentOffset.y
+        //print(lastContentOffset)
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (self.lastContentOffset < scrollView.contentOffset.y) {
+            print("Move to botton")
+            // moved to top
+        } else if (self.lastContentOffset > scrollView.contentOffset.y) {
+              print("Move to top")
+            
+            // moved to bottom
+        } else {
+            // didn't move
+        }
+    }
     
     
     func addRadiusCircle(location: CLLocation){

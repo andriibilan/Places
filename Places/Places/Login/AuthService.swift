@@ -12,8 +12,12 @@ import FirebaseStorage
 import FirebaseDatabase
 import FirebaseAuth
 
-struct AuthService {
-    
+protocol AuthServiceDelegate: class {
+    func transitionToProfile()
+}
+
+class AuthService {
+    weak var delegate: AuthServiceDelegate?
     var dataBaseReference: DatabaseReference! {
         return Database.database().reference()
     }
@@ -109,7 +113,7 @@ struct AuthService {
                                                "phone": phone,
                                                "photoURL": urlText]
                         
-                self.dataBaseReference.child("Users").child(userID).updateChildValues(currentUserInfo)
+                        self.dataBaseReference.child("Users").child(userID).updateChildValues(currentUserInfo)
                         
                     }
                 })
@@ -122,10 +126,7 @@ struct AuthService {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error == nil {
                 print("You have successfully logged in")
-                
-//                let appDel : AppDelegate = UIApplication.shared.delegate as! AppDelegate
-//                appDel.showProfile()
-               
+                self.delegate?.transitionToProfile()
             } else {
                 print(error!.localizedDescription)
             }
