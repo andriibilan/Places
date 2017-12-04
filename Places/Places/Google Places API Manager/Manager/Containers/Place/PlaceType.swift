@@ -25,7 +25,7 @@ enum PlaceType: String{
     case church
     case cemetery
     case park
-    case gym
+    case gym 
     
     static var all: [PlaceType]{
         return [

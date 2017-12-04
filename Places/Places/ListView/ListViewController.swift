@@ -13,7 +13,9 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
  
     func updateData() {
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC05twrUgzDULu7xzGmsrCLDYDFf_WlTXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+
             
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
@@ -26,6 +28,10 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         })
         //AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc
         //"AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM"
+
+        //AIzaSyCVaciTxny1MNyP9r38AelJu6Qoj2ImHF0
+
+        //AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ
     }
     
 	
@@ -102,8 +108,11 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		task 	= URLSessionDownloadTask()
 		cache	= NSCache()
 		
+
         
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC05twrUgzDULu7xzGmsrCLDYDFf_WlTXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
@@ -132,6 +141,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return filterOpenOnly ? openPlaces.count : places.count
@@ -159,7 +169,8 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
             
             //place type
             if place?.types != nil {
-                cell.type.text = place?.types[0].rawValue.capitalized
+                cell.type.text = (place?.types[safe: 0]).map { $0.rawValue }
+                print(place?.types[safe: 0]?.rawValue)
             }
             
             //Open/Closed
