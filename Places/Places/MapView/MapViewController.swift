@@ -50,6 +50,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var region: MKCoordinateRegion?
     var menu = ViewController()
     let mapDynamic = Dynamic()
+//    var menuIsOpen = false
    
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var filterTableView: UITableView!
@@ -72,6 +73,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
 
     
+    @IBOutlet weak var compassButtonConstraint: NSLayoutConstraint!
     @IBOutlet weak var compassButton: UIButton!
     @IBOutlet weak var filterButton: UIButton!
     
@@ -172,13 +174,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
         }))
         
+        actionSheet.view.tintColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
+        
         actionSheet.addAction(UIAlertAction.init(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (action) in
         }))
         
-        actionSheet.view.tintColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
         
         self.present(actionSheet, animated: true, completion: nil)
     }
+    
+    
+//    func animateThemeView(expand: Bool) {
+//        menuIsOpen = expand
+//        if menuIsOpen == true {
+//            compassButtonConstraint.constant = 190
+//            UIView.animate(withDuration: 2.0, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+//                self.view.layoutIfNeeded()
+//            }, completion: nil)
+//        } else {
+//            compassButtonConstraint.constant = 88
+//            UIView.animate(withDuration: 2.0, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+//                self.view.layoutIfNeeded()
+//            }, completion: nil)
+//        }
+//    }
     
     
     
