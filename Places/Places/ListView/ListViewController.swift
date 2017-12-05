@@ -14,7 +14,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
     func updateData() {
 
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
             
             if let foundedPlaces = foundedPlaces {
@@ -111,7 +111,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 
         
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces

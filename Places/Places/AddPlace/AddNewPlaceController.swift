@@ -141,7 +141,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
              "language": "en-AU"]
          
         let jsonData = try? JSONSerialization.data(withJSONObject: jsonArray)
-        let YOUR_API_KEY: Int = AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc
+        let YOUR_API_KEY: Int = AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM
         let url = URL(string: "https://maps.googleapis.com/maps/api/place/add/json?key=\(YOUR_API_KEY")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
