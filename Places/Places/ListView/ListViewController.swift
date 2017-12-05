@@ -13,7 +13,9 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
  
     func updateData() {
 
+
         googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+
             
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
@@ -108,7 +110,9 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		
 
         
+
         googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})

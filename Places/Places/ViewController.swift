@@ -143,13 +143,12 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         if segue.identifier == "ListView" {
            listObj = segue.destination as? ListViewController
         }
-
 	}
     
     @IBAction func unwindFromSettings(segue: UIStoryboardSegue) {
         if mapView.isHidden == false {
             map?.updateData()
-             print("List hiidden? \(listView.isHidden)")
+            print("List hiidden? \(listView.isHidden)")
         } else {
             if let listVC = listObj {
                 print("List hiidden? \(self.listView.isHidden)")
