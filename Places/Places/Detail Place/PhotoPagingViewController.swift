@@ -56,12 +56,34 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
         return cell!
     }
     
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        print("123321")
+   
+    
+    @IBAction func dismissButton(_ sender: UIButtonExplicit) {
+        dismiss(animated: true, completion: nil)
     }
-    /*
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    
+    
+    override func accessibilityScroll(_ direction: UIAccessibilityScrollDirection) -> Bool {
+        print("accessibility")
+        if direction == UIAccessibilityScrollDirection.right{
+            indexPath.row += 1
+        }else{
+            indexPath.row -= 1
+        }
         currentPhotoCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
+        return true
     }
-*/
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.effectiveUserInterfaceLayoutDirection == .rightToLeft{
+            print("right")
+        }else if scrollView.effectiveUserInterfaceLayoutDirection == .leftToRight {
+            print("left")
+        }else{
+            print("WHAT?")
+        }
+    }
+    
+   
+    
 }
