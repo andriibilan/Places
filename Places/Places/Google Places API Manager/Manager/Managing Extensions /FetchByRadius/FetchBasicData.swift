@@ -134,18 +134,17 @@ extension GooglePlacesManager{
                             let createdPlace = Place()
 
                             self?.getName(of: place, saveTo: createdPlace)
-                            if createdPlace.name?.hasPrefix(searchText) != true{
-                                continue
+                            if createdPlace.name?.hasPrefix(searchText) == true{
+                                self?.getOpeningStatus(of: place, saveTo: createdPlace)
+                                self?.getLocation(of: place, saveTo: createdPlace)
+                                self?.getIcon(of: place, saveTo: createdPlace)
+                                self?.getPlaceId(of: place, saveTo: createdPlace)
+                                self?.getTypes(of: place, saveTo: createdPlace)
+                                self?.getRating(of: place, saveTo: createdPlace)
+                                self?.getStraightDistance(to: createdPlace)
+                                
+                                self?.foundedPlaces.append(createdPlace)
                             }
-                            self?.getOpeningStatus(of: place, saveTo: createdPlace)
-                            self?.getLocation(of: place, saveTo: createdPlace)
-                            self?.getIcon(of: place, saveTo: createdPlace)
-                            self?.getPlaceId(of: place, saveTo: createdPlace)
-                            self?.getTypes(of: place, saveTo: createdPlace)
-                            self?.getRating(of: place, saveTo: createdPlace)
-                            self?.getStraightDistance(to: createdPlace)
-                            
-                            self?.foundedPlaces.append(createdPlace)
                     }
                     self?.loadedPlaceTypes += 1
                     self?.allPlacesLoaded = self?.loadedPlaceTypes == self?.filters.count
