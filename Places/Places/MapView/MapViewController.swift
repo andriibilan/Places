@@ -232,10 +232,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         super.viewDidLoad()
         loadVC.customActivityIndicatory(self.view, startAnimate: true)
         mapDynamic.dynamicFilter(button: filterButton, parView: view)
-        mapDynamic.dynamicCompass(button: compassButton, parView: view)
-        print(view.bounds)
         changeMapType()
-       
+        
         
         filterTableView.delegate = self
         filterTableView.dataSource = self

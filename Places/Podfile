@@ -12,5 +12,8 @@ target 'Places' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKShareKit'
+  pod 'FBSDKLoginKit'
 
 end

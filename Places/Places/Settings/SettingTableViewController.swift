@@ -12,6 +12,7 @@ import FirebaseStorage
 
 class SettingTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
+
     
     var dataBaseReference: DatabaseReference! {
         return Database.database().reference()
@@ -19,10 +20,7 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet weak var distanceSegment: UISegmentedControl!
     @IBOutlet weak var searchRadius: UILabel!
     @IBOutlet weak var sliderValue: UISlider!
-    
-    
     @IBOutlet weak var mapTypeSegment: UISegmentedControl!
-    
     @IBAction func sliderRadius(_ sender: UISlider) {
         let isDistanceAreKms = defaults.bool(forKey: "distanceIskm")
         let slider = lroundf(sender.value)
@@ -192,7 +190,7 @@ class SettingTableViewController: UITableViewController {
                 } else {
                     let emailUpdate = ["email": mailString]
                     self.dataBaseReference.child("Users").child(userID).updateChildValues(emailUpdate)
-                    self.resultAlert(text: "DONE", message: "You have successfully updated your email", color: .red)
+                    self.resultAlert(text: "DONE", message: "You have successfully updated your email", color: .white)
                 }
             })
         }

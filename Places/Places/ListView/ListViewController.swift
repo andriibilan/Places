@@ -9,12 +9,12 @@
 import UIKit
 
 class ListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,OutputInterface {
-
+    let ListDynamic = Dynamic()
  
     func updateData() {
 
 
-        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: [.bar, .restaurant], completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
 
             
@@ -107,10 +107,11 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		task 	= URLSessionDownloadTask()
 		cache	= NSCache()
 		
+        ListDynamic.dynamicSort(button: sortingButton, parView: self.view)
+        ListDynamic.dynamicFilterList(filter: filteringButton, parView: self.view)
 
 
-
-        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: [.bar, .restaurant], completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
 
             if let foundedPlaces = foundedPlaces {
