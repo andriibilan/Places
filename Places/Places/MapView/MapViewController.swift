@@ -12,13 +12,14 @@ import CoreLocation
 import Firebase
 
 var pressCoordinate = Location(latitude: 49.841856, longitude: 24.031530)
+var filterArray = [PlaceType]()
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
     
     func updateData() {
 
       let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
                 print("\t\(errorMessage!)")
@@ -59,12 +60,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var viewForFilter: UIView!
     
     @IBAction func currentLocation(_ sender: Any) {
-        self.map.removeAnnotations(self.map.annotations)
-        self.map.removeOverlays(self.map.overlays)
-        if region != nil {
-            updateData()
-           locationManagerConfigurate()
-        }
+        map.removeAnnotations(self.map.annotations)
+        map.removeOverlays(self.map.overlays)
+        
+            pressCoordinate = Location(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
+//            let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
+//           addCurrentLocation(coords: center)
+         updateData()
     }
     private var googlePlacesManager: GooglePlacesManager!
     public var places:[Place] = []
@@ -164,14 +166,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 
 
-            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: self.checkFilter(filter: self.filterArray), completion: { (foundedPlaces, errorMessage) in
+            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
                     if self.googlePlacesManager.allPlacesLoaded {
                         DispatchQueue.main.sync {
-                            self.addAnnotations(coords: self.places)
-                            //                    self.updateData()
+                           // self.addAnnotations(coords: self.places)
+                                              self.updateData()
                         }
                     }
                 }
@@ -222,7 +224,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterTableView.dataSource = self
 
      locationManagerConfigurate()
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
@@ -241,7 +243,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     DispatchQueue.main.sync {
                         self.locationManagerConfigurate()
                         
-                        //                  self.updateData()
+                                       self.updateData()
                     }
                 }
             }
@@ -528,7 +530,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    func checkFilter(filter: [PlaceType]) -> [PlaceType] {
+   static func checkFilter(filter: [PlaceType]) -> [PlaceType] {
         if filter .isEmpty {
             return PlaceType.all
         } else {
@@ -536,7 +538,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    var filterArray = [PlaceType]()
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var accessory = UITableViewCellAccessoryType.none
