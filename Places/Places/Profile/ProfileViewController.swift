@@ -337,6 +337,54 @@ extension ProfileViewController: UITextFieldDelegate {
         self.view.endEditing(true)
         return false
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        switch textField {
+        case nameTextField:
+            guard let text = nameTextField.text else { return true }
+            let newLength = text.count + string.count - range.length
+            return newLength <= 10
+            
+        case phoneTextField:
+            let allowedCharacters = CharacterSet.decimalDigits
+            let characterSet = CharacterSet(charactersIn: string)
+            
+            var originalText = textField.text
+            
+            if (originalText?.count)! == 0
+            {
+                originalText?.append("+38")
+            }
+            if (originalText?.count)! == 3
+            {
+                originalText?.append(" (0")
+            }
+            if (originalText?.count)! == 9
+            {
+                originalText?.append(") ")
+            }
+            if (originalText?.count)! == 13
+            {
+                originalText?.append("-")
+            }
+            if (originalText?.count)! == 16
+            {
+                originalText?.append("-")
+            }
+            if (originalText?.count)! == 19
+            {
+                guard let text = phoneTextField.text else { return true }
+                let newLength = text.count + string.count - range.length
+                return newLength <= 19
+            }
+            phoneTextField.text = originalText
+            return allowedCharacters.isSuperset(of: characterSet)
+        default:
+            break
+        }
+        return true
+    }
 }
 
 
