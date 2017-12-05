@@ -14,7 +14,8 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
     func updateData() {
 
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+
 
             
             if let foundedPlaces = foundedPlaces {
@@ -27,10 +28,8 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
             }
         })
         //AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc
-        //"AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM"
-
+        //AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM
         //AIzaSyCVaciTxny1MNyP9r38AelJu6Qoj2ImHF0
-
         //AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ
     }
     
@@ -111,7 +110,9 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         ListDynamic.dynamicSort(button: sortingButton, parView: self.view)
         ListDynamic.dynamicFilterList(filter: filteringButton, parView: self.view)
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+
 
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces

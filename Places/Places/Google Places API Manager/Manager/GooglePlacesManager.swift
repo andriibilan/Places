@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andrew. All rights reserved.
 //
 
-// json nearby request example: https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.7858956,-122.4067728&radius=50&key=AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ
+// json nearby request example: https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.7858956,-122.4067728&radius=50&key=AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM
 
 import Foundation
 import UIKit
@@ -25,13 +25,17 @@ class GooglePlacesManager{
     var loadedPlaceTypes = 0
     
     // MARK: - Init
-    /// Initialization of nearby search
-    init(apiKey: String, radius: Int, currentLocation: Location, filters: [PlaceType], completion: @escaping ([Place]?, String?) -> ()) {
+    /// Initialization of nearby/byName search
+    init(apiKey: String, radius: Int, currentLocation: Location, filters: [PlaceType], placeName: String? = nil, completion: @escaping ([Place]?, String?) -> ()) {
         self.apiKey = apiKey
         self.radius = radius
         self.currentLocation = currentLocation
         self.filters = filters
         
-        fetchPlaces(completion: completion)
+        if let name = placeName{
+//            getBasicData(byName: <#T##String#>, ofPlaceIndex: <#T##Int?#>, ofPlace: <#T##Place?#>, completion: <#T##(Place?, String?) -> ()#>)
+        } else{
+            fetchPlaces(completion: completion)
+        }
     }
 }

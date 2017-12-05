@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -540,7 +541,7 @@
                                         <color key="backgroundColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="dismiss"/>
                                         <connections>
-                                            <segue destination="Je1-fC-mgn" kind="show" id="V3h-2y-1bh"/>
+                                            <action selector="dismissButton:" destination="YBU-3i-5y2" eventType="touchUpInside" id="Gkn-w1-H1H"/>
                                         </connections>
                                     </button>
                                 </subviews>

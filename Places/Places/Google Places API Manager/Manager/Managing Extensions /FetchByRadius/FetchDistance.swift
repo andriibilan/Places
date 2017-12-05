@@ -11,19 +11,8 @@ import UIKit
 
 extension GooglePlacesManager{
     /// Loads distance from "currentLocation" to place location (by distancematrix request)
-    func getRealDistance(toPlaceIndex placeIndex: Int?, toPlace place: Place?, completion: @escaping (Place?, String?) -> ()){
-        let index: Int
-        
-        if placeIndex != nil{
-            index = placeIndex!
-        } else if let givenPlace = place{
-            if let indexOfGivenPlace = foundedPlaces.index(where: { $0.placeId ?? "empty" == givenPlace.placeId }) {
-                index = indexOfGivenPlace
-            } else { return }
-        } else { return }
-        
-        
-        if let destination = foundedPlaces[index].location{
+    func getRealDistance(toPlace givenPlace: Place, completion: @escaping (Place?, String?) -> ()){
+        if let destination = givenPlace.location{
             let origin = currentLocation
             
             let mode = "walking"
@@ -48,7 +37,7 @@ extension GooglePlacesManager{
                         let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                         if let dictionary = json as? [String: Any]{
                             if let errorMessage = dictionary["error_message"] as? String{
-                                completion(self?.foundedPlaces[index], "Distance gives: " + errorMessage)
+                                completion(givenPlace, "Distance gives: " + errorMessage)
                                 return
                             }
                             
@@ -59,10 +48,13 @@ extension GooglePlacesManager{
                                     let distance = element["distance"] as! [String: Any]
                                     let distanceValue = distance["value"] as! Int
                                     
-                                    self?.foundedPlaces[index].distance = distanceValue
-                                    self?.foundedPlaces[index].distanceFromLocation = self?.currentLocation
+                                    givenPlace.distance = distanceValue
+                                    givenPlace.distanceFromLocation = origin
                                     
-                                    completion(self?.foundedPlaces[index], nil)
+                                    if let indexOfGivenPlace = self?.foundedPlaces.index(where: { $0.placeId ?? "empty" == givenPlace.placeId }) {
+                                        self?.foundedPlaces[indexOfGivenPlace] = givenPlace
+                                    }
+                                    completion(givenPlace, nil)
                                 }
                             }
                         }
