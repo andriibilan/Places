@@ -19,6 +19,7 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
 
     @IBOutlet weak var currentPhotoCollectionView: UICollectionView!
     
+    @IBOutlet weak var dismissButtonOutlet: UIButtonExplicit!
     
     
     
@@ -31,7 +32,10 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        dismissButtonOutlet.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+        dismissButtonOutlet.backgroundColor = #colorLiteral(red: 0.8338858485, green: 0.2595152557, blue: 0.3878593445, alpha: 1)
+        
+        
         
         currentPhotoCollectionView.delegate = self
         currentPhotoCollectionView.dataSource = self

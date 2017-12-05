@@ -500,27 +500,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCN-6U-eEc" userLabel="Common View">
-                                <rect key="frame" x="37.5" y="84.5" width="300" height="518"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZDN-i6-Ylp" userLabel="Current Photo Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="518"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="7z1-Rq-gwv">
-                                            <size key="itemSize" width="300" height="526"/>
+                                            <size key="itemSize" width="370" height="640"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCollectionViewCell" id="fON-eY-cRS" customClass="PhotoCollectionViewCell" customModule="Places" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="-4" width="300" height="526"/>
+                                                <rect key="frame" x="0.0" y="13.5" width="370" height="640"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="526"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="370" height="640"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AgK-Rx-LlU" userLabel="Current Photo Image View">
-                                                            <rect key="frame" x="0.0" y="0.0" width="300" height="526"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="370" height="640"/>
                                                         </imageView>
                                                     </subviews>
                                                 </view>
@@ -530,7 +530,7 @@
                                                     <constraint firstItem="AgK-Rx-LlU" firstAttribute="width" secondItem="fON-eY-cRS" secondAttribute="width" id="OSN-ge-9GY"/>
                                                     <constraint firstItem="AgK-Rx-LlU" firstAttribute="centerX" secondItem="fON-eY-cRS" secondAttribute="centerX" id="TDy-Hb-BlG"/>
                                                 </constraints>
-                                                <size key="customSize" width="300" height="526"/>
+                                                <size key="customSize" width="370" height="640"/>
                                                 <connections>
                                                     <outlet property="photoImageView" destination="AgK-Rx-LlU" id="Hgf-5T-Yt4"/>
                                                 </connections>
@@ -544,46 +544,44 @@
                                     <constraint firstItem="ZDN-i6-Ylp" firstAttribute="top" secondItem="fCN-6U-eEc" secondAttribute="top" id="VDS-pm-Fue"/>
                                     <constraint firstAttribute="trailing" secondItem="ZDN-i6-Ylp" secondAttribute="trailing" id="bmS-6c-nkK"/>
                                     <constraint firstItem="ZDN-i6-Ylp" firstAttribute="leading" secondItem="fCN-6U-eEc" secondAttribute="leading" id="saj-aY-NTO"/>
-                                    <constraint firstItem="ZDN-i6-Ylp" firstAttribute="height" secondItem="fCN-6U-eEc" secondAttribute="height" id="xnf-Gs-axK"/>
                                     <constraint firstItem="ZDN-i6-Ylp" firstAttribute="width" secondItem="fCN-6U-eEc" secondAttribute="width" id="zaQ-qe-2S4"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVR-3O-eFY">
-                                <rect key="frame" x="161.5" y="615" width="52" height="52"/>
-                                <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exP-nQ-jbD" customClass="UIButtonExplicit" customModule="Places" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="52" height="52"/>
-                                        <color key="backgroundColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="dismiss"/>
-                                        <connections>
-                                            <action selector="dismissButton:" destination="YBU-3i-5y2" eventType="touchUpInside" id="Gkn-w1-H1H"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exP-nQ-jbD" customClass="UIButtonExplicit" customModule="Places" customModuleProvider="target">
+                                <rect key="frame" x="295" y="587" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="exP-nQ-jbD" secondAttribute="bottom" id="9rd-Wp-bGg"/>
-                                    <constraint firstAttribute="trailing" secondItem="exP-nQ-jbD" secondAttribute="trailing" id="K9b-dO-nbY"/>
-                                    <constraint firstAttribute="width" secondItem="bVR-3O-eFY" secondAttribute="height" multiplier="1:1" id="ML6-B0-Fjt"/>
-                                    <constraint firstItem="exP-nQ-jbD" firstAttribute="top" secondItem="bVR-3O-eFY" secondAttribute="top" id="chV-JE-g2f"/>
-                                    <constraint firstItem="exP-nQ-jbD" firstAttribute="leading" secondItem="bVR-3O-eFY" secondAttribute="leading" id="ksY-GQ-UFj"/>
+                                    <constraint firstAttribute="height" constant="60" id="9dc-w7-GbX"/>
+                                    <constraint firstAttribute="width" constant="60" id="ws0-bQ-zAU"/>
                                 </constraints>
-                            </view>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="211602-64">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="dismissButton:" destination="YBU-3i-5y2" eventType="touchUpInside" id="Gkn-w1-H1H"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="fCN-6U-eEc" firstAttribute="height" secondItem="uCu-dC-WNZ" secondAttribute="height" multiplier="0.8" id="K7X-YZ-aSM"/>
-                            <constraint firstItem="bVR-3O-eFY" firstAttribute="width" secondItem="bVR-3O-eFY" secondAttribute="height" multiplier="1:1" id="POa-tU-abs"/>
-                            <constraint firstItem="fCN-6U-eEc" firstAttribute="width" secondItem="uCu-dC-WNZ" secondAttribute="width" multiplier="0.8" id="fV4-as-9iy"/>
-                            <constraint firstItem="fCN-6U-eEc" firstAttribute="centerY" secondItem="uCu-dC-WNZ" secondAttribute="centerY" id="nM5-8H-wac"/>
-                            <constraint firstItem="uCu-dC-WNZ" firstAttribute="bottom" secondItem="bVR-3O-eFY" secondAttribute="bottom" id="sId-8C-kAL"/>
-                            <constraint firstItem="bVR-3O-eFY" firstAttribute="centerX" secondItem="uCu-dC-WNZ" secondAttribute="centerX" id="tYW-nQ-m8g"/>
-                            <constraint firstItem="fCN-6U-eEc" firstAttribute="centerX" secondItem="uCu-dC-WNZ" secondAttribute="centerX" id="zn0-Xn-Uro"/>
+                            <constraint firstItem="uCu-dC-WNZ" firstAttribute="trailing" secondItem="exP-nQ-jbD" secondAttribute="trailing" constant="20" id="D64-O3-eVo"/>
+                            <constraint firstAttribute="bottom" secondItem="fCN-6U-eEc" secondAttribute="bottom" id="QnT-HL-gZh"/>
+                            <constraint firstItem="fCN-6U-eEc" firstAttribute="leading" secondItem="uCu-dC-WNZ" secondAttribute="leading" id="c8u-5L-7WE"/>
+                            <constraint firstItem="uCu-dC-WNZ" firstAttribute="trailing" secondItem="fCN-6U-eEc" secondAttribute="trailing" id="it2-D4-v2h"/>
+                            <constraint firstItem="uCu-dC-WNZ" firstAttribute="bottom" secondItem="exP-nQ-jbD" secondAttribute="bottom" constant="20" id="ue9-rn-jWd"/>
+                            <constraint firstItem="fCN-6U-eEc" firstAttribute="top" secondItem="hvS-bj-5RS" secondAttribute="top" id="x1w-cO-xJX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uCu-dC-WNZ"/>
                     </view>
                     <connections>
                         <outlet property="currentPhotoCollectionView" destination="ZDN-i6-Ylp" id="1ps-QO-cbL"/>
+                        <outlet property="dismissButtonOutlet" destination="exP-nQ-jbD" id="Zc8-zU-nmB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FtT-Md-Mj5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -593,6 +591,7 @@
     </scenes>
     <resources>
         <image name="115801-64" width="32" height="32"/>
+        <image name="211602-64" width="32" height="32"/>
         <image name="noPhotoIcon" width="512" height="512"/>
         <image name="path" width="48" height="48"/>
         <image name="phone number" width="32" height="32"/>
