@@ -103,7 +103,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         menuIsOpen = expand
         if menuIsOpen == true {
             map?.compassButtonConstraint.constant = 200
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 1.4, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
             }, completion: nil)
         } else {
