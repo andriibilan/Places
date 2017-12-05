@@ -64,7 +64,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
         
         headerBlurImageView = UIImageView(frame: header.bounds)
         headerImageView?.image = UIImage(named: "lviv")
-        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffect = UIBlurEffect(style: .light)
         blurEffectView = UIVisualEffectView(effect: blurEffect)
         //        blurEffectView?.frame = view.bounds
         //        headerBlurImageView?.image = UIImage(named: "header_bg")?.blurredImage(withRadius: 10, iterations: 20, tintColor: UIColor.clear)
@@ -280,7 +280,7 @@ extension ProfileViewController:  UIScrollViewDelegate {
             
             //  ------------ Blur
             
-            blurEffectView?.alpha = min (1.0, (offset - offset_B_LabelHeader)/8)
+            blurEffectView?.alpha = min (0.8, (offset + 20 - offset_B_LabelHeader))
             blurEffectView?.frame = view.bounds
           
             
