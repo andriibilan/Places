@@ -13,7 +13,9 @@ import FirebaseStorage
 class SettingTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
     
-    
+    var dataBaseReference: DatabaseReference! {
+        return Database.database().reference()
+    }
     @IBOutlet weak var distanceSegment: UISegmentedControl!
     @IBOutlet weak var searchRadius: UILabel!
     @IBOutlet weak var sliderValue: UISlider!
@@ -182,11 +184,14 @@ class SettingTableViewController: UITableViewController {
     }
     
     func updateMail (mailString: String) {
+         let userID : String = (Auth.auth().currentUser?.uid)!
         if let user = Auth.auth().currentUser {
             user.updateEmail(to: mailString, completion: { (error) in
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
+                    let emailUpdate = ["email": mailString]
+                    self.dataBaseReference.child("Users").child(userID).updateChildValues(emailUpdate)
                     self.resultAlert(text: "DONE", message: "You have successfully updated your email", color: .red)
                 }
             })
