@@ -43,6 +43,7 @@
 		49E3C00F1FC6E12800400A06 /* UIImageViewExplicit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00E1FC6E12800400A06 /* UIImageViewExplicit.swift */; };
 		521CFD741FCCCE3800CD86DD /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521CFD731FCCCE3800CD86DD /* UIImage.swift */; };
 		524301311FD6B3AA002C613D /* Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524301301FD6B3AA002C613D /* Load.swift */; };
+		524301331FD6F2A3002C613D /* LaunchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524301321FD6F2A3002C613D /* LaunchScreenController.swift */; };
 		528825AA1FCEF53700C29BFE /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B9A11FCEE9D500415051 /* SearchVC.swift */; };
 		528825AB1FCEF53A00C29BFE /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B99F1FCEE9D500415051 /* ItemCell.swift */; };
 		528825AC1FCEF53D00C29BFE /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2505B9A01FCEE9D500415051 /* Search.storyboard */; };
@@ -157,6 +158,7 @@
 		49E3C00E1FC6E12800400A06 /* UIImageViewExplicit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExplicit.swift; sourceTree = "<group>"; };
 		521CFD731FCCCE3800CD86DD /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		524301301FD6B3AA002C613D /* Load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Load.swift; sourceTree = "<group>"; };
+		524301321FD6F2A3002C613D /* LaunchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenController.swift; sourceTree = "<group>"; };
 		528825C01FCF0EA400C29BFE /* GooglePlacesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
 		528825C31FCF0EA400C29BFE /* AddNewPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewPlace.swift; sourceTree = "<group>"; };
 		528825C71FCF0EA400C29BFE /* FetchAdditionalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAdditionalData.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 		8A8C5C691FC57F3E00A834EA = {
 			isa = PBXGroup;
 			children = (
+				524301321FD6F2A3002C613D /* LaunchScreenController.swift */,
 				8A8C5C741FC57F3E00A834EA /* Places */,
 				493649081FD0646B00C95EDC /* Places In Current Location */,
 				8A8C5C731FC57F3E00A834EA /* Products */,
@@ -728,6 +731,7 @@
 				8A8C5C781FC57F3E00A834EA /* ViewController.swift in Sources */,
 				528825B01FCEF55000C29BFE /* Place.swift in Sources */,
 				528825AF1FCEF54E00C29BFE /* Location.swift in Sources */,
+				524301331FD6F2A3002C613D /* LaunchScreenController.swift in Sources */,
 				528825CD1FCF0EA400C29BFE /* AddNewPlace.swift in Sources */,
 				521CFD741FCCCE3800CD86DD /* UIImage.swift in Sources */,
 				528825D11FCF0EA400C29BFE /* FetchDistance.swift in Sources */,
