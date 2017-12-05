@@ -17,18 +17,22 @@ var filterArray = [PlaceType]()
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
     
     func updateData() {
-
+      loadVC.customActivityIndicatory(self.view, startAnimate: true)
       let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+
+
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
                 print("\t\(errorMessage!)")
-//                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+               self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+               
                 DispatchQueue.main.sync {
                     //self.addAnnotations(coords: self.places)
+                    loadVC.customActivityIndicatory(self.view, startAnimate: false)
                     self.addCurrentLocation(coords: center)
                 }}
-            
 
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
@@ -36,7 +40,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     DispatchQueue.main.sync {
                         self.addAnnotations(coords: self.places)
                         self.addCurrentLocation(coords: center)
-                       
+                       loadVC.customActivityIndicatory(self.view, startAnimate: false)
                         //                    self.updateData()
                     }
                 }
@@ -72,9 +76,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     public var places:[Place] = []
     @IBOutlet weak var settingsButton: UIButton!
  
+
     
-    
-    
+  
 
     
     @IBOutlet weak var compassButtonConstraint: NSLayoutConstraint!
@@ -166,13 +170,26 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 
 
-            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
+            self.googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+
+                if errorMessage != nil {
+                    //self.locationManagerConfigurate()
+                    print("\t\(errorMessage!)")
+                    self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+                    
+                    DispatchQueue.main.sync {
+                        //self.addAnnotations(coords: self.places)
+                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                      
+                    }}
+                
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
                     if self.googlePlacesManager.allPlacesLoaded {
                         DispatchQueue.main.sync {
                            // self.addAnnotations(coords: self.places)
+                            
                                               self.updateData()
                         }
                     }
@@ -210,36 +227,44 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //    }
     
     
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadVC.customActivityIndicatory(self.view, startAnimate: true)
         mapDynamic.dynamicFilter(button: filterButton, parView: view)
-        mapDynamic.dynamicCompass(button: compassButton, parView: view)
-        print(view.bounds)
         changeMapType()
-       
+        
         
         filterTableView.delegate = self
         filterTableView.dataSource = self
 
+
      locationManagerConfigurate()
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+
+
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+
 
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
 
 
                 print("\t\(errorMessage!)")
-//                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+               self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                 DispatchQueue.main.sync {
                     self.locationManagerConfigurate()
+                    loadVC.customActivityIndicatory(self.view, startAnimate: false)
                 }}
 
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
-                
+                if !self.googlePlacesManager.allPlacesLoaded {
+//                    let loVC = loadVC(frame: (self.view.frame),)
+//                    self.present(loVC, animated: true, completion: nil)
+    
+                }
                 if self.googlePlacesManager.allPlacesLoaded{
+    
                     DispatchQueue.main.sync {
                         self.locationManagerConfigurate()
                         
@@ -256,7 +281,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
-
 
         sideMenuConstraint.constant = -160
         // Do any additional setup after loading the view.
@@ -334,7 +358,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let loc = locations.last! as CLLocation
         pressCoordinate = Location(latitude: loc.coordinate.latitude, longitude: loc.coordinate.longitude)
         let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
-        region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        
+        
         
         
         if map.annotations.count != 0 {
@@ -356,6 +381,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         map.removeAnnotations(map.annotations)
         let myAnnotation: MKPointAnnotation = MKPointAnnotation()
         myAnnotation.coordinate = coords
+        let center2D = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
+        region = MKCoordinateRegion(center: center2D, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         myAnnotation.title = "Current location"
         map.setRegion(region!, animated: true)
         map.addAnnotation(myAnnotation)
@@ -394,6 +421,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             annotations.append(annotation as CustomAnnotation)
         }
         map.addAnnotations(annotations)
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -447,12 +475,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //Perform a segue here to navigate to another viewcontroller
             let g = view.annotation as! CustomAnnotation
             
-            
-            
-            googlePlacesManager.getPhotos(ofPlaceIndex: nil, ofPlace: g.place){place, errorMessage in
-                DispatchQueue.main.async{
-                    print(errorMessage)
-                    self.performSegue(withIdentifier: "detailVC", sender: place)
+            if let place = g.place{
+                googlePlacesManager.getPhotos(ofPlace: place){ filledPlace, errorMessage in
+                    DispatchQueue.main.async {
+                        print(errorMessage ?? "")
+                        self.performSegue(withIdentifier: "detailVC", sender: filledPlace)
+                    }
+
                 }
             }
         }

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
-   
+  
     var map : MapViewController?
     var listObj : ListViewController?
     var menuIsOpen = false
@@ -22,7 +22,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     @IBOutlet weak var listView: UIView!
     @IBOutlet weak var menuView: UIViewExplicit!
     
-    @IBOutlet weak var segment: UISegmentedControl!
+
     
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
