@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -165,6 +166,9 @@
                         <outlet property="listView" destination="WRz-UB-V2K" id="PgK-q7-BnM"/>
                         <outlet property="mapView" destination="epZ-6t-w9F" id="rzk-cb-Pgw"/>
                         <outlet property="menuView" destination="C0Q-sZ-dW2" id="v4X-mG-Z8J"/>
+                        <outlet property="profileButton" destination="DHE-yK-Tu7" id="W4L-P9-Jqw"/>
+                        <outlet property="searchButton" destination="VWU-LE-cGY" id="Dl8-yr-3uM"/>
+                        <outlet property="settingsButton" destination="pFa-2t-k8b" id="NFI-cV-MC4"/>
                         <segue destination="G2v-qH-lE5" kind="presentation" identifier="ShowProfile" id="FZl-Th-4OR"/>
                         <segue destination="xjy-Hw-8Ed" kind="presentation" identifier="ShowLogin" id="4YD-0r-gCP"/>
                     </connections>
@@ -321,6 +325,7 @@
                         <outlet property="viewForFilter" destination="jpA-aE-Hki" id="vd5-dV-Au0"/>
                         <segue destination="w39-4y-S2s" kind="presentation" identifier="detailVC" id="okD-G1-lk4"/>
                         <segue destination="Ilh-Ai-EtW" kind="presentation" identifier="addPlace" id="fj7-XN-Q0T"/>
+                        <segue destination="xjy-Hw-8Ed" kind="presentation" identifier="toLogin" id="8cj-BZ-feC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6B-D0-qrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -528,5 +533,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="okD-G1-lk4"/>
+        <segue reference="8cj-BZ-feC"/>
     </inferredMetricsTieBreakers>
 </document>

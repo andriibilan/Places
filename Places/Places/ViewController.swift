@@ -15,6 +15,9 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     var listObj : ListViewController?
     var menuIsOpen = false
     
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
     @IBOutlet weak var menuView: UIViewExplicit!
@@ -29,6 +32,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         case 1:
             mapView.isHidden = true
             listView.isHidden = false
+            listObj?.updateData()
         default:
             break
         }
@@ -55,7 +59,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         listView.isHidden = true
-        menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        closeMenu()
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -65,15 +69,32 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         
     }
     
+    //MARK:- Custom menu view and animations
+    
     @IBAction func menuTapped(_ sender: FloatingActionButton) {
         animateThemeView(expand: !menuIsOpen)
         UIView.animate(withDuration: 0.3, animations: {
             if self.menuView.transform == .identity {
-                self.menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                self.closeMenu()
             } else {
                 self.menuView.transform = .identity
             }
         })
+        
+        UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: [], animations: {
+            if self.menuView.transform == .identity {
+                self.searchButton.transform = .identity
+                self.profileButton.transform = .identity
+                self.settingsButton.transform = .identity
+            }
+        })
+    }
+    
+    func closeMenu() {
+        menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        searchButton.transform = CGAffineTransform(translationX: 0, y: 15)
+        profileButton.transform = CGAffineTransform(translationX: 11, y: 11)
+        settingsButton.transform = CGAffineTransform(translationX: 15, y: 0)
     }
     
     //MARK:- Custom compass animations
@@ -82,12 +103,12 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         menuIsOpen = expand
         if menuIsOpen == true {
             map?.compassButtonConstraint.constant = 200
-            UIView.animate(withDuration: 2.0, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
             }, completion: nil)
         } else {
             map?.compassButtonConstraint.constant = 90
-            UIView.animate(withDuration: 2.0, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
             }, completion: nil)
         }
@@ -143,13 +164,12 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         if segue.identifier == "ListView" {
            listObj = segue.destination as? ListViewController
         }
-
 	}
     
     @IBAction func unwindFromSettings(segue: UIStoryboardSegue) {
         if mapView.isHidden == false {
             map?.updateData()
-             print("List hiidden? \(listView.isHidden)")
+            print("List hiidden? \(listView.isHidden)")
         } else {
             if let listVC = listObj {
                 print("List hiidden? \(self.listView.isHidden)")
