@@ -13,12 +13,15 @@ import Firebase
 
 var pressCoordinate = Location(latitude: 49.841856, longitude: 24.031530)
 
+
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
+    
+    let segueToAddScreen = "addPlace"
     
     func updateData() {
 
       let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
                 print("\t\(errorMessage!)")
@@ -139,8 +142,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         actionSheet.addAction(UIAlertAction.init(title: "Add new place", style: UIAlertActionStyle.default, handler: { (action) in
+            pressCoordinate = Location(latitude: location.latitude, longitude: location.longitude )
             if Auth.auth().currentUser != nil {
-                self.performSegue(withIdentifier: "addPlace", sender: nil)//add coords
+                self.performSegue(withIdentifier: self.segueToAddScreen, sender: pressCoordinate)
             }
             else {
                 self.performSegue(withIdentifier: "toLogin", sender: nil)
@@ -159,12 +163,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             let loc = CLLocation(latitude: location.latitude as CLLocationDegrees, longitude: location.longitude as CLLocationDegrees)
             pressCoordinate = Location(latitude: location.latitude, longitude: location.longitude )
+      
 
 
 
 
-
-            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: self.checkFilter(filter: self.filterArray), completion: { (foundedPlaces, errorMessage) in
+            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: self.checkFilter(filter: self.filterArray), completion: { (foundedPlaces, errorMessage) in
 
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
@@ -222,7 +226,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterTableView.dataSource = self
 
      locationManagerConfigurate()
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
@@ -462,6 +466,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if segue.identifier == "detailVC" {
             let d = segue.destination as? DetailPlaceViewController
             d?.place = sender as! Place
+        }
+        if segue.identifier == segueToAddScreen {
+            let addScreen = segue.destination as? AddNewPlaceController
+            addScreen?.location = pressCoordinate
         }
     }
 
