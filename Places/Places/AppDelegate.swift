@@ -21,14 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func showProfile(){
-        
-        if Auth.auth().currentUser != nil {
-            let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
-            self.window?.rootViewController = profileVC
-        } else {
-            let profileVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
-            self.window?.rootViewController = profileVC
-        }
-    }
+//    func showProfile(){
+//        
+//        if Auth.auth().currentUser != nil {
+//            let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
+//            self.window?.rootViewController = profileVC
+//        } else {
+//            let profileVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
+//            self.window?.rootViewController = profileVC
+//        }
+//    }
 }

@@ -55,10 +55,11 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="07n-cv-Ixb" customClass="UIImageViewExplicit" customModule="Places">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Unknown.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="07n-cv-Ixb" customClass="UIImageViewExplicit" customModule="Places">
                                                             <rect key="frame" x="5" y="4" width="61" height="61"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="61" id="R2V-gO-g1G"/>
+                                                                <constraint firstAttribute="height" constant="61" id="ry4-2l-QK7"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -67,7 +68,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="0.29018621575342468" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" white="1" alpha="0.79955051369863017" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="07n-cv-Ixb" firstAttribute="top" secondItem="cLP-gv-Cbc" secondAttribute="top" constant="4" id="96f-FH-Dhm"/>
                                                         <constraint firstItem="07n-cv-Ixb" firstAttribute="leading" secondItem="cLP-gv-Cbc" secondAttribute="leading" constant="5" id="CjO-xl-hx4"/>
@@ -126,6 +127,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="profile" width="175" height="175"/>
+        <image name="Unknown.jpeg" width="275" height="183"/>
     </resources>
 </document>

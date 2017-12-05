@@ -65,6 +65,7 @@ extension GooglePlacesManager{
         
         if givenPlace.reviews.isEmpty{  // "review" instead of "photoReferences" because "photoReferences" has icon!
             getAdditionalData(ofPlace: givenPlace, completion: loadPhotos)
+
         } else{
             loadPhotos(of: givenPlace, errorMessage: nil)
         }

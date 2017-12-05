@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2146AF8C1FD3549700A32BBD /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146AF8B1FD3549700A32BBD /* UIViewController.swift */; };
 		21D1FD781FD04D2400DD2B7F /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D1FD771FD04D2400DD2B7F /* Review.swift */; };
-		21FC345F1FD580CE005EED18 /* Static Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FC345E1FD580CE005EED18 /* Static Methods.swift */; };
 		25316AE41FCDB52B00CE29DE /* phoneFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25316AE31FCDB52B00CE29DE /* phoneFormatter.swift */; };
 		25316AE61FCDB77F00CE29DE /* lviv2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25316AE51FCDB77E00CE29DE /* lviv2.jpg */; };
 		25316AE81FCDB80B00CE29DE /* add.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25316AE71FCDB80A00CE29DE /* add.jpg */; };
@@ -52,6 +51,7 @@
 		528825B31FCEF55800C29BFE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B9901FCEE9D500415051 /* Int.swift */; };
 		528825CC1FCF0EA400C29BFE /* GooglePlacesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C01FCF0EA400C29BFE /* GooglePlacesManager.swift */; };
 		528825CD1FCF0EA400C29BFE /* AddNewPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C31FCF0EA400C29BFE /* AddNewPlace.swift */; };
+		528825CE1FCF0EA400C29BFE /* FetchByName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C51FCF0EA400C29BFE /* FetchByName.swift */; };
 		528825CF1FCF0EA400C29BFE /* FetchAdditionalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C71FCF0EA400C29BFE /* FetchAdditionalData.swift */; };
 		528825D01FCF0EA400C29BFE /* FetchBasicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C81FCF0EA400C29BFE /* FetchBasicData.swift */; };
 		528825D11FCF0EA400C29BFE /* FetchDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C91FCF0EA400C29BFE /* FetchDistance.swift */; };
@@ -115,7 +115,6 @@
 /* Begin PBXFileReference section */
 		2146AF8B1FD3549700A32BBD /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		21D1FD771FD04D2400DD2B7F /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
-		21FC345E1FD580CE005EED18 /* Static Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Static Methods.swift"; sourceTree = "<group>"; };
 		2505B9881FCEE9D500415051 /* UITableViewExplicit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExplicit.swift; sourceTree = "<group>"; };
 		2505B98A1FCEE9D500415051 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		2505B98C1FCEE9D500415051 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -157,6 +156,7 @@
 		521CFD731FCCCE3800CD86DD /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		528825C01FCF0EA400C29BFE /* GooglePlacesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
 		528825C31FCF0EA400C29BFE /* AddNewPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewPlace.swift; sourceTree = "<group>"; };
+		528825C51FCF0EA400C29BFE /* FetchByName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchByName.swift; sourceTree = "<group>"; };
 		528825C71FCF0EA400C29BFE /* FetchAdditionalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAdditionalData.swift; sourceTree = "<group>"; };
 		528825C81FCF0EA400C29BFE /* FetchBasicData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchBasicData.swift; sourceTree = "<group>"; };
 		528825C91FCF0EA400C29BFE /* FetchDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchDistance.swift; sourceTree = "<group>"; };
@@ -338,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				528825C21FCF0EA400C29BFE /* AddNewPlace */,
+				528825C41FCF0EA400C29BFE /* FetchByName */,
 				528825C61FCF0EA400C29BFE /* FetchByRadius */,
 				8A6926961FD58F5000CBFD18 /* Static Methods.swift */,
 			);
@@ -350,6 +351,14 @@
 				528825C31FCF0EA400C29BFE /* AddNewPlace.swift */,
 			);
 			path = AddNewPlace;
+			sourceTree = "<group>";
+		};
+		528825C41FCF0EA400C29BFE /* FetchByName */ = {
+			isa = PBXGroup;
+			children = (
+				528825C51FCF0EA400C29BFE /* FetchByName.swift */,
+			);
+			path = FetchByName;
 			sourceTree = "<group>";
 		};
 		528825C61FCF0EA400C29BFE /* FetchByRadius */ = {
@@ -693,6 +702,7 @@
 				2BCDF2361FC8481B00EA96F0 /* Double.swift in Sources */,
 				757042221FCB09450075FC87 /* Validator.swift in Sources */,
 				2B4BA9161FC5EC0E00B5E598 /* PhotoPagingViewController.swift in Sources */,
+				528825CE1FCF0EA400C29BFE /* FetchByName.swift in Sources */,
 				757042261FCB097B0075FC87 /* AuthService.swift in Sources */,
 				25316AEC1FCDBC2500CE29DE /* DlistViewController.swift in Sources */,
 				496189ED1FD593D200C99499 /* TodayViewController.swift in Sources */,
@@ -702,7 +712,6 @@
 				528825D01FCF0EA400C29BFE /* FetchBasicData.swift in Sources */,
 				49E3C00B1FC6D19300400A06 /* UIViewExplicit.swift in Sources */,
 				52E5577C1FCA4E90000B7FFC /* CustomTransitionAnimator.swift in Sources */,
-				21FC345F1FD580CE005EED18 /* Static Methods.swift in Sources */,
 				8A8C5C781FC57F3E00A834EA /* ViewController.swift in Sources */,
 				528825B01FCEF55000C29BFE /* Place.swift in Sources */,
 				528825AF1FCEF54E00C29BFE /* Location.swift in Sources */,

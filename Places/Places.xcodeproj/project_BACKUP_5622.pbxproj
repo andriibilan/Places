@@ -339,7 +339,11 @@
 			children = (
 				528825C21FCF0EA400C29BFE /* AddNewPlace */,
 				528825C61FCF0EA400C29BFE /* FetchByRadius */,
+<<<<<<< .merge_file_7b95AE
+				21FC345E1FD580CE005EED18 /* Static Methods.swift */,
+=======
 				8A6926961FD58F5000CBFD18 /* Static Methods.swift */,
+>>>>>>> .merge_file_7lbqt4
 			);
 			path = "Managing Extensions ";
 			sourceTree = "<group>";

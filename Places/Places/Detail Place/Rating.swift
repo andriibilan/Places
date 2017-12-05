@@ -23,10 +23,10 @@ class Rating: UIView {
     var tralingPoint: CGPoint = CGPoint()
     var ratingRule: CGFloat = 0
     
-    var firstColor: CGColor = UIColor.golden.cgColor
+    var firstColor: CGColor = UIColor.yellow.cgColor
     var secondColor: CGColor = UIColor.white.cgColor
     
-    init (x: Double, y: Double, height: Double, currentRate: Double, mainColor: CGColor = UIColor.golden.cgColor, backColor: CGColor = UIColor.white.cgColor) {
+    init (x: Double, y: Double, height: Double, currentRate: Double, mainColor: CGColor = UIColor.yellow.cgColor, backColor: CGColor = UIColor.white.cgColor) {
         let frame = CGRect(x: x, y: y, width: height * 5, height: height)
         super.init(frame: frame)
         backgroundColor = UIColor.clear

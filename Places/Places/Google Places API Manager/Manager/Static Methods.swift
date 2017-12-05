@@ -2,7 +2,7 @@
 //  Static Methods.swift
 //  Places
 //
-//  Created by Nazarii Melnyk on 12/4/17.
+//  Created by andriibilan on 12/4/17.
 //  Copyright © 2017 andriibilan. All rights reserved.
 //
 
@@ -21,7 +21,6 @@ extension GooglePlacesManager{
                 conformingType = regExForBounds.stringByReplacingMatches(in: conformingType, options: .withoutAnchoringBounds, range: NSRange(location: 0, length: conformingType.count), withTemplate: "")
             }
         }
-        
         return conformingType
     }
 }

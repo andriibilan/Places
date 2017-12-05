@@ -11,11 +11,11 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
-let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its transformations
-let offset_B_LabelHeader:CGFloat = 95.0 // At this offset the Black label reaches the Header
-let distance_W_LabelHeader:CGFloat = 35.0 // The distance between the bottom of the Header and the top of the White Label
+let offset_HeaderStop:CGFloat = 30.0 // At this offset the Header stops its transformations
+let offset_B_LabelHeader:CGFloat = 105.0 // At this offset the Black label reaches the Header
+let distance_W_LabelHeader:CGFloat = 100.0 // The distance between the bottom of the Header and the top of the White Label
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var nameTextField: UITextField!
@@ -29,49 +29,71 @@ class ProfileViewController: UIViewController {
     @IBOutlet var headerImageView:UIImageView!
     @IBOutlet var headerBlurImageView:UIImageView!
     var blurredHeaderImageView:UIImageView?
+    var blurEffectView: UIVisualEffectView?
     
+    private let transition = CustomTransitionAnimator()
     private var messageText : String!
     private let userID = (Auth.auth().currentUser?.uid)!
     private let ref = Database.database().reference()
     var authService = AuthService()
-	var validator = Validator()
-    
+    var validator = Validator()
+
     @IBOutlet weak var dismissButton: UIButton!{
-		didSet{
-			dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
-			dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
-		}
-	}
-	
-	@IBAction func dismissButtonTaped(_ sender: UIButton) {
-        updateProfile()
+        didSet{
+            dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
+            dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+        }
+    }
+    
+    @IBAction func dismissButtonTaped(_ sender: UIButton) {
+        if (nameTextField.text?.isEmpty)! {
+            messageText = "Please complete all fields."
+            alertAction(messageText)
+            
+            return
+        }
+        if !validator.isValidEmail(email: emailTextField.text!) {
+            messageText = "Please enter your correct email."
+            alertAction(messageText)
+            
+            return
+        }
+        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
         performSegue(withIdentifier: "unwindFromProfile", sender: self)
-       
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getProfileData()
-
+        profileBackground()
+        self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
     }
-  
+    
+    
     override func viewDidAppear(_ animated: Bool) {
-        // Header - Image
+        // Header - Blurred Image
+        
+        headerBlurImageView = UIImageView(frame: header.bounds)
+        headerImageView?.image = UIImage(named: "lviv")
+        let blurEffect = UIBlurEffect(style: .light)
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        //        blurEffectView?.frame = view.bounds
+        //        headerBlurImageView?.image = UIImage(named: "header_bg")?.blurredImage(withRadius: 10, iterations: 20, tintColor: UIColor.clear)
+        headerBlurImageView?.contentMode = UIViewContentMode.scaleAspectFill
+        headerBlurImageView?.alpha = 0.0
+        header.insertSubview(blurEffectView!, belowSubview: headerLabel)
+      
+        header.clipsToBounds = true
+    }
+    
+    func profileBackground() {
         headerImageView = UIImageView(frame: header.bounds)
         headerImageView?.image = UIImage(named: "lviv")
         headerImageView?.contentMode = UIViewContentMode.scaleAspectFill
         header.insertSubview(headerImageView, belowSubview: headerLabel)
-        
-        // Header - Blurred Image
-        
-        headerBlurImageView = UIImageView(frame: header.bounds)
-        //        headerBlurImageView?.image = UIImage(named: "header_bg")?.blurredImage(withRadius: 10, iterations: 20, tintColor: UIColor.clear)
-        headerBlurImageView?.contentMode = UIViewContentMode.scaleAspectFill
-        headerBlurImageView?.alpha = 0.0
-        header.insertSubview(headerBlurImageView, belowSubview: headerLabel)
-        
-        header.clipsToBounds = true
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -87,6 +109,7 @@ class ProfileViewController: UIViewController {
             let user = Users(snapshot: snapshot)
             self.emailTextField.text = user.email
             self.nameTextField.text = user.firstName
+            self.headerLabel.text = user.firstName
             self.phoneTextField.text = user.phone
             let profileImageURL = user.ImageUrl
             
@@ -99,35 +122,13 @@ class ProfileViewController: UIViewController {
         })
     }
     
-    func updateProfile() {
-        if (nameTextField.text?.isEmpty)! {
-            messageText = "Please complete all fields."
-            alertAction(messageText)
-            
-            return
-        }
-        if !validator.isValidEmail(email: emailTextField.text!) {
-            messageText = "Please enter your correct email."
-            alertAction(messageText)
-            
-            return
-        }
-         authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
-        
-//        if !validator.isValidPhoneNumber(testStr: phoneTextField.text!) {
-//            messageText = "Please enter your correct phone number."
-//            alertAction(messageText)
-//        } else {
-//            
-//        }
-    }
-    
+
     func alertAction(_ message: String) {
         let alertMessage = UIAlertController(title: "Oops!", message: message , preferredStyle: .alert)
         alertMessage.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alertMessage, animated: true, completion: nil)
     }
-  
+    
     
     @IBAction func logOutButton(_ sender: Any) {
         if Auth.auth().currentUser != nil {
@@ -135,9 +136,10 @@ class ProfileViewController: UIViewController {
                 try? Auth.auth().signOut()
                 
                 if Auth.auth().currentUser == nil {
-//                    performSegue(withIdentifier: "unwindLogOut", sender: self)
-                    let profileVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
-                            self.present(profileVC, animated: true, completion: nil)
+                    performSegue(withIdentifier: "showLoginAfterLogOut", sender: self)
+//                      performSegue(withIdentifier: "showLoginStoryboard", sender: self)
+//                    let profileVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
+//                    self.present(profileVC, animated: true, completion: nil)
                 }
             }
         }
@@ -146,11 +148,19 @@ class ProfileViewController: UIViewController {
     @IBAction func chooseImage(_ sender: Any) {
         chooseImage()
     }
-    @IBAction func editButton(_ sender: Any) {
-//        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
-        performSegue(withIdentifier: "unwindFromProfile", sender: self)
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showLoginStoryboard" {
+            let secondVC = segue.destination as! LoginViewController
+            secondVC.transitioningDelegate = self
+            secondVC.modalPresentationStyle = .custom
+        }
+    }
+
 }
 
 //MARK: ImagePickerController
@@ -231,12 +241,14 @@ extension ProfileViewController:  UIScrollViewDelegate {
             
             //  ------------ Label
             
-            let labelTransform = CATransform3DMakeTranslation(0, max(-distance_W_LabelHeader, offset_B_LabelHeader - offset), 0)
+            let labelTransform = CATransform3DMakeTranslation(0, max(-distance_W_LabelHeader, 20 - offset), 0)
             headerLabel.layer.transform = labelTransform
             
             //  ------------ Blur
             
-            headerBlurImageView?.alpha = min (1.0, (offset - offset_B_LabelHeader)/distance_W_LabelHeader)
+            blurEffectView?.alpha = min (0.8, (offset + 20 - offset_B_LabelHeader))
+            blurEffectView?.frame = view.bounds
+          
             
             // Avatar -----------
             
@@ -251,7 +263,7 @@ extension ProfileViewController:  UIScrollViewDelegate {
                     header.layer.zPosition = 0
                 }
                 
-            }else {
+            } else {
                 if profileImage.layer.zPosition >= header.layer.zPosition{
                     header.layer.zPosition = 2
                 }
@@ -264,6 +276,62 @@ extension ProfileViewController:  UIScrollViewDelegate {
         profileImage.layer.transform = avatarTransform
     }
     
+}
+
+extension ProfileViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        switch textField {
+        case nameTextField:
+            guard let text = nameTextField.text else { return true }
+            let newLength = text.count + string.count - range.length
+            return newLength <= 20
+            
+        case phoneTextField:
+            let allowedCharacters = CharacterSet.decimalDigits
+            let characterSet = CharacterSet(charactersIn: string)
+            
+            var originalText = textField.text
+            
+            if (originalText?.count)! == 0
+            {
+                originalText?.append("+38")
+            }
+            if (originalText?.count)! == 3
+            {
+                originalText?.append(" (0")
+            }
+            if (originalText?.count)! == 8
+            {
+                originalText?.append(") ")
+            }
+            if (originalText?.count)! == 12
+            {
+                originalText?.append("-")
+            }
+            if (originalText?.count)! == 15
+            {
+                originalText?.append("-")
+            }
+            if (originalText?.count)! == 19
+            {
+                guard let text = phoneTextField.text else { return true }
+                let newLength = text.count + string.count - range.length
+                return newLength <= 19
+            }
+            phoneTextField.text = originalText
+            return allowedCharacters.isSuperset(of: characterSet)
+        default:
+            break
+        }
+        return true
+    }
 }
 
 

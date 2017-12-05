@@ -21,9 +21,9 @@ class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
         
         googlePlacesManager = GooglePlacesManager(
             apiKey: AppDelegate.apiKey,
-            radius: 100.m,
-            currentLocation: Location.Lviv,
-            filters: [.restaurant, .bar],
+            radius: UserDefaults.standard.integer(forKey: "Radius"),
+            currentLocation: pressCoordinate,
+            filters: MapViewController.checkFilter(filter: filterArray),
             completion: {_, errorMessage  in
                 if errorMessage != nil{
                     print("\t\(errorMessage!)")

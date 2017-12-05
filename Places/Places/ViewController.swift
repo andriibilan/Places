@@ -13,7 +13,8 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
    
     var map : MapViewController?
     var listObj : ListViewController?
-   
+    var menuIsOpen = false
+    
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
     @IBOutlet weak var menuView: UIViewExplicit!
@@ -28,10 +29,12 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         case 1:
             mapView.isHidden = true
             listView.isHidden = false
+            listObj?.updateData()
         default:
             break
         }
     }
+    
 
 	
    
@@ -61,10 +64,10 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
         
-        print("fgh")
     }
     
     @IBAction func menuTapped(_ sender: FloatingActionButton) {
+        animateThemeView(expand: !menuIsOpen)
         UIView.animate(withDuration: 0.3, animations: {
             if self.menuView.transform == .identity {
                 self.menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
@@ -72,6 +75,23 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
                 self.menuView.transform = .identity
             }
         })
+    }
+    
+    //MARK:- Custom compass animations
+    
+    func animateThemeView(expand: Bool) {
+        menuIsOpen = expand
+        if menuIsOpen == true {
+            map?.compassButtonConstraint.constant = 200
+            UIView.animate(withDuration: 2.0, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        } else {
+            map?.compassButtonConstraint.constant = 90
+            UIView.animate(withDuration: 2.0, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
     }
 	
 	
@@ -123,15 +143,13 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         }
         if segue.identifier == "ListView" {
            listObj = segue.destination as? ListViewController
-          
         }
-
 	}
     
     @IBAction func unwindFromSettings(segue: UIStoryboardSegue) {
         if mapView.isHidden == false {
             map?.updateData()
-             print("List hiidden? \(listView.isHidden)")
+            print("List hiidden? \(listView.isHidden)")
         } else {
             if let listVC = listObj {
                 print("List hiidden? \(self.listView.isHidden)")
@@ -140,17 +158,13 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
                 print("ERRRORR")
             }
         }
-
     }
     
     @IBAction func unwindFromProfile(segue: UIStoryboardSegue) {
-       
     }
     
 	@IBAction func unwindFromSearch(segue: UIStoryboardSegue) {
-		
 	}
-    
 }
 
 protocol OutputInterface {
