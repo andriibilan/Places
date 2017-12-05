@@ -9,7 +9,7 @@
 import UIKit
 
 class ListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,OutputInterface {
-
+    let ListDynamic = Dynamic()
  
     func updateData() {
 
@@ -108,8 +108,8 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		task 	= URLSessionDownloadTask()
 		cache	= NSCache()
 		
-
-        
+        ListDynamic.dynamicSort(button: sortingButton, parView: self.view)
+        ListDynamic.dynamicFilterList(filter: filteringButton, parView: self.view)
 
         googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
 

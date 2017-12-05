@@ -12,13 +12,10 @@ import FirebaseStorage
 
 class SettingTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
-    
-    
+
     @IBOutlet weak var distanceSegment: UISegmentedControl!
     @IBOutlet weak var searchRadius: UILabel!
     @IBOutlet weak var sliderValue: UISlider!
-    
-    
     @IBOutlet weak var mapTypeSegment: UISegmentedControl!
     
     @IBAction func sliderRadius(_ sender: UISlider) {
@@ -187,7 +184,7 @@ class SettingTableViewController: UITableViewController {
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
-                    self.resultAlert(text: "DONE", message: "You have successfully updated your email", color: .red)
+                    self.resultAlert(text: "DONE", message: "You have successfully updated your email", color: .white)
                 }
             })
         }

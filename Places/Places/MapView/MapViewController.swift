@@ -213,10 +213,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         mapDynamic.dynamicFilter(button: filterButton, parView: view)
-        mapDynamic.dynamicCompass(button: compassButton, parView: view)
-        print(view.bounds)
         changeMapType()
-       
+        
         
         filterTableView.delegate = self
         filterTableView.dataSource = self
