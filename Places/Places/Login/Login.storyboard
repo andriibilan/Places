@@ -27,7 +27,7 @@
                                     <constraint firstAttribute="width" constant="235" id="ycG-Rz-3Dx"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="user321@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bbL-KY-9zT">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="tim123@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bbL-KY-9zT">
                                 <rect key="frame" x="56" y="255" width="263" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="TiC-Ar-2m1"/>
@@ -748,6 +748,13 @@
                                                     <action selector="dismissButtonTaped:" destination="y1D-2B-g8X" eventType="touchUpInside" id="hyo-QY-GZ2"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqc-0v-xHw">
+                                                <rect key="frame" x="164" y="521" width="46" height="30"/>
+                                                <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="facebookLoginWithSender:" destination="y1D-2B-g8X" eventType="touchUpInside" id="ste-Rb-7bt"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -763,6 +770,7 @@
                                             <constraint firstItem="m3p-Hp-dM3" firstAttribute="leading" secondItem="rtv-SE-3qo" secondAttribute="trailing" constant="20" id="Mxz-yt-JC7"/>
                                             <constraint firstAttribute="trailing" secondItem="m3p-Hp-dM3" secondAttribute="trailing" constant="20" id="NXz-Kg-fLU"/>
                                             <constraint firstItem="f8Q-7S-x2I" firstAttribute="top" secondItem="2LT-qg-a07" secondAttribute="bottom" constant="15" id="Pb4-Q5-fZi"/>
+                                            <constraint firstItem="wqc-0v-xHw" firstAttribute="centerX" secondItem="cjc-dr-WmB" secondAttribute="centerX" id="UuT-DQ-Hfk"/>
                                             <constraint firstItem="2LT-qg-a07" firstAttribute="leading" secondItem="cjc-dr-WmB" secondAttribute="leading" constant="25" id="XVb-Tt-Ac4"/>
                                             <constraint firstAttribute="trailing" secondItem="q2C-cL-k4g" secondAttribute="trailing" constant="20" id="a3Z-aU-1DG"/>
                                             <constraint firstAttribute="trailing" secondItem="tlw-n2-tTF" secondAttribute="trailing" constant="20" id="aon-z8-s8u"/>
@@ -772,6 +780,7 @@
                                             <constraint firstItem="q2C-cL-k4g" firstAttribute="leading" secondItem="cjc-dr-WmB" secondAttribute="leading" constant="25" id="gXf-qt-IQM"/>
                                             <constraint firstItem="rtv-SE-3qo" firstAttribute="leading" secondItem="cjc-dr-WmB" secondAttribute="leading" constant="25" id="t0y-aQ-5Vn"/>
                                             <constraint firstItem="Rc2-5r-Z2t" firstAttribute="top" secondItem="cjc-dr-WmB" secondAttribute="top" constant="28" id="tSf-W0-tTs"/>
+                                            <constraint firstItem="wqc-0v-xHw" firstAttribute="top" secondItem="ff9-Rf-J3w" secondAttribute="bottom" constant="16" id="wS6-cJ-RPk"/>
                                             <constraint firstItem="f8Q-7S-x2I" firstAttribute="leading" secondItem="cjc-dr-WmB" secondAttribute="leading" constant="25" id="yFV-dU-SpJ"/>
                                         </constraints>
                                     </view>
@@ -825,6 +834,6 @@
         <image name="street-map (1)" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="clc-qp-B7p"/>
+        <segue reference="01y-6W-2o8"/>
     </inferredMetricsTieBreakers>
 </document>

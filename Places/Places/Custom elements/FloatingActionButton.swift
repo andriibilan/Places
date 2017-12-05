@@ -10,6 +10,8 @@ import UIKit
 
 class FloatingActionButton: UIButtonExplicit {
     
+    //MARK:- Rotate menu button
+    
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         
         UIView.animate(withDuration: 0.3, animations: {

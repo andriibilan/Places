@@ -9,12 +9,12 @@
 import UIKit
 
 class ListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,OutputInterface {
-
+    let ListDynamic = Dynamic()
  
     func updateData() {
 
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
             
             if let foundedPlaces = foundedPlaces {
@@ -27,11 +27,13 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
             }
         })
         //AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc
-        //"AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM"
-
+        //AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM
         //AIzaSyCVaciTxny1MNyP9r38AelJu6Qoj2ImHF0
-
         //AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ
+        //AIzaSyAQds9vi_5uYPsprEO58LHlM8a_u2OQgIE
+        //AIzaSyAJWZdkxoRmSEMpmgTQJIsP5AEk-imEniY
+        //AIzaSyD1EzRFmZpAKq5KZzcFYOwDL8_YfllCeAo
+        //AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ
     }
     
 	
@@ -108,10 +110,12 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		task 	= URLSessionDownloadTask()
 		cache	= NSCache()
 		
+        ListDynamic.dynamicSort(button: sortingButton, parView: self.view)
+        ListDynamic.dynamicFilterList(filter: filteringButton, parView: self.view)
 
-        
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+
 
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
@@ -148,12 +152,12 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
       
 	}
 
-	//MARK:- TableView Delegate
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		 if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
+    //MARK:- TableView Delegate
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
             print(places.count.description)
             let place = (filterOpenOnly) ? openPlaces[safe: indexPath.row] : places[safe: indexPath.row]
-
+            
             //placeholder image
             cell.thumbnailImageView.image = place?.icon // #imageLiteral(resourceName: "marker")
             
@@ -169,8 +173,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
             
             //place type
             if place?.types != nil {
-                cell.type.text = (place?.types[safe: 0]).map { $0.rawValue }
-                print(place?.types[safe: 0]?.rawValue)
+                cell.type.text = typePlaces(types: (place?.types)!)
             }
             
             //Open/Closed
@@ -182,54 +185,22 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
                     cell.openClosedImageView.image = #imageLiteral(resourceName: "closed-sign")
                 }
             }
-            
-    
-//            if place?.photoReferences != nil {
-//
-//                let urlString = place?.photoReferences[0]
-//                let url:URL! = URL(string: urlString!)
-//
-//                //downloading/cashing image from internet
-//                if let cachedImage = (self.cache.object(forKey: (urlString as AnyObject) ) as? UIImage ) {
-//                    //we are using cashe
-//                    print("Using cashe - \(String(describing: urlString))")
-//                    cell.thumbnailImageView.image = cachedImage
-//                }
-//                } else {
-//                    //download image and add to cache
-//
-//                    task = session.downloadTask(with: url, completionHandler: { (location, response, error) -> Void in
-//                        if let data = try? Data(contentsOf: url){
-//
-//                            DispatchQueue.main.async(execute: { () -> Void in
-//                                //DispatchQueue.global(qos: .background).async {
-//                                // if the current cell is visible
-//                                if let updateCell = self.tableView.cellForRow(at: indexPath) as? ListTableViewCell{
-//                                    let img:UIImage! = UIImage(data: data)
-//
-//                                    //DispatchQueue.main.sync {
-//                                    updateCell.thumbnailImageView?.image = img//.resizedImage(withBounds: CGSize(width: 120, height: 120))
-//                                    //}
-//                                   // self.cache.setObject(img, forKey: urlString as AnyObject)
-//                                  //  print("adding to cache - \(urlString)")
-//                                }
-//                            }
-//                            )
-//                        }
-//                    })
-//                    task.resume()
-//
-//                }
-           
-            
-			return cell
+            return cell
         }
-
         return UITableViewCell()
+    }
 
-		
-	}
-
+    
+    func typePlaces (types: [PlaceType]) -> String {
+        var stringType = ""
+        for type in types {
+            stringType += type.rawValue + ", "
+        }
+        stringType.removeLast()
+        stringType.removeLast()
+        return stringType
+    }
+    
 	//MARK: - Fade in effect
 	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		// Define the initial state (Before the animation)
@@ -261,3 +232,4 @@ extension Array {
         return indices ~= index ? self[index] : nil
     }
 }
+
