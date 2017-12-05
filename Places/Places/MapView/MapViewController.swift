@@ -22,7 +22,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
                 print("\t\(errorMessage!)")
-                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+//                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                 DispatchQueue.main.sync {
                     //self.addAnnotations(coords: self.places)
                     self.addCurrentLocation(coords: center)
@@ -93,8 +93,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBAction func showSideMenu(_ sender: UIButton) {
        
         if isSideMenuHidden {
-            sideMenuConstraint.constant = -3
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            sideMenuConstraint.constant = 0
+             UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
                 if sender.transform == .identity {
                     sender.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
                     sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
@@ -102,19 +102,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 }}
                 , completion: nil)
             
-//            UIView.animate(withDuration: 0.3, animations: {
-//                if sender.transform == .identity {
-//                    sender.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
-//                    sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
-//                    self.view.layoutIfNeeded()
-//                }})
         } else {
             sideMenuConstraint.constant = -160
             UIView.animate(withDuration: 0.3,animations: {
                 sender.transform = .identity
                 sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
                 self.view.layoutIfNeeded()
-            })
+            }, completion: nil)
+
             updateData()
             preventAnimation.removeAll()
             
@@ -173,7 +168,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
-                    if self.googlePlacesManager.allPlacesLoaded{
+                    if self.googlePlacesManager.allPlacesLoaded {
                         DispatchQueue.main.sync {
                             self.addAnnotations(coords: self.places)
                             //                    self.updateData()
@@ -226,7 +221,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterTableView.delegate = self
         filterTableView.dataSource = self
 
-
+     locationManagerConfigurate()
         googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
             if errorMessage != nil {
@@ -234,7 +229,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 
                 print("\t\(errorMessage!)")
-                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+//                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                 DispatchQueue.main.sync {
                     self.locationManagerConfigurate()
                 }}
@@ -245,6 +240,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 if self.googlePlacesManager.allPlacesLoaded{
                     DispatchQueue.main.sync {
                         self.locationManagerConfigurate()
+                        
                         //                  self.updateData()
                     }
                 }
@@ -277,6 +273,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             locationManager.requestAlwaysAuthorization()
             if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
                 locationManager.startUpdatingLocation()
+                //pressCoordinate = locationManager.location?.coordinate
             } else {
                 locationManager!.requestWhenInUseAuthorization()
             }
@@ -565,7 +562,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = accessory
         }
-        
     }
     
     var lastContentOffset: CGFloat = 0

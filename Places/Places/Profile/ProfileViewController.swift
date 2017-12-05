@@ -11,9 +11,9 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
-let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its transformations
-let offset_B_LabelHeader:CGFloat = 85.0 // At this offset the Black label reaches the Header
-let distance_W_LabelHeader:CGFloat = 35.0 // The distance between the bottom of the Header and the top of the White Label
+let offset_HeaderStop:CGFloat = 30.0 // At this offset the Header stops its transformations
+let offset_B_LabelHeader:CGFloat = 105.0 // At this offset the Black label reaches the Header
+let distance_W_LabelHeader:CGFloat = 100.0 // The distance between the bottom of the Header and the top of the White Label
 
 class ProfileViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
@@ -37,7 +37,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     private let ref = Database.database().reference()
     var authService = AuthService()
     var validator = Validator()
-    
+
     @IBOutlet weak var dismissButton: UIButton!{
         didSet{
             dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
@@ -64,14 +64,14 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
         
         headerBlurImageView = UIImageView(frame: header.bounds)
         headerImageView?.image = UIImage(named: "lviv")
-        let blurEffect = UIBlurEffect(style: .light)
+        let blurEffect = UIBlurEffect(style: .regular)
         blurEffectView = UIVisualEffectView(effect: blurEffect)
         //        blurEffectView?.frame = view.bounds
         //        headerBlurImageView?.image = UIImage(named: "header_bg")?.blurredImage(withRadius: 10, iterations: 20, tintColor: UIColor.clear)
         headerBlurImageView?.contentMode = UIViewContentMode.scaleAspectFill
         headerBlurImageView?.alpha = 0.0
         header.insertSubview(blurEffectView!, belowSubview: headerLabel)
-        
+      
         header.clipsToBounds = true
     }
     
@@ -97,6 +97,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
             let user = Users(snapshot: snapshot)
             self.emailTextField.text = user.email
             self.nameTextField.text = user.firstName
+            self.headerLabel.text = user.firstName
             self.phoneTextField.text = user.phone
             let profileImageURL = user.ImageUrl
             
@@ -275,13 +276,13 @@ extension ProfileViewController:  UIScrollViewDelegate {
             //  ------------ Label
             
             let labelTransform = CATransform3DMakeTranslation(0, max(-distance_W_LabelHeader, 20 - offset), 0)
-//            nameTextField.layer.transform = labelTransform
+            headerLabel.layer.transform = labelTransform
             
             //  ------------ Blur
             
-            blurEffectView?.alpha = min (1.0, (offset - offset_B_LabelHeader)/distance_W_LabelHeader)
+            blurEffectView?.alpha = min (1.0, (offset - offset_B_LabelHeader)/8)
             blurEffectView?.frame = view.bounds
-            //            headerBlurImageView?.alpha = min (1.0, (offset - offset_B_LabelHeader)/distance_W_LabelHeader)
+          
             
             // Avatar -----------
             
