@@ -26,10 +26,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
                 print("\t\(errorMessage!)")
-//                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+               self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                
                 DispatchQueue.main.sync {
                     //self.addAnnotations(coords: self.places)
+                    loadVC.customActivityIndicatory(self.view, startAnimate: false)
                     self.addCurrentLocation(coords: center)
                 }}
 
@@ -39,7 +40,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     DispatchQueue.main.sync {
                         self.addAnnotations(coords: self.places)
                         self.addCurrentLocation(coords: center)
-                       loadVC.customActivityIndicatory(self.view, startAnimate: false)                        //                    self.updateData()
+                       loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                        //                    self.updateData()
                     }
                 }
             }
@@ -171,12 +173,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
             self.googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
-
+                if errorMessage != nil {
+                    //self.locationManagerConfigurate()
+                    print("\t\(errorMessage!)")
+                    self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+                    
+                    DispatchQueue.main.sync {
+                        //self.addAnnotations(coords: self.places)
+                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                      
+                    }}
+                
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
                     if self.googlePlacesManager.allPlacesLoaded {
                         DispatchQueue.main.sync {
                            // self.addAnnotations(coords: self.places)
+                            
                                               self.updateData()
                         }
                     }
@@ -239,9 +252,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 
                 print("\t\(errorMessage!)")
-//                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+               self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                 DispatchQueue.main.sync {
                     self.locationManagerConfigurate()
+                    loadVC.customActivityIndicatory(self.view, startAnimate: false)
                 }}
 
             if let foundedPlaces = foundedPlaces {
@@ -346,7 +360,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let loc = locations.last! as CLLocation
         pressCoordinate = Location(latitude: loc.coordinate.latitude, longitude: loc.coordinate.longitude)
         let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
-        region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        
+        
         
         
         if map.annotations.count != 0 {
@@ -368,6 +383,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         map.removeAnnotations(map.annotations)
         let myAnnotation: MKPointAnnotation = MKPointAnnotation()
         myAnnotation.coordinate = coords
+        let center2D = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
+        region = MKCoordinateRegion(center: center2D, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         myAnnotation.title = "Current location"
         map.setRegion(region!, animated: true)
         map.addAnnotation(myAnnotation)
