@@ -15,7 +15,7 @@ import CoreLocation
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
     
     func updateData() {
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: [.bar, .restaurant], completion: { (foundedPlaces, errorMessage) in
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 
@@ -140,7 +140,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let loc1 = Location(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude )
 
 
-            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: loc1 , filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+            self.googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: loc1 , filters: [.bar, .restaurant], completion: { (foundedPlaces, errorMessage) in
                 if let foundedPlaces = foundedPlaces {
                     self.places = foundedPlaces
                     
@@ -180,7 +180,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterTableView.dataSource = self
         
       
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: [.bar, .restaurant], completion: { (foundedPlaces, errorMessage) in
             if errorMessage != nil{
                 print("\t\(errorMessage!)")
                 self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
@@ -203,7 +203,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: PlaceType.all, completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: [.bar, .restaurant], completion: { (foundedPlaces, errorMessage) in
             if errorMessage != nil{
                 print("\t\(errorMessage!)")
                 self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
@@ -384,11 +384,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //Perform a segue here to navigate to another viewcontroller
             let g = view.annotation as! CustomAnnotation
             
-            
-            
-            
-            
-            performSegue(withIdentifier: "detailVC", sender: g.place)
+            if let place = g.place{
+                googlePlacesManager.getPhotos(ofPlace: place){ filledPlace, errorMessage in
+                    DispatchQueue.main.async {
+                        print(errorMessage ?? "")
+                        self.performSegue(withIdentifier: "detailVC", sender: filledPlace)
+                    }
+                }
+            }
         }
     }
 

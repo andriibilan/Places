@@ -58,14 +58,14 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         testPlace.installDefaultValues()
         //
         
-        /*
+        
         
         //
         //TODO: height 0 if data is null
         placeName?.text = place.name ?? "Lol"
         placeAddress?.text = place.address ?? "lol"
         placeAddress?.frame.size.height = 0.0
- 
+        
         if let ratting = place.rating{
             let ratting = ratting.rounded(toPlaces: 1)
             placeRattingLabel?.text = "★ " + String(ratting.rounded(toPlaces: 1))
@@ -75,7 +75,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         placeWebsite?.text = place.website
         
         switch place.isOpen{
-        case   true?:  placeHours?.text = "Open"
+        case true?:  placeHours?.text = "Open"
         case false?:  placeHours?.text = "Close"
         default: placeHours?.text = "nil" //TODO: height 0
         }
@@ -88,11 +88,11 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         str.removeLast()
         str.removeLast()
         placeType?.text = str
-        */
+        
         //
         
-    feedbackTableView.reloadData()
-    heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
+        feedbackTableView.reloadData()
+        heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
     }
     
   
@@ -156,7 +156,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     //function for returning number of items in section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return testPlace.image.count
+        return place.photos.count
     }
     
     //function for filling my cell
@@ -164,8 +164,8 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell
         
         
-        if testPlace.image.count != 0{
-            cell?.photoImageView?.image = testPlace.image[indexPath.row]
+        if place.photos.count != 0{
+            cell?.photoImageView?.image = place.photos[indexPath.row]
         }else{
             cell?.photoImageView?.image = #imageLiteral(resourceName: "noPhotoIcon")
         }
