@@ -10,6 +10,8 @@ import UIKit
 
 class SlideMenuActionButton: UIButtonExplicit {
 
+    //MARK:- Rotate filter button
+    
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
 
         UIView.animate(withDuration: 0.3, animations: {
