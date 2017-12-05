@@ -30,6 +30,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="69.5" height="98"/>
                                                 <color key="tintColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="path"/>
+                                                <connections>
+                                                    <action selector="createPathBetweenTwoLocations:" destination="Je1-fC-mgn" eventType="touchUpInside" id="6zh-B7-yfn"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHN-Ho-O7s" userLabel="Phone Button">
                                                 <rect key="frame" x="69.5" y="0.0" width="69" height="98"/>

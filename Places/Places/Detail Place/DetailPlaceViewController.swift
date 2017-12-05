@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate {
     
@@ -242,20 +243,32 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         */
         return cell
     }
-}
-/*
-func loadImageFromPath(path: String) -> UIImage? {
-    let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
-    let imageURL = URL(fileURLWithPath: documentDirectoryPath.appendingPathComponent(path))
-    do {
-        let imageData = try Data(contentsOf: imageURL)
-        return UIImage(data: imageData)
-    } catch {
-        print(error.localizedDescription)
+    
+    
+    @IBAction func createPathBetweenTwoLocations(_ sender: UIButton) {
+        let latitude : CLLocationDegrees = 39.048625
+        let longitude : CLLocationDegrees = -120.981227
+        
+        let regionDistance : CLLocationDistance = 100;
+       
+      //  let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let coordinates = CLLocationCoordinate2DMake((place.location?.latitude)!, (place.location?.longitude)!)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        
+        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+        
+        let placemark = MKPlacemark(coordinate: coordinates)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = "Current"
+        mapItem.openInMaps(launchOptions: options)
+        
+        
+        
+        
     }
-    return nil
+    
 }
-*/
+
 func loadImageFromPath(path: String) -> UIImage? {
     if let url = URL(string: path){
         if let urlContents = try? Data(contentsOf: url){
