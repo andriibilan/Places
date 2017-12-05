@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 
 extension GooglePlacesManager {
     static func makeConforming(type: String) -> String {

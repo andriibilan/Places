@@ -14,7 +14,8 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
     func updateData() {
 
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC05twrUgzDULu7xzGmsrCLDYDFf_WlTXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: [.bar, .restaurant], completion: { (foundedPlaces, errorMessage) in
+
 
             
             if let foundedPlaces = foundedPlaces {
@@ -27,10 +28,8 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
             }
         })
         //AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc
-        //"AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM"
-
+        //AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM
         //AIzaSyCVaciTxny1MNyP9r38AelJu6Qoj2ImHF0
-
         //AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ
     }
     
@@ -109,9 +108,9 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		cache	= NSCache()
 		
 
-        
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC05twrUgzDULu7xzGmsrCLDYDFf_WlTXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: [.bar, .restaurant], completion: { (foundedPlaces, errorMessage) in
+
 
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2146AF8C1FD3549700A32BBD /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146AF8B1FD3549700A32BBD /* UIViewController.swift */; };
 		21D1FD781FD04D2400DD2B7F /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D1FD771FD04D2400DD2B7F /* Review.swift */; };
-		21FEF2521FD6D17600DF5A40 /* Static Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FEF2511FD6D17600DF5A40 /* Static Methods.swift */; };
 		25316AE41FCDB52B00CE29DE /* phoneFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25316AE31FCDB52B00CE29DE /* phoneFormatter.swift */; };
 		25316AE61FCDB77F00CE29DE /* lviv2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25316AE51FCDB77E00CE29DE /* lviv2.jpg */; };
 		25316AE81FCDB80B00CE29DE /* add.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25316AE71FCDB80A00CE29DE /* add.jpg */; };
@@ -52,6 +51,7 @@
 		528825B31FCEF55800C29BFE /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B9901FCEE9D500415051 /* Int.swift */; };
 		528825CC1FCF0EA400C29BFE /* GooglePlacesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C01FCF0EA400C29BFE /* GooglePlacesManager.swift */; };
 		528825CD1FCF0EA400C29BFE /* AddNewPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C31FCF0EA400C29BFE /* AddNewPlace.swift */; };
+		528825CE1FCF0EA400C29BFE /* FetchByName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C51FCF0EA400C29BFE /* FetchByName.swift */; };
 		528825CF1FCF0EA400C29BFE /* FetchAdditionalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C71FCF0EA400C29BFE /* FetchAdditionalData.swift */; };
 		528825D01FCF0EA400C29BFE /* FetchBasicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C81FCF0EA400C29BFE /* FetchBasicData.swift */; };
 		528825D11FCF0EA400C29BFE /* FetchDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528825C91FCF0EA400C29BFE /* FetchDistance.swift */; };
@@ -69,6 +69,7 @@
 		75F7EB791FC59E96002F169E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F7EB781FC59E96002F169E /* ProfileViewController.swift */; };
 		75F7EB7B1FC59F33002F169E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F7EB7A1FC59F33002F169E /* Login.storyboard */; };
 		75F7EB831FC5A8AD002F169E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75F7EB821FC5A8AD002F169E /* GoogleService-Info.plist */; };
+		8A6926971FD58F5000CBFD18 /* Static Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6926961FD58F5000CBFD18 /* Static Methods.swift */; };
 		8A8C5C761FC57F3E00A834EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C5C751FC57F3E00A834EA /* AppDelegate.swift */; };
 		8A8C5C781FC57F3E00A834EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C5C771FC57F3E00A834EA /* ViewController.swift */; };
 		8A8C5C7B1FC57F3E00A834EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A8C5C791FC57F3E00A834EA /* Main.storyboard */; };
@@ -114,8 +115,6 @@
 /* Begin PBXFileReference section */
 		2146AF8B1FD3549700A32BBD /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		21D1FD771FD04D2400DD2B7F /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
-		21FC345E1FD580CE005EED18 /* Static Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Static Methods.swift"; sourceTree = "<group>"; };
-		21FEF2511FD6D17600DF5A40 /* Static Methods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Static Methods.swift"; sourceTree = "<group>"; };
 		2505B9881FCEE9D500415051 /* UITableViewExplicit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExplicit.swift; sourceTree = "<group>"; };
 		2505B98A1FCEE9D500415051 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		2505B98C1FCEE9D500415051 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -157,6 +156,7 @@
 		521CFD731FCCCE3800CD86DD /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		528825C01FCF0EA400C29BFE /* GooglePlacesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
 		528825C31FCF0EA400C29BFE /* AddNewPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewPlace.swift; sourceTree = "<group>"; };
+		528825C51FCF0EA400C29BFE /* FetchByName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchByName.swift; sourceTree = "<group>"; };
 		528825C71FCF0EA400C29BFE /* FetchAdditionalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAdditionalData.swift; sourceTree = "<group>"; };
 		528825C81FCF0EA400C29BFE /* FetchBasicData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchBasicData.swift; sourceTree = "<group>"; };
 		528825C91FCF0EA400C29BFE /* FetchDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchDistance.swift; sourceTree = "<group>"; };
@@ -175,6 +175,7 @@
 		75F7EB781FC59E96002F169E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75F7EB7A1FC59F33002F169E /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		75F7EB821FC5A8AD002F169E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8A6926961FD58F5000CBFD18 /* Static Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Static Methods.swift"; sourceTree = "<group>"; };
 		8A8C5C721FC57F3E00A834EA /* Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Places.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A8C5C751FC57F3E00A834EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A8C5C771FC57F3E00A834EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -217,14 +218,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		21FEF24E1FD6D0F800DF5A40 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				21FC345E1FD580CE005EED18 /* Static Methods.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		2505B9841FCEE9D500415051 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,9 +337,10 @@
 		528825C11FCF0EA400C29BFE /* Managing Extensions  */ = {
 			isa = PBXGroup;
 			children = (
-				21FEF2511FD6D17600DF5A40 /* Static Methods.swift */,
 				528825C21FCF0EA400C29BFE /* AddNewPlace */,
+				528825C41FCF0EA400C29BFE /* FetchByName */,
 				528825C61FCF0EA400C29BFE /* FetchByRadius */,
+				8A6926961FD58F5000CBFD18 /* Static Methods.swift */,
 			);
 			path = "Managing Extensions ";
 			sourceTree = "<group>";
@@ -357,6 +351,14 @@
 				528825C31FCF0EA400C29BFE /* AddNewPlace.swift */,
 			);
 			path = AddNewPlace;
+			sourceTree = "<group>";
+		};
+		528825C41FCF0EA400C29BFE /* FetchByName */ = {
+			isa = PBXGroup;
+			children = (
+				528825C51FCF0EA400C29BFE /* FetchByName.swift */,
+			);
+			path = FetchByName;
 			sourceTree = "<group>";
 		};
 		528825C61FCF0EA400C29BFE /* FetchByRadius */ = {
@@ -427,7 +429,6 @@
 				8A8C5C731FC57F3E00A834EA /* Products */,
 				D35FD948EF9C03A39BC6A4E0 /* Pods */,
 				68BFA9EE6ACA38C160097694 /* Frameworks */,
-				21FEF24E1FD6D0F800DF5A40 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -686,9 +687,9 @@
 				75F7EB791FC59E96002F169E /* ProfileViewController.swift in Sources */,
 				5291916B1FCC1E02008FD5AB /* myAnnotation.swift in Sources */,
 				7510D9711FCD77A9004B83CD /* AvatarImageView.swift in Sources */,
-				21FEF2521FD6D17600DF5A40 /* Static Methods.swift in Sources */,
 				258B065A1FC861D6003A09B8 /* AddNewPlaceController.swift in Sources */,
 				49E3C0091FC6D18E00400A06 /* UIButtonExplicit.swift in Sources */,
+				8A6926971FD58F5000CBFD18 /* Static Methods.swift in Sources */,
 				2BDB159C1FD06D0C00C32F81 /* DetailPlaceViewController.swift in Sources */,
 				528825AA1FCEF53700C29BFE /* SearchVC.swift in Sources */,
 				528825AE1FCEF54B00C29BFE /* UITableViewExplicit.swift in Sources */,
@@ -701,6 +702,7 @@
 				2BCDF2361FC8481B00EA96F0 /* Double.swift in Sources */,
 				757042221FCB09450075FC87 /* Validator.swift in Sources */,
 				2B4BA9161FC5EC0E00B5E598 /* PhotoPagingViewController.swift in Sources */,
+				528825CE1FCF0EA400C29BFE /* FetchByName.swift in Sources */,
 				757042261FCB097B0075FC87 /* AuthService.swift in Sources */,
 				25316AEC1FCDBC2500CE29DE /* DlistViewController.swift in Sources */,
 				496189ED1FD593D200C99499 /* TodayViewController.swift in Sources */,
@@ -775,7 +777,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5VFNA2836T;
 				INFOPLIST_FILE = "Places In Current Location/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Places.Places-In-Current-Location";
@@ -790,7 +792,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5VFNA2836T;
 				INFOPLIST_FILE = "Places In Current Location/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Places.Places-In-Current-Location";
@@ -916,7 +918,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = VT879D47Q5;
 				INFOPLIST_FILE = Places/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -936,7 +938,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = VT879D47Q5;
 				INFOPLIST_FILE = Places/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

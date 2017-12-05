@@ -20,7 +20,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
       let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
 
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC05twrUgzDULu7xzGmsrCLDYDFf_WlTXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
             if errorMessage != nil {
                 //self.locationManagerConfigurate()
@@ -30,7 +30,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     //self.addAnnotations(coords: self.places)
                     self.addCurrentLocation(coords: center)
                 }}
-            
 
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
@@ -168,8 +167,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 
 
-
-            self.googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC05twrUgzDULu7xzGmsrCLDYDFf_WlTXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+            self.googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
 
                 if let foundedPlaces = foundedPlaces {
@@ -229,7 +227,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 
      locationManagerConfigurate()
-        googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC05twrUgzDULu7xzGmsrCLDYDFf_WlTXM", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
 
             if errorMessage != nil {
@@ -262,7 +261,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
-
 
         sideMenuConstraint.constant = -160
         // Do any additional setup after loading the view.
@@ -453,12 +451,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             //Perform a segue here to navigate to another viewcontroller
             let g = view.annotation as! CustomAnnotation
             
-            
-            
-            googlePlacesManager.getPhotos(ofPlaceIndex: nil, ofPlace: g.place){place, errorMessage in
-                DispatchQueue.main.async{
-                    print(errorMessage)
-                    self.performSegue(withIdentifier: "detailVC", sender: place)
+            if let place = g.place{
+                googlePlacesManager.getPhotos(ofPlace: place){ filledPlace, errorMessage in
+                    DispatchQueue.main.async {
+                        print(errorMessage ?? "")
+                        self.performSegue(withIdentifier: "detailVC", sender: filledPlace)
+                    }
+
                 }
             }
         }
