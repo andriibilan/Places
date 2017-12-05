@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 
 
-extension GooglePlacesManager {
-    static func makeConforming(type: String) -> String {
+extension GooglePlacesManager{
+    static func makeConforming(type: String) -> String{
+
         var conformingType = type.lowercased()
         
         if let regEx = try? NSRegularExpression(pattern: "\\s+") {
