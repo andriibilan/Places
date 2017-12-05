@@ -15,9 +15,10 @@
 		25316AEA1FCDBA4900CE29DE /* down.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25316AE91FCDBA4800CE29DE /* down.jpg */; };
 		25316AEC1FCDBC2500CE29DE /* DlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25316AEB1FCDBC2500CE29DE /* DlistViewController.swift */; };
 		25316AEE1FCDBC6800CE29DE /* CategoriesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25316AED1FCDBC6800CE29DE /* CategoriesViewCell.swift */; };
+		257391111FD56BE6001A9BBD /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 257391101FD56BE5001A9BBD /* cancel.png */; };
+		257391131FD56D08001A9BBD /* done.png in Resources */ = {isa = PBXBuildFile; fileRef = 257391121FD56D08001A9BBD /* done.png */; };
 		258B06561FC837C6003A09B8 /* NewPlaceBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 258B06551FC837C6003A09B8 /* NewPlaceBoard.storyboard */; };
 		258B065A1FC861D6003A09B8 /* AddNewPlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B06591FC861D6003A09B8 /* AddNewPlaceController.swift */; };
-		258D2B771FCEC448001BC470 /* done.png in Resources */ = {isa = PBXBuildFile; fileRef = 258D2B761FCEC448001BC470 /* done.png */; };
 		25ACDC721FCC227400695896 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ACDC711FCC227400695896 /* Rating.swift */; };
 		2B4BA9151FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4BA9111FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift */; };
 		2B4BA9161FC5EC0E00B5E598 /* PhotoPagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4BA9121FC5EC0E00B5E598 /* PhotoPagingViewController.swift */; };
@@ -128,9 +129,10 @@
 		25316AE91FCDBA4800CE29DE /* down.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = down.jpg; sourceTree = "<group>"; };
 		25316AEB1FCDBC2500CE29DE /* DlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DlistViewController.swift; sourceTree = "<group>"; };
 		25316AED1FCDBC6800CE29DE /* CategoriesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewCell.swift; sourceTree = "<group>"; };
+		257391101FD56BE5001A9BBD /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
+		257391121FD56D08001A9BBD /* done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done.png; sourceTree = "<group>"; };
 		258B06551FC837C6003A09B8 /* NewPlaceBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewPlaceBoard.storyboard; sourceTree = "<group>"; };
 		258B06591FC861D6003A09B8 /* AddNewPlaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPlaceController.swift; sourceTree = "<group>"; };
-		258D2B761FCEC448001BC470 /* done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done.png; sourceTree = "<group>"; };
 		25ACDC711FCC227400695896 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		2B4BA9111FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		2B4BA9121FC5EC0E00B5E598 /* PhotoPagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPagingViewController.swift; sourceTree = "<group>"; };
@@ -252,9 +254,10 @@
 				25316AED1FCDBC6800CE29DE /* CategoriesViewCell.swift */,
 				25316AE31FCDB52B00CE29DE /* phoneFormatter.swift */,
 				25316AEB1FCDBC2500CE29DE /* DlistViewController.swift */,
+				257391101FD56BE5001A9BBD /* cancel.png */,
 				25316AE51FCDB77E00CE29DE /* lviv2.jpg */,
+				257391121FD56D08001A9BBD /* done.png */,
 				25316AE71FCDB80A00CE29DE /* add.jpg */,
-				258D2B761FCEC448001BC470 /* done.png */,
 				25316AE91FCDBA4800CE29DE /* down.jpg */,
 				258B06591FC861D6003A09B8 /* AddNewPlaceController.swift */,
 			);
@@ -601,8 +604,8 @@
 			files = (
 				8A8C5C801FC57F3E00A834EA /* LaunchScreen.storyboard in Resources */,
 				25316AE61FCDB77F00CE29DE /* lviv2.jpg in Resources */,
-				258D2B771FCEC448001BC470 /* done.png in Resources */,
 				75F7EB831FC5A8AD002F169E /* GoogleService-Info.plist in Resources */,
+				257391111FD56BE6001A9BBD /* cancel.png in Resources */,
 				258B06561FC837C6003A09B8 /* NewPlaceBoard.storyboard in Resources */,
 				8A8C5C7D1FC57F3E00A834EA /* Assets.xcassets in Resources */,
 				75F7EB7B1FC59F33002F169E /* Login.storyboard in Resources */,
@@ -610,6 +613,7 @@
 				25316AEA1FCDBA4900CE29DE /* down.jpg in Resources */,
 				8AAC34041FC6D3BE0060C3A2 /* Settings.storyboard in Resources */,
 				528825AC1FCEF53D00C29BFE /* Search.storyboard in Resources */,
+				257391131FD56D08001A9BBD /* done.png in Resources */,
 				2BDB159B1FD06D0C00C32F81 /* DetailPlace.storyboard in Resources */,
 				750592051FD427490051E404 /* Profile.storyboard in Resources */,
 				8A8C5C7B1FC57F3E00A834EA /* Main.storyboard in Resources */,
@@ -773,7 +777,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5VFNA2836T;
 				INFOPLIST_FILE = "Places In Current Location/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Places.Places-In-Current-Location";
@@ -788,7 +792,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5VFNA2836T;
 				INFOPLIST_FILE = "Places In Current Location/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Places.Places-In-Current-Location";
