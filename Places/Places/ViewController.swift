@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
-   
+  
     var map : MapViewController?
     var listObj : ListViewController?
     var menuIsOpen = false
@@ -22,7 +22,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     @IBOutlet weak var listView: UIView!
     @IBOutlet weak var menuView: UIViewExplicit!
     
-    @IBOutlet weak var segment: UISegmentedControl!
+
     
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -103,7 +103,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         menuIsOpen = expand
         if menuIsOpen == true {
             map?.compassButtonConstraint.constant = 200
-            UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 1.4, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
             }, completion: nil)
         } else {

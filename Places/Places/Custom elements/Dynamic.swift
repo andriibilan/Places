@@ -7,77 +7,53 @@
 //
 
 import  UIKit
+import QuartzCore
 
 class Dynamic {
     var animator: UIDynamicAnimator?
     var panGesture: UIPanGestureRecognizer?
     var snap: UISnapBehavior?
-    var snapCompass: UISnapBehavior?
-    var snapMenu: UISnapBehavior?
+    var snapFilter: UISnapBehavior?
+    var snapSort: UISnapBehavior?
     
     var box: UIButton?
-    var compass: UIButton?
-    var segmentD: UISegmentedControl?
+    var filterD: UIButton?
+    var sort: UIButton?
     
     var parentView: UIView?
-    var mainView: UIView?
-    var originalCenter: CGPoint?
-    var originalCenterCompass: CGPoint?
-    var originalCenterMenu: CGPoint?
-    
+    var listView: UIView?
 
     func dynamicFilter (button: UIButton, parView: UIView) {
         box = button
         parentView = parView
         animator = UIDynamicAnimator(referenceView: parentView!)
-        originalCenter = box?.center
-        print("centerCompass: \(String(describing: originalCenterCompass))")
-        snap = UISnapBehavior(item: box!, snapTo: originalCenter!)
-        print("center filter \(String(describing: originalCenter))" )
-        
+        let snapToNewCoordFilter = CGPoint(x:  (box?.frame.origin.x)! + (box?.frame.width)!/2 , y: (parentView?.frame.maxY)! - 50 )
+        snap = UISnapBehavior(item: box!, snapTo: snapToNewCoordFilter)
         self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(panning))
         self.box?.addGestureRecognizer(panGesture!)
     }
- //   CGPoint(x: (self.greenBox?.bounds.midX)!, y: (self.greenBox?.bounds.midY)!)
-    func dynamicCompass (button: UIButton, parView: UIView) {
-        compass = button
-        parentView = parView
-        animator = UIDynamicAnimator(referenceView: parentView!)
-        //let  compasCenter = CGPoint(x: (compass?.bounds.origin.x)! + (compass?.bounds.size.width)!/2,  y: (compass?.bounds.origin.y)! + (compass?.bounds.size.height)!/2)
-        //originalCenterCompass = compass?.convert(compasCenter, to: parentView)
-       // originalCenterCompass = compass?.bounds
-        originalCenterCompass = compass?.center
-        snapCompass = UISnapBehavior(item: compass!, snapTo: originalCenterCompass!)
-        self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(panCompass))
-        self.compass?.addGestureRecognizer(panGesture!)
-        print("center Compass \(String(describing: originalCenterCompass))")
+    
+    func dynamicSort (button: UIButton, parView: UIView) {
+        sort = button
+        listView = parView
+        animator = UIDynamicAnimator(referenceView: listView!)
+        let snapToNewCoordMenu = CGPoint(x: (sort?.frame.origin.x)! + (sort?.frame.width)!/2 , y: (listView?.frame.maxY)! - 50 )
+        snapSort = UISnapBehavior(item: sort!, snapTo: snapToNewCoordMenu)
+        self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(panSort))
+        self.sort?.addGestureRecognizer(panGesture!)
     }
     
-    
-    func dynamicSegment (segment: UISegmentedControl, parView: UIView) {
-        segmentD = segment
-        mainView = parView
-        animator = UIDynamicAnimator(referenceView: mainView!)
-        originalCenterMenu = segmentD?.center
-        snapMenu = UISnapBehavior(item: segmentD!, snapTo: originalCenterMenu!)
-        self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(panMenu))
-        self.segmentD?.addGestureRecognizer(panGesture!)
-        
-        
+    func dynamicFilterList (filter: UIButton, parView: UIView) {
+        filterD = filter
+        listView = parView
+        animator = UIDynamicAnimator(referenceView: listView!)
+        let snapToNewCoordFilter = CGPoint(x: (filterD?.frame.origin.x)! + (filterD?.frame.width)!/2 , y: (listView?.frame.maxY)! - 114 )
+        snapFilter = UISnapBehavior(item: filterD!, snapTo: snapToNewCoordFilter)
+        self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(panFilter))
+        self.filterD?.addGestureRecognizer(panGesture!)
     }
     
-//    func animation(button: UIButton) {
-//        UIView.animate(withDuration: 0.3, animations: {
-//            if button.transform == .identity {
-//                button.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
-//                button.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
-//            } else {
-//                button.transform = .identity
-//                button.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)
-//            }
-//        })
-//        
-//    }
+ 
     
     @objc func panning(pan: UIPanGestureRecognizer) {
         self.animator!.removeAllBehaviors()
@@ -92,29 +68,30 @@ class Dynamic {
             break
         }
     }
-    
-    @objc func panCompass(pan: UIPanGestureRecognizer) {
+
+    @objc func panSort(pan: UIPanGestureRecognizer) {
         self.animator!.removeAllBehaviors()
         switch pan.state {
         case .began:
-            compass?.center = pan.location(ofTouch: 0, in: parentView)
+            sort?.center = pan.location(ofTouch: 0, in: listView)
         case .changed:
-            compass?.center = pan.location(ofTouch: 0, in: parentView)
+            sort?.center = pan.location(ofTouch: 0, in: listView)
         case .ended:
-            self.animator!.addBehavior(self.snapCompass!)
+            self.animator!.addBehavior(self.snapSort!)
         default:
             break
         }
     }
-    @objc func panMenu(pan: UIPanGestureRecognizer) {
+
+    @objc func panFilter(pan: UIPanGestureRecognizer) {
         self.animator!.removeAllBehaviors()
         switch pan.state {
         case .began:
-            segmentD?.center = pan.location(ofTouch: 0, in: mainView)
+            filterD?.center = pan.location(ofTouch: 0, in: listView)
         case .changed:
-            segmentD?.center = pan.location(ofTouch: 0, in: mainView)
+            filterD?.center = pan.location(ofTouch: 0, in: listView)
         case .ended:
-            self.animator!.addBehavior(self.snapMenu!)
+            self.animator!.addBehavior(self.snapFilter!)
         default:
             break
         }

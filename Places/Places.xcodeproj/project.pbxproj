@@ -42,6 +42,8 @@
 		49E3C00D1FC6D1A000400A06 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */; };
 		49E3C00F1FC6E12800400A06 /* UIImageViewExplicit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C00E1FC6E12800400A06 /* UIImageViewExplicit.swift */; };
 		521CFD741FCCCE3800CD86DD /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521CFD731FCCCE3800CD86DD /* UIImage.swift */; };
+		524301311FD6B3AA002C613D /* Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524301301FD6B3AA002C613D /* Load.swift */; };
+		524301331FD6F2A3002C613D /* LaunchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524301321FD6F2A3002C613D /* LaunchScreenController.swift */; };
 		528825AA1FCEF53700C29BFE /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B9A11FCEE9D500415051 /* SearchVC.swift */; };
 		528825AB1FCEF53A00C29BFE /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505B99F1FCEE9D500415051 /* ItemCell.swift */; };
 		528825AC1FCEF53D00C29BFE /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2505B9A01FCEE9D500415051 /* Search.storyboard */; };
@@ -155,6 +157,8 @@
 		49E3C00C1FC6D1A000400A06 /* FloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		49E3C00E1FC6E12800400A06 /* UIImageViewExplicit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExplicit.swift; sourceTree = "<group>"; };
 		521CFD731FCCCE3800CD86DD /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		524301301FD6B3AA002C613D /* Load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Load.swift; sourceTree = "<group>"; };
+		524301321FD6F2A3002C613D /* LaunchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenController.swift; sourceTree = "<group>"; };
 		528825C01FCF0EA400C29BFE /* GooglePlacesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
 		528825C31FCF0EA400C29BFE /* AddNewPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewPlace.swift; sourceTree = "<group>"; };
 		528825C71FCF0EA400C29BFE /* FetchAdditionalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAdditionalData.swift; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 		75F7EB781FC59E96002F169E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75F7EB7A1FC59F33002F169E /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		75F7EB821FC5A8AD002F169E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		75FE84A81FD6DFE200E01FA4 /* Places In Current Location.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Places In Current Location.entitlements"; sourceTree = "<group>"; };
 		8A8C5C721FC57F3E00A834EA /* Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Places.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A8C5C751FC57F3E00A834EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A8C5C771FC57F3E00A834EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -300,6 +305,7 @@
 		493649081FD0646B00C95EDC /* Places In Current Location */ = {
 			isa = PBXGroup;
 			children = (
+				75FE84A81FD6DFE200E01FA4 /* Places In Current Location.entitlements */,
 				493649091FD0646B00C95EDC /* TodayViewController.swift */,
 				496189F11FD5969300C99499 /* Unknown.jpeg */,
 				493649181FD064C700C95EDC /* TodayTableViewCell.swift */,
@@ -422,6 +428,7 @@
 		8A8C5C691FC57F3E00A834EA = {
 			isa = PBXGroup;
 			children = (
+				524301321FD6F2A3002C613D /* LaunchScreenController.swift */,
 				8A8C5C741FC57F3E00A834EA /* Places */,
 				493649081FD0646B00C95EDC /* Places In Current Location */,
 				8A8C5C731FC57F3E00A834EA /* Products */,
@@ -462,6 +469,7 @@
 				8A8C5C7E1FC57F3E00A834EA /* LaunchScreen.storyboard */,
 				8A8C5C811FC57F3E00A834EA /* Info.plist */,
 				75F7EB821FC5A8AD002F169E /* GoogleService-Info.plist */,
+				524301301FD6B3AA002C613D /* Load.swift */,
 			);
 			path = Places;
 			sourceTree = "<group>";
@@ -560,11 +568,21 @@
 					493649041FD0646B00C95EDC = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 					8A8C5C711FC57F3E00A834EA = {
 						CreatedOnToolsVersion = 9.1;
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -713,6 +731,7 @@
 				8A8C5C781FC57F3E00A834EA /* ViewController.swift in Sources */,
 				528825B01FCEF55000C29BFE /* Place.swift in Sources */,
 				528825AF1FCEF54E00C29BFE /* Location.swift in Sources */,
+				524301331FD6F2A3002C613D /* LaunchScreenController.swift in Sources */,
 				528825CD1FCF0EA400C29BFE /* AddNewPlace.swift in Sources */,
 				521CFD741FCCCE3800CD86DD /* UIImage.swift in Sources */,
 				528825D11FCF0EA400C29BFE /* FetchDistance.swift in Sources */,
@@ -722,6 +741,7 @@
 				8A8C5C881FC5A1B000A834EA /* MapViewController.swift in Sources */,
 				8A9BF77C1FC6F89A002E970C /* ListTableViewCell.swift in Sources */,
 				21D1FD781FD04D2400DD2B7F /* Review.swift in Sources */,
+				524301311FD6B3AA002C613D /* Load.swift in Sources */,
 				25ACDC721FCC227400695896 /* Rating.swift in Sources */,
 				8A9BF7781FC6E22E002E970C /* SettingTableViewController.swift in Sources */,
 				49D395C11FCD85A8003FCC29 /* SlideMenuActionButton.swift in Sources */,
@@ -775,7 +795,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4PVY6Y62RV;
 				INFOPLIST_FILE = "Places In Current Location/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Places.Places-In-Current-Location";
@@ -790,7 +810,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4PVY6Y62RV;
 				INFOPLIST_FILE = "Places In Current Location/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Places.Places-In-Current-Location";
@@ -915,10 +935,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Places/Places.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Places/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Places";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -935,10 +956,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Places/Places.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Places/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Places";
 				PRODUCT_NAME = "$(TARGET_NAME)";
