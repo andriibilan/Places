@@ -221,7 +221,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterTableView.delegate = self
         filterTableView.dataSource = self
 
-
+     locationManagerConfigurate()
         googlePlacesManager = GooglePlacesManager(apiKey: "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ", radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
             if errorMessage != nil {
@@ -240,6 +240,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 if self.googlePlacesManager.allPlacesLoaded{
                     DispatchQueue.main.sync {
                         self.locationManagerConfigurate()
+                        
                         //                  self.updateData()
                     }
                 }
@@ -272,6 +273,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             locationManager.requestAlwaysAuthorization()
             if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
                 locationManager.startUpdatingLocation()
+                //pressCoordinate = locationManager.location?.coordinate
             } else {
                 locationManager!.requestWhenInUseAuthorization()
             }
