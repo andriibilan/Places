@@ -166,6 +166,9 @@
                         <outlet property="listView" destination="WRz-UB-V2K" id="PgK-q7-BnM"/>
                         <outlet property="mapView" destination="epZ-6t-w9F" id="rzk-cb-Pgw"/>
                         <outlet property="menuView" destination="C0Q-sZ-dW2" id="v4X-mG-Z8J"/>
+                        <outlet property="profileButton" destination="DHE-yK-Tu7" id="W4L-P9-Jqw"/>
+                        <outlet property="searchButton" destination="VWU-LE-cGY" id="Dl8-yr-3uM"/>
+                        <outlet property="settingsButton" destination="pFa-2t-k8b" id="NFI-cV-MC4"/>
                         <segue destination="G2v-qH-lE5" kind="presentation" identifier="ShowProfile" id="FZl-Th-4OR"/>
                         <segue destination="xjy-Hw-8Ed" kind="presentation" identifier="ShowLogin" id="4YD-0r-gCP"/>
                     </connections>

@@ -13,102 +13,94 @@ extension GooglePlacesManager{
     // MARK: - Fetching additional data
 
     /// Loads additional data: phone number, address, website, working schedule, photo references(used for fetching photos in future), reviews
-    func getAdditionalData(ofPlaceIndex placeIndex: Int?, ofPlace place: Place?, completion: @escaping (Place?, String?) -> ()){
-        let placeId: String
-        let index: Int
-        
-        if placeIndex != nil{
-            placeId = foundedPlaces[placeIndex!].placeId!
-            index = placeIndex!
-        } else if let givenPlace = place{
-            placeId = givenPlace.placeId!
-            if let indexOfGivenPlace = foundedPlaces.index(where: { $0.placeId ?? "nil" == placeId }) {
-                index = indexOfGivenPlace
-            } else { return }
-        } else { return }
-        
-        
-        // place detail request
-        let jsonPlaceRequest = """
-        https://maps.googleapis.com/maps/api/place/details/json?\
-        placeid=\(placeId)&\
-        key=\(apiKey)
-        """
-        print("\nParticular place request: " + jsonPlaceRequest)
-        
-        if let url = URL(string: jsonPlaceRequest){
-            URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
-                if error != nil{
-                    print("\n\tdataTask in \"getPhotos\": ")
-                    print(error!)
-                    return
-                }
-                
-                do{
-                    jsonPlaceRequest // used for debuging
-                    
-                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                    let dictionary = json as! [String: Any]
-                    
-                    if let errorMessage = dictionary["error_message"] as? String{
-                        completion(self?.foundedPlaces[index], "Additional Data gives: " + errorMessage)
+    func getAdditionalData(ofPlace givenPlace: Place, completion: @escaping (Place?, String?) -> ()){
+        if let placeId = givenPlace.placeId{
+            
+            // place detail request
+            let jsonPlaceRequest = """
+            https://maps.googleapis.com/maps/api/place/details/json?\
+            placeid=\(placeId)&\
+            key=\(apiKey)
+            """
+            print("\nParticular place request: " + jsonPlaceRequest)
+            
+            if let url = URL(string: jsonPlaceRequest){
+                URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+                    if error != nil{
+                        print("\n\tdataTask in \"getPhotos\": ")
+                        print(error!)
                         return
                     }
                     
-                    if let place = dictionary["result"] as? [String: Any]{
-                        self?.getPhoneNumber(of: place, forIndex: index)
-                        self?.getAddress(of: place, forIndex: index)
-                        self?.getWebsite(of: place, forIndex: index)
-                        self?.getWorkingSchedule(of: place, forIndex: index)
-                        self?.getPhotoReferences(of: place, forIndex: index)
-                        self?.getReviews(of: place, forIndex: index)
+                    do{
+                        jsonPlaceRequest // used for debuging
+                        
+                        let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                        let dictionary = json as! [String: Any]
+                        
+                        if let errorMessage = dictionary["error_message"] as? String{
+                            completion(givenPlace, "Additional Data gives: " + errorMessage)
+                            return
+                        }
+                        
+                        if let place = dictionary["result"] as? [String: Any]{
+                            self?.getPhoneNumber(of: place, saveTo: givenPlace)
+                            self?.getAddress(of: place, saveTo: givenPlace)
+                            self?.getWebsite(of: place, saveTo: givenPlace)
+                            self?.getWorkingSchedule(of: place, saveTo: givenPlace)
+                            self?.getPhotoReferences(of: place, saveTo: givenPlace)
+                            self?.getReviews(of: place, saveTo: givenPlace)
+                        }
+                        if let indexOfGivenPlace = self?.foundedPlaces.index(where: { $0.placeId ?? "nil" == placeId }){
+                            self?.foundedPlaces[indexOfGivenPlace] = givenPlace
+                        }
+                        completion(givenPlace, nil)
+                    } catch let jsonError{
+                        print("\n\tcatched in \"getAdditionalData\": ")
+                        print(jsonError)
                     }
-                    completion(self?.foundedPlaces[index], nil)
-                } catch let jsonError{
-                    print("\n\tcatched in \"getAdditionalData\": ")
-                    print(jsonError)
-                }
-                }.resume()
+                    }.resume()
+            }
         }
     }
     /// Loads place phone number
-    private func getPhoneNumber(of place: [String: Any], forIndex index: Int){
+    private func getPhoneNumber(of place: [String: Any], saveTo givenPlace: Place){
         if let internationalPhoneNumber = place["international_phone_number"] as? String{
-            foundedPlaces[index].phoneNumber = internationalPhoneNumber
+            givenPlace.phoneNumber = internationalPhoneNumber
         }
     }
     /// Loads place address
-    private func getAddress(of place: [String: Any], forIndex index: Int){
+    private func getAddress(of place: [String: Any], saveTo givenPlace: Place){
         if let address = place["formatted_address"] as? String{
-            foundedPlaces[index].address = address
+            givenPlace.address = address
         }
     }
     /// Loads place website
-    private func getWebsite(of place: [String: Any], forIndex index: Int){
+    private func getWebsite(of place: [String: Any], saveTo givenPlace: Place){
         if let website = place["website"] as? String{
-            foundedPlaces[index].website = website
+            givenPlace.website = website
         }
     }
     /// Loads place working schedule
-    private func getWorkingSchedule(of place: [String: Any], forIndex index: Int){
+    private func getWorkingSchedule(of place: [String: Any], saveTo givenPlace: Place){
         if let openingHours = place["opening_hours"] as? [String: Any]{
             if let weekdayText = openingHours["weekday_text"] as? [String]{
-                foundedPlaces[index].workingSchedule = weekdayText
+                givenPlace.workingSchedule = weekdayText
             }
         }
     }
     /// Loads place photo's references
-    private func getPhotoReferences(of place: [String: Any], forIndex index: Int){
+    private func getPhotoReferences(of place: [String: Any], saveTo givenPlace: Place){
         if let photos = place["photos"] as? [[String: Any]]{
             for photo in photos{
                 let photoReference = photo["photo_reference"] as! String
                 
-                foundedPlaces[index].photoReferences.append(photoReference)
+                givenPlace.photoReferences.append(photoReference)
             }
         }
     }
     /// Loads place reviews
-    private func getReviews(of place: [String: Any], forIndex index: Int){
+    private func getReviews(of place: [String: Any], saveTo givenPlace: Place){
         if let reviews = place["reviews"] as? [[String: Any]]{
             for review in reviews{
                 let fetchedReview = Review(
@@ -118,7 +110,7 @@ extension GooglePlacesManager{
                     text: review["text"] as? String
                 )
 
-                foundedPlaces[index].reviews.append(fetchedReview)
+                givenPlace.reviews.append(fetchedReview)
             }
         }
     }
