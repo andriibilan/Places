@@ -109,7 +109,9 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 		
 
 
+
         googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: [.bar, .restaurant], completion: { (foundedPlaces, errorMessage) in
+
 
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
