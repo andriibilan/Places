@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    static var apiKey = "AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ"
+    static var apiKey = "AIzaSyC05twrUgzDULu7xzGmsrCLDYDFf_WlTXM"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
