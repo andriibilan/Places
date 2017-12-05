@@ -175,6 +175,7 @@
 		75F7EB781FC59E96002F169E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75F7EB7A1FC59F33002F169E /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		75F7EB821FC5A8AD002F169E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		75FE84A81FD6DFE200E01FA4 /* Places In Current Location.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Places In Current Location.entitlements"; sourceTree = "<group>"; };
 		8A8C5C721FC57F3E00A834EA /* Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Places.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A8C5C751FC57F3E00A834EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A8C5C771FC57F3E00A834EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -300,6 +301,7 @@
 		493649081FD0646B00C95EDC /* Places In Current Location */ = {
 			isa = PBXGroup;
 			children = (
+				75FE84A81FD6DFE200E01FA4 /* Places In Current Location.entitlements */,
 				493649091FD0646B00C95EDC /* TodayViewController.swift */,
 				496189F11FD5969300C99499 /* Unknown.jpeg */,
 				493649181FD064C700C95EDC /* TodayTableViewCell.swift */,
@@ -443,7 +445,6 @@
 		8A8C5C741FC57F3E00A834EA /* Places */ = {
 			isa = PBXGroup;
 			children = (
-				75FE84A71FD6D12500E01FA4 /* Places.entitlements */,
 				528825BD1FCF0EA400C29BFE /* Google Places API Manager */,
 				2505B9841FCEE9D500415051 /* Search */,
 				258B06541FC8377B003A09B8 /* AddPlace */,
@@ -561,6 +562,11 @@
 					493649041FD0646B00C95EDC = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 					8A8C5C711FC57F3E00A834EA = {
 						CreatedOnToolsVersion = 9.1;
