@@ -63,7 +63,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XuK-vI-200">
-                                        <rect key="frame" x="0.0" y="350" width="600" height="450"/>
+                                        <rect key="frame" x="0.0" y="330" width="600" height="450"/>
                                         <color key="backgroundColor" red="0.92156862750000001" green="0.29411764709999999" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="450" id="5vR-1D-Go3"/>
@@ -135,7 +135,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f4L-C7-slV">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="f4L-C7-slV">
                                                 <rect key="frame" x="165" y="6" width="421" height="53"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -161,7 +161,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hl-8S-7XP" userLabel="LogOut">
-                                        <rect key="frame" x="552" y="45" width="40" height="40"/>
+                                        <rect key="frame" x="552" y="50" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="D7z-XU-3AE"/>
                                             <constraint firstAttribute="height" constant="40" id="QdY-2e-ZRa"/>
@@ -198,7 +198,7 @@
                                     <constraint firstAttribute="trailing" secondItem="c1P-sa-CjL" secondAttribute="trailing" constant="20" id="FaB-cS-Vby"/>
                                     <constraint firstItem="5hl-8S-7XP" firstAttribute="centerX" secondItem="ocR-hJ-o4L" secondAttribute="centerX" constant="272" id="Fzj-J2-QFk"/>
                                     <constraint firstItem="iTJ-QA-lo9" firstAttribute="leading" secondItem="ocR-hJ-o4L" secondAttribute="leading" id="GtG-AT-yNP"/>
-                                    <constraint firstItem="XuK-vI-200" firstAttribute="top" secondItem="ocR-hJ-o4L" secondAttribute="top" constant="350" id="PpJ-fa-AKd"/>
+                                    <constraint firstItem="XuK-vI-200" firstAttribute="top" secondItem="ocR-hJ-o4L" secondAttribute="top" constant="330" id="PpJ-fa-AKd"/>
                                     <constraint firstItem="yP1-1M-vsR" firstAttribute="bottom" secondItem="3jV-vF-b8J" secondAttribute="bottom" id="Rsg-12-siB"/>
                                     <constraint firstAttribute="bottom" secondItem="XuK-vI-200" secondAttribute="bottom" id="Um4-MQ-aES"/>
                                     <constraint firstItem="yP1-1M-vsR" firstAttribute="trailing" secondItem="3jV-vF-b8J" secondAttribute="trailing" id="VWU-Qk-tBi"/>
@@ -243,7 +243,7 @@
                             <constraint firstAttribute="trailing" secondItem="rDF-65-yGB" secondAttribute="trailing" id="S2H-pv-6a4"/>
                             <constraint firstItem="ocR-hJ-o4L" firstAttribute="leading" secondItem="B3G-ev-SkV" secondAttribute="leading" id="bN9-bp-yWK"/>
                             <constraint firstItem="D4v-5F-yd5" firstAttribute="trailing" secondItem="IQY-Px-P9W" secondAttribute="trailing" constant="20" id="eS7-Iw-Wzf"/>
-                            <constraint firstItem="5hl-8S-7XP" firstAttribute="top" secondItem="rDF-65-yGB" secondAttribute="top" constant="45" id="hMW-CD-ej9"/>
+                            <constraint firstItem="5hl-8S-7XP" firstAttribute="top" secondItem="rDF-65-yGB" secondAttribute="top" constant="50" id="hMW-CD-ej9"/>
                             <constraint firstItem="ocR-hJ-o4L" firstAttribute="top" secondItem="B3G-ev-SkV" secondAttribute="top" constant="-20" id="mhQ-Dd-1WC"/>
                             <constraint firstItem="rDF-65-yGB" firstAttribute="leading" secondItem="B3G-ev-SkV" secondAttribute="leading" id="mu3-KO-tKg"/>
                             <constraint firstItem="5hl-8S-7XP" firstAttribute="trailing" secondItem="rDF-65-yGB" secondAttribute="trailing" constant="-8" id="wgg-Lu-YF5"/>

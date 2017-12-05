@@ -46,7 +46,19 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     }
     
     @IBAction func dismissButtonTaped(_ sender: UIButton) {
-        updateProfile()
+        if (nameTextField.text?.isEmpty)! {
+            messageText = "Please complete all fields."
+            alertAction(messageText)
+            
+            return
+        }
+        if !validator.isValidEmail(email: emailTextField.text!) {
+            messageText = "Please enter your correct email."
+            alertAction(messageText)
+            
+            return
+        }
+        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
         performSegue(withIdentifier: "unwindFromProfile", sender: self)
         
     }
@@ -64,7 +76,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
         
         headerBlurImageView = UIImageView(frame: header.bounds)
         headerImageView?.image = UIImage(named: "lviv")
-        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffect = UIBlurEffect(style: .light)
         blurEffectView = UIVisualEffectView(effect: blurEffect)
         //        blurEffectView?.frame = view.bounds
         //        headerBlurImageView?.image = UIImage(named: "header_bg")?.blurredImage(withRadius: 10, iterations: 20, tintColor: UIColor.clear)
@@ -110,29 +122,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
         })
     }
     
-    func updateProfile() {
-        if (nameTextField.text?.isEmpty)! {
-            messageText = "Please complete all fields."
-            alertAction(messageText)
-            
-            return
-        }
-        if !validator.isValidEmail(email: emailTextField.text!) {
-            messageText = "Please enter your correct email."
-            alertAction(messageText)
-            
-            return
-        }
-        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
-        
-        //        if !validator.isValidPhoneNumber(testStr: phoneTextField.text!) {
-        //            messageText = "Please enter your correct phone number."
-        //            alertAction(messageText)
-        //        } else {
-        //
-        //        }
-    }
-    
+
     func alertAction(_ message: String) {
         let alertMessage = UIAlertController(title: "Oops!", message: message , preferredStyle: .alert)
         alertMessage.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
@@ -158,10 +148,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     @IBAction func chooseImage(_ sender: Any) {
         chooseImage()
     }
-    @IBAction func editButton(_ sender: Any) {
-        //        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
-        performSegue(withIdentifier: "unwindFromProfile", sender: self)
-    }
+
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -173,28 +160,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
             secondVC.modalPresentationStyle = .custom
         }
     }
-//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        transition.transitionMode = .present
-//        transition.startingPoint = dismissButton.center
-//        transition.circleColor = .white
-//
-//        return transition
-//    }
-//    
-//    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        transition.transitionMode = .dismiss
-//        transition.startingPoint = dismissButton.center
-//        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
-//        
-//        return transition
-//    }
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "showLoginAfterLogOut" {
-//            let secondVC = segue.destination as! LoginViewController
-//            secondVC.transitioningDelegate = self
-//            secondVC.modalPresentationStyle = .custom
-//        }
-//    }
+
 }
 
 //MARK: ImagePickerController
@@ -280,7 +246,7 @@ extension ProfileViewController:  UIScrollViewDelegate {
             
             //  ------------ Blur
             
-            blurEffectView?.alpha = min (1.0, (offset - offset_B_LabelHeader)/8)
+            blurEffectView?.alpha = min (0.8, (offset + 20 - offset_B_LabelHeader))
             blurEffectView?.frame = view.bounds
           
             
@@ -312,30 +278,59 @@ extension ProfileViewController:  UIScrollViewDelegate {
     
 }
 
-//extension ProfileViewController: UIViewControllerTransitioningDelegate {
-//    //MARK:- Custom Transition
-//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        transition.transitionMode = .present
-//        transition.startingPoint = dismissButton.center
-//        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
-//
-//        return transition
-//    }
-//
-//    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        transition.transitionMode = .dismiss
-//        transition.startingPoint = dismissButton.center
-//        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
-//
-//        return transition
-//    }
-//}
-
 extension ProfileViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        switch textField {
+        case nameTextField:
+            guard let text = nameTextField.text else { return true }
+            let newLength = text.count + string.count - range.length
+            return newLength <= 20
+            
+        case phoneTextField:
+            let allowedCharacters = CharacterSet.decimalDigits
+            let characterSet = CharacterSet(charactersIn: string)
+            
+            var originalText = textField.text
+            
+            if (originalText?.count)! == 0
+            {
+                originalText?.append("+38")
+            }
+            if (originalText?.count)! == 3
+            {
+                originalText?.append(" (0")
+            }
+            if (originalText?.count)! == 8
+            {
+                originalText?.append(") ")
+            }
+            if (originalText?.count)! == 12
+            {
+                originalText?.append("-")
+            }
+            if (originalText?.count)! == 15
+            {
+                originalText?.append("-")
+            }
+            if (originalText?.count)! == 19
+            {
+                guard let text = phoneTextField.text else { return true }
+                let newLength = text.count + string.count - range.length
+                return newLength <= 19
+            }
+            phoneTextField.text = originalText
+            return allowedCharacters.isSuperset(of: characterSet)
+        default:
+            break
+        }
+        return true
     }
 }
 

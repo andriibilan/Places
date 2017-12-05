@@ -237,15 +237,15 @@ extension SignUpViewController: UITextFieldDelegate {
             {
                 originalText?.append(" (0")
             }
-            if (originalText?.count)! == 9
+            if (originalText?.count)! == 8
             {
                 originalText?.append(") ")
             }
-            if (originalText?.count)! == 13
+            if (originalText?.count)! == 12
             {
                 originalText?.append("-")
             }
-            if (originalText?.count)! == 16
+            if (originalText?.count)! == 15
             {
                 originalText?.append("-")
             }
