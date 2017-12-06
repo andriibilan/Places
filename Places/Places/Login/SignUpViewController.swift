@@ -11,7 +11,7 @@ import Firebase
 import FirebaseDatabase
 import FBSDKLoginKit
 
-class SignUpViewController: UIViewController, AuthServiceDelegate ,UIViewControllerTransitioningDelegate {
+class SignUpViewController: UIViewController, AuthServiceDelegate {
     
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
@@ -26,7 +26,7 @@ class SignUpViewController: UIViewController, AuthServiceDelegate ,UIViewControl
     private let transition = CustomTransitionAnimator()
     var authService = AuthService()
     var validator = Validator()
-
+    
     var dataBaseReference: DatabaseReference! {
         return Database.database().reference()
     }
@@ -45,69 +45,42 @@ class SignUpViewController: UIViewController, AuthServiceDelegate ,UIViewControl
                 return
             }
             
-            guard let accessToken = FBSDKAccessToken.current() else {
-                print("Failed to get access token")
-                return
-            }
+//            guard let accessToken = FBSDKAccessToken.current() else {
+//                print("Failed to get access token")
+//                return
+//            }
             
-            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-//            print("credential = \(credential)")
+            //            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
             
-            
-            
-            // Perform login by calling Firebase APIs
-            Auth.auth().signIn(with: credential, completion: { (user, error) in
-                if let error = error {
-                    print("Login error: \(error.localizedDescription)")
-                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(okayAction)
-                    self.present(alertController, animated: true, completion: nil)
-
-                    return
-                }
-                
-                self.fetchProfile(user!)
-                // Present the main view
-//                if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") {
-//                    UIApplication.shared.keyWindow?.rootViewController = viewController
-//                    self.dismiss(animated: true, completion: nil)
-//                }
-//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC")
-//                        self.present(vc!, animated: true, completion: nil)
-                self.performSegue(withIdentifier: "ShowProfileVC", sender: nil)
-           })
-            
+            self.fetchProfile()
         }
         
     }
     
-    func fetchProfile(_ user: User) {
-        let parameters = ["fields": "email,name, picture"]
+    func fetchProfile() {
+        let parameters = ["fields": "email, name, picture"]
         FBSDKGraphRequest(graphPath: "me", parameters: parameters).start { (connection, result, error) in
             if error != nil {
                 print("error")
                 return
             }
-             guard let data = result as? [String:Any] else { return }
-                let email = data["email"] as! String
-                let name = data["name"] as! String
-            self.authService.saveUserInfo(userName: name, email: email, phone: "12345678", password: "12345678", user: user)
-            print(email)
-            print(name)
-           print(result!)
-//            guard let pictureUrl = result as? [String:Any] else { return }
-//                let picture = data["picture"]
-//            let pictureUrl = picture as? [String:Any]
-//                let dataPicture = picture["data"]
-//            guard let urlString = dataPicture as? [String:Any] else { return }
-//            let url = urlString["url"]
-//            print(url)
-
+            guard let userInfo = result as? [String:Any] else { return }
+            
+            self.emailTextField.text = userInfo["email"] as? String
+            self.firstNameTextField.text = userInfo["name"] as? String
+            if let imageURL = ((userInfo["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
+                
+                let profileImageURL = imageURL
+                
+                let url = URL(string: profileImageURL)
+                let data = try? Data(contentsOf: url!)
+                
+                DispatchQueue.main.async {
+                    self.profileImage.image = UIImage(data: data!)
+                }
+            }
+        }
         
-
-    }
-       
     }
     @IBOutlet weak var dismissButton: UIButton!{
         didSet{
@@ -123,64 +96,52 @@ class SignUpViewController: UIViewController, AuthServiceDelegate ,UIViewControl
         chooseImage()
     }
     
-    //    @IBAction func selectSignInButton(_ sender: Any) {
-    //        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
-    //        self.present(vc!, animated: true, completion: nil)
-    //    }
-    
     func transitionToProfile() {
-//        let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
-//        self.present(profileVC, animated: true, completion: nil)
-         performSegue(withIdentifier: "ShowProfileVC", sender: nil)
+        performSegue(withIdentifier: "ShowProfileVC", sender: nil)
+//        performSegue(withIdentifier: "ShowProfile", sender: nil)
     }
     
     @IBAction func registerAction(_ sender: Any) {
         
         if (firstNameTextField.text?.isEmpty)! {
             messageText = "Please complete all fields."
-//            alertAction(messageText)
             showAlertAction(text: messageText)
+            
             return
         }
         if !validator.isValidEmail(email: emailTextField.text!) {
             messageText = "Please enter your correct email."
-//            alertAction(messageText)
             showAlertAction(text: messageText)
+            
             return
         }
-        //        if !validator.isValidPhoneNumber(testStr: phoneTextField.text!) {
-        //            messageText = "Please enter your correct phone number."
-        //            alertAction(messageText)
-        //
-        //            return
-        //        }
+        if (phoneTextField.text?.isEmpty)! {
+            messageText = "Please enter your correct phone number."
+            showAlertAction(text: messageText)
+            
+            return
+        }
         if !validator.isValidPassword(password: passwordTextField.text!) && passwordTextField.text!.count <= 8 {
             messageText = "Passwords must contain at least 8 characters."
-//            alertAction(messageText)
             showAlertAction(text: messageText)
+            
             return
         }
         if passwordTextField.text != confirmPassTextField.text {
             messageText = "Confirmed password not matched please try again."
-//            alertAction(messageText)
             showAlertAction(text: messageText)
+            
             return
         }
         if profileImage.image == nil {
             messageText = "You need to add photo, If you want create user !"
-//            alertAction(messageText)
             showAlertAction(text: messageText)
+            
             return
         }
         let pictureData = UIImageJPEGRepresentation(self.profileImage.image!, 0.20)
         authService.createUser(userName: firstNameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, password: passwordTextField.text!, pictureData: pictureData!)
     }
-    
-//    func alertAction(_ message: String) {
-//        let alertMessage = UIAlertController(title: "Oops!", message: message , preferredStyle: .alert)
-//        alertMessage.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-//        present(alertMessage, animated: true, completion: nil)
-//    }
     
     func showAlertAction(text: String) {
         let alertMessage = UIAlertController(title: "Oops!", message: text , preferredStyle: .alert)
@@ -191,22 +152,7 @@ class SignUpViewController: UIViewController, AuthServiceDelegate ,UIViewControl
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    //MARK:- Custom Transition
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.transitionMode = .present
-        transition.startingPoint = dismissButton.center
-        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
-        
-        return transition
-    }
     
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.transitionMode = .dismiss
-        transition.startingPoint = dismissButton.center
-        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
-        
-        return transition
-    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowProfileVC" {
             let secondVC = segue.destination as! ProfileViewController
@@ -265,7 +211,24 @@ extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationCo
         picker.dismiss(animated: true, completion: nil)
     }
 }
-
+extension SignUpViewController: UIViewControllerTransitioningDelegate {
+    //MARK:- Custom Transition
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .present
+        transition.startingPoint = dismissButton.center
+        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        
+        return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .dismiss
+        transition.startingPoint = dismissButton.center
+        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        
+        return transition
+    }
+}
 //MARK: TextField
 extension SignUpViewController: UITextFieldDelegate {
     
