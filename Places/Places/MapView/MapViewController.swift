@@ -24,6 +24,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     let mapDynamic = Dynamic()
     //    var menuIsOpen = false
     
+
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var filterTableView: UITableView!
     @IBOutlet weak var viewForFilter: UIView!
@@ -57,6 +58,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         locationManagerConfigurate()
         
+
         googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
             
             if errorMessage != nil {
@@ -83,6 +85,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         sideMenuConstraint.constant = -160
         // Do any additional setup after loading the view.
+
     }
     
     
@@ -168,7 +171,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 self.view.layoutIfNeeded()
             }, completion: nil)
             updateData()
-            preventAnimation.removeAll()
         }
         isSideMenuHidden = !isSideMenuHidden
     }
@@ -403,7 +405,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         if segue.identifier == segueToAddScreen {
             let addScreen = segue.destination as? AddNewPlaceController
-            addScreen?.location = pressCoordinate
+            addScreen?.newLocation = pressCoordinate
         }
     }
     
@@ -418,15 +420,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     var nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beauty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
-    
     let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
+
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nameFilterArray.count
     }
@@ -443,29 +444,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterCell.backgroundColor = colorForIndex(index: indexPath.row)
         filterCell.accessoryType = accessory
         filterCell.selectionStyle = .none
-        
+
         return filterCell
     }
     
-    var preventAnimation = Set<IndexPath>()
-    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        print(preventAnimation.count)
-        // first version
-        //cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
-        //print(indexPath.row)
-        //second version
-        if !preventAnimation.contains(indexPath) {
+        if indexPath.row >= 12 || indexPath.row <= 4 {
             cell.alpha = 0
-            preventAnimation.insert(indexPath)
-            DispatchQueue.main.async {
-                cell.layer.transform = CATransform3DScale(CATransform3DIdentity, -1, 1, 1)
-                UIView.animate(withDuration: 0.7) {
-                    cell.alpha = 1
-                    cell.layer.transform = CATransform3DIdentity
-                }
+            cell.layer.transform = CATransform3DScale(CATransform3DIdentity, -1, 1, 1)
+            UIView.animate(withDuration: 0.7) {
+                cell.alpha = 1
+                cell.layer.transform = CATransform3DIdentity
             }
-            
         }
     }
     
@@ -477,14 +467,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var accessory = UITableViewCellAccessoryType.none
-        // print(selectedCell)
         if selectedCell.contains(indexPath.row) {
             selectedCell.remove(indexPath.row)
-            print("cancel filter: \(nameFilterArray[indexPath.row])")
             var num = 0
             for i in filterArray {
                 if i.rawValue == GooglePlacesManager.makeConforming(type: nameFilterArray[indexPath.row]) {
@@ -492,39 +478,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 }
                 num += 1
             }
-            print(filterArray)
         } else {
             selectedCell.add(indexPath.row)
             accessory = .checkmark
-            print("choose filter: \(nameFilterArray[indexPath.row])")
             filterArray.append(PlaceType(rawValue: GooglePlacesManager.makeConforming(type: nameFilterArray[indexPath.row]))!)
-            print(filterArray)
         }
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = accessory
         }
     }
     
-    var lastContentOffset: CGFloat = 0
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.lastContentOffset = scrollView.contentOffset.y
-        //print(lastContentOffset)
-    }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (self.lastContentOffset < scrollView.contentOffset.y) {
-            print("Move to botton")
-            // moved to top
-        } else if (self.lastContentOffset > scrollView.contentOffset.y) {
-            print("Move to top")
-            
-            // moved to bottom
-        } else {
-            // didn't move
-        }
-    }
-    
-    
+
     func addRadiusCircle(location: CLLocation){
         
         for overlay in self.map.overlays {
