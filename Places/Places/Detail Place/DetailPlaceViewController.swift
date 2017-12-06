@@ -35,6 +35,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var dismissButton: UIButtonExplicit!
     
+    @IBOutlet weak var placeTypeIcon: UIImageView!
     
     //
     let testPlace = TestPlace()
@@ -76,6 +77,8 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         placeWebsite?.text = place.website
         
+        placeTypeIcon?.image = place.icon
+        
         switch place.isOpen{
         case true?:  placeHours?.text = "Open"
         case false?:  placeHours?.text = "Close"
@@ -115,6 +118,11 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     //TODO: Check it on device
     @IBAction func openPhone(_ sender: UIButton) {
         if let phone = placePhone?.text{
+           /* for index in 0...phone.count - 1{
+                if phone.re == " "{
+                    phone.remove(at: index)
+                }
+            }*/
             let phoneURL = NSURL(string: "telprompt://\(phone)")! as URL
             UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
         }
