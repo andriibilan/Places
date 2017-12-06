@@ -49,8 +49,8 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     var keyBoardPresent = true
     
     var offset: CGFloat = 0
-    //var location: [String: Double]?
-    var location: Location?
+    
+    var newLocation: Location?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +87,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     }
 
     @objc func keyboardWillShow(notification: NSNotification) {
+        if keyBoardPresent == false {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             offset = keyboardSize.height
             let newHeight = scroll.contentSize.height + offset
@@ -95,10 +96,13 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
             upper.constant += offset
             keyBoardPresent = true
         }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        print("lat is \(newLocation?.latitude)")
+        print("lng is \(newLocation?.longitude)")
     }
     
     override func didReceiveMemoryWarning() {
@@ -113,29 +117,22 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        let frame = textField.superview?.convert(textField.frame.origin, to: nil)// convertPoint:aView.frame.origin toView:nil
-      
-        if textField == category {
-            list.isHidden = false
-        }
-        else {
-            list.isHidden = true
-        }
+        //let frame = textField.superview?.convert(textField.frame.origin, to: nil)// convertPoint:aView.frame.origin toView:nil
+        list.isHidden = ( textField == category ) ?  false: true
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         if textField != category {
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.25, animations: {
                 self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y + 200, width: self.view.frame.size.width, height: self.view.frame.size.height);
-                
             })
         }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField != category {
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.25, animations: {
                 self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y - 200, width: self.view.frame.size.width, height: self.view.frame.size.height);
                 
             })
@@ -154,7 +151,6 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
             else if allowedCharacters.isSuperset(of: characterSet) == true {
                 phoneFormat?.printNumber(newDigit: string.first!)
             }
-            
             return false
         }
         else {
@@ -163,21 +159,18 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     }
     
     func scrollRectToVisible(_ rect: CGRect,  animated: Bool) {
-        //print("scroll")
+  
     }
     
     @IBAction func postToGoogle(_ sender: UIButton) {
-    //    NotificationCenter.default.removeObserver(self)
-     //   print("deinit")
-        
-      let coordinates: [String: Double] = [
-        "lat": (location?.latitude)!,
-        "lng": (location?.longitude)!
+         let coordinates: [String: Double] = [
+        "lat": (newLocation?.latitude)!,
+        "lng": (newLocation?.longitude)!
       ]
        //wrap!!!!
       let jsonArray: [String: Any] =
              [ "location": coordinates,
-               "accuracy": 200,
+               "accuracy": 50,
                "name": name.text!,
                "phone_number": number.text!,
                "address": addres.text!,
@@ -185,12 +178,12 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
                "language": "en-AU"]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: jsonArray)
-        //let YOUR_API_KEY: Int = AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc
-        //let YOUR_API_KEY: String = "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ"
+        //AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc
+        //AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ
         
         var answer = [String: Any] ()
         
-        if let url = URL(string: "https://maps.googleapis.com/maps/api/place/add/json?key=AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc"){
+        if let url = URL(string: "https://maps.googleapis.com/maps/api/place/add/json?key=\(AppDelegate.apiKey)"){
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.httpBody = jsonData
@@ -209,9 +202,9 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
             task.resume()
         }
         
-        let requestStatus: String? = answer["status"] as? String
-        print(answer["status"] as Any)
-        print(requestStatus as Any)
+        let requestStatus = answer["status"]// as? String
+        //print(answer["status"] as Any)
+        //print(requestStatus as Any)
         
         let alert = UIAlertController(title: "YOUR REQUEST WAS SENDED", message: "you request status is \(requestStatus ?? "unknown")", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: { action in
@@ -222,8 +215,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     
     @IBAction func cansel(_ sender: UIButton) {
     //    NotificationCenter.default.removeObserver(self)
-    //    print("deinit")
-        dismiss(animated: true, completion: nil)
+          dismiss(animated: true, completion: nil)
     }
     
     func setCategoryText(newText: String) {
@@ -232,7 +224,6 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     }
     
     func isValidEmail(testStr:String) -> Bool {
-        // print("validate calendar: \(testStr)")
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)

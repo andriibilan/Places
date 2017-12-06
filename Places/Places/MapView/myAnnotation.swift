@@ -10,7 +10,6 @@ import UIKit
 import MapKit
 
 class CustomAnnotation : NSObject, MKAnnotation {
-    
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
@@ -18,7 +17,6 @@ class CustomAnnotation : NSObject, MKAnnotation {
     var image : UIImage?
     var place:Place?
     
-
     init(place: Place) {
         self.coordinate = CLLocationCoordinate2DMake((place.location?.latitude)!, (place.location?.longitude)!)
         self.place = place
@@ -30,15 +28,6 @@ class CustomAnnotation : NSObject, MKAnnotation {
         } else {
             subtitle = "Closed"
         }
-        
     }
-
-    
 }
-
-class myAnnotationView : MKPinAnnotationView {
-     var place:Place!
-    
-}
-
 

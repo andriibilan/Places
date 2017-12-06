@@ -4,12 +4,11 @@
 //
 //  Created by Victoriia Rohozhyna on 12/5/17.
 //  Copyright © 2017 andriibilan. All rights reserved.
-//
 
 import UIKit
 import Foundation
 
-class loadVC: NSObject {
+class loadVC: UIView {
     
     static func customActivityIndicatory(_ viewContainer: UIView, startAnimate:Bool? = true) -> UIActivityIndicatorView {
         let mainContainer: UIView = UIView(frame: viewContainer.frame)
@@ -31,13 +30,13 @@ class loadVC: NSObject {
         activityIndicatorView.activityIndicatorViewStyle =
             UIActivityIndicatorViewStyle.whiteLarge
         activityIndicatorView.center = CGPoint(x: viewBackgroundLoading.frame.size.width / 2, y: viewBackgroundLoading.frame.size.height / 2)
-        if startAnimate!{
+        if startAnimate! {
             viewBackgroundLoading.addSubview(activityIndicatorView)
             mainContainer.addSubview(viewBackgroundLoading)
             viewContainer.addSubview(mainContainer)
             activityIndicatorView.startAnimating()
-        }else{
-            for subview in viewContainer.subviews{
+        } else {
+            for subview in viewContainer.subviews {
                 if subview.tag == 789456123{
                     subview.removeFromSuperview()
                 }
