@@ -8,17 +8,21 @@
 
 import UIKit
 import NotificationCenter
+import CoreLocation
 
 class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataSource, UITableViewDelegate {
     
-
-    var name = ["Meet & Burger", "Meet & Burger", "Meet & Burger", "Meet & Burger", "Meet & Burger"]
-    var distance = ["123m", "123m", "123m", "123m", "123m"]
-    var open = ["Open", "Open", "Open", "Open", "Open"]
-        
+    @IBOutlet weak var tableView: UITableView!
+    
+    var forecastData = [WeatherApi]()
+//    var name = ["Meet & Burger", "Meet & Burger", "Meet & Burger", "Meet & Burger", "Meet & Burger"]
+//    var distance = ["123m", "123m", "123m", "123m", "123m"]
+//    var open = ["Open", "Open", "Open", "Open", "Open"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+         updateWeatherForLocation(location: "Lviv")
     }
     
     override func didReceiveMemoryWarning() {
@@ -26,17 +30,54 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
         // Dispose of any resources that can be recreated.
     }
     
+    func updateWeatherForLocation (location:String) {
+        CLGeocoder().geocodeAddressString(location) { (placemarks:[CLPlacemark]?, error:Error?) in
+            if error == nil {
+                if let location = placemarks?.first?.location {
+                    WeatherApi.forecast(withLocation: location.coordinate, completion: { (results:[WeatherApi]?) in
+                        
+                        if let weatherData = results {
+                            self.forecastData = weatherData
+                            
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                            
+                        }
+                        
+                    })
+                }
+            }
+        }
+    }
+    
+    // MARK: - Table view data source
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return forecastData.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return name.count
+        // #warning Incomplete implementation, return the number of rows
+        return forecastData.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let date = Calendar.current.date(byAdding: .day, value: section, to: Date())
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM dd, yyyy"
+        
+        return dateFormatter.string(from: date!)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! TodayTableViewCell
-        cell.placeName.text = name[indexPath.row]
-        cell.placeDistance.text = distance[indexPath.row]
-        cell.plaseIsOpen.text = open[indexPath.row]
-//        cell.placeImage.image = UIImage?
-        
+        let weatherObject = forecastData[indexPath.section]
+        cell.placeName.text = weatherObject.summary
+        cell.placeDistance.text = "\(Int(weatherObject.temperature)) °F"
+        cell.placeImage.image = UIImage(named: weatherObject.icon)
+
         
         return cell
         
