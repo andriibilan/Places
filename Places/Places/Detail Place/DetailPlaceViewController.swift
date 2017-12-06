@@ -58,7 +58,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
         dismissButton.backgroundColor = #colorLiteral(red: 0.8338858485, green: 0.2595152557, blue: 0.3878593445, alpha: 1)
         //
-        testPlace.installDefaultValues()
+ //       testPlace.installDefaultValues()
         //
         
         
@@ -254,10 +254,10 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     
     @IBAction func createPathBetweenTwoLocations(_ sender: UIButton) {
-        let latitude : CLLocationDegrees = 39.048625
-        let longitude : CLLocationDegrees = -120.981227
+     //   let latitude : CLLocationDegrees = 39.048625
+     //   let longitude : CLLocationDegrees = -120.981227
         
-        let regionDistance : CLLocationDistance = 100;
+        let regionDistance : CLLocationDistance = Double(place.distance!);
        
       //  let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         let coordinates = CLLocationCoordinate2DMake((place.location?.latitude)!, (place.location?.longitude)!)
