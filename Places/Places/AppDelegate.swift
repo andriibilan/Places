@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
-    static var apiKey = "AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ"
+    static var apiKey = "AIzaSyB1stl48ZyTMr4Y6Su7nKHs5a0pLzoVe5w"
 
 
 

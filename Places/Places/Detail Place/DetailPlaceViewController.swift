@@ -210,14 +210,22 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         let cell  = feedbackTableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as! ReviewTableViewCell
         
         
+        //
+        cell.layer.cornerRadius = 15
+        cell.layer.borderColor = #colorLiteral(red: 0.2275260389, green: 0.6791594625, blue: 0.5494497418, alpha: 1)
+        cell.layer.borderWidth = 1.5
+        //
+        
+        
+        
         cell.labelForReview.text = review.text
         
         
-        cell.labelForReview.backgroundColor? = UIColor(red:   1.0,green: 0.7, blue:  CGFloat(indexPath.row) / CGFloat(testPlace.forReview.count - 1) * 0.8,alpha: 1.0)
- 
-        
+      //  cell.labelForReview.backgroundColor? = UIColor(red:   1.0,green: 0.7, blue:  CGFloat(indexPath.row) / CGFloat(testPlace.forReview.count - 1) * 0.8,alpha: 1.0)
+ cell.labelForReview.backgroundColor? = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+ cell.labelForReview.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         cell.labelForReviewer.text = review.author
-        cell.labelForReviewer.textColor = UIColor.white
+        cell.labelForReviewer.textColor = #colorLiteral(red: 0.2275260389, green: 0.6791594625, blue: 0.5494497418, alpha: 1)
         cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: Double(review.rating!)))
         cell.ImageViewForIcon?.image = loadImageFromPath(path: review.profilePhotoUrl!)
 
