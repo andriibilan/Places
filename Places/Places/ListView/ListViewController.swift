@@ -145,6 +145,8 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
+    
 
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -211,17 +213,22 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		tableView.deselectRow(at: indexPath, animated: true)
+         let place = (filterOpenOnly) ? openPlaces[indexPath.row] : places[indexPath.row]
+            googlePlacesManager.getPhotos(ofPlace: place){ filledPlace, errorMessage in
+                DispatchQueue.main.async {
+                    print(errorMessage ?? "")
+                    self.performSegue(withIdentifier: "ShowDetailPlace", sender: filledPlace)
+                }
+                
+            }
+        
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		
 		if segue.identifier == "ShowDetailPlace" {
-			if let destVC = segue.destination as? DetailPlaceViewController {
-				let selectedRow = (tableView.indexPathForSelectedRow as NSIndexPath?)?.row ?? 0
-				let place = (filterOpenOnly) ? openPlaces[selectedRow] : places[selectedRow]
-				destVC.place = place
-			}
+            let d = segue.destination as? DetailPlaceViewController
+            d?.place = sender as! Place
 		}
 	}
     

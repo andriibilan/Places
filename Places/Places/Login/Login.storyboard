@@ -675,16 +675,22 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ff9-Rf-J3w">
-                                                <rect key="frame" x="112" y="465" width="150" height="40"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ff9-Rf-J3w" customClass="UIButtonExplicit" customModule="Places" customModuleProvider="target">
+                                                <rect key="frame" x="112" y="460" width="150" height="35"/>
                                                 <color key="backgroundColor" red="0.2275260389" green="0.67915946250000003" blue="0.54944974179999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="DeA-Hn-dw2"/>
+                                                    <constraint firstAttribute="height" constant="35" id="DeA-Hn-dw2"/>
                                                     <constraint firstAttribute="width" constant="150" id="ouH-gG-zCL"/>
                                                 </constraints>
-                                                <state key="normal" title="Sign Up">
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                <state key="normal" title="SIGN UP">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="registerAction:" destination="y1D-2B-g8X" eventType="touchUpInside" id="JTH-Lq-cTB"/>
                                                     <action selector="registerAction:" destination="d7a-qM-Njr" eventType="touchUpInside" id="iPF-Ct-6uT"/>
@@ -748,13 +754,31 @@
                                                     <action selector="dismissButtonTaped:" destination="y1D-2B-g8X" eventType="touchUpInside" id="hyo-QY-GZ2"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqc-0v-xHw">
-                                                <rect key="frame" x="164" y="521" width="46" height="30"/>
-                                                <state key="normal" title="Button"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqc-0v-xHw" customClass="UIButtonExplicit" customModule="Places" customModuleProvider="target">
+                                                <rect key="frame" x="112" y="510" width="150" height="35"/>
+                                                <color key="backgroundColor" red="0.23375499250000001" green="0.34919965269999997" blue="0.60641884800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="Xjl-jw-4nu"/>
+                                                    <constraint firstAttribute="width" constant="150" id="eDF-Uw-IOM"/>
+                                                    <constraint firstAttribute="height" constant="35" id="rNd-mS-7vi"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="  JOIN US !">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="facebookLoginWithSender:" destination="y1D-2B-g8X" eventType="touchUpInside" id="ste-Rb-7bt"/>
                                                 </connections>
                                             </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="Kjl-96-Rdw">
+                                                <rect key="frame" x="124" y="510" width="35" height="35"/>
+                                                <color key="backgroundColor" red="0.23375499248504639" green="0.34919965267181396" blue="0.60641884803771973" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -765,11 +789,14 @@
                                             <constraint firstItem="rtv-SE-3qo" firstAttribute="top" secondItem="Rc2-5r-Z2t" secondAttribute="bottom" constant="8" id="57w-9F-O8t"/>
                                             <constraint firstItem="2LT-qg-a07" firstAttribute="top" secondItem="rtv-SE-3qo" secondAttribute="bottom" constant="19" id="8cv-DP-kdA"/>
                                             <constraint firstItem="m3p-Hp-dM3" firstAttribute="top" secondItem="Rc2-5r-Z2t" secondAttribute="bottom" constant="40" id="A3f-uP-iUL"/>
-                                            <constraint firstItem="ff9-Rf-J3w" firstAttribute="top" secondItem="q2C-cL-k4g" secondAttribute="bottom" constant="25" id="FeK-99-hYe"/>
+                                            <constraint firstItem="Kjl-96-Rdw" firstAttribute="leading" secondItem="wqc-0v-xHw" secondAttribute="leading" constant="12" id="FbB-yv-Ptg"/>
+                                            <constraint firstItem="ff9-Rf-J3w" firstAttribute="top" secondItem="q2C-cL-k4g" secondAttribute="bottom" constant="20" id="FeK-99-hYe"/>
                                             <constraint firstItem="tlw-n2-tTF" firstAttribute="leading" secondItem="cjc-dr-WmB" secondAttribute="leading" constant="25" id="LO9-I8-czQ"/>
                                             <constraint firstItem="m3p-Hp-dM3" firstAttribute="leading" secondItem="rtv-SE-3qo" secondAttribute="trailing" constant="20" id="Mxz-yt-JC7"/>
                                             <constraint firstAttribute="trailing" secondItem="m3p-Hp-dM3" secondAttribute="trailing" constant="20" id="NXz-Kg-fLU"/>
+                                            <constraint firstItem="Kjl-96-Rdw" firstAttribute="bottom" secondItem="wqc-0v-xHw" secondAttribute="bottom" id="P6g-H0-ERy"/>
                                             <constraint firstItem="f8Q-7S-x2I" firstAttribute="top" secondItem="2LT-qg-a07" secondAttribute="bottom" constant="15" id="Pb4-Q5-fZi"/>
+                                            <constraint firstItem="Kjl-96-Rdw" firstAttribute="top" secondItem="wqc-0v-xHw" secondAttribute="top" id="SAZ-hA-8gr"/>
                                             <constraint firstItem="wqc-0v-xHw" firstAttribute="centerX" secondItem="cjc-dr-WmB" secondAttribute="centerX" id="UuT-DQ-Hfk"/>
                                             <constraint firstItem="2LT-qg-a07" firstAttribute="leading" secondItem="cjc-dr-WmB" secondAttribute="leading" constant="25" id="XVb-Tt-Ac4"/>
                                             <constraint firstAttribute="trailing" secondItem="q2C-cL-k4g" secondAttribute="trailing" constant="20" id="a3Z-aU-1DG"/>
@@ -778,9 +805,10 @@
                                             <constraint firstItem="ff9-Rf-J3w" firstAttribute="centerX" secondItem="cjc-dr-WmB" secondAttribute="centerX" id="bPb-Md-RVn"/>
                                             <constraint firstItem="tlw-n2-tTF" firstAttribute="top" secondItem="f8Q-7S-x2I" secondAttribute="bottom" constant="15" id="dOO-JR-bN7"/>
                                             <constraint firstItem="q2C-cL-k4g" firstAttribute="leading" secondItem="cjc-dr-WmB" secondAttribute="leading" constant="25" id="gXf-qt-IQM"/>
+                                            <constraint firstItem="Kjl-96-Rdw" firstAttribute="trailing" secondItem="wqc-0v-xHw" secondAttribute="trailing" constant="-103" id="jk2-pS-YJH"/>
                                             <constraint firstItem="rtv-SE-3qo" firstAttribute="leading" secondItem="cjc-dr-WmB" secondAttribute="leading" constant="25" id="t0y-aQ-5Vn"/>
                                             <constraint firstItem="Rc2-5r-Z2t" firstAttribute="top" secondItem="cjc-dr-WmB" secondAttribute="top" constant="28" id="tSf-W0-tTs"/>
-                                            <constraint firstItem="wqc-0v-xHw" firstAttribute="top" secondItem="ff9-Rf-J3w" secondAttribute="bottom" constant="16" id="wS6-cJ-RPk"/>
+                                            <constraint firstItem="wqc-0v-xHw" firstAttribute="top" secondItem="ff9-Rf-J3w" secondAttribute="bottom" constant="15" id="wS6-cJ-RPk"/>
                                             <constraint firstItem="f8Q-7S-x2I" firstAttribute="leading" secondItem="cjc-dr-WmB" secondAttribute="leading" constant="25" id="yFV-dU-SpJ"/>
                                         </constraints>
                                     </view>
@@ -829,6 +857,7 @@
         <image name="211602-64" width="32" height="32"/>
         <image name="Icon - Mail" width="24" height="18"/>
         <image name="Icon - Password" width="22" height="32"/>
+        <image name="facebook" width="64" height="64"/>
         <image name="icon User" width="100" height="100"/>
         <image name="old-typical-phone (2)" width="512" height="512"/>
         <image name="street-map (1)" width="512" height="512"/>

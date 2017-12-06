@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController, AuthServiceDelegate,UIViewControllerTransitioningDelegate {
+class LoginViewController: UIViewController, AuthServiceDelegate, UIViewControllerTransitioningDelegate {
     
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
