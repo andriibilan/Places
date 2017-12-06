@@ -10,12 +10,12 @@ import UIKit
 
 class ListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,OutputInterface {
     let ListDynamic = Dynamic()
- 
+    
     func updateData() {
-
-
+        
+        
         googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
-
+            
             
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
@@ -28,7 +28,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         })
     }
     
-	
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sortingButton: UIButton! {
         didSet {
@@ -78,37 +78,37 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
             [button] in button.transform = CGAffineTransform.identity
             }, completion: nil)
     }
-
-	public var places:[Place] = []
-	private var openPlaces: [Place] = []
-	private var filterOpenOnly = false
-	private var sortingByName = true
-	private var task: URLSessionDownloadTask!
-	private var session: URLSession!
-	private var cache:NSCache<AnyObject, AnyObject>!
-	private var googlePlacesManager: GooglePlacesManager!
-	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		tableView.delegate = self
-		tableView.dataSource = self
-		
-		tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 148, right: 0)
-		tableView.tableFooterView = UIView()
-		//tableView.estimatedRowHeight = 120
-		//tableView.rowHeight = UITableViewAutomaticDimension
+    
+    public var places:[Place] = []
+    private var openPlaces: [Place] = []
+    private var filterOpenOnly = false
+    private var sortingByName = true
+    private var task: URLSessionDownloadTask!
+    private var session: URLSession!
+    private var cache:NSCache<AnyObject, AnyObject>!
+    private var googlePlacesManager: GooglePlacesManager!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
         
-		session = URLSession.shared
-		task 	= URLSessionDownloadTask()
-		cache	= NSCache()
-		
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 148, right: 0)
+        tableView.tableFooterView = UIView()
+        //tableView.estimatedRowHeight = 120
+        //tableView.rowHeight = UITableViewAutomaticDimension
+        
+        session = URLSession.shared
+        task 	= URLSessionDownloadTask()
+        cache	= NSCache()
+        
         ListDynamic.dynamicSort(button: sortingButton, parView: self.view)
         ListDynamic.dynamicFilterList(filter: filteringButton, parView: self.view)
-
-
+        
+        
         googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
-
-
+            
+            
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
@@ -137,13 +137,15 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
-	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return filterOpenOnly ? openPlaces.count : places.count
-      
-	}
-
+    
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filterOpenOnly ? openPlaces.count : places.count
+        
+    }
+    
     //MARK:- TableView Delegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
@@ -181,7 +183,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         }
         return UITableViewCell()
     }
-
+    
     
     func typePlaces (types: [PlaceType]) -> String {
         var stringType = ""
@@ -193,34 +195,34 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         return stringType
     }
     
-	//MARK: - Fade in effect
-	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		// Define the initial state (Before the animation)
-		//cell.alpha = 0
-		
-		// Define the final state (After the animation)
-		//UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
-	}
-	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-	}
-
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "ShowDetailPlace" {
-			if let destVC = segue.destination as? DetailPlaceViewController {
-				let selectedRow = (tableView.indexPathForSelectedRow as NSIndexPath?)?.row ?? 0
-				let place = (filterOpenOnly) ? openPlaces[selectedRow] : places[selectedRow]
-				destVC.place = place
-			}
-		}
-	}
-    
-    
-}
-extension Array {
-    subscript (safe index: Int) -> Element? {
-        return indices ~= index ? self[index] : nil
+    //MARK: - Fade in effect
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // Define the initial state (Before the animation)
+        //cell.alpha = 0
+        
+        // Define the final state (After the animation)
+        //UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let place = (filterOpenOnly) ? openPlaces[indexPath.row] : places[indexPath.row]
+        googlePlacesManager.getPhotos(ofPlace: place){ filledPlace, errorMessage in
+            DispatchQueue.main.async {
+                print(errorMessage ?? "")
+                self.performSegue(withIdentifier: "ShowDetailPlace", sender: filledPlace)
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetailPlace" {
+            if let d = segue.destination as? DetailPlaceViewController{
+                if let selectedPlace = sender as? Place{
+                    d.place = selectedPlace
+                }
+            }
+        }
+    }
+    
+    
 }
-

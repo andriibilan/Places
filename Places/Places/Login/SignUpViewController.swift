@@ -26,14 +26,17 @@ class SignUpViewController: UIViewController, AuthServiceDelegate ,UIViewControl
     private let transition = CustomTransitionAnimator()
     var authService = AuthService()
     var validator = Validator()
-    var activeField: UITextField?
-   
+
+    var dataBaseReference: DatabaseReference! {
+        return Database.database().reference()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         authService.delegate = self
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
         
     }
+    
     @IBAction func facebookLogin(sender: UIButton) {
         let fbLoginManager = FBSDKLoginManager()
         fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
@@ -48,6 +51,9 @@ class SignUpViewController: UIViewController, AuthServiceDelegate ,UIViewControl
             }
             
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+//            print("credential = \(credential)")
+            
+            
             
             // Perform login by calling Firebase APIs
             Auth.auth().signIn(with: credential, completion: { (user, error) in
@@ -57,21 +63,52 @@ class SignUpViewController: UIViewController, AuthServiceDelegate ,UIViewControl
                     let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                     alertController.addAction(okayAction)
                     self.present(alertController, animated: true, completion: nil)
-                    
+
                     return
                 }
                 
+                self.fetchProfile(user!)
                 // Present the main view
-                if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "Profile") {
-                    UIApplication.shared.keyWindow?.rootViewController = viewController
-                    self.dismiss(animated: true, completion: nil)
-                }
-                
-            })
+//                if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") {
+//                    UIApplication.shared.keyWindow?.rootViewController = viewController
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC")
+//                        self.present(vc!, animated: true, completion: nil)
+                self.performSegue(withIdentifier: "ShowProfileVC", sender: nil)
+           })
             
         }
+        
     }
     
+    func fetchProfile(_ user: User) {
+        let parameters = ["fields": "email,name, picture"]
+        FBSDKGraphRequest(graphPath: "me", parameters: parameters).start { (connection, result, error) in
+            if error != nil {
+                print("error")
+                return
+            }
+             guard let data = result as? [String:Any] else { return }
+                let email = data["email"] as! String
+                let name = data["name"] as! String
+            self.authService.saveUserInfo(userName: name, email: email, phone: "12345678", password: "12345678", user: user)
+            print(email)
+            print(name)
+           print(result!)
+//            guard let pictureUrl = result as? [String:Any] else { return }
+//                let picture = data["picture"]
+//            let pictureUrl = picture as? [String:Any]
+//                let dataPicture = picture["data"]
+//            guard let urlString = dataPicture as? [String:Any] else { return }
+//            let url = urlString["url"]
+//            print(url)
+
+        
+
+    }
+       
+    }
     @IBOutlet weak var dismissButton: UIButton!{
         didSet{
             dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2

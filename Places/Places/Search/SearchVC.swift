@@ -15,7 +15,7 @@
 
 import UIKit
 
-class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
+class SearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate,  UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,7 +60,7 @@ class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var tableViewForPlaces: UITableViewExplicit!
 
 	
-	@IBOutlet weak var dismissButton: UIButton!{
+	@IBOutlet weak var dismissButton: UIButton! {
 		didSet{
 			dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
 			dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
@@ -73,25 +73,12 @@ class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
 		performSegue(withIdentifier: "exitFromSearch", sender: self)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowDetailPlace" {
-            let selectedRow = tableViewForPlaces.indexPathForSelectedRow?.row
-            let d = segue.destination as? DetailPlaceViewController
-            
-            let selectedPlace = filteredPlaces[selectedRow! - 1]
-            googlePlacesManager.getAdditionalData(ofPlace: selectedPlace) {filledPlace, errorMessage in
-                if let errorMessage = errorMessage{
-                    print(errorMessage)
-                }
-                d?.place = filledPlace
-            }
-        }
-    }
 }
 
 
 extension SearchVC{
     // MARK: - TableView DataSource methods
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableViewForPlaces.numberOfViewedRows = 0
         
@@ -140,8 +127,17 @@ extension SearchVC{
         }
     }
     
+    // MARK: - TableView Delegate methods
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowDetailPlace", sender: filteredPlaces[indexPath.row - 1])
+        let place = filteredPlaces[indexPath.row]
+
+        googlePlacesManager.getPhotos(ofPlace: place) {filledPlace, errorMessage in
+            DispatchQueue.main.async {
+                print(errorMessage ?? "")
+                self.performSegue(withIdentifier: "ShowDetailPlace", sender: filledPlace)
+            }
+        }
     }
     
     // MARK: - SearchBar Delegate methods
@@ -166,6 +162,17 @@ extension SearchVC{
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.view.endEditing(true)
+    }
+    
+    // MARK: - Prepare for Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetailPlace" {
+            if let detailVC = segue.destination as? DetailPlaceViewController {
+                if let selectedPlace = sender as? Place {
+                    detailVC.place = selectedPlace
+                }
+            }
+        }
     }
     
 }
