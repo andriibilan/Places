@@ -29,6 +29,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         case 0:
             mapView.isHidden = false
             listView.isHidden = true
+            map?.updateData()
         case 1:
             mapView.isHidden = true
             listView.isHidden = false
