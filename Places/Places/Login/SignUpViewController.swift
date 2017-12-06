@@ -58,7 +58,7 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
     }
     
     func fetchProfile() {
-        let parameters = ["fields": "email, name, picture"]
+        let parameters = ["fields": "email, name, picture.height(200).width(200)"]
         FBSDKGraphRequest(graphPath: "me", parameters: parameters).start { (connection, result, error) in
             if error != nil {
                 print("error")
@@ -69,7 +69,7 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
             self.emailTextField.text = userInfo["email"] as? String
             self.firstNameTextField.text = userInfo["name"] as? String
             if let imageURL = ((userInfo["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
-                
+                print("url - \(imageURL)")
                 let profileImageURL = imageURL
                 
                 let url = URL(string: profileImageURL)
@@ -140,6 +140,7 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
             return
         }
         let pictureData = UIImageJPEGRepresentation(self.profileImage.image!, 0.20)
+        loadVC.customActivityIndicatory(self.view, startAnimate: true)
         authService.createUser(userName: firstNameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, password: passwordTextField.text!, pictureData: pictureData!)
     }
     
