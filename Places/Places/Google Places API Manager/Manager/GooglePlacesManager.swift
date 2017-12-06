@@ -21,8 +21,8 @@ class GooglePlacesManager{
     var currentLocation = Location.currentLocation
     var filters = [PlaceType]()
     
-    var allPlacesLoaded = false
     var loadedPlaceTypes = 0
+    var loadedPhotos = 0
     
     // MARK: - Init
     /// Initialization of nearby/byName search

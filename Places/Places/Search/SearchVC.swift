@@ -106,6 +106,7 @@ extension SearchVC{
             case false?:
                 cell.openClosedImageView.image = #imageLiteral(resourceName: "closed-sign")
             case nil:
+                // remove this questionmark !
                 cell.openClosedImageView.image = #imageLiteral(resourceName: "questionMark")
             }
             

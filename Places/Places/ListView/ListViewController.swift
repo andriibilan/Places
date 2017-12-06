@@ -77,14 +77,19 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         listDynamic.dynamicSort(button: sortingButton, parView: self.view)
         listDynamic.dynamicFilterList(filter: filteringButton, parView: self.view)
 
-//        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
-//            if let foundedPlaces = foundedPlaces {
-//                self.places = foundedPlaces
-//                self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-//                DispatchQueue.main.sync {
-//                    self.tableView.reloadData()
+//        googlePlacesManager = GooglePlacesManager(
+//            apiKey: AppDelegate.apiKey,
+//            radius: UserDefaults.standard.integer(forKey: "Radius"),
+//            currentLocation: Location.currentLocation,
+//            filters: MapViewController.checkFilter(filter: filterArray),
+//            completion: { (foundedPlaces, errorMessage) in
+//                if let foundedPlaces = foundedPlaces {
+//                    self.places = foundedPlaces
+//                    self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
+//                    DispatchQueue.main.sync {
+//                        self.tableView.reloadData()
+//                    }
 //                }
-//            }
 //        })
 
     }
@@ -106,17 +111,22 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
    
     func updateData() {
         loadVC.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
-        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
-            if let foundedPlaces = foundedPlaces {
-                self.places = foundedPlaces
-                self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-                if self.googlePlacesManager.allPlacesLoaded {
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    loadVC.customActivityIndicatory((self.view)!, startAnimate: false).stopAnimating()
+        
+        googlePlacesManager = GooglePlacesManager(
+            apiKey: AppDelegate.apiKey,
+            radius: UserDefaults.standard.integer(forKey: "Radius"),
+            currentLocation: pressCoordinate,
+            filters: MapViewController.checkFilter(filter: filterArray),
+            completion: { (foundedPlaces, errorMessage) in
+                if let foundedPlaces = foundedPlaces {
+                    self.places = foundedPlaces
+                    self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        loadVC.customActivityIndicatory((self.view)!, startAnimate: false).stopAnimating()
                     }
                 }
-            }
         })
     }
   

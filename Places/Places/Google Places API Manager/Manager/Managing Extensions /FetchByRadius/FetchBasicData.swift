@@ -17,7 +17,6 @@ extension GooglePlacesManager{
     /// loaded data: name, isOpen, location, icon, placeId, types, rating, photo, straightDistance
     func fetchPlaces(completion: @escaping ([Place]?, String?) -> ()){
         foundedPlaces.removeAll()
-        allPlacesLoaded = false
         loadedPlaceTypes = 0
         
         let jsonPlacesInRadiusRequest = """
@@ -103,9 +102,9 @@ extension GooglePlacesManager{
                         self?.foundedPlaces.append(createdPlace)
                 }
                 self?.loadedPlaceTypes += 1
-                self?.allPlacesLoaded = self?.loadedPlaceTypes == self?.filters.count
                 
-                if self?.allPlacesLoaded == true{
+                // if all places loaded
+                if self?.loadedPlaceTypes == self?.filters.count{
                     if let errorMessage = dictionary["error_message"] as? String{
                         completion(self?.foundedPlaces, "Basic Data gives: " + errorMessage)
                     } else{
@@ -165,7 +164,6 @@ extension GooglePlacesManager{
                                 self?.foundedPlaces.append(createdPlace)
                             }
                     }
-                    self?.allPlacesLoaded = true
                     completion(self?.foundedPlaces, nil)
                 } catch let jsonError{
                     print("\n\tcatched in \"fetchPlaces\": ")
