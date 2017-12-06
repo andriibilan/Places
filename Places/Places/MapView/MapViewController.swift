@@ -14,12 +14,14 @@ import Firebase
 var pressCoordinate = Location(latitude: 49.841856, longitude: 24.031530)
 var filterArray = [PlaceType]()
 
+
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
+    
+    let segueToAddScreen = "addPlace"
     
     func updateData() {
       loadVC.customActivityIndicatory(self.view, startAnimate: true)
       let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
-
 
         googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
@@ -145,8 +147,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         actionSheet.addAction(UIAlertAction.init(title: "Add new place", style: UIAlertActionStyle.default, handler: { (action) in
+            pressCoordinate = Location(latitude: location.latitude, longitude: location.longitude )
             if Auth.auth().currentUser != nil {
-                self.performSegue(withIdentifier: "addPlace", sender: nil)//add coords
+                self.performSegue(withIdentifier: self.segueToAddScreen, sender: pressCoordinate)
             }
             else {
                 self.performSegue(withIdentifier: "toLogin", sender: nil)
@@ -165,7 +168,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             let loc = CLLocation(latitude: location.latitude as CLLocationDegrees, longitude: location.longitude as CLLocationDegrees)
             pressCoordinate = Location(latitude: location.latitude, longitude: location.longitude )
-
+      
 
 
 
@@ -240,7 +243,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 
      locationManagerConfigurate()
-
 
         googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
@@ -493,6 +495,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if segue.identifier == "detailVC" {
             let d = segue.destination as? DetailPlaceViewController
             d?.place = sender as! Place
+        }
+        if segue.identifier == segueToAddScreen {
+            let addScreen = segue.destination as? AddNewPlaceController
+            addScreen?.location = pressCoordinate
         }
     }
 

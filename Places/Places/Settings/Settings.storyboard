@@ -147,7 +147,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ey9-bC-YIM">
-                                                    <rect key="frame" x="210.5" y="7" width="154.5" height="30"/>
+                                                    <rect key="frame" x="207.5" y="7" width="157" height="30"/>
                                                     <segments>
                                                         <segment title="Standart"/>
                                                         <segment title="Satellite"/>
@@ -164,7 +164,7 @@
                                                 <constraint firstItem="RSE-J6-EfA" firstAttribute="top" secondItem="0iX-PW-2bc" secondAttribute="top" constant="6" id="9vG-Xu-eh1"/>
                                                 <constraint firstItem="RSE-J6-EfA" firstAttribute="leading" secondItem="0iX-PW-2bc" secondAttribute="leading" constant="16" id="FdP-dV-exL"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ey9-bC-YIM" secondAttribute="trailing" constant="10" id="Hqf-4h-IBC"/>
-                                                <constraint firstItem="Ey9-bC-YIM" firstAttribute="leading" secondItem="h54-He-pP6" secondAttribute="trailing" constant="18" id="K8l-9k-7Yb"/>
+                                                <constraint firstItem="Ey9-bC-YIM" firstAttribute="leading" secondItem="h54-He-pP6" secondAttribute="trailing" constant="15" id="K8l-9k-7Yb"/>
                                                 <constraint firstItem="Ey9-bC-YIM" firstAttribute="top" secondItem="0iX-PW-2bc" secondAttribute="top" constant="7" id="LCj-TH-sqQ"/>
                                                 <constraint firstAttribute="bottom" secondItem="RSE-J6-EfA" secondAttribute="bottom" constant="5.5" id="LZy-nP-zzK"/>
                                                 <constraint firstItem="h54-He-pP6" firstAttribute="leading" secondItem="RSE-J6-EfA" secondAttribute="trailing" constant="9" id="Wvk-ws-Rlr"/>
