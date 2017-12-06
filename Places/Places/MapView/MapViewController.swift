@@ -156,7 +156,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBAction func showSideMenu(_ sender: UIButton) {
         if isSideMenuHidden {
             sideMenuConstraint.constant = 0
-            UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
                 if sender.transform == .identity {
                     sender.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
                     sender.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6784313725, blue: 0.5490196078, alpha: 1)

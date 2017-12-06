@@ -75,16 +75,6 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         tableView.tableFooterView = UIView()
         listDynamic.dynamicSort(button: sortingButton, parView: self.view)
         listDynamic.dynamicFilterList(filter: filteringButton, parView: self.view)
-
-//        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
-//            if let foundedPlaces = foundedPlaces {
-//                self.places = foundedPlaces
-//                self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-//                DispatchQueue.main.sync {
-//                    self.tableView.reloadData()
-//                }
-//            }
-//        })
     }
     
     private func refillOpenPlaces() {
@@ -105,11 +95,16 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
     func updateData() {
         loadVC.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
         googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+            if errorMessage != nil {
+                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+                DispatchQueue.main.sync {
+                    loadVC.customActivityIndicatory(self.view, startAnimate: false).stopAnimating()
+                }}
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
                 if self.googlePlacesManager.allPlacesLoaded {
-                DispatchQueue.main.async {
+                DispatchQueue.main.sync {
                     self.tableView.reloadData()
                     loadVC.customActivityIndicatory((self.view)!, startAnimate: false).stopAnimating()
                     }
@@ -118,9 +113,6 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         })
     }
   
-    func sorting(sort: [Place]) -> [Place] {
-      return  sort.sorted(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-    }
     
     //MARK:- TableView DataSource
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -202,8 +194,8 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
 
  
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         let place = (filterOpenOnly) ? openPlaces[indexPath.row] : places[indexPath.row]
-            googlePlacesManager.getPhotos(ofPlace: place){ filledPlace, errorMessage in
+        let place = (filterOpenOnly) ? openPlaces[safe: indexPath.row] : places[safe: indexPath.row]
+        googlePlacesManager.getPhotos(ofPlace: place!){ filledPlace, errorMessage in
                 DispatchQueue.main.async {
                     print(errorMessage ?? "")
                     self.performSegue(withIdentifier: "ShowDetailPlace", sender: filledPlace)
