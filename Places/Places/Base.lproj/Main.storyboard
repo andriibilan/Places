@@ -439,7 +439,6 @@
                                             <outlet property="openClosedImageView" destination="p6s-8p-6vs" id="cLd-1s-tZc"/>
                                             <outlet property="thumbnailImageView" destination="qUf-PE-xaD" id="zko-YY-fOK"/>
                                             <outlet property="type" destination="gmi-NC-vDE" id="sVj-e6-b4q"/>
-                                            <segue destination="w39-4y-S2s" kind="show" identifier="ShowDetailPlace" id="NOk-4w-6xs"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -489,6 +488,7 @@
                         <outlet property="filteringButton" destination="3A9-lK-kEv" id="eqZ-9g-GRU"/>
                         <outlet property="sortingButton" destination="Njk-02-aK0" id="QIa-XN-HJE"/>
                         <outlet property="tableView" destination="PgG-5D-Wbu" id="04r-aZ-3m8"/>
+                        <segue destination="w39-4y-S2s" kind="presentation" identifier="ShowDetailPlace" id="h6x-wR-fUd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QTz-Ho-Zm2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -532,7 +532,7 @@
         <image name="filter" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NOk-4w-6xs"/>
+        <segue reference="h6x-wR-fUd"/>
         <segue reference="4YD-0r-gCP"/>
     </inferredMetricsTieBreakers>
 </document>
