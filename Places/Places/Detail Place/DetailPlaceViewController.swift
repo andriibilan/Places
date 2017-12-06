@@ -43,7 +43,11 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
    
     @IBOutlet weak var heightConstaintForReviewTable: NSLayoutConstraint!
-
+    
+    @IBOutlet weak var heightProportionalConstrainForPhotoColelctionView: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightEqualConstraintForCollectionView: NSLayoutConstraint!
+    
 	var place:Place!
 
    
@@ -99,12 +103,15 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         feedbackTableView.reloadData()
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
+        //
+ //       heightConstrainForPhotoColelctionView.constant = PhotoCollectionView.contentSize.height
     }
     
   
     
     override func viewDidAppear(_ animated: Bool) {
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
+        //
     }
     
     @IBAction func openWebsite(_ sender: UIButton) {
@@ -169,7 +176,10 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         print("photos counter: \(place.photos.count)")
-
+        if place.photos.count == 0{
+            heightProportionalConstrainForPhotoColelctionView.isActive = false
+            heightEqualConstraintForCollectionView.isActive = true
+        }
         return place.photos.count
     }
     
@@ -249,38 +259,9 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = place?.name
         mapItem.openInMaps(launchOptions: options)
-        
-        //
-        //
-        //
- //       let startLocation = pressCoordinate
- //       let endLocation = Location(latitude: (place.location?.latitude)!, longitude: (place.location?.longitude)!)
-        // MAP
-        
-  //      googlePlacesManager.getRealDistance(toPlace: place, completion: {(place,str) in
-            
- //       })
+      
         
     }
-    
-    
-    /*
-    func drawPath(startlocation: CLLocation, endLocation: CLLocation){
-        let origin = "\(startlocation.coordinate.latitude),\(startlocation.coordinate.longitude)"
-        let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
-       
-    }
-    
-    private var googlePlacesManager: GooglePlacesManager!
-    
-    */
-    
-    
-    
-    
-    
-    
-    
     
     
 }//end class

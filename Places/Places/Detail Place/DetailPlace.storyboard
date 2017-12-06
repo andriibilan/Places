@@ -109,6 +109,9 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FYY-uH-e9T">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="245"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="bqE-C3-cef"/>
+                                        </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="c5w-TR-iRT">
                                             <size key="itemSize" width="138" height="140"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -139,6 +142,11 @@
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="bqE-C3-cef"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <outlet property="dataSource" destination="Je1-fC-mgn" id="tfJ-ai-XfQ"/>
                                             <outlet property="delegate" destination="Je1-fC-mgn" id="mgl-QL-9xh"/>
@@ -622,6 +630,8 @@
                         <outlet property="dismissButton" destination="C9L-rH-oF0" id="1yN-6i-huU"/>
                         <outlet property="feedbackTableView" destination="OeB-a3-OS7" id="uR8-cR-CFT"/>
                         <outlet property="heightConstaintForReviewTable" destination="dJ7-X1-pyT" id="U81-GH-al6"/>
+                        <outlet property="heightEqualConstraintForCollectionView" destination="bqE-C3-cef" id="EB9-NA-JfA"/>
+                        <outlet property="heightProportionalConstrainForPhotoColelctionView" destination="xMI-oQ-gAX" id="9WQ-mC-daL"/>
                         <outlet property="placeAddress" destination="yRl-Tm-9Tw" id="MLB-tM-mIC"/>
                         <outlet property="placeHours" destination="f43-lS-oNb" id="uFp-SH-NYf"/>
                         <outlet property="placeName" destination="TEx-j0-9j8" id="kax-Yr-hFZ"/>
