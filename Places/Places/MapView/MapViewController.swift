@@ -119,7 +119,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }, completion: nil)
 
             updateData()
-            preventAnimation.removeAll()
+            
             
         }
         isSideMenuHidden = !isSideMenuHidden
@@ -547,13 +547,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         print(preventAnimation.count)
+       
         // first version
         //cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
         //print(indexPath.row)
         //second version
-        if !preventAnimation.contains(indexPath) {
+        
+
+       // if !preventAnimation.contains(indexPath) {
             cell.alpha = 0
-            preventAnimation.insert(indexPath)
+            //preventAnimation.insert(indexPath)
             DispatchQueue.main.async {
                 cell.layer.transform = CATransform3DScale(CATransform3DIdentity, -1, 1, 1)
                 UIView.animate(withDuration: 0.7) {
@@ -561,8 +564,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     cell.layer.transform = CATransform3DIdentity
                 }
             }
-            
-        }
+
+        
     }
     
    static func checkFilter(filter: [PlaceType]) -> [PlaceType] {
@@ -605,12 +608,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
          self.lastContentOffset = scrollView.contentOffset.y
-        //print(lastContentOffset)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
         if (self.lastContentOffset < scrollView.contentOffset.y) {
             print("Move to botton")
+           
+            
             // moved to top
+//            var x = 203.0
+//            if lastContentOffset >= CGFloat(x) {
+//                anim = false
+//                print("VAAASSASASDAS")
+//            }
+          
         } else if (self.lastContentOffset > scrollView.contentOffset.y) {
               print("Move to top")
             
@@ -618,8 +629,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         } else {
             // didn't move
         }
+       
     }
     
+  
     
     func addRadiusCircle(location: CLLocation){
 
