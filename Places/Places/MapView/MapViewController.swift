@@ -22,7 +22,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func updateData() {
       loadVC.customActivityIndicatory(self.view, startAnimate: true)
       let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
-
+/*
         googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
 
             if errorMessage != nil {
@@ -48,8 +48,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 }
             }
         }
-        )
-//        locationManagerConfigurate()
+        )*/
+        locationManagerConfigurate()
         changeMapType()
 
     }
@@ -498,7 +498,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         if segue.identifier == segueToAddScreen {
             let addScreen = segue.destination as? AddNewPlaceController
-            addScreen?.location = pressCoordinate
+            addScreen?.newLocation = pressCoordinate
         }
     }
 
