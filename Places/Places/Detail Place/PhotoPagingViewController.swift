@@ -8,13 +8,18 @@
 
 import UIKit
 
-class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource {
+class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        return CGSize(width: currentPhotoCollectionView.frame.width, height: currentPhotoCollectionView.frame.height)
+    }
+    
+   
 
     @IBOutlet weak var currentPhotoCollectionView: UICollectionView!
     
-    @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var dismissButtonOutlet: UIButtonExplicit!
     
     
     
@@ -27,14 +32,15 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionViewFlowLayout.itemSize = currentPhotoCollectionView.frame.size
-        print(currentPhotoCollectionView.frame.width)
-        print(currentPhotoCollectionView.frame.size)
+        dismissButtonOutlet.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+        dismissButtonOutlet.backgroundColor = #colorLiteral(red: 0.8338858485, green: 0.2595152557, blue: 0.3878593445, alpha: 1)
         
         
         
         currentPhotoCollectionView.delegate = self
         currentPhotoCollectionView.dataSource = self
+        
+        
     }
     
 
@@ -49,10 +55,9 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell
+        
         cell?.photoImageView?.image = photoArray[indexPath.row]
-        print("image: \(cell?.photoImageView?.frame.width)")
-       
-
+        
         return cell!
     }
     
@@ -62,28 +67,7 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
         dismiss(animated: true, completion: nil)
     }
     
-    
-    override func accessibilityScroll(_ direction: UIAccessibilityScrollDirection) -> Bool {
-        print("accessibility")
-        if direction == UIAccessibilityScrollDirection.right{
-            indexPath.row += 1
-        }else{
-            indexPath.row -= 1
-        }
-        currentPhotoCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
-        return true
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.effectiveUserInterfaceLayoutDirection == .rightToLeft{
-            print("right")
-        }else if scrollView.effectiveUserInterfaceLayoutDirection == .leftToRight {
-            print("left")
-        }else{
-            print("WHAT?")
-        }
-    }
-    
+   
    
     
 }
