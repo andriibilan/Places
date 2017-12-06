@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate {
     
@@ -34,6 +35,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var dismissButton: UIButtonExplicit!
     
+    @IBOutlet weak var placeTypeIcon: UIImageView!
     
     //
     let testPlace = TestPlace()
@@ -75,6 +77,8 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         placeWebsite?.text = place.website
         
+        placeTypeIcon?.image = place.icon
+        
         switch place.isOpen{
         case true?:  placeHours?.text = "Open"
         case false?:  placeHours?.text = "Close"
@@ -114,6 +118,11 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     //TODO: Check it on device
     @IBAction func openPhone(_ sender: UIButton) {
         if let phone = placePhone?.text{
+           /* for index in 0...phone.count - 1{
+                if phone.re == " "{
+                    phone.remove(at: index)
+                }
+            }*/
             let phoneURL = NSURL(string: "telprompt://\(phone)")! as URL
             UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
         }
@@ -242,20 +251,32 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         */
         return cell
     }
-}
-/*
-func loadImageFromPath(path: String) -> UIImage? {
-    let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
-    let imageURL = URL(fileURLWithPath: documentDirectoryPath.appendingPathComponent(path))
-    do {
-        let imageData = try Data(contentsOf: imageURL)
-        return UIImage(data: imageData)
-    } catch {
-        print(error.localizedDescription)
+    
+    
+    @IBAction func createPathBetweenTwoLocations(_ sender: UIButton) {
+        let latitude : CLLocationDegrees = 39.048625
+        let longitude : CLLocationDegrees = -120.981227
+        
+        let regionDistance : CLLocationDistance = 100;
+       
+      //  let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let coordinates = CLLocationCoordinate2DMake((place.location?.latitude)!, (place.location?.longitude)!)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        
+        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+        
+        let placemark = MKPlacemark(coordinate: coordinates)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = "Current"
+        mapItem.openInMaps(launchOptions: options)
+        
+        
+        
+        
     }
-    return nil
+    
 }
-*/
+
 func loadImageFromPath(path: String) -> UIImage? {
     if let url = URL(string: path){
         if let urlContents = try? Data(contentsOf: url){

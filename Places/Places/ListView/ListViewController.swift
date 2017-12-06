@@ -9,7 +9,7 @@
 import UIKit
 
 class ListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,OutputInterface {
-    
+
     let listDynamic = Dynamic()
     public var places:[Place] = []
     private var openPlaces: [Place] = []
@@ -120,7 +120,6 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
   
     func sorting(sort: [Place]) -> [Place] {
       return  sort.sorted(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-    
     }
     
     //MARK:- TableView DataSource
@@ -128,10 +127,10 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filterOpenOnly ? openPlaces.count : places.count
-    }
-    
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return filterOpenOnly ? openPlaces.count : places.count
+	}
+
     //MARK:- TableView Delegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
@@ -176,9 +175,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         //UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
+
     
     func typePlaces (types: [PlaceType]) -> String {
         var stringType = ""
@@ -189,6 +186,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         stringType.removeLast()
         return stringType
     }
+
 
     func updateDistance(distance: Int) -> String {
         if UserDefaults.standard.bool(forKey: "distanceIskm") == true {
@@ -201,16 +199,26 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
             return "\((Double(distance).miles).rounded(toPlaces: 2)) ml."
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowDetailPlace" {
-            if let destVC = segue.destination as? DetailPlaceViewController {
-                let selectedRow = (tableView.indexPathForSelectedRow as NSIndexPath?)?.row ?? 0
-                let place = (filterOpenOnly) ? openPlaces[selectedRow] : places[selectedRow]
-                destVC.place = place
+
+ 
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         let place = (filterOpenOnly) ? openPlaces[indexPath.row] : places[indexPath.row]
+            googlePlacesManager.getPhotos(ofPlace: place){ filledPlace, errorMessage in
+                DispatchQueue.main.async {
+                    print(errorMessage ?? "")
+                    self.performSegue(withIdentifier: "ShowDetailPlace", sender: filledPlace)
+                }
             }
-        }
-    }
+	}
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "ShowDetailPlace" {
+            let d = segue.destination as? DetailPlaceViewController
+            d?.place = sender as! Place
+		}
+	}
+
+    
 }
 
 extension Array {

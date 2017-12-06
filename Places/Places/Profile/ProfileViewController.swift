@@ -78,12 +78,9 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
         headerImageView?.image = UIImage(named: "lviv")
         let blurEffect = UIBlurEffect(style: .light)
         blurEffectView = UIVisualEffectView(effect: blurEffect)
-        //        blurEffectView?.frame = view.bounds
-        //        headerBlurImageView?.image = UIImage(named: "header_bg")?.blurredImage(withRadius: 10, iterations: 20, tintColor: UIColor.clear)
         headerBlurImageView?.contentMode = UIViewContentMode.scaleAspectFill
         headerBlurImageView?.alpha = 0.0
         header.insertSubview(blurEffectView!, belowSubview: headerLabel)
-      
         header.clipsToBounds = true
     }
     
@@ -137,9 +134,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
                 
                 if Auth.auth().currentUser == nil {
                     performSegue(withIdentifier: "showLoginAfterLogOut", sender: self)
-//                      performSegue(withIdentifier: "showLoginStoryboard", sender: self)
-//                    let profileVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
-//                    self.present(profileVC, animated: true, completion: nil)
+
                 }
             }
         }
@@ -152,9 +147,25 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    //MARK:- Custom Transition
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .present
+        transition.startingPoint = dismissButton.center
+        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        
+        return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .dismiss
+        transition.startingPoint = dismissButton.center
+        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        
+        return transition
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showLoginStoryboard" {
+        if segue.identifier == "showLoginAfterLogOut" {
             let secondVC = segue.destination as! LoginViewController
             secondVC.transitioningDelegate = self
             secondVC.modalPresentationStyle = .custom
