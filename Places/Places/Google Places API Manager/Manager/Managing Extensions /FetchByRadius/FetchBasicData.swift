@@ -26,17 +26,32 @@ extension GooglePlacesManager{
         radius=\(radius)&
         """
         
-        for filter in filters{
-            let requestForCertainType = jsonPlacesInRadiusRequest +
-            "type=\(filter.rawValue)&" +
+        if filters.isEmpty{
+            let requestForAllPlaces = jsonPlacesInRadiusRequest +
             "key=\(apiKey)"
             
-            print("\nPlaces in Radius: " + requestForCertainType)
+            print("\nPlaces in Radius: " + requestForAllPlaces)
             
-            if let url = URL(string: requestForCertainType){
+            if let url = URL(string: requestForAllPlaces){
                 getBasicData(from: url, completion: completion)
             } else{
                 print("\nerror converting json \"Places in Radius\" request to URL")
+            }
+        } else{
+            for filter in filters{
+                let requestForCertainType = jsonPlacesInRadiusRequest +
+                """
+                type=\(filter.rawValue)&\
+                key=\(apiKey)
+                """
+                
+                print("\nPlaces in Radius: " + requestForCertainType)
+                
+                if let url = URL(string: requestForCertainType){
+                    getBasicData(from: url, completion: completion)
+                } else{
+                    print("\nerror converting json \"Places in Radius\" request to URL")
+                }
             }
         }
     }
@@ -90,7 +105,13 @@ extension GooglePlacesManager{
                 self?.loadedPlaceTypes += 1
                 self?.allPlacesLoaded = self?.loadedPlaceTypes == self?.filters.count
                 
-                completion(self?.foundedPlaces, nil)
+                if self?.allPlacesLoaded == true{
+                    if let errorMessage = dictionary["error_message"] as? String{
+                        completion(self?.foundedPlaces, "Basic Data gives: " + errorMessage)
+                    } else{
+                        completion(self?.foundedPlaces, nil)
+                    }
+                }
             } catch let jsonError{
                 print("\n\tcatched in \"fetchPlaces\": ")
                 print(jsonError)
@@ -100,13 +121,11 @@ extension GooglePlacesManager{
     /// Loads basic data: phone number, address, website, working schedule, photo references(used for fetching photos in future), reviews - by place name
     func getBasicData(byName searchText: String, completion: @escaping ([Place]?, String?) -> ()){
         foundedPlaces.removeAll()
-        allPlacesLoaded = false
-        loadedPlaceTypes = 0
         
         let jsonPlacesInRadiusRequest = """
         https://maps.googleapis.com/maps/api/place/nearbysearch/json?\
         location=\(currentLocation.latitude),\(currentLocation.longitude)&\
-        radius=\(radius)&
+        radius=\(radius)&\
         key=\(apiKey)
         """
         print("\nPlaces in Radius: " + jsonPlacesInRadiusRequest)
@@ -146,9 +165,7 @@ extension GooglePlacesManager{
                                 self?.foundedPlaces.append(createdPlace)
                             }
                     }
-                    self?.loadedPlaceTypes += 1
-                    self?.allPlacesLoaded = self?.loadedPlaceTypes == self?.filters.count
-                    
+                    self?.allPlacesLoaded = true
                     completion(self?.foundedPlaces, nil)
                 } catch let jsonError{
                     print("\n\tcatched in \"fetchPlaces\": ")

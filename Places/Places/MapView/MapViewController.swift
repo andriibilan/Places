@@ -478,7 +478,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let g = view.annotation as! CustomAnnotation
             
             if let place = g.place{
-                googlePlacesManager.getPhotos(ofPlace: place){ filledPlace, errorMessage in
+                googlePlacesManager.getPhotos(ofPlace: place) { filledPlace, errorMessage in
                     DispatchQueue.main.async {
                         print(errorMessage ?? "")
                         self.performSegue(withIdentifier: "detailVC", sender: filledPlace)

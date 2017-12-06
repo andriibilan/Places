@@ -21,20 +21,19 @@ class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
         
         googlePlacesManager = GooglePlacesManager(
             apiKey: AppDelegate.apiKey,
-
             radius: UserDefaults.standard.integer(forKey: "Radius"),
             currentLocation: pressCoordinate,
-            filters: MapViewController.checkFilter(filter: filterArray),
-            completion: {_, errorMessage  in
-                if errorMessage != nil{
-                    print("\t\(errorMessage!)")
-                    self.showAlert(message: "Cannot load places! Try it tomorrow ;)")
+            filters: [PlaceType](),
+            completion: {foundedPlaces, errorMessage in
+                if let errorMessage = errorMessage{
+                    self.showAlert(message: errorMessage)
                 }
                 
-                DispatchQueue.main.async { [weak self] in
-                    self?.tableViewForPlaces.reloadData()
+                if let foundedPlaces = foundedPlaces{
+                    self.filteredPlaces = foundedPlaces
                 }
         })
+        
         
         /*
         Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false){ [weak self] _ in
@@ -56,6 +55,7 @@ class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     }
     
     var googlePlacesManager: GooglePlacesManager!
+    var filteredPlaces = [Place]()
     
     @IBOutlet weak var tableViewForPlaces: UITableViewExplicit!
 
@@ -72,6 +72,21 @@ class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
 		
 		performSegue(withIdentifier: "exitFromSearch", sender: self)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetailPlace" {
+            let selectedRow = tableViewForPlaces.indexPathForSelectedRow?.row
+            let d = segue.destination as? DetailPlaceViewController
+            
+            let selectedPlace = filteredPlaces[selectedRow! - 1]
+            googlePlacesManager.getAdditionalData(ofPlace: selectedPlace) {filledPlace, errorMessage in
+                if let errorMessage = errorMessage{
+                    print(errorMessage)
+                }
+                d?.place = filledPlace
+            }
+        }
+    }
 }
 
 
@@ -79,11 +94,14 @@ extension SearchVC{
     // MARK: - TableView DataSource methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableViewForPlaces.numberOfViewedRows = 0
-        return googlePlacesManager.foundedPlaces.count
+        
+        let placesCount = filteredPlaces.count
+        
+        return placesCount == 0 ? 1 : placesCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let places = googlePlacesManager.foundedPlaces
+        let places = filteredPlaces
         
         if places.isEmpty {
             return tableView.dequeueReusableCell(withIdentifier: "No Item", for: indexPath)
@@ -105,7 +123,11 @@ extension SearchVC{
             }
             
             if let distance = place.distance{
-                cell.distance.text = String(describing: distance)
+                if distance >= 1000{
+                    cell.distance.text = String(describing: distance.km)
+                }else {
+                    cell.distance.text = String(describing: distance.m)
+                }
             } else{
                 cell.distance.text = "unknown m."
             }
@@ -118,15 +140,32 @@ extension SearchVC{
         }
     }
     
-
-    /*
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "ShowDetailPlace", sender: filteredPlaces[indexPath.row - 1])
+    }
+    
     // MARK: - SearchBar Delegate methods
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        <#code#>
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(searchPlaces), object: nil)
+        self.perform(#selector(searchPlaces), with: searchText, afterDelay: 1.5)
+    }
+    
+    @objc func searchPlaces(byName placeName: String){
+        filteredPlaces.removeAll()
+        
+        for place in googlePlacesManager.foundedPlaces{
+            if let name = place.name?.lowercased(){
+                if name.hasPrefix(placeName.lowercased()){
+                    filteredPlaces.append(place)
+                }
+            }
+        }
+        
+        tableViewForPlaces.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        <#code#>
-    }*/
+        self.view.endEditing(true)
+    }
     
 }

@@ -33,7 +33,7 @@ class GooglePlacesManager{
         self.filters = filters
         
         if let name = placeName{
-//            getBasicData(byName: <#T##String#>, ofPlaceIndex: <#T##Int?#>, ofPlace: <#T##Place?#>, completion: <#T##(Place?, String?) -> ()#>)
+            getBasicData(byName: name, completion: completion)
         } else{
             fetchPlaces(completion: completion)
         }
