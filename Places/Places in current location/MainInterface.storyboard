@@ -36,26 +36,20 @@
                                                             <rect key="frame" x="66" y="3" width="218" height="63"/>
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meet &amp; Burger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTY-cm-3ta">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="218" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="218" height="31.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" red="0.92018407579999995" green="0.29233893750000001" blue="0.4312838316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vU-Kh-id1">
-                                                                    <rect key="frame" x="0.0" y="21" width="218" height="21"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" red="0.2275260389" green="0.67915946250000003" blue="0.54944974179999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123m" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9u3-zh-EYw">
-                                                                    <rect key="frame" x="0.0" y="42" width="218" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="31.5" width="218" height="31.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Unknown.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="07n-cv-Ixb" customClass="UIImageViewExplicit" customModule="Places">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wind" translatesAutoresizingMaskIntoConstraints="NO" id="07n-cv-Ixb" customClass="UIImageViewExplicit" customModule="Places">
                                                             <rect key="frame" x="5" y="4" width="61" height="61"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="61" id="R2V-gO-g1G"/>
@@ -98,7 +92,6 @@
                                             <outlet property="placeDistance" destination="9u3-zh-EYw" id="w7F-1C-ls0"/>
                                             <outlet property="placeImage" destination="07n-cv-Ixb" id="GRG-hl-oCC"/>
                                             <outlet property="placeName" destination="pTY-cm-3ta" id="rWV-Uo-vwp"/>
-                                            <outlet property="plaseIsOpen" destination="8vU-Kh-id1" id="jfJ-KU-UQm"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -130,6 +123,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Unknown.jpeg" width="275" height="183"/>
+        <image name="wind" width="64" height="64"/>
     </resources>
 </document>

@@ -13,7 +13,6 @@ class TodayTableViewCell: UITableViewCell {
     
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var placeName: UILabel!
-    @IBOutlet weak var plaseIsOpen: UILabel!
     @IBOutlet weak var placeDistance: UILabel!
     
     
