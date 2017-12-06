@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController, AuthServiceDelegate,UIViewControllerTransitioningDelegate {
+class LoginViewController: UIViewController, AuthServiceDelegate, UIViewControllerTransitioningDelegate {
     
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
@@ -53,6 +53,7 @@ class LoginViewController: UIViewController, AuthServiceDelegate,UIViewControlle
             self.present(alertController, animated: true, completion: nil)
             
         } else {
+//            loadVC.customActivityIndicatory(self.view, startAnimate: true)
             authService.logIn(email: email, password: password)
         }
     }
