@@ -51,9 +51,10 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         //
-        dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.3
+        dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.35
         
-        
+        dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+        dismissButton.backgroundColor = #colorLiteral(red: 0.8338858485, green: 0.2595152557, blue: 0.3878593445, alpha: 1)
         //
         testPlace.installDefaultValues()
         //
@@ -175,7 +176,8 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         }else{
             cell?.photoImageView?.image = #imageLiteral(resourceName: "noPhotoIcon")
         }
-        
+        cell?.layer.borderColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        cell?.layer.borderWidth = 5
         return cell!
     }
     
@@ -199,7 +201,11 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         
         cell.labelForReview.text = review.text
+        
+        
         cell.labelForReview.backgroundColor? = UIColor(red:   1.0,green: 0.7, blue:  CGFloat(indexPath.row) / CGFloat(testPlace.forReview.count - 1) * 0.8,alpha: 1.0)
+ 
+        
         cell.labelForReviewer.text = review.author
         cell.labelForReviewer.textColor = UIColor.white
         cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: Double(review.rating!)))
