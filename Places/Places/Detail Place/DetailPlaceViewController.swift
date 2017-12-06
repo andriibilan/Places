@@ -37,10 +37,6 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var placeTypeIcon: UIImageView!
     
-    //
-    let testPlace = TestPlace()
-    //
-    
    
     @IBOutlet weak var heightConstaintForReviewTable: NSLayoutConstraint!
     
@@ -50,7 +46,13 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
 	var place:Place!
 
-   
+    //
+    //
+    @IBOutlet weak var heightProportionalConstraintForWebsite: NSLayoutConstraint!
+    @IBOutlet weak var heightEqualConstantForWebsite: NSLayoutConstraint!
+    //
+    //
+    
    
     
     //TODO: load real image when I'll have choosing place
@@ -58,20 +60,13 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         super.viewDidLoad()
         //
         dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.35
-        
         dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
         dismissButton.backgroundColor = #colorLiteral(red: 0.8338858485, green: 0.2595152557, blue: 0.3878593445, alpha: 1)
         //
- //       testPlace.installDefaultValues()
-        //
         
-        
-        
-        //
         //TODO: height 0 if data is null
         placeName?.text = place.name ?? "Lol"
         placeAddress?.text = place.address ?? "lol"
-        placeAddress?.frame.size.height = 0.0
         
         if let ratting = place.rating{
             let ratting = ratting.rounded(toPlaces: 1)
@@ -79,7 +74,14 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
             placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((placeRattingView?.frame.height)!), currentRate: ratting))
         }
         
-        placeWebsite?.text = place.website
+        
+        
+//        if place.website != "" && place.website != nil{
+//            placeWebsite?.text = place.website
+//        }else{
+//            heightProportionalConstraintForWebsite.isActive = false
+//            heightEqualConstantForWebsite.isActive = true
+//        }
         
         placeTypeIcon?.image = place.icon
         placeTypeIcon?.tintColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
@@ -103,15 +105,22 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         feedbackTableView.reloadData()
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
-        //
- //       heightConstrainForPhotoColelctionView.constant = PhotoCollectionView.contentSize.height
     }
     
-  
+    override func viewWillAppear(_ animated: Bool) {
+        DispatchQueue.main.async {
+            if self.place.website != "" && self.place.website != nil{
+                self.placeWebsite?.text = self.place.website
+            }else{
+                self.heightProportionalConstraintForWebsite.isActive = false
+                self.heightEqualConstantForWebsite.isActive = true
+            }
+        }
+        
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
-        //
     }
     
     @IBAction func openWebsite(_ sender: UIButton) {
@@ -159,9 +168,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         if segue.identifier == "DetailToPhoto"{
             let photoVC = segue.destination as! PhotoPagingViewController
             
-            for temp in testPlace.image{
-                photoVC.photoArray.append(temp)
-            }
+            
             //TODO: REAL IMAGE
             photoVC.photoArray = self.place.photos
             photoVC.indexPath = sender as? IndexPath
@@ -186,15 +193,8 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     //function for filling my cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell
-        
-        
         if place.photos.count != 0{
-
-        //    cell?.photoImageView?.image = testPlace.image[indexPath.row]
-
             cell?.photoImageView?.image = place.photos[indexPath.row]
-        }else{
-            cell?.photoImageView?.image = #imageLiteral(resourceName: "noPhotoIcon")
         }
         cell?.layer.borderColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
         cell?.layer.borderWidth = 5
@@ -211,14 +211,9 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        //let review = testPlace.forReview[indexPath.row]
         let review = place.reviews[indexPath.row]
         
-        
         let cell  = feedbackTableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as! ReviewTableViewCell
-        
         
         //
         cell.layer.cornerRadius = 15
@@ -226,21 +221,23 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         cell.layer.borderWidth = 1.5
         //
         
-        
-        
+
         cell.labelForReview.text = review.text
+        cell.labelForReview.backgroundColor? = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        cell.labelForReview.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
-        
-      //  cell.labelForReview.backgroundColor? = UIColor(red:   1.0,green: 0.7, blue:  CGFloat(indexPath.row) / CGFloat(testPlace.forReview.count - 1) * 0.8,alpha: 1.0)
- cell.labelForReview.backgroundColor? = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
- cell.labelForReview.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         cell.labelForReviewer.text = review.author
         cell.labelForReviewer.textColor = #colorLiteral(red: 0.2275260389, green: 0.6791594625, blue: 0.5494497418, alpha: 1)
+        
         cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: Double(review.rating!)))
+        
         cell.ImageViewForIcon?.image = loadImageFromPath(path: review.profilePhotoUrl!)
 
         return cell
     }
+    
+    
+    
     
     
     @IBAction func createPathBetweenTwoLocations(_ sender: UIButton) {
