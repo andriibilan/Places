@@ -78,6 +78,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         placeWebsite?.text = place.website
         
         placeTypeIcon?.image = place.icon
+        placeTypeIcon?.tintColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
         
         switch place.isOpen{
         case true?:  placeHours?.text = "Open"
@@ -219,36 +220,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         cell.labelForReviewer.textColor = UIColor.white
         cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: Double(review.rating!)))
         cell.ImageViewForIcon?.image = loadImageFromPath(path: review.profilePhotoUrl!)
-        
-        /*
-        cell.labelForReview.text = review.review
-        cell.labelForReview.backgroundColor? = UIColor(red:   1.0,green: 0.7, blue:  CGFloat(indexPath.row) / CGFloat(testPlace.forReview.count - 1) * 0.8,alpha: 1.0)
-        
-        
-        
-        
-        
-        print("cell: \(cell.labelForReview.backgroundColor)")
-        print( "index: \(indexPath.row)")
-        if review.isanonymous {
-            cell.labelForReviewer.text = "Anonymous"
-        }else{
-            cell.labelForReviewer.text = review.reviewer
-        }
-        
-        /*
-        if let icon = place.icon{
-            cell.ImageViewForIcon?.image = icon
-        }else{
-            //TODO: Maybe  width = 0
-            cell.ImageViewForIcon?.isHidden = true
-        }
-        */
-        
-        //TODO: go in class addSubview
-        cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: testPlace.forReview[indexPath.row].reviewRatting!))
-        
-        */
+
         return cell
     }
     
@@ -267,15 +239,43 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         
         let placemark = MKPlacemark(coordinate: coordinates)
         let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = "Current"
+        mapItem.name = place?.name
         mapItem.openInMaps(launchOptions: options)
         
+        //
+        //
+        //
+ //       let startLocation = pressCoordinate
+ //       let endLocation = Location(latitude: (place.location?.latitude)!, longitude: (place.location?.longitude)!)
+        // MAP
         
-        
+  //      googlePlacesManager.getRealDistance(toPlace: place, completion: {(place,str) in
+            
+ //       })
         
     }
     
-}
+    
+    /*
+    func drawPath(startlocation: CLLocation, endLocation: CLLocation){
+        let origin = "\(startlocation.coordinate.latitude),\(startlocation.coordinate.longitude)"
+        let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
+       
+    }
+    
+    private var googlePlacesManager: GooglePlacesManager!
+    
+    */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}//end class
 
 func loadImageFromPath(path: String) -> UIImage? {
     if let url = URL(string: path){
