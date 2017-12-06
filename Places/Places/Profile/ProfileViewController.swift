@@ -65,15 +65,17 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        loadVC.customActivityIndicatory(self.view, startAnimate: true)
         getProfileData()
         profileBackground()
+//        loadVC.customActivityIndicatory(self.view, startAnimate: false)
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         // Header - Blurred Image
-        
+       // loadVC.customActivityIndicatory(self.view, startAnimate: false)
         headerBlurImageView = UIImageView(frame: header.bounds)
         headerImageView?.image = UIImage(named: "lviv")
         let blurEffect = UIBlurEffect(style: .light)
