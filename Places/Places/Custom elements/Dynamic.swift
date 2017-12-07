@@ -12,6 +12,7 @@ import QuartzCore
 class Dynamic {
     var animator: UIDynamicAnimator?
     var panGesture: UIPanGestureRecognizer?
+    
     var snap: UISnapBehavior?
     var snapFilter: UISnapBehavior?
     var snapSort: UISnapBehavior?
@@ -22,7 +23,8 @@ class Dynamic {
     
     var parentView: UIView?
     var listView: UIView?
-
+   
+    
     func dynamicFilter (button: UIButton, parView: UIView) {
         box = button
         parentView = parView
@@ -53,7 +55,7 @@ class Dynamic {
         self.filterD?.addGestureRecognizer(panGesture!)
     }
     
- 
+
     
     @objc func panning(pan: UIPanGestureRecognizer) {
         self.animator!.removeAllBehaviors()
@@ -96,4 +98,5 @@ class Dynamic {
             break
         }
     }
+  
 }

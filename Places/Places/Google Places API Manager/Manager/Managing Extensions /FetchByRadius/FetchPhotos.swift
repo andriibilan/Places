@@ -20,6 +20,8 @@ extension GooglePlacesManager{
                 return
             }
             
+            loadedPlaceTypes = 0
+            
             for photoReference in foundedPlace!.photoReferences{
                 let jsonPhotoRequest = """
                 https://maps.googleapis.com/maps/api/place/photo?\
@@ -52,7 +54,12 @@ extension GooglePlacesManager{
                             if let image = UIImage(data: dataImage){
                                 givenPlace.photos.append(image)
                                 
-                                completion(givenPlace, nil)
+                                self?.loadedPhotos += 1
+                                
+                                // if all photos loaded
+                                if (self?.loadedPhotos) == (givenPlace.photoReferences.count - 1){
+                                    completion(givenPlace, nil)
+                                }
                             }
                         }
                         }.resume()

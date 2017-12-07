@@ -13,7 +13,6 @@ import FirebaseStorage
 class SettingTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
 
-    
     var dataBaseReference: DatabaseReference! {
         return Database.database().reference()
     }
@@ -45,20 +44,20 @@ class SettingTableViewController: UITableViewController {
         }
     }
     
-    func valueForMetres() {
+  private  func valueForMetres() {
         let radiusValue = defaults.integer(forKey: "Radius")
         if radiusValue < 1000 {
             searchRadius.text = "Search Radius: \(radiusValue ) m"
         } else {
-            searchRadius.text = "Search Radius: \( (Double(radiusValue).kilometr).rounded(toPlaces: 2) ) km"
+            searchRadius.text = "Search Radius: \((Double(radiusValue).kilometr).rounded(toPlaces: 2)) km"
         }
     }
     
-    func valueForMiles() {
+    private func valueForMiles() {
         searchRadius.text = "Search Radius: \(String((defaults.double(forKey: "Radius").miles).rounded(toPlaces: 2))) mi"
     }
     
-    func updateSliderValue (distanceIsKms: Bool) {
+   private func updateSliderValue (distanceIsKms: Bool) {
         sliderValue.setValue(Float(defaults.integer(forKey: "Radius")) ,animated: true)
         if distanceIsKms == true {
             distanceSegment.selectedSegmentIndex = 0
@@ -81,7 +80,7 @@ class SettingTableViewController: UITableViewController {
         }
     }
     
-    func updateMapTypeValue(map: Int) {
+    private func updateMapTypeValue(map: Int) {
         switch map {
         case 1:
             mapTypeSegment.selectedSegmentIndex = 0
@@ -92,7 +91,6 @@ class SettingTableViewController: UITableViewController {
         }
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         updateSliderValue(distanceIsKms: defaults.bool(forKey: "distanceIskm"))
@@ -164,7 +162,7 @@ class SettingTableViewController: UITableViewController {
         }
     }
     
-    func changeEmail() {
+   private func changeEmail() {
         let emailAlertController = UIAlertController(title: "e-mail", message: "Please write new e-mail", preferredStyle: .alert)
         changeAlertProperties(alertController: emailAlertController, color: .white)
         emailAlertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (alert: UIAlertAction) in
@@ -181,7 +179,7 @@ class SettingTableViewController: UITableViewController {
         present(emailAlertController, animated: true, completion: nil)
     }
     
-    func updateMail (mailString: String) {
+  private  func updateMail (mailString: String) {
          let userID : String = (Auth.auth().currentUser?.uid)!
         if let user = Auth.auth().currentUser {
             user.updateEmail(to: mailString, completion: { (error) in
@@ -196,7 +194,7 @@ class SettingTableViewController: UITableViewController {
         }
     }
     
-    func  changePassword() {
+  private  func  changePassword() {
         var newPassword = ""
         var confirmPassword = ""
         let passwordAllertController = UIAlertController(title: "Password", message: "Please write new password", preferredStyle: .alert)
@@ -216,7 +214,6 @@ class SettingTableViewController: UITableViewController {
             passwordTextField.isSecureTextEntry = true
             newPassword = passwordTextField.text!
         }
-        
         passwordAllertController.addTextField { (confirmPasswordTextField)  in
             confirmPasswordTextField.placeholder = "Confirm password"
             confirmPasswordTextField.isSecureTextEntry = true
@@ -225,7 +222,7 @@ class SettingTableViewController: UITableViewController {
         present(passwordAllertController, animated: true, completion: nil)
     }
     
-    func updatePassword(password: String) {
+   private func updatePassword(password: String) {
         if let user = Auth.auth().currentUser {
             user.updatePassword(to: password, completion: { (error) in
                 if let error = error {
@@ -237,7 +234,7 @@ class SettingTableViewController: UITableViewController {
         }
     }
     
-    func resultAlert(text: String, message: String?, color: UIColor) {
+   private func resultAlert(text: String, message: String?, color: UIColor) {
         let alertBad = UIAlertController(title: text, message: message, preferredStyle: .alert)
         changeAlertProperties(alertController: alertBad, color: color)
         self.present(alertBad, animated: true, completion: {
@@ -246,7 +243,7 @@ class SettingTableViewController: UITableViewController {
         })
     }
     
-    func changeAlertProperties(alertController: UIAlertController, color: UIColor) {
+   private func changeAlertProperties(alertController: UIAlertController, color: UIColor) {
         let subview = alertController.view.subviews.first! as UIView
         let alertContentView = subview.subviews.first! as UIView
         alertContentView.backgroundColor = color
@@ -255,7 +252,7 @@ class SettingTableViewController: UITableViewController {
         alertContentView.layer.borderColor = UIColor.white.cgColor
     }
     
-    func ValidatorForEmail( isEmail: String)-> Bool {
+   private func ValidatorForEmail( isEmail: String)-> Bool {
         do {
             let regex = try NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}", options: .caseInsensitive)
             return regex.firstMatch(in: isEmail, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, isEmail.count)) != nil
