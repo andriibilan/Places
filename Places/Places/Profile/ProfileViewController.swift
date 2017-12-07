@@ -22,22 +22,22 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     @IBOutlet private weak var phoneTextField: UITextField!
     @IBOutlet private weak var profileImage: UIImageView!
     
-    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var header: UIView!
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet var headerImageView:UIImageView!
     @IBOutlet var headerBlurImageView:UIImageView!
-    var blurredHeaderImageView:UIImageView?
-    var blurEffectView: UIVisualEffectView?
-    
+
+    private var blurEffectView: UIVisualEffectView?
     private let transition = CustomTransitionAnimator()
     private var messageText : String!
+    
     private let userID = (Auth.auth().currentUser?.uid)!
     private let ref = Database.database().reference()
     var authService = AuthService()
     var validator = Validator()
-
+    let blurEffect = UIBlurEffect(style: .light)
+    
     @IBOutlet weak var dismissButton: UIButton!{
         didSet{
             dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
@@ -45,40 +45,19 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
         }
     }
     
-    @IBAction func dismissButtonTaped(_ sender: UIButton) {
-        if (nameTextField.text?.isEmpty)! {
-            messageText = "Please complete all fields."
-            alertAction(messageText)
-            
-            return
-        }
-        if !validator.isValidEmail(email: emailTextField.text!) {
-            messageText = "Please enter your correct email."
-            alertAction(messageText)
-            
-            return
-        }
-        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
-        performSegue(withIdentifier: "unwindFromProfile", sender: self)
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        loadVC.customActivityIndicatory(self.view, startAnimate: true)
         getProfileData()
         profileBackground()
-//        loadVC.customActivityIndicatory(self.view, startAnimate: false)
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         // Header - Blurred Image
-       // loadVC.customActivityIndicatory(self.view, startAnimate: false)
+      
         headerBlurImageView = UIImageView(frame: header.bounds)
         headerImageView?.image = UIImage(named: "lviv")
-        let blurEffect = UIBlurEffect(style: .light)
         blurEffectView = UIVisualEffectView(effect: blurEffect)
         headerBlurImageView?.contentMode = UIViewContentMode.scaleAspectFill
         headerBlurImageView?.alpha = 0.0
@@ -136,10 +115,27 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
                 
                 if Auth.auth().currentUser == nil {
                     performSegue(withIdentifier: "showLoginAfterLogOut", sender: self)
-
                 }
             }
         }
+    }
+    
+    @IBAction func dismissButtonTaped(_ sender: UIButton) {
+        if (nameTextField.text?.isEmpty)! {
+            messageText = "Please complete all fields."
+            alertAction(messageText)
+            
+            return
+        }
+        if !validator.isValidEmail(email: emailTextField.text!) {
+            messageText = "Please enter your correct email."
+            alertAction(messageText)
+            
+            return
+        }
+        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
+        performSegue(withIdentifier: "unwindFromProfile", sender: self)
+        
     }
     
     @IBAction func chooseImage(_ sender: Any) {
@@ -149,6 +145,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
     //MARK:- Custom Transition
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .present
@@ -173,7 +170,6 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
             secondVC.modalPresentationStyle = .custom
         }
     }
-
 }
 
 //MARK: ImagePickerController
@@ -226,56 +222,41 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
 }
 
 extension ProfileViewController:  UIScrollViewDelegate {
+   
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let offset = scrollView.contentOffset.y
         var avatarTransform = CATransform3DIdentity
         var headerTransform = CATransform3DIdentity
         
-        // PULL DOWN -----------------
-        
+        // PULL DOWN
         if offset < 0 {
-            
             let headerScaleFactor:CGFloat = -(offset) / header.bounds.height
             let headerSizevariation = ((header.bounds.height * (1.0 + headerScaleFactor)) - header.bounds.height)/2.0
             headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
             headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
-            
             header.layer.transform = headerTransform
         }
-            
-            // SCROLL UP/DOWN ------------
-            
+            // SCROLL UP/DOWN
         else {
-            
-            // Header -----------
-            
             headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offset_HeaderStop, -offset), 0)
-            
-            //  ------------ Label
-            
             let labelTransform = CATransform3DMakeTranslation(0, max(-distance_W_LabelHeader, 20 - offset), 0)
             headerLabel.layer.transform = labelTransform
             
-            //  ------------ Blur
-            
+            // Blur
             blurEffectView?.alpha = min (0.8, (offset + 20 - offset_B_LabelHeader))
             blurEffectView?.frame = view.bounds
           
-            
-            // Avatar -----------
-            
+            // Avatar
             let avatarScaleFactor = (min(offset_HeaderStop, offset)) / profileImage.bounds.height / 1.4 // Slow down the animation
             let avatarSizeVariation = ((profileImage.bounds.height * (1.0 + avatarScaleFactor)) - profileImage.bounds.height) / 2.0
             avatarTransform = CATransform3DTranslate(avatarTransform, 0, avatarSizeVariation, 0)
             avatarTransform = CATransform3DScale(avatarTransform, 1.0 - avatarScaleFactor, 1.0 - avatarScaleFactor, 0)
             
             if offset <= offset_HeaderStop {
-                
                 if profileImage.layer.zPosition < header.layer.zPosition{
                     header.layer.zPosition = 0
                 }
-                
             } else {
                 if profileImage.layer.zPosition >= header.layer.zPosition{
                     header.layer.zPosition = 2
@@ -284,7 +265,6 @@ extension ProfileViewController:  UIScrollViewDelegate {
         }
         
         // Apply Transformations
-        
         header.layer.transform = headerTransform
         profileImage.layer.transform = avatarTransform
     }
