@@ -15,26 +15,25 @@
 
 import UIKit
 
-class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
+class SearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate,  UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
         googlePlacesManager = GooglePlacesManager(
             apiKey: AppDelegate.apiKey,
-
             radius: UserDefaults.standard.integer(forKey: "Radius"),
             currentLocation: pressCoordinate,
-            filters: MapViewController.checkFilter(filter: filterArray),
-            completion: {_, errorMessage  in
-                if errorMessage != nil{
-                    print("\t\(errorMessage!)")
-                    self.showAlert(message: "Cannot load places! Try it tomorrow ;)")
+            filters: [PlaceType](),
+            completion: {foundedPlaces, errorMessage in
+                if let errorMessage = errorMessage{
+                    self.showAlert(message: errorMessage)
                 }
                 
-                DispatchQueue.main.async { [weak self] in
-                    self?.tableViewForPlaces.reloadData()
+                if let foundedPlaces = foundedPlaces{
+                    self.filteredPlaces = foundedPlaces
                 }
         })
+        
         
         /*
         Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false){ [weak self] _ in
@@ -56,11 +55,12 @@ class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     }
     
     var googlePlacesManager: GooglePlacesManager!
+    var filteredPlaces = [Place]()
     
     @IBOutlet weak var tableViewForPlaces: UITableViewExplicit!
 
 	
-	@IBOutlet weak var dismissButton: UIButton!{
+	@IBOutlet weak var dismissButton: UIButton! {
 		didSet{
 			dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
 			dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
@@ -72,18 +72,23 @@ class SearchVC: UIViewController, UITableViewDataSource, UISearchBarDelegate {
 		
 		performSegue(withIdentifier: "exitFromSearch", sender: self)
     }
+    
 }
 
 
 extension SearchVC{
     // MARK: - TableView DataSource methods
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableViewForPlaces.numberOfViewedRows = 0
-        return googlePlacesManager.foundedPlaces.count
+        
+        let placesCount = filteredPlaces.count
+        
+        return placesCount == 0 ? 1 : placesCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let places = googlePlacesManager.foundedPlaces
+        let places = filteredPlaces
         
         if places.isEmpty {
             return tableView.dequeueReusableCell(withIdentifier: "No Item", for: indexPath)
@@ -101,11 +106,16 @@ extension SearchVC{
             case false?:
                 cell.openClosedImageView.image = #imageLiteral(resourceName: "closed-sign")
             case nil:
+                // remove this questionmark !
                 cell.openClosedImageView.image = #imageLiteral(resourceName: "questionMark")
             }
             
             if let distance = place.distance{
-                cell.distance.text = String(describing: distance)
+                if distance >= 1000{
+                    cell.distance.text = String(describing: distance.km)
+                }else {
+                    cell.distance.text = String(describing: distance.m)
+                }
             } else{
                 cell.distance.text = "unknown m."
             }
@@ -118,15 +128,52 @@ extension SearchVC{
         }
     }
     
+    // MARK: - TableView Delegate methods
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let place = filteredPlaces[indexPath.row]
 
-    /*
+        googlePlacesManager.getPhotos(ofPlace: place) {filledPlace, errorMessage in
+            DispatchQueue.main.async {
+                print(errorMessage ?? "")
+                self.performSegue(withIdentifier: "ShowDetailPlace", sender: filledPlace)
+            }
+        }
+    }
+    
     // MARK: - SearchBar Delegate methods
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        <#code#>
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(searchPlaces), object: nil)
+        self.perform(#selector(searchPlaces), with: searchText, afterDelay: 1.5)
+    }
+    
+    @objc func searchPlaces(byName placeName: String){
+        filteredPlaces.removeAll()
+        
+        for place in googlePlacesManager.foundedPlaces{
+            if let name = place.name?.lowercased(){
+                if name.hasPrefix(placeName.lowercased()){
+                    filteredPlaces.append(place)
+                }
+            }
+        }
+        
+        tableViewForPlaces.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        <#code#>
-    }*/
+        self.view.endEditing(true)
+    }
+    
+    // MARK: - Prepare for Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetailPlace" {
+            if let detailVC = segue.destination as? DetailPlaceViewController {
+                if let selectedPlace = sender as? Place {
+                    detailVC.place = selectedPlace
+                }
+            }
+        }
+    }
     
 }
