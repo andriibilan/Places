@@ -20,7 +20,7 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
     @IBOutlet private weak var phoneTextField: UITextField!
     
     @IBOutlet private weak var profileImage: UIImageView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     private var messageText : String!
     private let transition = CustomTransitionAnimator()
@@ -30,11 +30,18 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
     var dataBaseReference: DatabaseReference! {
         return Database.database().reference()
     }
+    
+    @IBOutlet weak var dismissButton: UIButton!{
+        didSet{
+            dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
+            dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         authService.delegate = self
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
-        
     }
     
     @IBAction func facebookLogin(sender: UIButton) {
@@ -44,24 +51,16 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
                 print("Failed to login: \(error.localizedDescription)")
                 return
             }
-            
-//            guard let accessToken = FBSDKAccessToken.current() else {
-//                print("Failed to get access token")
-//                return
-//            }
-            
-            //            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-            
+        
             self.fetchProfile()
         }
-        
     }
     
     func fetchProfile() {
         let parameters = ["fields": "email, name, picture.height(200).width(200)"]
         FBSDKGraphRequest(graphPath: "me", parameters: parameters).start { (connection, result, error) in
             if error != nil {
-                print("error")
+                print("Error")
                 return
             }
             guard let userInfo = result as? [String:Any] else { return }
@@ -69,9 +68,8 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
             self.emailTextField.text = userInfo["email"] as? String
             self.firstNameTextField.text = userInfo["name"] as? String
             if let imageURL = ((userInfo["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
-                print("url - \(imageURL)")
-                let profileImageURL = imageURL
                 
+                let profileImageURL = imageURL
                 let url = URL(string: profileImageURL)
                 let data = try? Data(contentsOf: url!)
                 
@@ -82,23 +80,13 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
         }
         
     }
-    @IBOutlet weak var dismissButton: UIButton!{
-        didSet{
-            dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
-            dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
-        }
-    }
+    
     @IBAction func dismissButtonTaped(_ sender: UIButton) {
         performSegue(withIdentifier: "unwindFromSignUp", sender: self)
     }
     
     @IBAction func selectProfileImage(_ sender: Any) {
         chooseImage()
-    }
-    
-    func transitionToProfile() {
-        performSegue(withIdentifier: "ShowProfileVC", sender: nil)
-//        performSegue(withIdentifier: "ShowProfile", sender: nil)
     }
     
     @IBAction func registerAction(_ sender: Any) {
@@ -142,6 +130,10 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
         let pictureData = UIImageJPEGRepresentation(self.profileImage.image!, 0.20)
         loadVC.customActivityIndicatory(self.view, startAnimate: true)
         authService.createUser(userName: firstNameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, password: passwordTextField.text!, pictureData: pictureData!)
+    }
+    
+    func transitionToProfile() {
+        performSegue(withIdentifier: "ShowProfileVC", sender: nil)
     }
     
     func showAlertAction(text: String) {
@@ -212,6 +204,7 @@ extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationCo
         picker.dismiss(animated: true, completion: nil)
     }
 }
+
 extension SignUpViewController: UIViewControllerTransitioningDelegate {
     //MARK:- Custom Transition
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -230,6 +223,7 @@ extension SignUpViewController: UIViewControllerTransitioningDelegate {
         return transition
     }
 }
+
 //MARK: TextField
 extension SignUpViewController: UITextFieldDelegate {
     
@@ -249,10 +243,10 @@ extension SignUpViewController: UITextFieldDelegate {
             scrollView.setContentOffset(scrollPoint, animated: true)
         }
     }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         scrollView.setContentOffset(CGPoint.zero, animated: true)
     }
-    
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         

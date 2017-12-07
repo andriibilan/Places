@@ -14,8 +14,9 @@ import FBSDKCoreKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
- 
-    static var apiKey = "AIzaSyAEMsUJkEQaNxAxcmuQ92dnjQOWtEz1A_g"
+
+    
+    static var apiKey = "AIzaSyB1stl48ZyTMr4Y6Su7nKHs5a0pLzoVe5w"
     //static var apiKey = ""
     
     //AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc
@@ -27,7 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //AIzaSyD1EzRFmZpAKq5KZzcFYOwDL8_YfllCeAo
     //AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ
     //AIzaSyB-pH6swhtcKVc0GzzL0pOTIr8Z9c36WoU
-    //    AIzaSyAEMsUJkEQaNxAxcmuQ92dnjQOWtEz1A_g
+    //AIzaSyAEMsUJkEQaNxAxcmuQ92dnjQOWtEz1A_g
+    //AIzaSyB1stl48ZyTMr4Y6Su7nKHs5a0pLzoVe5w
+    //AIzaSyAEMsUJkEQaNxAxcmuQ92dnjQOWtEz1A_g
+
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

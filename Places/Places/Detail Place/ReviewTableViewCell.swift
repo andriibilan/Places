@@ -9,11 +9,10 @@
 import UIKit
 
 class ReviewTableViewCell: UITableViewCell {
-
     
-    @IBOutlet weak var labelForReview: UILabel!
+    @IBOutlet weak var labelForReview: UILabel?
     
-    @IBOutlet weak var labelForReviewer: UILabel!
+    @IBOutlet weak var labelForReviewer: UILabel?
     
     @IBOutlet weak var viewForRatting: UIView?
     

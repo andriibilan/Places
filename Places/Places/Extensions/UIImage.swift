@@ -21,4 +21,12 @@ extension UIImage {
 		UIGraphicsEndImageContext()
 		return newImage!
 	}
+    static func loadImageFromPath(path: String) -> UIImage? {
+        if let url = URL(string: path) {
+            if let urlContents = try? Data(contentsOf: url) {
+                return UIImage(data: urlContents)
+            }
+        }
+        return nil
+    }
 }

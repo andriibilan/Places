@@ -9,9 +9,7 @@
 import UIKit
 import MapKit
 
-class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate {
-    
-    
+class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UITableViewDelegate {
     
     @IBOutlet weak var PhotoCollectionView: UICollectionView!
     
@@ -37,70 +35,51 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var placeTypeIcon: UIImageView!
     
-    //
-    let testPlace = TestPlace()
-    //
-    
-   
     @IBOutlet weak var heightConstaintForReviewTable: NSLayoutConstraint!
-
-	var place:Place!
-
-   
-   
     
-    //TODO: load real image when I'll have choosing place
+    @IBOutlet weak var heightProportionalConstrainForPhotoColelctionView: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightEqualConstraintForCollectionView: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightProportionalConstraintForWebsite: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightEqualConstantForWebsite: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightProportionalConstrainForPhone: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightEqualConstantForPhone: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightProportionalConstrainForClock: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightEqualConstantForClock: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightProportionalConstrainForAddress: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightEqualConstrainForAddress: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightProportionalConstrainForType: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightEqualConstrainForType: NSLayoutConstraint!
+    
+    var place:Place!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
         dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.35
-        
         dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
         dismissButton.backgroundColor = #colorLiteral(red: 0.8338858485, green: 0.2595152557, blue: 0.3878593445, alpha: 1)
-        //
-        testPlace.installDefaultValues()
-        //
-        
-        
-        
-        //
-        //TODO: height 0 if data is null
-        placeName?.text = place.name ?? "Lol"
-        placeAddress?.text = place.address ?? "lol"
-        placeAddress?.frame.size.height = 0.0
-        
-        if let ratting = place.rating{
-            let ratting = ratting.rounded(toPlaces: 1)
-            placeRattingLabel?.text = "★ " + String(ratting.rounded(toPlaces: 1))
-            placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((placeRattingView?.frame.height)!), currentRate: ratting))
+        if let name = place.name {
+            placeName?.text = name
         }
-        
-        placeWebsite?.text = place.website
-        
-        placeTypeIcon?.image = place.icon
-        
-        switch place.isOpen{
-        case true?:  placeHours?.text = "Open"
-        case false?:  placeHours?.text = "Close"
-        default: placeHours?.text = "nil" //TODO: height 0
-        }
-        placePhone?.text = place.phoneNumber
-        var str = ""
-        
-        for type in place.types{
-            str += type.rawValue + ", "
-        }
-        str.removeLast()
-        str.removeLast()
-        placeType?.text = str
-
-        //
-        
         feedbackTableView.reloadData()
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
     }
     
-  
+    override func viewWillAppear(_ animated: Bool) {
+        DispatchQueue.main.async {
+            self.setAllData()
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
@@ -113,175 +92,121 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         }
     }
     
-    
-    
-    //TODO: Check it on device
     @IBAction func openPhone(_ sender: UIButton) {
-        if let phone = placePhone?.text{
-           /* for index in 0...phone.count - 1{
-                if phone.re == " "{
-                    phone.remove(at: index)
+        var phoneNumber = ""
+        if var phone = placePhone?.text {
+            while (!phone.isEmpty) {
+                let char = phone.removeLast()
+                if let _ = Int(String(char)) {
+                    phoneNumber += String(char)
                 }
-            }*/
-            let phoneURL = NSURL(string: "telprompt://\(phone)")! as URL
+            }
+            let phoneURL = NSURL(string: "telprompt://\(phoneNumber)")! as URL
             UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
         }
     }
     
-    
-    
     @IBAction func sharePlace(_ sender: UIButton) {
-        let shareInfo = UIActivityViewController(activityItems: [place.icon ?? "" , "Name: \(String(describing: placeName?.text))", "\(((placeType?.text) != nil) ? ", Type: " + (placeType?.text)! : "")", "\(((placeRattingLabel?.text) != nil) ? "Ratting: " + (placeRattingLabel?.text)! : "");"], applicationActivities: nil)
+        let shareInfo = UIActivityViewController(activityItems: [place.photos[0], "Name: \(String(describing: placeName?.text))", "\(((placeType?.text) != nil) ? ", Type: " + (placeType?.text)! : "")", "\(((placeRattingLabel?.text) != nil) ? "Ratting: " + (placeRattingLabel?.text)! : "");"], applicationActivities: nil)
         self.present(shareInfo, animated: true, completion: nil)
     }
-    
     
     @IBAction func dismissAction(_ sender: UIButtonExplicit) {
         dismiss(animated: true, completion: nil)
     }
     
-
-    
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailToPhoto", sender:  indexPath)
+    @IBAction func createPathBetweenTwoLocations(_ sender: UIButton) {
+        let regionDistance : CLLocationDistance = Double(place.distance!)
+        let coordinates = CLLocationCoordinate2DMake((place.location?.latitude)!, (place.location?.longitude)!)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+        let placemark = MKPlacemark(coordinate: coordinates)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = place?.name
+        mapItem.openInMaps(launchOptions: options)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "DetailToPhoto"{
+        if segue.identifier == "DetailToPhoto" {
             let photoVC = segue.destination as! PhotoPagingViewController
-            
-            for temp in testPlace.image{
-                photoVC.photoArray.append(temp)
-            }
-            //TODO: REAL IMAGE
             photoVC.photoArray = self.place.photos
             photoVC.indexPath = sender as? IndexPath
         }
     }
     
-    
-    
-    //MARK: Collection View Data Source
-    
-    //function for returning number of items in section
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
-        print("photos counter: \(place.photos.count)")
-
-        return place.photos.count
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "DetailToPhoto", sender:  indexPath)
     }
     
-    //function for filling my cell
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell
-        
-        
-        if place.photos.count != 0{
-
-        //    cell?.photoImageView?.image = testPlace.image[indexPath.row]
-
-            cell?.photoImageView?.image = place.photos[indexPath.row]
-        }else{
-            cell?.photoImageView?.image = #imageLiteral(resourceName: "noPhotoIcon")
+    func setAllData() {
+        if !setData(set: place.rating, at: placeRattingView) {
+            let _ = setData(set: 0, at: placeRattingView)
         }
-        cell?.layer.borderColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
-        cell?.layer.borderWidth = 5
-        return cell!
-    }
-    
-   
-    
-    //MARK: Table View Data Source
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("review count:\(place.reviews.count)")
-        return place.reviews.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        //let review = testPlace.forReview[indexPath.row]
-        let review = place.reviews[indexPath.row]
-        
-        
-        let cell  = feedbackTableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as! ReviewTableViewCell
-        
-        
-        cell.labelForReview.text = review.text
-        
-        
-        cell.labelForReview.backgroundColor? = UIColor(red:   1.0,green: 0.7, blue:  CGFloat(indexPath.row) / CGFloat(testPlace.forReview.count - 1) * 0.8,alpha: 1.0)
- 
-        
-        cell.labelForReviewer.text = review.author
-        cell.labelForReviewer.textColor = UIColor.white
-        cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: Double(review.rating!)))
-        cell.ImageViewForIcon?.image = loadImageFromPath(path: review.profilePhotoUrl!)
-        
-        /*
-        cell.labelForReview.text = review.review
-        cell.labelForReview.backgroundColor? = UIColor(red:   1.0,green: 0.7, blue:  CGFloat(indexPath.row) / CGFloat(testPlace.forReview.count - 1) * 0.8,alpha: 1.0)
-        
-        
-        
-        
-        
-        print("cell: \(cell.labelForReview.backgroundColor)")
-        print( "index: \(indexPath.row)")
-        if review.isanonymous {
-            cell.labelForReviewer.text = "Anonymous"
-        }else{
-            cell.labelForReviewer.text = review.reviewer
+        if !setData(set: place.types, at: placeType) {
+            heightProportionalConstrainForType.isActive = false
+            heightEqualConstrainForType.isActive = true
         }
-        
-        /*
-        if let icon = place.icon{
-            cell.ImageViewForIcon?.image = icon
-        }else{
-            //TODO: Maybe  width = 0
-            cell.ImageViewForIcon?.isHidden = true
+        if !setData(set: place.address, at: placeAddress) {
+            heightProportionalConstrainForAddress.isActive = false
+            heightEqualConstrainForAddress.isActive = true
         }
-        */
-        
-        //TODO: go in class addSubview
-        cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: testPlace.forReview[indexPath.row].reviewRatting!))
-        
-        */
-        return cell
-    }
-    
-    
-    @IBAction func createPathBetweenTwoLocations(_ sender: UIButton) {
-        let latitude : CLLocationDegrees = 39.048625
-        let longitude : CLLocationDegrees = -120.981227
-        
-        let regionDistance : CLLocationDistance = 100;
-       
-      //  let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
-        let coordinates = CLLocationCoordinate2DMake((place.location?.latitude)!, (place.location?.longitude)!)
-        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
-        
-        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
-        
-        let placemark = MKPlacemark(coordinate: coordinates)
-        let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = "Current"
-        mapItem.openInMaps(launchOptions: options)
-        
-        
-        
-        
-    }
-    
-}
-
-func loadImageFromPath(path: String) -> UIImage? {
-    if let url = URL(string: path){
-        if let urlContents = try? Data(contentsOf: url){
-            return UIImage(data: urlContents)
+        if !setData(set: place.isOpen, at: placeHours) {
+            heightProportionalConstrainForClock.isActive = false
+            heightEqualConstantForClock.isActive = true
+        }
+        if !setData(set: place.phoneNumber, at: placePhone) {
+            heightProportionalConstrainForPhone.isActive = false
+            heightEqualConstantForPhone.isActive = true
+        }
+        if !setData(set: place.website, at: placeWebsite) {
+            heightProportionalConstraintForWebsite.isActive = false
+            heightEqualConstantForWebsite.isActive = true
         }
     }
-    return nil
+    
+    //MARK: Overloading setData function
+    
+    func setData(set data: String?, at label: UILabel?) -> Bool {
+        if data != nil && data != "" {
+            label?.text = data
+            return true
+        }
+        return false
+    }
+    
+    func setData(set data: Double?, at view: UIView?) -> Bool {
+        if let ratting = data {
+            let ratting = ratting.rounded(toPlaces: 1)
+            self.placeRattingLabel?.text = "★ " + String(ratting.rounded(toPlaces: 1))
+            view?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((self.placeRattingView?.frame.height)!), currentRate: ratting))
+            return true
+        }
+        return false
+    }
+    
+    func setData(set data: Bool?, at label: UILabel?) -> Bool {
+        switch self.place.isOpen {
+        case true?:  label?.text = "Open"
+        case false?:  label?.text = "Close"
+        default:
+            return false
+        }
+        return true
+    }
+    
+    func setData(set data: [PlaceType]?, at label: UILabel?) -> Bool {
+        if data?.count != 0 {
+            var str = ""
+            for type in data! {
+                str += type.rawValue + ", "
+            }
+            str.removeLast()
+            str.removeLast()
+            label?.text = str
+            self.placeTypeIcon?.image = self.place.icon
+            self.placeTypeIcon?.tintColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+            return true
+        }
+        return false
+    }
 }
