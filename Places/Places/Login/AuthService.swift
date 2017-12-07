@@ -18,7 +18,9 @@ protocol AuthServiceDelegate: class {
 }
 
 class AuthService {
+    
     weak var delegate: AuthServiceDelegate?
+    
     var dataBaseReference: DatabaseReference! {
         return Database.database().reference()
     }
