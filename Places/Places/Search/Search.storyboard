@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -161,12 +162,21 @@
                         <outlet property="dismissButton" destination="E49-AE-yqn" id="Am8-Lt-JgP"/>
                         <outlet property="tableViewForPlaces" destination="vFq-on-3n0" id="Pdx-RV-aWY"/>
                         <segue destination="bw2-5c-Z5X" kind="unwind" identifier="exitFromSearch" unwindAction="unwindFromSearchWithSegue:" id="Ary-zS-DbB"/>
+                        <segue destination="Kho-IM-dV7" kind="show" identifier="ShowDetailPlace" id="8az-Qv-Fhm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H9R-rR-Ibo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="bw2-5c-Z5X" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-151.19999999999999" y="7.6461769115442282"/>
+        </scene>
+        <!--DetailPlace-->
+        <scene sceneID="ijC-Eb-Vye">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DetailPlace" id="Kho-IM-dV7" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OQV-yf-WtC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="516" y="7"/>
         </scene>
     </scenes>
     <resources>

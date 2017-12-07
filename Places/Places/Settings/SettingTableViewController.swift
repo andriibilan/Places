@@ -50,7 +50,7 @@ class SettingTableViewController: UITableViewController {
         if radiusValue < 1000 {
             searchRadius.text = "Search Radius: \(radiusValue ) m"
         } else {
-            searchRadius.text = "Search Radius: \( (Double(radiusValue).kilometr).rounded(toPlaces: 2) ) km"
+            searchRadius.text = "Search Radius: \((Double(radiusValue).kilometr).rounded(toPlaces: 2)) km"
         }
     }
     
