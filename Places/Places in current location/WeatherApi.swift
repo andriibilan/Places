@@ -2,7 +2,7 @@
 //  TodayViewController.swift
 //  Places In Current Location
 //
-//  Created by Andrew on 11/30/17.
+//  Created by Andrew Konchak on 11/30/17.
 //  Copyright © 2017 andriibilan. All rights reserved.
 //
 
@@ -19,7 +19,6 @@ struct WeatherApi {
         case invalid(String, Any)
     }
     
-    
     init(json:[String:Any]) throws {
         guard let summary = json["summary"] as? String else {throw SerializationError.missing("summary is missing")}
         
@@ -32,7 +31,6 @@ struct WeatherApi {
         self.temperature = temperature
         
     }
-    
     
     static let basePath = "https://api.darksky.net/forecast/7d4844348f4f1050bb7a581a0d19e7c9/"
     
@@ -58,22 +56,13 @@ struct WeatherApi {
                                 }
                             }
                         }
-                    
                     }
                 }catch {
                     print(error.localizedDescription)
                 }
-                
                 completion(forecastArray)
-                
             }
-            
-            
         }
-    
         task.resume()
-
     }
-    
-
 }

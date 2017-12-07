@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ListViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,OutputInterface {
-
+class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OutputInterface {
     let listDynamic = Dynamic()
-    public var places:[Place] = []
+    public var places: [Place] = []
     private var openPlaces: [Place] = []
     private var filterOpenOnly = false
     private var sortingByName = true
     private var googlePlacesManager: GooglePlacesManager!
+
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var sortingButton: UIButton! {
@@ -60,31 +60,38 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         self.tableView.reloadData()
     }
     
-    private func scaleAnimation(onButton button:UIButton)  {
+    private func scaleAnimation(onButton button:UIButton) {
         button.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         UIView.animate(withDuration: 0.5, delay: 0, options: .allowUserInteraction, animations: {
             [button] in button.transform = CGAffineTransform.identity
             }, completion: nil)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 148, right: 0)
         tableView.tableFooterView = UIView()
         listDynamic.dynamicSort(button: sortingButton, parView: self.view)
         listDynamic.dynamicFilterList(filter: filteringButton, parView: self.view)
 
-//        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: Location.currentLocation, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
-//            if let foundedPlaces = foundedPlaces {
-//                self.places = foundedPlaces
-//                self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-//                DispatchQueue.main.sync {
-//                    self.tableView.reloadData()
+//        googlePlacesManager = GooglePlacesManager(
+//            apiKey: AppDelegate.apiKey,
+//            radius: UserDefaults.standard.integer(forKey: "Radius"),
+//            currentLocation: Location.currentLocation,
+//            filters: MapViewController.checkFilter(filter: filterArray),
+//            completion: { (foundedPlaces, errorMessage) in
+//                if let foundedPlaces = foundedPlaces {
+//                    self.places = foundedPlaces
+//                    self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
+//                    DispatchQueue.main.sync {
+//                        self.tableView.reloadData()
+//                    }
 //                }
-//            }
 //        })
+
     }
     
     private func refillOpenPlaces() {
@@ -104,17 +111,22 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
    
     func updateData() {
         loadVC.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
-        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
-            if let foundedPlaces = foundedPlaces {
-                self.places = foundedPlaces
-                self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-                if self.googlePlacesManager.allPlacesLoaded {
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    loadVC.customActivityIndicatory((self.view)!, startAnimate: false).stopAnimating()
+        
+        googlePlacesManager = GooglePlacesManager(
+            apiKey: AppDelegate.apiKey,
+            radius: UserDefaults.standard.integer(forKey: "Radius"),
+            currentLocation: pressCoordinate,
+            filters: MapViewController.checkFilter(filter: filterArray),
+            completion: { (foundedPlaces, errorMessage) in
+                if let foundedPlaces = foundedPlaces {
+                    self.places = foundedPlaces
+                    self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        loadVC.customActivityIndicatory((self.view)!, startAnimate: false).stopAnimating()
                     }
                 }
-            }
         })
     }
   
@@ -127,6 +139,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         return 1
     }
     
+
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return filterOpenOnly ? openPlaces.count : places.count
 	}
@@ -164,8 +177,6 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
     }
     
     
-  
-    
     //MARK: - Fade in effect
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // Define the initial state (Before the animation)
@@ -174,8 +185,6 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         // Define the final state (After the animation)
         //UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
     }
-    
-
     
     func typePlaces (types: [PlaceType]) -> String {
         var stringType = ""
@@ -186,7 +195,6 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
         stringType.removeLast()
         return stringType
     }
-
 
     func updateDistance(distance: Int) -> String {
         if UserDefaults.standard.bool(forKey: "distanceIskm") == true {
@@ -199,7 +207,6 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
             return "\((Double(distance).miles).rounded(toPlaces: 2)) ml."
         }
     }
-
  
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          let place = (filterOpenOnly) ? openPlaces[indexPath.row] : places[indexPath.row]
@@ -217,13 +224,5 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
             d?.place = sender as! Place
 		}
 	}
-
     
 }
-
-extension Array {
-    subscript (safe index: Int) -> Element? {
-        return indices ~= index ? self[index] : nil
-    }
-}
-

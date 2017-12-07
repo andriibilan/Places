@@ -21,6 +21,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="b4c-YW-7Ft">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="customCell" rowHeight="83" id="OE7-72-zNB" customClass="TodayTableViewCell" customModule="Places_In_Current_Location" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="83"/>
@@ -30,19 +33,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cLP-gv-Cbc" customClass="UIViewExplicit" customModule="Places">
-                                                    <rect key="frame" x="10" y="5" width="300" height="69"/>
+                                                    <rect key="frame" x="0.0" y="5" width="0.0" height="69"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Mik-9C-zsQ">
-                                                            <rect key="frame" x="66" y="3" width="218" height="63"/>
+                                                            <rect key="frame" x="0.0" y="3" width="0.0" height="63"/>
                                                             <subviews>
-                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meet &amp; Burger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTY-cm-3ta">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="218" height="31.5"/>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meet &amp; Burger" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pTY-cm-3ta">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="31.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" red="0.92018407579999995" green="0.29233893750000001" blue="0.4312838316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123m" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9u3-zh-EYw">
-                                                                    <rect key="frame" x="0.0" y="31.5" width="218" height="31.5"/>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9u3-zh-EYw">
+                                                                    <rect key="frame" x="0.0" y="31.5" width="0.0" height="31.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -50,7 +53,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wind" translatesAutoresizingMaskIntoConstraints="NO" id="07n-cv-Ixb" customClass="UIImageViewExplicit" customModule="Places">
-                                                            <rect key="frame" x="5" y="4" width="61" height="61"/>
+                                                            <rect key="frame" x="0.0" y="4" width="61" height="61"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="61" id="R2V-gO-g1G"/>
                                                                 <constraint firstAttribute="height" constant="61" id="ry4-2l-QK7"/>
@@ -62,7 +65,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="0.79955051369863017" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" white="1" alpha="0.82475385273972601" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="07n-cv-Ixb" firstAttribute="top" secondItem="cLP-gv-Cbc" secondAttribute="top" constant="4" id="96f-FH-Dhm"/>
                                                         <constraint firstItem="07n-cv-Ixb" firstAttribute="leading" secondItem="cLP-gv-Cbc" secondAttribute="leading" constant="5" id="CjO-xl-hx4"/>
@@ -101,7 +104,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="0.59805757705479456" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="0.79955051369999997" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="b4c-YW-7Ft" secondAttribute="trailing" id="ALY-Nd-WsN"/>
                             <constraint firstAttribute="bottom" secondItem="b4c-YW-7Ft" secondAttribute="bottom" id="NnK-bM-cF2"/>

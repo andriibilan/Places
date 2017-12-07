@@ -2,7 +2,7 @@
 //  TodayViewController.swift
 //  Places In Current Location
 //
-//  Created by Andrew on 11/30/17.
+//  Created by Andrew Konchak on 11/30/17.
 //  Copyright © 2017 andriibilan. All rights reserved.
 //
 
@@ -15,14 +15,11 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
     @IBOutlet weak var tableView: UITableView!
     
     var forecastData = [WeatherApi]()
-//    var name = ["Meet & Burger", "Meet & Burger", "Meet & Burger", "Meet & Burger", "Meet & Burger"]
-//    var distance = ["123m", "123m", "123m", "123m", "123m"]
-//    var open = ["Open", "Open", "Open", "Open", "Open"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-         updateWeatherForLocation(location: "Lviv")
+        updateWeatherForLocation(location: "Lviv")
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,9 +72,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! TodayTableViewCell
         let weatherObject = forecastData[indexPath.section]
         cell.placeName.text = weatherObject.summary
-        cell.placeDistance.text = "\(Int(weatherObject.temperature)) °F"
+        cell.placeDistance.text = "\(Int(5.0 / 9.0 * (Double(weatherObject.temperature) - 32.0))) °C"
         cell.placeImage.image = UIImage(named: weatherObject.icon)
-
+        
         
         return cell
         
@@ -87,10 +84,10 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
         if activeDisplayMode == .compact {
             self.preferredContentSize = maxSize
         } else if activeDisplayMode == .expanded {
-            self.preferredContentSize = CGSize(width: maxSize.width, height: 410)
+            self.preferredContentSize = CGSize(width: maxSize.width, height: 440)
         }
     }
-
+    
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
         
