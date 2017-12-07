@@ -1,7 +1,7 @@
 //
 //  AddNewPlaceController.swift
 //  Places
-//
+//  Elyx
 //  Created by adminaccount on 11/24/17.
 //  Copyright © 2017 andriibilan. All rights reserved.
 //
@@ -11,47 +11,31 @@ import UIKit
 class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, UITextInputTraits, SetCategory {
 
     let destination = "toAddBoard"
-    
     let segueToMain = "goBack"
-    
     let phoneTemplate = "+380(__) ___ __ __"
-    
     let underLiner: Character = "_"
-    
-    var phoneFormat: phoneNumberFormatter?
-    
+    ///outlets
     @IBOutlet weak var inside: UIView!
-    
     @IBOutlet weak var scroll: UIScrollView!
-    
     @IBOutlet weak var name: UITextField!
-    
     @IBOutlet weak var addres: UITextField!
-    
     @IBOutlet weak var number: UITextField!
-   
     @IBOutlet weak var list: UIView!
-    
     @IBOutlet weak var category: UITextField!
-    
     @IBOutlet weak var website: UITextField!
-    
+    //constraints
     @IBOutlet weak var forUpKeyboard: NSLayoutConstraint!
-    
     @IBOutlet weak var insideHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var upper: NSLayoutConstraint!
-    
+    //dummy view for category
     var unseen: UIView?
-    
-    var categoryListVisibility = true
-    
-    var keyBoardPresent = true
-    
-    var offset: CGFloat = 0
-    
+    //other classes
+    var phoneFormat: phoneNumberFormatter?
     var newLocation: Location?
-    
+    //for keyboard
+    var keyBoardPresent = true
+    var offset: CGFloat = 0
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,10 +44,9 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
         number.delegate = self
         category.delegate = self
         website.delegate = self
-        
         scroll.delegate = self
         
-        list.isHidden = categoryListVisibility
+        list.isHidden = false
         
         unseen = UIView.init(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
         category.inputView = unseen
@@ -88,21 +71,21 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if keyBoardPresent == false {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            offset = keyboardSize.height
-            let newHeight = scroll.contentSize.height + offset
-            scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: newHeight)
-            insideHeight.constant += offset
-            upper.constant += offset
-            keyBoardPresent = true
-        }
+            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                offset = keyboardSize.height
+                let newHeight = scroll.contentSize.height + offset
+                scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: newHeight)
+                insideHeight.constant += offset
+                upper.constant += offset
+                keyBoardPresent = true
+            }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        print("lat is \(newLocation?.latitude)")
-        print("lng is \(newLocation?.longitude)")
+        //print("lat is \(newLocation?.latitude)")
+        //print("lng is \(newLocation?.longitude)")
     }
     
     override func didReceiveMemoryWarning() {
@@ -158,10 +141,6 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
         }
     }
     
-    func scrollRectToVisible(_ rect: CGRect,  animated: Bool) {
-  
-    }
-    
     @IBAction func postToGoogle(_ sender: UIButton) {
          let coordinates: [String: Double] = [
         "lat": (newLocation?.latitude)!,
@@ -178,8 +157,6 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
                "language": "en-AU"]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: jsonArray)
-        //AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc
-        //AIzaSyC-bJQ22eXNhviJ9nmF_aQ0FSNWK2mNlVQ
         
         var answer = [String: Any] ()
         
@@ -214,8 +191,14 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     }
     
     @IBAction func cansel(_ sender: UIButton) {
-    //    NotificationCenter.default.removeObserver(self)
           dismiss(animated: true, completion: nil)
+    }
+    
+    func checkForFields() -> Bool{
+        if isValidEmail(testStr: website.text!) {
+            return true
+        }
+        return false
     }
     
     func setCategoryText(newText: String) {
