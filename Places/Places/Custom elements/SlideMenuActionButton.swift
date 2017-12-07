@@ -10,7 +10,7 @@ import UIKit
 
 class SlideMenuActionButton: UIButtonExplicit {
 
-    //MARK:- Rotate filter button
+    // MARK:- Rotate Filter Button
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
 

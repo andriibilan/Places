@@ -175,10 +175,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         isSideMenuHidden = !isSideMenuHidden
     }
     
-    // long press action
-    
+    // MARK: - Long Press Action
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
+       
         locationManager.stopUpdatingLocation()
         let pressPoint = sender.location(in: map)
         let location = map.convert(pressPoint, toCoordinateFrom: map)
@@ -192,17 +192,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
         }
         
-        actionSheet.addAction(UIAlertAction.init(title: "Add new place", style: UIAlertActionStyle.default, handler: { (action) in
-            pressCoordinate = Location(latitude: location.latitude, longitude: location.longitude )
+        actionSheet.addAction(UIAlertAction.init(title: "Add new place",
+                                                 style: UIAlertActionStyle.default,
+                                                 handler: { (action) in
+            pressCoordinate = Location(latitude: location.latitude,
+                                       longitude: location.longitude )
             if Auth.auth().currentUser != nil {
-                self.performSegue(withIdentifier: self.segueToAddScreen, sender: pressCoordinate)
-            }
-            else {
+                self.performSegue(withIdentifier: self.segueToAddScreen,
+                                  sender: pressCoordinate)
+            } else {
                 self.performSegue(withIdentifier: "toLogin", sender: nil)
             }
         }))
         
-        actionSheet.addAction(UIAlertAction.init(title: "Show selected place", style: UIAlertActionStyle.default, handler: { (action) in
+        actionSheet.addAction(UIAlertAction.init(title: "Show selected place",
+                                                 style: UIAlertActionStyle.default,
+                                                 handler: { (action) in
             self.map.removeAnnotations(self.map.annotations)
             self.map.removeOverlays(self.map.overlays)
             
@@ -212,72 +217,37 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             annotation.subtitle = "Add another place"
             self.map.addAnnotation(annotation)
             
-            let loc = CLLocation(latitude: location.latitude as CLLocationDegrees, longitude: location.longitude as CLLocationDegrees)
-            pressCoordinate = Location(latitude: location.latitude, longitude: location.longitude )
+            let loc = CLLocation(latitude: location.latitude as CLLocationDegrees,
+                                 longitude: location.longitude as CLLocationDegrees)
+            pressCoordinate = Location(latitude: location.latitude,
+                                       longitude: location.longitude )
   
             self.googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
                 
                 if errorMessage != nil {
-                    //self.locationManagerConfigurate()
                     print("\t\(errorMessage!)")
                     self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                     
-                    DispatchQueue.main.sync {
-                        //self.addAnnotations(coords: self.places)
                         loadVC.customActivityIndicatory(self.view, startAnimate: false)
-                    }}
+                    }
+                
                 self.places = foundedPlaces!
                 if self.googlePlacesManager.allPlacesLoaded {
                     DispatchQueue.main.sync {
                         self.updateData()
                     }
                 }
-            }
-            )
+            })
+            
             self.addRadiusCircle(location: loc)
         }))
+        
         actionSheet.view.tintColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
         actionSheet.addAction(UIAlertAction.init(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (action) in
         }))
+        
         self.present(actionSheet, animated: true, completion: nil)
     }
-    
-    //    func animateThemeView(expand: Bool) {
-    //        menuIsOpen = expand
-    //        if menuIsOpen == true {
-    //            compassButtonConstraint.constant = 190
-    //            UIView.animate(withDuration: 2.0, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
-    //                self.view.layoutIfNeeded()
-    //            }, completion: nil)
-    //        } else {
-    //            compassButtonConstraint.constant = 88
-    //            UIView.animate(withDuration: 2.0, delay: 0.0, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
-    //                self.view.layoutIfNeeded()
-    //            }, completion: nil)
-    //        }
-    //    }
-
-    // radius / places in radius
-
-    /*
-     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-     transition.transitionMode = .present
-     transition.startingPoint = menuView.center
-     transition.circleColor = menuView.backgroundColor!
-     
-     return transition
-     }
-     
-     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-     transition.transitionMode = .dismiss
-     transition.startingPoint = menuView.center
-     transition.circleColor = menuView.backgroundColor!
-     
-     return transition
-     }
-     
-     */
-    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let loc = locations.last! as CLLocation

@@ -33,7 +33,6 @@
 		493649111FD0646B00C95EDC /* Places In Current Location.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 493649051FD0646B00C95EDC /* Places In Current Location.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		493649171FD0649F00C95EDC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 493649161FD0649F00C95EDC /* MainInterface.storyboard */; };
 		493649191FD064C700C95EDC /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493649181FD064C700C95EDC /* TodayTableViewCell.swift */; };
-		496189EE1FD593DB00C99499 /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493649181FD064C700C95EDC /* TodayTableViewCell.swift */; };
 		49634E051FD84FD500188499 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49634E041FD84FD500188499 /* Media.xcassets */; };
 		49D395C11FCD85A8003FCC29 /* SlideMenuActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D395C01FCD85A8003FCC29 /* SlideMenuActionButton.swift */; };
 		49E3C0091FC6D18E00400A06 /* UIButtonExplicit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C0081FC6D18E00400A06 /* UIButtonExplicit.swift */; };
@@ -305,14 +304,30 @@
 		493649081FD0646B00C95EDC /* Places In Current Location */ = {
 			isa = PBXGroup;
 			children = (
-				493649091FD0646B00C95EDC /* TodayViewController.swift */,
-				493649181FD064C700C95EDC /* TodayTableViewCell.swift */,
+				4986A0A81FD9674600CFA6BE /* View */,
+				4986A0A91FD9676D00CFA6BE /* Services */,
 				49634E041FD84FD500188499 /* Media.xcassets */,
-				49EA7EEF1FD8441E00996CB0 /* WeatherApi.swift */,
-				493649161FD0649F00C95EDC /* MainInterface.storyboard */,
 				4936490E1FD0646B00C95EDC /* Info.plist */,
 			);
 			path = "Places In Current Location";
+			sourceTree = "<group>";
+		};
+		4986A0A81FD9674600CFA6BE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				493649091FD0646B00C95EDC /* TodayViewController.swift */,
+				493649181FD064C700C95EDC /* TodayTableViewCell.swift */,
+				493649161FD0649F00C95EDC /* MainInterface.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4986A0A91FD9676D00CFA6BE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				49EA7EEF1FD8441E00996CB0 /* WeatherApi.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		49E3C0071FC6D0CF00400A06 /* Custom elements */ = {
@@ -747,7 +762,6 @@
 				49D395C11FCD85A8003FCC29 /* SlideMenuActionButton.swift in Sources */,
 				2B4BA9151FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift in Sources */,
 				528825D21FCF0EA400C29BFE /* FetchPhotos.swift in Sources */,
-				496189EE1FD593DB00C99499 /* TodayTableViewCell.swift in Sources */,
 				8A8C5C8A1FC5A1C100A834EA /* ListViewController.swift in Sources */,
 				8A9C7C7B1FCB371A009B9C86 /* UIView.swift in Sources */,
 				49E3C00F1FC6E12800400A06 /* UIImageViewExplicit.swift in Sources */,
