@@ -14,7 +14,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private var openPlaces: [Place] = []
     private var filterOpenOnly = false
     private var sortingByName = true
-    private var googlePlacesManager: GooglePlacesManager!
+     var googlePlacesManager: GooglePlacesManager!
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -77,21 +77,6 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         listDynamic.dynamicSort(button: sortingButton, parView: self.view)
         listDynamic.dynamicFilterList(filter: filteringButton, parView: self.view)
 
-//        googlePlacesManager = GooglePlacesManager(
-//            apiKey: AppDelegate.apiKey,
-//            radius: UserDefaults.standard.integer(forKey: "Radius"),
-//            currentLocation: Location.currentLocation,
-//            filters: MapViewController.checkFilter(filter: filterArray),
-//            completion: { (foundedPlaces, errorMessage) in
-//                if let foundedPlaces = foundedPlaces {
-//                    self.places = foundedPlaces
-//                    self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-//                    DispatchQueue.main.sync {
-//                        self.tableView.reloadData()
-//                    }
-//                }
-//        })
-
     }
     
     private func refillOpenPlaces() {
@@ -111,27 +96,24 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
    
     func updateData() {
         loadVC.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
-        
-        googlePlacesManager = GooglePlacesManager(
-            apiKey: AppDelegate.apiKey,
-            radius: UserDefaults.standard.integer(forKey: "Radius"),
-            currentLocation: pressCoordinate,
-            filters: MapViewController.checkFilter(filter: filterArray),
-            completion: { (foundedPlaces, errorMessage) in
-                if let foundedPlaces = foundedPlaces {
-                    self.places = foundedPlaces
-                    self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        loadVC.customActivityIndicatory((self.view)!, startAnimate: false).stopAnimating()
-                    }
+        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+            if errorMessage != nil {
+                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+                DispatchQueue.main.sync {
+                    loadVC.customActivityIndicatory(self.view, startAnimate: false).stopAnimating()
                 }
-        })
-    }
-  
-    func sorting(sort: [Place]) -> [Place] {
-      return  sort.sorted(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
+            }
+            if let foundedPlaces = foundedPlaces {
+                self.places = foundedPlaces
+                self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
+               
+                DispatchQueue.main.sync {
+                    self.tableView.reloadData()
+                    loadVC.customActivityIndicatory((self.view)!, startAnimate: false).stopAnimating()
+                    }
+                
+        }
+    })
     }
     
     //MARK:- TableView DataSource
@@ -180,13 +162,12 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //MARK: - Fade in effect
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // Define the initial state (Before the animation)
-        //cell.alpha = 0
-        
+        cell.alpha = 0
         // Define the final state (After the animation)
-        //UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
+        UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
     }
     
-    func typePlaces (types: [PlaceType]) -> String {
+   private func typePlaces (types: [PlaceType]) -> String {
         var stringType = ""
         for type in types {
             stringType += type.rawValue + ", "
@@ -196,7 +177,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return stringType
     }
 
-    func updateDistance(distance: Int) -> String {
+    private func updateDistance(distance: Int) -> String {
         if UserDefaults.standard.bool(forKey: "distanceIskm") == true {
             if distance < 1000 {
                 return "\(distance) m."
@@ -209,8 +190,8 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
  
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         let place = (filterOpenOnly) ? openPlaces[indexPath.row] : places[indexPath.row]
-            googlePlacesManager.getPhotos(ofPlace: place){ filledPlace, errorMessage in
+        let place = (filterOpenOnly) ? openPlaces[safe: indexPath.row] : places[safe: indexPath.row]
+        googlePlacesManager.getPhotos(ofPlace: place!){ filledPlace, errorMessage in
                 DispatchQueue.main.async {
                     print(errorMessage ?? "")
                     self.performSegue(withIdentifier: "ShowDetailPlace", sender: filledPlace)

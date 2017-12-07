@@ -10,33 +10,28 @@ import UIKit
 import FirebaseAuth
 
 class LoginViewController: UIViewController, AuthServiceDelegate, UIViewControllerTransitioningDelegate {
-    
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-	
-    var authService = AuthService()
-	private let transition = CustomTransitionAnimator()
     
-	@IBOutlet weak var dismissButton: UIButton!{
-		didSet{
-			dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
-			dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
-		}
-	}
-	
-	@IBAction func dismissButtonTaped(_ sender: UIButton) {
-        performSegue(withIdentifier: "unwindToLogin", sender: self)
-	}
+    var authService = AuthService()
+    private let transition = CustomTransitionAnimator()
+    
+    @IBOutlet weak var dismissButton: UIButton!{
+        didSet{
+            dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
+            dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         authService.delegate = self
+        authService.delegate = self
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
     }
     
     func transitionToProfile() {
-         performSegue(withIdentifier: "ShowProfile", sender: nil)
+        performSegue(withIdentifier: "ShowProfile", sender: nil)
     }
     
     @IBAction func loginAction(_ sender: Any) {
@@ -53,7 +48,6 @@ class LoginViewController: UIViewController, AuthServiceDelegate, UIViewControll
             self.present(alertController, animated: true, completion: nil)
             
         } else {
-//            loadVC.customActivityIndicatory(self.view, startAnimate: true)
             authService.logIn(email: email, password: password)
         }
     }
@@ -79,7 +73,7 @@ class LoginViewController: UIViewController, AuthServiceDelegate, UIViewControll
         
         return transition
     }
-    //fasfasfasfas
+    
     @IBAction func unwindFromSignUp(segue: UIStoryboardSegue) {
     }
     
@@ -102,6 +96,10 @@ class LoginViewController: UIViewController, AuthServiceDelegate, UIViewControll
             secondVC.transitioningDelegate = self
             secondVC.modalPresentationStyle = .custom
         }
+    }
+    
+    @IBAction func dismissButtonTaped(_ sender: UIButton) {
+        performSegue(withIdentifier: "unwindToLogin", sender: self)
     }
     
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tGC-2i-N8v">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wgX-I0-ut5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,19 +13,19 @@
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
-        <scene sceneID="DbA-2p-925">
+        <scene sceneID="Z2A-jn-3On">
             <objects>
-                <navigationController hidesBottomBarWhenPushed="YES" navigationBarHidden="YES" id="tGC-2i-N8v" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PBQ-kg-lTP">
+                <navigationController navigationBarHidden="YES" id="wgX-I0-ut5" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jaK-hX-cwD">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="zvQ-cS-cZO"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="z32-L0-vXD"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oTN-RS-ne0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E84-z6-6OS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-78" y="-1"/>
+            <point key="canvasLocation" x="-303" y="0.0"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -532,7 +532,7 @@
         <image name="filter" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="h6x-wR-fUd"/>
-        <segue reference="4YD-0r-gCP"/>
+        <segue reference="okD-G1-lk4"/>
+        <segue reference="8cj-BZ-feC"/>
     </inferredMetricsTieBreakers>
 </document>
