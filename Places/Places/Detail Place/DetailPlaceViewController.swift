@@ -44,12 +44,38 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var heightEqualConstraintForCollectionView: NSLayoutConstraint!
     
+    
+   
+    
+    
+    
+    
 	var place:Place!
 
     //
     //
     @IBOutlet weak var heightProportionalConstraintForWebsite: NSLayoutConstraint!
     @IBOutlet weak var heightEqualConstantForWebsite: NSLayoutConstraint!
+    
+    
+    
+     @IBOutlet weak var heightProportionalConstrainForPhone: NSLayoutConstraint!
+    @IBOutlet weak var heightEqualConstantForPhone: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var heightProportionalConstrainForClock: NSLayoutConstraint!
+    @IBOutlet weak var heightEqualConstantForClock: NSLayoutConstraint!
+    
+    
+    
+    @IBOutlet weak var heightProportionalConstrainForAddress: NSLayoutConstraint!
+    @IBOutlet weak var heightEqualConstrainForAddress: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var heightProportionalConstrainForType: NSLayoutConstraint!
+    @IBOutlet weak var heightEqualConstrainForType: NSLayoutConstraint!
+    
+    
     //
     //
     
@@ -65,41 +91,34 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         //
         
         //TODO: height 0 if data is null
+       
+        
         placeName?.text = place.name ?? "Lol"
-        placeAddress?.text = place.address ?? "lol"
         
-        if let ratting = place.rating{
-            let ratting = ratting.rounded(toPlaces: 1)
-            placeRattingLabel?.text = "★ " + String(ratting.rounded(toPlaces: 1))
-            placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((placeRattingView?.frame.height)!), currentRate: ratting))
-        }
+   //     placeAddress?.text = place.address ?? "lol"
         
-        
-        
-//        if place.website != "" && place.website != nil{
-//            placeWebsite?.text = place.website
-//        }else{
-//            heightProportionalConstraintForWebsite.isActive = false
-//            heightEqualConstantForWebsite.isActive = true
+//        if let ratting = place.rating{
+//            let ratting = ratting.rounded(toPlaces: 1)
+//            placeRattingLabel?.text = "★ " + String(ratting.rounded(toPlaces: 1))
+//            placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((placeRattingView?.frame.height)!), currentRate: ratting))
 //        }
+        
+  //      placePhone?.text = place.phoneNumber
+       
+        
+        
+        
         
         placeTypeIcon?.image = place.icon
         placeTypeIcon?.tintColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
-        
-        switch place.isOpen{
-        case true?:  placeHours?.text = "Open"
-        case false?:  placeHours?.text = "Close"
-        default: placeHours?.text = "nil" //TODO: height 0
-        }
-        placePhone?.text = place.phoneNumber
-        var str = ""
-        
-        for type in place.types{
-            str += type.rawValue + ", "
-        }
-        str.removeLast()
-        str.removeLast()
-        placeType?.text = str
+       
+//        var str = ""
+//        for type in place.types{
+//            str += type.rawValue + ", "
+//        }
+//        str.removeLast()
+//        str.removeLast()
+//        placeType?.text = str
 
         //
         
@@ -109,14 +128,63 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewWillAppear(_ animated: Bool) {
         DispatchQueue.main.async {
+            //
             if self.place.website != "" && self.place.website != nil{
                 self.placeWebsite?.text = self.place.website
             }else{
                 self.heightProportionalConstraintForWebsite.isActive = false
                 self.heightEqualConstantForWebsite.isActive = true
             }
+            //
+            if self.place.phoneNumber != "" && self.place.phoneNumber != nil{
+                self.placePhone?.text = self.place.phoneNumber
+            }else{
+                self.heightProportionalConstrainForPhone.isActive = false
+                self.heightEqualConstantForPhone.isActive = true
+            }
+            //
+            switch self.place.isOpen{
+            case true?:  self.placeHours?.text = "Open"
+            case false?:  self.placeHours?.text = "Close"
+            default:
+                self.heightProportionalConstrainForClock.isActive = false
+                self.heightEqualConstantForClock.isActive = true
+            }
+            //
+            if self.place.address != "" && self.place.address != nil{
+                self.placeAddress?.text = self.place.address
+            }else{
+                self.heightProportionalConstrainForAddress.isActive = false
+                self.heightEqualConstrainForAddress.isActive = true
+            }
+            //
+            if let ratting = self.place.rating{
+                let ratting = ratting.rounded(toPlaces: 1)
+                self.placeRattingLabel?.text = "★ " + String(ratting.rounded(toPlaces: 1))
+                self.placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((self.placeRattingView?.frame.height)!), currentRate: ratting))
+            }else{
+                let ratting = 0
+                self.placeRattingLabel?.text = "★ " + String(ratting)
+                self.placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((self.placeRattingView?.frame.height)!), currentRate: Double(ratting)))
+            }
+            //
+            if self.place.types.count != 0{
+                var str = ""
+                for type in self.place.types{
+                    str += type.rawValue + ", "
+                }
+                str.removeLast()
+                str.removeLast()
+                self.placeType?.text = str
+                //
+                self.placeTypeIcon?.image = self.place.icon
+                self.placeTypeIcon?.tintColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+            }else{
+                self.heightProportionalConstrainForType.isActive = false
+                self.heightEqualConstrainForType.isActive = true
+            }
+            //
         }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
