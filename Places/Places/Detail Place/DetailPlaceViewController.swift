@@ -89,38 +89,10 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
         dismissButton.backgroundColor = #colorLiteral(red: 0.8338858485, green: 0.2595152557, blue: 0.3878593445, alpha: 1)
         //
-        
-        //TODO: height 0 if data is null
        
-        
-        placeName?.text = place.name ?? "Lol"
-        
-   //     placeAddress?.text = place.address ?? "lol"
-        
-//        if let ratting = place.rating{
-//            let ratting = ratting.rounded(toPlaces: 1)
-//            placeRattingLabel?.text = "★ " + String(ratting.rounded(toPlaces: 1))
-//            placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((placeRattingView?.frame.height)!), currentRate: ratting))
-//        }
-        
-  //      placePhone?.text = place.phoneNumber
-       
-        
-        
-        
-        
-        placeTypeIcon?.image = place.icon
-        placeTypeIcon?.tintColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
-       
-//        var str = ""
-//        for type in place.types{
-//            str += type.rawValue + ", "
-//        }
-//        str.removeLast()
-//        str.removeLast()
-//        placeType?.text = str
-
-        //
+        if let name = place.name{
+            placeName?.text = name
+        }
         
         feedbackTableView.reloadData()
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
@@ -128,64 +100,78 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewWillAppear(_ animated: Bool) {
         DispatchQueue.main.async {
-            //
-            if self.place.website != "" && self.place.website != nil{
-                self.placeWebsite?.text = self.place.website
-            }else{
-                self.heightProportionalConstraintForWebsite.isActive = false
-                self.heightEqualConstantForWebsite.isActive = true
-            }
-            //
-            if self.place.phoneNumber != "" && self.place.phoneNumber != nil{
-                self.placePhone?.text = self.place.phoneNumber
-            }else{
-                self.heightProportionalConstrainForPhone.isActive = false
-                self.heightEqualConstantForPhone.isActive = true
-            }
-            //
-            switch self.place.isOpen{
-            case true?:  self.placeHours?.text = "Open"
-            case false?:  self.placeHours?.text = "Close"
-            default:
-                self.heightProportionalConstrainForClock.isActive = false
-                self.heightEqualConstantForClock.isActive = true
-            }
-            //
-            if self.place.address != "" && self.place.address != nil{
-                self.placeAddress?.text = self.place.address
-            }else{
-                self.heightProportionalConstrainForAddress.isActive = false
-                self.heightEqualConstrainForAddress.isActive = true
-            }
-            //
-            if let ratting = self.place.rating{
-                let ratting = ratting.rounded(toPlaces: 1)
-                self.placeRattingLabel?.text = "★ " + String(ratting.rounded(toPlaces: 1))
-                self.placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((self.placeRattingView?.frame.height)!), currentRate: ratting))
-            }else{
-                let ratting = 0
-                self.placeRattingLabel?.text = "★ " + String(ratting)
-                self.placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((self.placeRattingView?.frame.height)!), currentRate: Double(ratting)))
-            }
-            //
-            if self.place.types.count != 0{
-                var str = ""
-                for type in self.place.types{
-                    str += type.rawValue + ", "
-                }
-                str.removeLast()
-                str.removeLast()
-                self.placeType?.text = str
-                //
-                self.placeTypeIcon?.image = self.place.icon
-                self.placeTypeIcon?.tintColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
-            }else{
-                self.heightProportionalConstrainForType.isActive = false
-                self.heightEqualConstrainForType.isActive = true
-            }
-            //
+            self.setData()
         }
     }
+    
+    
+    
+    func setData(){
+        //
+        if self.place.website != "" && self.place.website != nil{
+            self.placeWebsite?.text = self.place.website
+        }else{
+            self.heightProportionalConstraintForWebsite.isActive = false
+            self.heightEqualConstantForWebsite.isActive = true
+        }
+        //
+        if self.place.phoneNumber != "" && self.place.phoneNumber != nil{
+            self.placePhone?.text = self.place.phoneNumber
+        }else{
+            self.heightProportionalConstrainForPhone.isActive = false
+            self.heightEqualConstantForPhone.isActive = true
+        }
+        //
+        switch self.place.isOpen{
+        case true?:  self.placeHours?.text = "Open"
+        case false?:  self.placeHours?.text = "Close"
+        default:
+            self.heightProportionalConstrainForClock.isActive = false
+            self.heightEqualConstantForClock.isActive = true
+        }
+        //
+        if self.place.address != "" && self.place.address != nil{
+            self.placeAddress?.text = self.place.address
+        }else{
+            self.heightProportionalConstrainForAddress.isActive = false
+            self.heightEqualConstrainForAddress.isActive = true
+        }
+        //
+        if let ratting = self.place.rating{
+            let ratting = ratting.rounded(toPlaces: 1)
+            self.placeRattingLabel?.text = "★ " + String(ratting.rounded(toPlaces: 1))
+            self.placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((self.placeRattingView?.frame.height)!), currentRate: ratting))
+        }else{
+            let ratting = 0
+            self.placeRattingLabel?.text = "★ " + String(ratting)
+            self.placeRattingView?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((self.placeRattingView?.frame.height)!), currentRate: Double(ratting)))
+        }
+        //
+        if self.place.types.count != 0{
+            var str = ""
+            for type in self.place.types{
+                str += type.rawValue + ", "
+            }
+            str.removeLast()
+            str.removeLast()
+            self.placeType?.text = str
+            //
+            self.placeTypeIcon?.image = self.place.icon
+            self.placeTypeIcon?.tintColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        }else{
+            self.heightProportionalConstrainForType.isActive = false
+            self.heightEqualConstrainForType.isActive = true
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
@@ -202,13 +188,15 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
     
     //TODO: Check it on device
     @IBAction func openPhone(_ sender: UIButton) {
+        var phoneNumber = ""
         if let phone = placePhone?.text{
-           /* for index in 0...phone.count - 1{
-                if phone.re == " "{
-                    phone.remove(at: index)
+            for char in 0...phone.count - 1{
+                if Int(char) != nil{
+                   phoneNumber += String(char)
                 }
-            }*/
-            let phoneURL = NSURL(string: "telprompt://\(phone)")! as URL
+            }
+            let phoneURL = NSURL(string: "telprompt://\(phoneNumber)")! as URL
+        //    let phoneURL = NSURL(string: "telprompt://+38093-48")! as URL
             UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
         }
     }
@@ -290,12 +278,12 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIC
         //
         
 
-        cell.labelForReview.text = review.text
-        cell.labelForReview.backgroundColor? = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
-        cell.labelForReview.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        cell.labelForReview?.text = review.text
+        cell.labelForReview?.backgroundColor? = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        cell.labelForReview?.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
-        cell.labelForReviewer.text = review.author
-        cell.labelForReviewer.textColor = #colorLiteral(red: 0.2275260389, green: 0.6791594625, blue: 0.5494497418, alpha: 1)
+        cell.labelForReviewer?.text = review.author
+        cell.labelForReviewer?.textColor = #colorLiteral(red: 0.2275260389, green: 0.6791594625, blue: 0.5494497418, alpha: 1)
         
         cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: Double(review.rating!)))
         
