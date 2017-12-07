@@ -9,7 +9,6 @@
 import UIKit
 
 class ReviewTableViewCell: UITableViewCell {
-
     
     @IBOutlet weak var labelForReview: UILabel?
     
