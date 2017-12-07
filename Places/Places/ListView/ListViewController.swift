@@ -93,7 +93,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-   
+    
     func updateData() {
         loadVC.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
         googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
@@ -106,14 +106,13 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-               
+                
                 DispatchQueue.main.sync {
                     self.tableView.reloadData()
                     loadVC.customActivityIndicatory((self.view)!, startAnimate: false).stopAnimating()
-                    }
-                
-        }
-    })
+                }
+            }
+        })
     }
     
     //MARK:- TableView DataSource
@@ -130,7 +129,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
             let place = (filterOpenOnly) ? openPlaces[safe: indexPath.row] : places[safe: indexPath.row]
-            //placeholder image
+            // image
             cell.thumbnailImageView.image = place?.icon
             //name
             cell.name.text = place?.name
