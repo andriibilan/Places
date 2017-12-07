@@ -244,10 +244,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                             loadVC.customActivityIndicatory(self.view, startAnimate: false)
                         }
                     }
-                    self.places = foundedPlaces!
-                    DispatchQueue.main.sync {
+                    else {
+                        self.places = foundedPlaces!
+                        DispatchQueue.main.sync {
                         self.updateData()
-                    }
+                    }  
+                }
             })
             self.addRadiusCircle(location: loc)
         }))
