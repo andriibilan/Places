@@ -26,20 +26,5 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier {
-            switch identifier {
-            case "showMapSettings":
-                let mapSettingsVC = segue.destination 
-                //mapSettingsVC.transitioningDelegate = slider
-                
-                //            case "showUserSettings":
-//                let userSettingsVC = segue.destination as! UserSettingTableViewController
-            default:
-                break
-            }
-        }
-    }
 }
 
