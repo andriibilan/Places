@@ -10,11 +10,17 @@ import UIKit
 import NotificationCenter
 import CoreLocation
 
-class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataSource, UITableViewDelegate {
+class TodayViewController: UIViewController {
+    
+    // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Properties
+    
     var forecastData = [WeatherApi]()
+    
+    // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,50 +28,38 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
         updateWeatherForLocation(location: "Lviv")
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    // MARK: - Convinience
     
     func updateWeatherForLocation (location:String) {
         CLGeocoder().geocodeAddressString(location) { (placemarks:[CLPlacemark]?, error:Error?) in
             if error == nil {
                 if let location = placemarks?.first?.location {
+                    
                     WeatherApi.forecast(withLocation: location.coordinate, completion: { (results:[WeatherApi]?) in
-                        
                         if let weatherData = results {
                             self.forecastData = weatherData
                             
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
                             }
-                            
                         }
-                        
                     })
                 }
             }
         }
     }
-    
-    // MARK: - Table view data source
+}
+
+// MARK: - UITableViewDataSource
+
+extension TodayViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return forecastData.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 1
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let date = Calendar.current.date(byAdding: .day, value: section, to: Date())
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM dd, yyyy"
-        
-        return dateFormatter.string(from: date!)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -75,10 +69,27 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
         cell.placeDistance.text = "\(Int(5.0 / 9.0 * (Double(weatherObject.temperature) - 32.0))) °C"
         cell.placeImage.image = UIImage(named: weatherObject.icon)
         
-        
         return cell
-        
     }
+}
+
+// MARK: - UITableViewDelegate
+
+extension TodayViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let date = Calendar.current.date(byAdding: .day, value: section, to: Date())
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM dd, yyyy"
+        
+        return dateFormatter.string(from: date!)
+    }
+}
+
+// MARK: - NCWidgetProviding
+
+extension TodayViewController: NCWidgetProviding {
+    
     
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         if activeDisplayMode == .compact {
@@ -89,13 +100,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
     }
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        // Perform any setup necessary in order to update the view.
-        
-        // If an error is encountered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
-        
         completionHandler(NCUpdateResult.newData)
     }
-    
 }
+
