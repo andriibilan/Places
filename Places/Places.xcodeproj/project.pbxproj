@@ -159,6 +159,7 @@
 		521CFD731FCCCE3800CD86DD /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		524301301FD6B3AA002C613D /* Load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Load.swift; sourceTree = "<group>"; };
 		524301321FD6F2A3002C613D /* LaunchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenController.swift; sourceTree = "<group>"; };
+		524301341FD81EA1002C613D /* Places.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Places.entitlements; sourceTree = "<group>"; };
 		528825C01FCF0EA400C29BFE /* GooglePlacesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
 		528825C31FCF0EA400C29BFE /* AddNewPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewPlace.swift; sourceTree = "<group>"; };
 		528825C71FCF0EA400C29BFE /* FetchAdditionalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAdditionalData.swift; sourceTree = "<group>"; };
@@ -450,6 +451,7 @@
 		8A8C5C741FC57F3E00A834EA /* Places */ = {
 			isa = PBXGroup;
 			children = (
+				524301341FD81EA1002C613D /* Places.entitlements */,
 				528825BD1FCF0EA400C29BFE /* Google Places API Manager */,
 				2505B9841FCEE9D500415051 /* Search */,
 				258B06541FC8377B003A09B8 /* AddPlace */,
@@ -795,7 +797,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4PVY6Y62RV;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Places In Current Location/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Places.Places-In-Current-Location";
@@ -810,7 +812,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4PVY6Y62RV;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Places In Current Location/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.Places.Places-In-Current-Location";

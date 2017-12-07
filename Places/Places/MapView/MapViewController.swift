@@ -31,9 +31,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBAction func currentLocation(_ sender: Any) {
         map.removeAnnotations(self.map.annotations)
         map.removeOverlays(self.map.overlays)
-        
+        locationManager.startUpdatingLocation()
         pressCoordinate = Location(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
+        locationManager.stopUpdatingLocation()
         updateData()
+        
     }
     private var googlePlacesManager: GooglePlacesManager!
     public var places:[Place] = []
@@ -48,15 +50,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadVC.customActivityIndicatory(self.view, startAnimate: true)
-        mapDynamic.dynamicFilter(button: filterButton, parView: view)
-        changeMapType()
-        
-        filterTableView.delegate = self
-        filterTableView.dataSource = self
-        
-        locationManagerConfigurate()
-        
         googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
             
             if errorMessage != nil {
@@ -76,6 +69,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
         }
         )
+        loadVC.customActivityIndicatory(self.view, startAnimate: true)
+        mapDynamic.dynamicFilter(button: filterButton, parView: view)
+        changeMapType()
+        
+        filterTableView.delegate = self
+        filterTableView.dataSource = self
+        
+        locationManagerConfigurate()
+        
+    
         viewForFilter.setCorenerAndShadow(viewForFilter)
         
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
