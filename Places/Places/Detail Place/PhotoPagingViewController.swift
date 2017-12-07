@@ -40,7 +40,7 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate, UICo
         currentPhotoCollectionView.delegate = self
         currentPhotoCollectionView.dataSource = self
         
-        
+       
     }
     
 

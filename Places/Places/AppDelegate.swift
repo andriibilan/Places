@@ -15,8 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    //static var apiKey = "AIzaSyB-pH6swhtcKVc0GzzL0pOTIr8Z9c36WoU"
-    static var apiKey = ""
+    static var apiKey = "AIzaSyB1stl48ZyTMr4Y6Su7nKHs5a0pLzoVe5w"
+    //static var apiKey = ""
     
     //AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc
     //AIzaSyDLxIv8iHmwytbkXR5Gs2U9rqoLixhXIXM
@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //AIzaSyD1EzRFmZpAKq5KZzcFYOwDL8_YfllCeAo
     //AIzaSyCOrfXohc5LOn-J6aZQHqXc0nmsYEhAxQQ
     //AIzaSyB-pH6swhtcKVc0GzzL0pOTIr8Z9c36WoU
+    //AIzaSyB1stl48ZyTMr4Y6Su7nKHs5a0pLzoVe5w
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

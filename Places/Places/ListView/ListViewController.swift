@@ -161,15 +161,14 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
     //MARK: - Fade in effect
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // Define the initial state (Before the animation)
-        //cell.alpha = 0
-        
+        cell.alpha = 0
         // Define the final state (After the animation)
-        //UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
+        UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
     }
     
 
     
-    func typePlaces (types: [PlaceType]) -> String {
+   private func typePlaces (types: [PlaceType]) -> String {
         var stringType = ""
         for type in types {
             stringType += type.rawValue + ", "
@@ -180,7 +179,7 @@ class ListViewController: UIViewController,UITableViewDataSource, UITableViewDel
     }
 
 
-    func updateDistance(distance: Int) -> String {
+    private func updateDistance(distance: Int) -> String {
         if UserDefaults.standard.bool(forKey: "distanceIskm") == true {
             if distance < 1000 {
                 return "\(distance) m."
