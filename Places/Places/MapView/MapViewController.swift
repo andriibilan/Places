@@ -32,9 +32,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBAction func currentLocation(_ sender: Any) {
         map.removeAnnotations(self.map.annotations)
         map.removeOverlays(self.map.overlays)
-        
+        locationManager.startUpdatingLocation()
         pressCoordinate = Location(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
+        locationManager.stopUpdatingLocation()
         updateData()
+        
     }
     private var googlePlacesManager: GooglePlacesManager!
     public var places:[Place] = []
@@ -59,25 +61,31 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManagerConfigurate()
         
 
-        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
-            
-            if errorMessage != nil {
-                print("\t\(errorMessage!)")
-                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
-                DispatchQueue.main.sync {
-                    self.locationManagerConfigurate()
-                    loadVC.customActivityIndicatory(self.view, startAnimate: false)
-                }}
-            
-            if let foundedPlaces = foundedPlaces {
-                self.places = foundedPlaces
-                DispatchQueue.main.sync {
-                    self.locationManagerConfigurate()
-                    self.updateData()
+        googlePlacesManager = GooglePlacesManager(
+            apiKey: AppDelegate.apiKey,
+            radius: UserDefaults.standard.integer(forKey: "Radius"),
+            currentLocation: pressCoordinate,
+            filters: MapViewController.checkFilter(filter: filterArray),
+            completion: { (foundedPlaces, errorMessage) in
+                if errorMessage != nil {
+                    print("\t\(errorMessage!)")
+                    self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+                    
+                    DispatchQueue.main.sync {
+                        self.locationManagerConfigurate()
+                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                    }
                 }
-            }
-        }
-        )
+                
+                if let foundedPlaces = foundedPlaces {
+                    self.places = foundedPlaces
+                    DispatchQueue.main.sync {
+                        self.locationManagerConfigurate()
+                        self.updateData()
+                    }
+                }
+        })
+        
         viewForFilter.setCorenerAndShadow(viewForFilter)
         
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
@@ -130,25 +138,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         loadVC.customActivityIndicatory(self.view, startAnimate: true)
         let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
         
-        googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
-            
-            if errorMessage != nil {
-                print("\t\(errorMessage!)")
-                self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
-                DispatchQueue.main.sync {
-                    loadVC.customActivityIndicatory(self.view, startAnimate: false)
-                    self.addCurrentLocation(coords: center)
-                }}
-            if let foundedPlaces = foundedPlaces {
-                self.places = foundedPlaces
-                DispatchQueue.main.sync {
-                    self.addAnnotations(coords: self.places)
-                    self.addCurrentLocation(coords: center)
-                    loadVC.customActivityIndicatory(self.view, startAnimate: false)
+        googlePlacesManager = GooglePlacesManager(
+            apiKey: AppDelegate.apiKey,
+            radius: UserDefaults.standard.integer(forKey: "Radius"),
+            currentLocation: pressCoordinate,
+            filters: MapViewController.checkFilter(filter: filterArray),
+            completion: { (foundedPlaces, errorMessage) in
+                if errorMessage != nil {
+                    print("\t\(errorMessage!)")
+                    self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+                    
+                    DispatchQueue.main.sync {
+                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                        self.addCurrentLocation(coords: center)
+                    }
                 }
-            }
-        }
-        )
+                if let foundedPlaces = foundedPlaces {
+                    self.places = foundedPlaces
+                    DispatchQueue.main.sync {
+                        self.addAnnotations(coords: self.places)
+                        self.addCurrentLocation(coords: center)
+                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                    }
+                }
+        })
         changeMapType()
     }
     
@@ -215,25 +228,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let loc = CLLocation(latitude: location.latitude as CLLocationDegrees, longitude: location.longitude as CLLocationDegrees)
             pressCoordinate = Location(latitude: location.latitude, longitude: location.longitude )
   
-            self.googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
-                
-                if errorMessage != nil {
-                    //self.locationManagerConfigurate()
-                    print("\t\(errorMessage!)")
-                    self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
-                    
-                    DispatchQueue.main.sync {
-                        //self.addAnnotations(coords: self.places)
-                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
-                    }}
-                self.places = foundedPlaces!
-                if self.googlePlacesManager.allPlacesLoaded {
+            self.googlePlacesManager = GooglePlacesManager(
+                apiKey: AppDelegate.apiKey,
+                radius: UserDefaults.standard.integer(forKey: "Radius"),
+                currentLocation: pressCoordinate,
+                filters: MapViewController.checkFilter(filter: filterArray),
+                completion: { (foundedPlaces, errorMessage) in
+                    if errorMessage != nil {
+                        //self.locationManagerConfigurate()
+                        print("\t\(errorMessage!)")
+                        self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+                        
+                        DispatchQueue.main.sync {
+                            //self.addAnnotations(coords: self.places)
+                            loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                        }
+                    }
+                    self.places = foundedPlaces!
                     DispatchQueue.main.sync {
                         self.updateData()
                     }
-                }
-            }
-            )
+            })
             self.addRadiusCircle(location: loc)
         }))
         actionSheet.view.tintColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
@@ -259,25 +274,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     // radius / places in radius
 
-    /*
-     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-     transition.transitionMode = .present
-     transition.startingPoint = menuView.center
-     transition.circleColor = menuView.backgroundColor!
-     
-     return transition
-     }
-     
-     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-     transition.transitionMode = .dismiss
-     transition.startingPoint = menuView.center
-     transition.circleColor = menuView.backgroundColor!
-     
-     return transition
-     }
-     
-     */
-    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let loc = locations.last! as CLLocation
@@ -298,18 +294,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         map.removeAnnotations(map.annotations)
         let myAnnotation: MKPointAnnotation = MKPointAnnotation()
         myAnnotation.coordinate = coords
+        
         let center2D = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
         region = MKCoordinateRegion(center: center2D, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         myAnnotation.title = "Current location"
         map.setRegion(region!, animated: true)
         map.addAnnotation(myAnnotation)
         addAnnotations(coords: places)
+        
         let center = CLLocation(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
         addRadiusCircle(location: center)
     }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         let center2D = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
+        
         region = MKCoordinateRegion(center: center2D, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        
         switch status {
         case .notDetermined:
             map.setRegion(region!, animated: true)
@@ -331,10 +331,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func addAnnotations(coords: [Place]) {
         var annotations = [CustomAnnotation]()
+        
         for each in coords {
             let annotation : CustomAnnotation = CustomAnnotation(place: each)
             annotations.append(annotation as CustomAnnotation)
         }
+        
         map.addAnnotations(annotations)
     }
     
@@ -345,18 +347,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func mapView(_ map: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKCircle {
             let circle = MKCircleRenderer(overlay: overlay)
+            
             circle.strokeColor = #colorLiteral(red: 0.1254901961, green: 0.6980392157, blue: 0.6666666667, alpha: 1)
             circle.fillColor = UIColor(red: 0, green: 235, blue: 20, alpha: 0.07)
             circle.lineWidth = 1
+            
             return circle
         } else {
             return MKPolylineRenderer()
         }
     }
     
-    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
         if annotation is MKUserLocation {
             return nil
         } else {
@@ -380,11 +382,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView || control == view.detailCalloutAccessoryView || control == view.leftCalloutAccessoryView {
             //Perform a segue here to navigate to another viewcontroller
             let g = view.annotation as! CustomAnnotation
+            
             
             if let place = g.place {
                 googlePlacesManager.getPhotos(ofPlace: place){ filledPlace, errorMessage in
@@ -396,7 +398,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
         }
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailVC" {
@@ -460,7 +461,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     static func checkFilter(filter: [PlaceType]) -> [PlaceType] {
-        if filter .isEmpty {
+        if filter.isEmpty {
             return PlaceType.all
         } else {
             return filter
@@ -469,6 +470,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var accessory = UITableViewCellAccessoryType.none
+        
         if selectedCell.contains(indexPath.row) {
             selectedCell.remove(indexPath.row)
             var num = 0
@@ -483,6 +485,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             accessory = .checkmark
             filterArray.append(PlaceType(rawValue: GooglePlacesManager.makeConforming(type: nameFilterArray[indexPath.row]))!)
         }
+        
         if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = accessory
         }
@@ -490,10 +493,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
 
     func addRadiusCircle(location: CLLocation){
-        
         for overlay in self.map.overlays {
             self.map.remove(overlay)
         }
+        
         let radius =  UserDefaults.standard.double(forKey: "Radius")
         self.map.delegate = self
         let circle = MKCircle(center: location.coordinate, radius: radius as CLLocationDistance)

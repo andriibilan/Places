@@ -53,6 +53,7 @@ class LoginViewController: UIViewController, AuthServiceDelegate, UIViewControll
             self.present(alertController, animated: true, completion: nil)
             
         } else {
+//            loadVC.customActivityIndicatory(self.view, startAnimate: true)
             authService.logIn(email: email, password: password)
         }
     }
