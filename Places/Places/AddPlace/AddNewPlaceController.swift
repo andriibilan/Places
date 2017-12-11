@@ -51,9 +51,9 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
         unseen = UIView.init(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
         category.inputView = unseen
         
-        //let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        //tap.cancelsTouchesInView = false
-        //view.addGestureRecognizer(tap)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
         
         phoneFormat = phoneNumberFormatter(field: number, ins: phoneTemplate, replacmentCharacter: underLiner)
     }
@@ -72,21 +72,21 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
             childController?.delegate = self
         }
     }
-    /*
+   
     @objc func dismissKeyboard() {
-        if keyBoardPresent == true {
+        /*if keyBoardPresent == true {
             let newHeight = scroll.contentSize.height - offset
             scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: newHeight)
             insideHeight.constant -= offset
             upper.constant = 18
             keyBoardPresent = false
-        }
-        list.isHidden = true
+        }*/
+        //list.isHidden = true
         view.endEditing(true)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if keyBoardPresent == false {
+       /* if keyBoardPresent == false {
             if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 offset = keyboardSize.height
                 let newHeight = scroll.contentSize.height + offset
@@ -95,19 +95,19 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
                 upper.constant += offset
                 keyBoardPresent = true
             }
-        }
+        }*/
     }
-    */
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == category {
-            if upper.constant != 18 {
+          /*  if upper.constant != 18 {
                 let newHeight = scroll.contentSize.height - offset
                 scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: newHeight)
                 insideHeight.constant -= offset
                 upper.constant = 18
                 keyBoardPresent = false
             }
-            list.isHidden = false
+            list.isHidden = false*/
         }
         else {
             list.isHidden = true
