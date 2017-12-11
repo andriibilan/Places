@@ -198,7 +198,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         if data?.count != 0 {
             var str = ""
             for type in data! {
-                str += type.rawValue + ", "
+                str += type.printableStyle + ", "
             }
             str.removeLast()
             str.removeLast()

@@ -26,6 +26,11 @@ enum PlaceType: String{
     case cemetery
     case park
     case gym
+    
+    var printableStyle: String {
+        return self.rawValue.replacingOccurrences(of: "_", with: " ").capitalized
+    }
+    
     // unsupported by application types
     case accounting
     case caseairport
