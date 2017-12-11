@@ -51,15 +51,15 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
         unseen = UIView.init(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
         category.inputView = unseen
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+        //let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        //tap.cancelsTouchesInView = false
+        //view.addGestureRecognizer(tap)
         
         phoneFormat = phoneNumberFormatter(field: number, ins: phoneTemplate, replacmentCharacter: underLiner)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,7 +72,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
             childController?.delegate = self
         }
     }
-    
+    /*
     @objc func dismissKeyboard() {
         if keyBoardPresent == true {
             let newHeight = scroll.contentSize.height - offset
@@ -97,7 +97,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
             }
         }
     }
-    
+    */
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == category {
             if upper.constant != 18 {
@@ -118,7 +118,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         if textField != category {
             UIView.animate(withDuration: 0.25, animations: {
-                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y + 200, width: self.view.frame.size.width, height: self.view.frame.size.height)
+                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y + 210, width: self.view.frame.size.width, height: self.view.frame.size.height)
             })
         }
     }
@@ -126,7 +126,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField != category {
             UIView.animate(withDuration: 0.25, animations: {
-                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y - 200, width: self.view.frame.size.width, height: self.view.frame.size.height)
+                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y - 210, width: self.view.frame.size.width, height: self.view.frame.size.height)
             })
         }
     }
@@ -151,7 +151,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     }
     
     @IBAction func postToGoogle(_ sender: UIButton) {
-        if checkForFields(){
+        if checkForFields() {
             let coordinates: [String: Double] = [
                 "lat": (newLocation?.latitude)!,
                 "lng": (newLocation?.longitude)!
@@ -207,7 +207,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     }
     
     func checkForFields() -> Bool{
-        if (name.text != ""), (addres.text != ""), (number.text?.contains(underLiner) == nil), (category.text != ""), isValidEmail(testStr: website.text!) {
+        if (name.text != ""), (addres.text != ""), (number.text?.contains(underLiner) == false), (category.text != ""), isValidEmail(testStr: website.text!) {
             return true
         }
         else {
