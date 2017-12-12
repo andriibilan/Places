@@ -106,8 +106,8 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
                 insideHeight.constant -= offset
                 upper.constant = 18
                 keyBoardPresent = false
-            }
-            list.isHidden = false*/
+            }*/
+            list.isHidden = false
         }
         else {
             list.isHidden = true
