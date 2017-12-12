@@ -39,7 +39,6 @@ class Rating: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.cyan
-        //starSize = height
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -47,17 +46,34 @@ class Rating: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        guard let context = UIGraphicsGetCurrentContext() else {return}
+        guard let context = UIGraphicsGetCurrentContext() else { return }
         context.clear(rect)
         var center = CGPoint(x: starSize/2, y: rect.midY)
         let radius = rect.maxY/2
-        var tmp = CGFloat(rating)
+        var split = CGFloat(rating)
+        
         for _ in 1...5 {
-            //print(tmp)
             setStarPointsArray(centralPoint: center, longBeam: radius, shortBeam: radius/2)
-            drawStar(context: context, split: tmp)
+            switch split {
+            case 0..<1:
+                setFilledHalfArray(split)
+                if split < 0.5 {
+                    drawStar(context: context, points: starPoints, color: firstColor)
+                    drawStar(context: context, points: emptyHalf, color: secondColor)
+                }
+                else {
+                    drawStar(context: context, points: starPoints, color: secondColor)
+                    drawStar(context: context, points: filledHalf, color: firstColor)
+                }
+            case ..<0:
+                drawStar(context: context, points: starPoints, color: secondColor)
+            case 1... :
+                drawStar(context: context, points: starPoints, color: firstColor)
+            default:
+                break
+            }
             center.x += starSize
-            tmp -= 1
+            split -= 1
         }
     }
     
@@ -69,78 +85,15 @@ class Rating: UIView {
         return CGFloat( sin(coordinate * Double.pi / 180) )
     }
     
-    func drawStar(context: CGContext, split: CGFloat) {
-        
-        if split > 0 && split < 0.5 {
-            setFilledHalfArray(split)
-            
-            context.beginPath()
-            context.setFillColor(firstColor)
-            context.move(to: starPoints[0])
-            for dot in starPoints {
-                context.addLine(to: dot)
-            }
-            context.closePath()
-            context.fillPath()
-            
-            context.beginPath()
-            context.setFillColor(secondColor)
-            context.move(to: emptyHalf[0])
-            for dot in emptyHalf{
-                context.addLine(to: dot)
-            }
-            context.closePath()
-            context.fillPath()
-            
+    func drawStar(context: CGContext, points: [CGPoint], color: CGColor) {
+        context.beginPath()
+        context.setFillColor(color)
+        context.move(to: points[0])
+        for dot in points {
+            context.addLine(to: dot)
         }
-        if ( split > 0.5 || split == 0.5 ) && split < 1 {
-            setFilledHalfArray(split)
-            
-            context.beginPath()
-            context.setFillColor(secondColor)
-            context.move(to: starPoints[0])
-            
-            for dot in starPoints {
-                context.addLine(to: dot)
-            }
-            context.closePath()
-            context.fillPath()
-            
-            context.beginPath()
-            context.setFillColor(firstColor)
-            context.move(to: filledHalf[0])
-            
-            for dot in filledHalf{
-                context.addLine(to: dot)
-            }
-            context.closePath()
-            context.fillPath()
-        }
-        
-        if split == 0 || split < 0 {
-            context.beginPath()
-            context.setFillColor(secondColor)
-            context.move(to: starPoints[0])
-            
-            for dot in starPoints {
-                context.addLine(to: dot)
-            }
-            context.closePath()
-            context.fillPath()
-        }
-        
-        if split > 1 || split == 1 {
-            context.beginPath()
-            context.setFillColor(firstColor)
-            context.move(to: starPoints[0])
-            
-            for dot in starPoints {
-                context.addLine(to: dot)
-            }
-            
-            context.closePath()
-            context.fillPath()
-        }
+        context.closePath()
+        context.fillPath()
     }
     
     func setFilledHalfArray(_ split: CGFloat) {
@@ -150,10 +103,10 @@ class Rating: UIView {
         
         for currentIndex in 1...10 {
             
-            if  ( ( starPoints[currentIndex].x > splitPoint.x || starPoints[currentIndex].x == splitPoint.x) && starPoints[currentIndex - 1].x < splitPoint.x ) ||
-                ( starPoints[currentIndex].x < splitPoint.x && ( starPoints[currentIndex - 1].x > splitPoint.x || starPoints[currentIndex - 1].x == splitPoint.x ) ){
+            if  ( ( starPoints[currentIndex].x >= splitPoint.x) && starPoints[currentIndex - 1].x < splitPoint.x ) ||
+                ( starPoints[currentIndex].x < splitPoint.x && ( starPoints[currentIndex - 1].x >= splitPoint.x ) ) {
                 
-                splitPoint.y = ( (splitPoint.x - starPoints[currentIndex - 1].x) / (starPoints[currentIndex].x - starPoints[currentIndex - 1].x) ) * (starPoints[currentIndex].y - starPoints[currentIndex - 1].y) + starPoints[currentIndex - 1].y
+                splitPoint.y = ( ( splitPoint.x - starPoints[currentIndex - 1].x) / (starPoints[currentIndex].x - starPoints[currentIndex - 1].x) ) * (starPoints[currentIndex].y - starPoints[currentIndex - 1].y) + starPoints[currentIndex - 1].y
                 
                 filledHalf.append(splitPoint)
                 
@@ -199,9 +152,4 @@ class Rating: UIView {
         tralingPoint = starPoints[4]
         ratingRule = tralingPoint.x - leadingPoint.x
     }
-
-}
-
-extension UIColor{
-    static var golden = UIColor(patternImage: UIImage(named: "gold.jpg")!)
 }

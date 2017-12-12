@@ -59,7 +59,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,21 +72,21 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
             childController?.delegate = self
         }
     }
-    
+   
     @objc func dismissKeyboard() {
-        if keyBoardPresent == true {
+        /*if keyBoardPresent == true {
             let newHeight = scroll.contentSize.height - offset
             scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: newHeight)
             insideHeight.constant -= offset
             upper.constant = 18
             keyBoardPresent = false
-        }
-        list.isHidden = true
+        }*/
+        //list.isHidden = true
         view.endEditing(true)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if keyBoardPresent == false {
+       /* if keyBoardPresent == false {
             if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 offset = keyboardSize.height
                 let newHeight = scroll.contentSize.height + offset
@@ -95,18 +95,18 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
                 upper.constant += offset
                 keyBoardPresent = true
             }
-        }
+        }*/
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == category {
-            if upper.constant != 18 {
+          /*  if upper.constant != 18 {
                 let newHeight = scroll.contentSize.height - offset
                 scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: newHeight)
                 insideHeight.constant -= offset
                 upper.constant = 18
                 keyBoardPresent = false
-            }
+            }*/
             list.isHidden = false
         }
         else {
@@ -118,7 +118,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         if textField != category {
             UIView.animate(withDuration: 0.25, animations: {
-                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y + 200, width: self.view.frame.size.width, height: self.view.frame.size.height)
+                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y + 210, width: self.view.frame.size.width, height: self.view.frame.size.height)
             })
         }
     }
@@ -126,7 +126,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField != category {
             UIView.animate(withDuration: 0.25, animations: {
-                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y - 200, width: self.view.frame.size.width, height: self.view.frame.size.height)
+                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y - 210, width: self.view.frame.size.width, height: self.view.frame.size.height)
             })
         }
     }
@@ -151,7 +151,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     }
     
     @IBAction func postToGoogle(_ sender: UIButton) {
-        if checkForFields(){
+        if checkForFields() {
             let coordinates: [String: Double] = [
                 "lat": (newLocation?.latitude)!,
                 "lng": (newLocation?.longitude)!
@@ -207,7 +207,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     }
     
     func checkForFields() -> Bool{
-        if (name.text != ""), (addres.text != ""), (number.text?.contains(underLiner) == nil), (category.text != ""), isValidEmail(testStr: website.text!) {
+        if (name.text != ""), (addres.text != ""), (number.text?.contains(underLiner) == false), (category.text != ""), isValidEmail(testStr: website.text!) {
             return true
         }
         else {

@@ -244,9 +244,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     
                         loadVC.customActivityIndicatory(self.view, startAnimate: false)
                     }
-                
+
                 if let foundedPlaces = foundedPlaces {
-                self.places = foundedPlaces
+                    self.places = foundedPlaces
                     DispatchQueue.main.sync {
                         self.updateData()
                     }
