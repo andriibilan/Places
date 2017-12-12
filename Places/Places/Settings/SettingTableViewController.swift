@@ -92,7 +92,20 @@ class SettingTableViewController: UITableViewController {
         updateMapTypeValue(map: defaults.integer(forKey: "mapType"))
         print(Float(defaults.double(forKey: "Radius")))
     }
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            switch indexPath.row {
+            case 0 :
+                changeEmail()
+            case 1:
+                changePassword()
+            default:
+                break
+            }
+        }
+    }
+    
     func resultAlert(text: String, message: String?, color: UIColor) {
         let alertBad = UIAlertController(title: text, message: message, preferredStyle: .alert)
         changeAlertProperties(alertController: alertBad, color: color)

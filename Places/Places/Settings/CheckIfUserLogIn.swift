@@ -11,6 +11,13 @@ import Firebase
 
 extension SettingTableViewController {
     
+    func checkIfUserLogIn() -> CGFloat {
+        guard Auth.auth().currentUser != nil else {
+            return 0.0001
+        }
+        return UITableViewAutomaticDimension
+    }
+    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             headerView.textLabel?.textColor = UIColor.white
@@ -27,27 +34,7 @@ extension SettingTableViewController {
             return "Map Settings"
         }
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            switch indexPath.row {
-            case 0 :
-                changeEmail()
-            case 1:
-                changePassword()
-            default:
-                break
-            }
-        }
-    }
-    
-    func checkIfUserLogIn() -> CGFloat {
-        guard Auth.auth().currentUser != nil else {
-            return 0.0001
-        }
-        return UITableViewAutomaticDimension
-    }
-    
+
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 1 {
             return checkIfUserLogIn()
