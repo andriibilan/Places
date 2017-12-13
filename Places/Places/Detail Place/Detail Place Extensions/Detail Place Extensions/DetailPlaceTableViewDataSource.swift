@@ -34,7 +34,9 @@ extension DetailPlaceViewController : UITableViewDataSource {
         
         cell.viewForRatting?.addSubview(Rating(x: 0.0, y: 0.0, height: Double((cell.viewForRatting?.frame.height)!), currentRate: Double(review.rating!)))
         
-        cell.ImageViewForIcon?.image = UIImage.loadImageFromPath(path: review.profilePhotoUrl!)
+        if let _ = review.profilePhotoUrl {
+            cell.ImageViewForIcon?.image = UIImage.loadImageFromPath(path: review.profilePhotoUrl!)
+        }
         
         return cell
     }

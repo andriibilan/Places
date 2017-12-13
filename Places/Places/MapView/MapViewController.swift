@@ -11,6 +11,7 @@ import MapKit
 import CoreLocation
 import Firebase
 
+
 var pressCoordinate = Location(latitude: 49.841856, longitude: 24.031530)
 var filterArray = [PlaceType]()
 
@@ -51,6 +52,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         loadVC.customActivityIndicatory(self.view, startAnimate: true)
         mapDynamic.dynamicFilter(button: filterButton, parView: view)
         changeMapType()
@@ -351,12 +353,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             circle.strokeColor = #colorLiteral(red: 0.1254901961, green: 0.6980392157, blue: 0.6666666667, alpha: 1)
             circle.fillColor = UIColor(red: 0, green: 235, blue: 20, alpha: 0.07)
             circle.lineWidth = 1
-            
+
             return circle
-        } else {
-            return MKPolylineRenderer()
         }
+        
+        if overlay.isKind(of: MKPolyline.self) {
+            let polyLine = overlay
+            let polyLineRenderer = MKPolylineRenderer(overlay: polyLine)
+            polyLineRenderer.strokeColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+            polyLineRenderer.lineWidth = 2.0
+            return polyLineRenderer
+        }
+        
+        return MKPolylineRenderer()
+        
     }
+    
+    
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
@@ -403,6 +416,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if segue.identifier == "detailVC" {
             let d = segue.destination as? DetailPlaceViewController
             d?.place = sender as! Place
+            d?.mapView = map
         }
         if segue.identifier == segueToAddScreen {
             let addScreen = segue.destination as? AddNewPlaceController

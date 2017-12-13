@@ -31,7 +31,7 @@
                                                 <color key="tintColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="path"/>
                                                 <connections>
-                                                    <action selector="createPathBetweenTwoLocations:" destination="Je1-fC-mgn" eventType="touchUpInside" id="6zh-B7-yfn"/>
+                                                    <action selector="AlertForCreatingPathBetweenTwoLocations:" destination="Je1-fC-mgn" eventType="touchUpInside" id="eBU-bu-Bkq"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHN-Ho-O7s" userLabel="Phone Button">
@@ -69,7 +69,7 @@
                                         <rect key="frame" x="138.5" y="0.0" width="98" height="98"/>
                                         <subviews>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9L-rH-oF0" customClass="UIButtonExplicit" customModule="Places" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="98" height="98"/>
+                                                <rect key="frame" x="0.5" y="0.0" width="98" height="98"/>
                                                 <color key="backgroundColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" image="211602-64"/>
@@ -342,7 +342,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="62.5" height="62.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="address" translatesAutoresizingMaskIntoConstraints="NO" id="GQe-5R-O4z" customClass="UIImageViewExplicit" customModule="Places" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="62.5" height="62.5"/>
+                                                                <rect key="frame" x="0.0" y="0.5" width="62.5" height="62"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <color key="tintColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <userDefinedRuntimeAttributes>
@@ -444,7 +444,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="62.5" height="62.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone32" translatesAutoresizingMaskIntoConstraints="NO" id="8DY-8s-feg" customClass="UIImageViewExplicit" customModule="Places" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="62.5" height="62.5"/>
+                                                                <rect key="frame" x="0.0" y="0.5" width="62.5" height="62.5"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <color key="tintColor" red="0.92119914290000005" green="0.2922174931" blue="0.43170982600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <userDefinedRuntimeAttributes>
@@ -661,6 +661,7 @@
                         <outlet property="placeTypeIcon" destination="LHx-HL-zNF" id="Zth-nL-86o"/>
                         <outlet property="placeWebsite" destination="LuK-Xb-uV3" id="kdz-BJ-WxY"/>
                         <segue destination="YBU-3i-5y2" kind="show" identifier="DetailToPhoto" id="JZZ-Bp-B2R"/>
+                        <segue destination="0f1-mL-awV" kind="show" identifier="DetailToMap" id="6Uz-mu-6eL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xcv-VS-DJi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -763,6 +764,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FtT-Md-Mj5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="930.39999999999998" y="-537.48125937031489"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="C5H-oX-vJL">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="0f1-mL-awV" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Clo-C3-7Dh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1079" y="23"/>
         </scene>
     </scenes>
     <resources>

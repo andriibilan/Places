@@ -63,6 +63,8 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
     
     var place:Place!
     
+    var mapView : MKMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.35
@@ -115,7 +117,18 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func createPathBetweenTwoLocations(_ sender: UIButton) {
+    @IBAction func AlertForCreatingPathBetweenTwoLocations(_ sender: UIButton) {
+        
+        
+        //
+        
+        drawRouteAtAppleMap()
+        
+        drawRouteAtPlaceMap(sourse: CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude), destination: CLLocationCoordinate2D(latitude: (place.location?.latitude)!, longitude: (place.location?.longitude)!))
+        
+    }
+    
+    func drawRouteAtAppleMap() {
         let regionDistance : CLLocationDistance = Double(place.distance!)
         let coordinates = CLLocationCoordinate2DMake((place.location?.latitude)!, (place.location?.longitude)!)
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
@@ -126,12 +139,16 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         mapItem.openInMaps(launchOptions: options)
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailToPhoto" {
             let photoVC = segue.destination as! PhotoPagingViewController
             photoVC.photoArray = self.place.photos
             photoVC.indexPath = sender as? IndexPath
-        }
+        }/*else if segue.identifier == "DetailToMap" {
+            let MapVC = segue.destination as! MapViewController
+            MapVC.map.add((sender as! MKRoute).polyline, level: .aboveRoads)
+        }*/
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -209,4 +226,74 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         }
         return false
     }
-}
+    
+    
+    
+    func drawRouteAtPlaceMap(sourse: CLLocationCoordinate2D, destination: CLLocationCoordinate2D) {
+        
+        let sourseItem = MKMapItem(placemark: MKPlacemark(coordinate: sourse))
+        let destItem = MKMapItem(placemark: MKPlacemark(coordinate: destination))
+        
+        let directionRequest = MKDirectionsRequest()
+        directionRequest.source = sourseItem
+        directionRequest.destination = destItem
+        directionRequest.transportType = .walking
+        
+        let directions = MKDirections(request: directionRequest)
+        directions.calculate(completionHandler: {
+            responce, error in
+            
+            guard let responce = responce else {
+                if let error = error {
+                    print("Something whent wrong \(error)")
+                }
+                return
+            }
+            
+            let route = responce.routes[0]
+            
+            if let _ = self.mapView {
+                self.mapView.add(route.polyline, level: .aboveRoads)
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+            
+        //  self.performSegue(withIdentifier: "DetailToMap", sender: route)
+        })
+    }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+}//end class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
