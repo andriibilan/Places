@@ -12,7 +12,7 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate {
     
     @IBOutlet weak var currentPhotoCollectionView: UICollectionView!
     
-    @IBOutlet weak var dismissButtonOutlet: UIButtonExplicit!
+    @IBOutlet weak var dismissButtonOutlet: UIButton!
     
     var photoArray : [UIImage] = []
     
@@ -31,7 +31,8 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate {
         currentPhotoCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
     }
     
-    @IBAction func dismissButton(_ sender: UIButtonExplicit) {
+    @IBAction func dismissButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
-    } 
+    }
 }
+

@@ -11,6 +11,8 @@ import MapKit
 
 class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UITableViewDelegate {
     
+    
+    
     @IBOutlet weak var PhotoCollectionView: UICollectionView!
     
     @IBOutlet weak var placeName: UILabel?
@@ -149,12 +151,6 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         self.present(mapAlert, animated: true, completion: nil)
         
         
-        
-        //
-      //  drawRouteAtAppleMap()
-        
-     //   drawRouteAtPlaceMap(sourse: CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude), destination: CLLocationCoordinate2D(latitude: (place.location?.latitude)!, longitude: (place.location?.longitude)!))
-        
     }
     
     func drawRouteAtAppleMap() {
@@ -174,6 +170,8 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
             let photoVC = segue.destination as! PhotoPagingViewController
             photoVC.photoArray = self.place.photos
             photoVC.indexPath = sender as? IndexPath
+            photoVC.transitioningDelegate = self
+            photoVC.modalPresentationStyle = .custom
         }/*else if segue.identifier == "DetailToMap" {
             let MapVC = segue.destination as! MapViewController
             MapVC.map.add((sender as! MKRoute).polyline, level: .aboveRoads)
@@ -296,10 +294,15 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
     
     
     
+   
     
     
     
     
+    
+    
+    
+   private let transition = CustomTransitionAnimator()
 }//end class
 
 
@@ -309,7 +312,25 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
 
 
 
-
+extension DetailPlaceViewController: UIViewControllerTransitioningDelegate {
+    //MARK:- Custom Transition
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .present
+       // transition.startingPoint = dismissButton.center
+        transition.startingPoint = CGPoint(x: view.bounds.maxX - 50, y: view.bounds.maxY - 50)
+        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        
+        return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .dismiss
+        transition.startingPoint = CGPoint(x: view.bounds.maxX - 50, y: view.bounds.maxY - 50)
+        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        
+        return transition
+    }
+}
 
 
 
