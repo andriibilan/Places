@@ -121,7 +121,17 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         
         
         //
-        let mapAlert = UIAlertController(title: "Choose Map", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let mapAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        
+        if let subview = mapAlert.view.subviews.first, let mapAlert = subview.subviews.first {
+            for innerView in mapAlert.subviews {
+                innerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                innerView.layer.cornerRadius = 15.0
+                innerView.clipsToBounds = true
+            }
+        }
+        
         
         mapAlert.addAction(UIAlertAction(title: "Place Map", style: .default, handler: {(action:UIAlertAction) in
             self.drawRouteAtPlaceMap(sourse: CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude), destination: CLLocationCoordinate2D(latitude: (self.place.location?.latitude)!, longitude: (self.place.location?.longitude)!))
@@ -132,6 +142,9 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         }))
         
         mapAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        
+        mapAlert.view.tintColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
         
         self.present(mapAlert, animated: true, completion: nil)
         
