@@ -71,7 +71,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         super.viewDidLoad()
         dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.35
         dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
-        dismissButton.backgroundColor = #colorLiteral(red: 0.8338858485, green: 0.2595152557, blue: 0.3878593445, alpha: 1)
+        dismissButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         if let name = place.name {
             placeName?.text = name
         }
@@ -318,7 +318,7 @@ extension DetailPlaceViewController: UIViewControllerTransitioningDelegate {
         transition.transitionMode = .present
        // transition.startingPoint = dismissButton.center
         transition.startingPoint = CGPoint(x: view.bounds.maxX - 50, y: view.bounds.maxY - 50)
-        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        transition.circleColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         return transition
     }
@@ -326,7 +326,7 @@ extension DetailPlaceViewController: UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .dismiss
         transition.startingPoint = CGPoint(x: view.bounds.maxX - 50, y: view.bounds.maxY - 50)
-        transition.circleColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        transition.circleColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         return transition
     }

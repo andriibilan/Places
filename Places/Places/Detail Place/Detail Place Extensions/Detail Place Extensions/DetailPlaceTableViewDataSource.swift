@@ -26,8 +26,8 @@ extension DetailPlaceViewController : UITableViewDataSource {
         cell.layer.borderWidth = 1.5
         
         cell.labelForReview?.text = review.text
-        cell.labelForReview?.backgroundColor? = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
-        cell.labelForReview?.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        cell.labelForReview?.backgroundColor? = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        cell.labelForReview?.textColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
         
         cell.labelForReviewer?.text = review.author
         cell.labelForReviewer?.textColor = #colorLiteral(red: 0.2275260389, green: 0.6791594625, blue: 0.5494497418, alpha: 1)
