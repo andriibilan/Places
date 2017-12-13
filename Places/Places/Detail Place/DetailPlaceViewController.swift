@@ -121,10 +121,26 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         
         
         //
+        let mapAlert = UIAlertController(title: "Choose Map", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         
-        drawRouteAtAppleMap()
+        mapAlert.addAction(UIAlertAction(title: "Place Map", style: .default, handler: {(action:UIAlertAction) in
+            self.drawRouteAtPlaceMap(sourse: CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude), destination: CLLocationCoordinate2D(latitude: (self.place.location?.latitude)!, longitude: (self.place.location?.longitude)!))
+        }))
         
-        drawRouteAtPlaceMap(sourse: CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude), destination: CLLocationCoordinate2D(latitude: (place.location?.latitude)!, longitude: (place.location?.longitude)!))
+        mapAlert.addAction(UIAlertAction(title: "Apple Map", style: .default, handler: {(action:UIAlertAction) in
+            self.drawRouteAtAppleMap()
+        }))
+        
+        mapAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(mapAlert, animated: true, completion: nil)
+        
+        
+        
+        //
+      //  drawRouteAtAppleMap()
+        
+     //   drawRouteAtPlaceMap(sourse: CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude), destination: CLLocationCoordinate2D(latitude: (place.location?.latitude)!, longitude: (place.location?.longitude)!))
         
     }
     
