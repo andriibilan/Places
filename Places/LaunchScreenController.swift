@@ -20,14 +20,22 @@ class  LaunchScreenController: UIViewController {
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         sleep(1)
-       
-       
+        
+        
     }
     
     func animationLogo() {
         
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "main")
-        self.present(vc!, animated: true, completion: nil)
-        
+        UIView.animateKeyframes(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations:  {
+            UIView.setAnimationRepeatCount(2)
+            
+            self.imageScreen.frame.origin.y += 20
+            self.imageScreen.frame.origin.y = 0
+          
+        },
+            completion: { finished in
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "main")
+            self.present(vc!, animated: true, completion: nil)
+        })
     }
 }

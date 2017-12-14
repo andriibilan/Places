@@ -566,6 +566,9 @@
                         <viewLayoutGuide key="safeArea" id="kEH-Xw-gf7"/>
                     </view>
                     <navigationItem key="navigationItem" id="s7g-aZ-P8M"/>
+                    <connections>
+                        <outlet property="imageScreen" destination="TXF-hf-kur" id="NBL-ao-UWJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AgA-XO-M6I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
