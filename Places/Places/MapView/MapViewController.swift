@@ -15,15 +15,15 @@ var pressCoordinate = Location(latitude: 49.841856, longitude: 24.031530)
 var filterArray = [PlaceType]()
 
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, OutputInterface {
     
     let segueToAddScreen = "addPlace"
-    var locationManager:CLLocationManager!
+    var locationManager: CLLocationManager!
     var region: MKCoordinateRegion?
     var menu = ViewController()
     let mapDynamic = Dynamic()
     //    var menuIsOpen = false
-    
+    private let transition = CustomTransitionAnimator()
 
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var filterTableView: UITableView!
@@ -395,6 +395,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if segue.identifier == segueToAddScreen {
             let addScreen = segue.destination as? AddNewPlaceController
             addScreen?.newLocation = pressCoordinate
+            addScreen?.transitioningDelegate = self
+            addScreen?.modalPresentationStyle = .custom
         }
     }
     
@@ -491,6 +493,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         self.map.add(circle)
     }
     
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .present
+        transition.startingPoint = CGPoint(x: view.bounds.midX, y: view.bounds.maxY)
+        transition.circleColor = UIColor(red: 235.0/255.0, green: 75.0/255.0, blue: 110.0/255.0, alpha: 1.0)
+        
+        return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .dismiss
+        transition.startingPoint = CGPoint(x: view.bounds.midX, y: view.bounds.maxY)
+        transition.circleColor = UIColor(red: 235.0/255.0, green: 75.0/255.0, blue: 110.0/255.0, alpha: 1.0)
+        
+        return transition
+    }
     
 }
 

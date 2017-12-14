@@ -9,36 +9,28 @@
 import UIKit
 
 class Rating: UIView {
-
-    
     var rating: Double = 0.0
-    
+    var angles: [Double] = [-162.0, -126.0, -90.0, -54.0, -18.0, 18.0, 54.0, 90.0, 126.0, 162.0, -162.0]
     var starPoints = [CGPoint] ()
     var filledHalf = [CGPoint] ()
     var emptyHalf = [CGPoint] ()
-    
     var starSize: CGFloat = 0
-    
     var leadingPoint: CGPoint = CGPoint()
     var tralingPoint: CGPoint = CGPoint()
     var ratingRule: CGFloat = 0
-    
     var firstColor: CGColor = UIColor.yellow.cgColor
     var secondColor: CGColor = UIColor.white.cgColor
     
-    init (x: Double, y: Double, height: Double, currentRate: Double, mainColor: CGColor = UIColor.yellow.cgColor, backColor: CGColor = UIColor.white.cgColor) {
+    init (x: Double, y: Double, height: Double, currentRate: Double) {
         let frame = CGRect(x: x, y: y, width: height * 5, height: height)
         super.init(frame: frame)
         backgroundColor = UIColor.clear
-        firstColor = mainColor
-        secondColor = backColor
         starSize = CGFloat(height)
         rating = currentRate
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.cyan
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -85,38 +77,34 @@ class Rating: UIView {
         return CGFloat( sin(coordinate * Double.pi / 180) )
     }
     
+    func createPoint(angle: Double, centralPoint: CGPoint, beam: CGFloat) ->CGPoint {
+        return CGPoint(x: offsetX(coordinate: angle) * beam + centralPoint.x,
+                       y: offsetY(coordinate: angle) * beam + centralPoint.y)
+    }
+    
     func drawStar(context: CGContext, points: [CGPoint], color: CGColor) {
-        context.beginPath()
         context.setFillColor(color)
         context.move(to: points[0])
         for dot in points {
             context.addLine(to: dot)
         }
-        context.closePath()
         context.fillPath()
     }
     
     func setFilledHalfArray(_ split: CGFloat) {
         var splitPoint = CGPoint(x: leadingPoint.x + ratingRule * split, y: 0)
-        
         filledHalf.append(starPoints[0])
         
         for currentIndex in 1...10 {
-            
-            if  ( ( starPoints[currentIndex].x >= splitPoint.x) && starPoints[currentIndex - 1].x < splitPoint.x ) ||
-                ( starPoints[currentIndex].x < splitPoint.x && ( starPoints[currentIndex - 1].x >= splitPoint.x ) ) {
-                
+            if  (  starPoints[currentIndex].x >= splitPoint.x && starPoints[currentIndex - 1].x < splitPoint.x ) ||
+                ( starPoints[currentIndex].x < splitPoint.x && starPoints[currentIndex - 1].x >= splitPoint.x ) {
                 splitPoint.y = ( ( splitPoint.x - starPoints[currentIndex - 1].x) / (starPoints[currentIndex].x - starPoints[currentIndex - 1].x) ) * (starPoints[currentIndex].y - starPoints[currentIndex - 1].y) + starPoints[currentIndex - 1].y
-                
                 filledHalf.append(splitPoint)
-                
                 emptyHalf.append(splitPoint)
             }
-            
             if ( starPoints[currentIndex].x < splitPoint.x ) {
                 filledHalf.append(starPoints[currentIndex])
             }
-            
             if ( starPoints[currentIndex].x > splitPoint.x ) {
                 emptyHalf.append(starPoints[currentIndex])
             }
@@ -124,29 +112,12 @@ class Rating: UIView {
     }
     
     func setStarPointsArray(centralPoint: CGPoint, longBeam: CGFloat, shortBeam: CGFloat) {
-        starPoints =
-            [CGPoint(x: offsetX(coordinate: -162) * longBeam + centralPoint.x,
-                     y: offsetY(coordinate: -162) * longBeam + centralPoint.y),
-             CGPoint(x: offsetX(coordinate: -126) * shortBeam + centralPoint.x,
-                     y: offsetY(coordinate: -126) * shortBeam + centralPoint.y),
-             CGPoint(x: centralPoint.x,
-                     y: offsetY(coordinate: -90) * longBeam + centralPoint.y),
-             CGPoint(x: offsetX(coordinate: -54) * shortBeam  + centralPoint.x,
-                     y: offsetY(coordinate: -54) * shortBeam + centralPoint.y),
-             CGPoint(x: offsetX(coordinate: -18) * longBeam  + centralPoint.x,
-                     y: offsetY(coordinate: -18) * longBeam + centralPoint.y),
-             CGPoint(x: offsetX(coordinate: 18) * shortBeam  + centralPoint.x,
-                     y: offsetY(coordinate: 18) * shortBeam + centralPoint.y),
-             CGPoint(x: offsetX(coordinate: 54) * longBeam  + centralPoint.x,
-                     y: offsetY(coordinate: 54) * longBeam + centralPoint.y),
-             CGPoint(x: centralPoint.x,
-                     y: offsetY(coordinate: 90) * shortBeam + centralPoint.y),
-             CGPoint(x: offsetX(coordinate: 126) * longBeam  + centralPoint.x,
-                     y: offsetY(coordinate: 126) * longBeam + centralPoint.y),
-             CGPoint(x: offsetX(coordinate: 162) * shortBeam  + centralPoint.x,
-                     y: offsetY(coordinate: 162) * shortBeam + centralPoint.y),
-             CGPoint(x: offsetX(coordinate: -162) * longBeam + centralPoint.x,
-                     y: offsetY(coordinate: -162) * longBeam + centralPoint.y)]
+        starPoints = []
+        for index in 0...4 {
+            starPoints.append(createPoint(angle: angles[index*2], centralPoint: centralPoint, beam: longBeam))
+            starPoints.append(createPoint(angle: angles[index*2 + 1], centralPoint: centralPoint, beam: shortBeam))
+        }
+        starPoints.append(createPoint(angle: angles[10], centralPoint: centralPoint, beam: longBeam))
         
         leadingPoint = starPoints[0]
         tralingPoint = starPoints[4]
