@@ -13,32 +13,31 @@ class ChangePassword {
     let validator = Validator()
     
     func  changePassword(controller: UIViewController) {
-        var newPassword = ""
-        var confirmPassword = ""
         let passwordAllertController = UIAlertController(title: "Password", message: "Please write new password", preferredStyle: .alert)
         passwordAllertController.changeAlertProperties(alertController: passwordAllertController, color: .white)
         passwordAllertController.addAction(UIAlertAction(title: "Save", style: .default, handler: {(alert: UIAlertAction) in
-            newPassword = passwordAllertController.textFields![0].text!
-            confirmPassword = passwordAllertController.textFields![1].text!
-            if newPassword == confirmPassword && self.validator.isValidPassword(password: newPassword) {
-                self.updatePassword(password: newPassword, controller: controller)
-            } else {
-               controller.resultAlert(text: "Please write correct  confirm password", message: nil, color: .red)
-                
-            }
+            self.checkPassword(newPassword: passwordAllertController.textFields![0].text!,
+                          confirmPassword: passwordAllertController.textFields![1].text!,
+                          controller: controller)
         }))
         passwordAllertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         passwordAllertController.addTextField { (passwordTextField)  in
             passwordTextField.placeholder = "New password"
             passwordTextField.isSecureTextEntry = true
-            newPassword = passwordTextField.text!
         }
         passwordAllertController.addTextField { (confirmPasswordTextField)  in
             confirmPasswordTextField.placeholder = "Confirm password"
             confirmPasswordTextField.isSecureTextEntry = true
-            confirmPassword = confirmPasswordTextField.text!
         }
         controller.present(passwordAllertController, animated: true, completion: nil)
+    }
+    
+    func checkPassword(newPassword: String, confirmPassword: String, controller: UIViewController) {
+        if newPassword == confirmPassword && self.validator.isValidPassword(password: newPassword) {
+            updatePassword(password: newPassword, controller: controller)
+        } else {
+            controller.resultAlert(text: "Please write correct confirm password", message: nil, color: .red)
+        }
     }
     
     func updatePassword(password: String, controller: UIViewController) {
