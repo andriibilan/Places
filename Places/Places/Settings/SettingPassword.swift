@@ -32,15 +32,14 @@ class ChangePassword {
         controller.present(passwordAllertController, animated: true, completion: nil)
     }
     
-    func checkPassword(newPassword: String, confirmPassword: String, controller: UIViewController) {
-        if newPassword == confirmPassword && self.validator.isValidPassword(password: newPassword) {
-            updatePassword(password: newPassword, controller: controller)
-        } else {
-            controller.resultAlert(text: "Please write correct confirm password", message: nil, color: .red)
+    private  func checkPassword(newPassword: String, confirmPassword: String, controller: UIViewController) {
+        guard newPassword == confirmPassword && self.validator.isValidPassword(password: newPassword) else {
+            return controller.resultAlert(text: "Please write correct confirm password", message: nil, color: .red)
         }
+        updatePassword(password: newPassword, controller: controller)
     }
     
-    func updatePassword(password: String, controller: UIViewController) {
+   private func updatePassword(password: String, controller: UIViewController) {
         if let user = Auth.auth().currentUser {
             user.updatePassword(to: password, completion: { (error) in
                 if let error = error {
@@ -52,4 +51,3 @@ class ChangePassword {
         }
     }
 }
-

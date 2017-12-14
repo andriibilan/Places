@@ -20,11 +20,7 @@ class ChangeEmail {
         let emailAlertController = UIAlertController(title: "e-mail", message: "Please write new e-mail", preferredStyle: .alert)
         emailAlertController.changeAlertProperties(alertController: emailAlertController, color: .white)
         emailAlertController.addAction(UIAlertAction(title: "Save", style: .default, handler: {(alert: UIAlertAction) in
-            if self.validator.isValidEmail(email: emailAlertController.textFields![0].text!) {
-                self.updateMail(mailString: emailAlertController.textFields![0].text!, controller: controller)
-            } else {
-                controller.resultAlert(text: "Error", message:"Please write correct e-mail", color: .red)
-            }
+            self.checkEmail(newEmail: emailAlertController.textFields![0].text!, controller: controller)
         }))
         emailAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         emailAlertController.addTextField {(emailTextFiled) in
@@ -33,7 +29,14 @@ class ChangeEmail {
         controller.present(emailAlertController, animated: true, completion: nil)
     }
     
-    func updateMail (mailString: String, controller: UIViewController) {
+    private func checkEmail(newEmail: String, controller: UIViewController) {
+        guard validator.isValidEmail(email: newEmail) else {
+            return controller.resultAlert(text: "Error", message:"Please write correct e-mail", color: .red)
+        }
+        updateMail(mailString: newEmail, controller: controller)
+    }
+
+   private func updateMail (mailString: String, controller: UIViewController) {
         let userID : String = (Auth.auth().currentUser?.uid)!
         if let user = Auth.auth().currentUser {
             user.updateEmail(to: mailString, completion: {(error) in
@@ -47,5 +50,4 @@ class ChangeEmail {
             })
         }
     }
- 
 }
