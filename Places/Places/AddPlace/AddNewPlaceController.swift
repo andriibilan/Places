@@ -12,8 +12,8 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
 
     let destination = "toAddBoard"
     let segueToMain = "goBack"
-    let phoneTemplate = "+380(__) ___ __ __"
-    let underLiner: Character = "_"
+    let phoneTemplate = "+380 (XX) XXX XX XX"
+    let underLiner: Character = "X"
     ///outlets
     @IBOutlet weak var inside: UIView!
     @IBOutlet weak var scroll: UIScrollView!
@@ -46,7 +46,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
         website.delegate = self
         scroll.delegate = self
         
-        list.isHidden = false
+        list.isHidden = true
         
         unseen = UIView.init(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
         category.inputView = unseen
@@ -58,34 +58,8 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
         phoneFormat = phoneNumberFormatter(field: number, ins: phoneTemplate, replacmentCharacter: underLiner)
     }
     
-    @objc func dismissKeyboard() {
-        if keyBoardPresent == true {
-            let newHeight = scroll.contentSize.height - offset
-            scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: newHeight)
-            insideHeight.constant -= offset
-            upper.constant = 18
-            keyBoardPresent = false
-        }
-        view.endEditing(true)
-    }
-
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if keyBoardPresent == false {
-            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                offset = keyboardSize.height
-                let newHeight = scroll.contentSize.height + offset
-                scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: newHeight)
-                insideHeight.constant += offset
-                upper.constant += offset
-                keyBoardPresent = true
-            }
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        //print("lat is \(newLocation?.latitude)")
-        //print("lng is \(newLocation?.longitude)")
+        //NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -98,17 +72,53 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
             childController?.delegate = self
         }
     }
+   
+    @objc func dismissKeyboard() {
+        /*if keyBoardPresent == true {
+            let newHeight = scroll.contentSize.height - offset
+            scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: newHeight)
+            insideHeight.constant -= offset
+            upper.constant = 18
+            keyBoardPresent = false
+        }*/
+        //list.isHidden = true
+        view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+       /* if keyBoardPresent == false {
+            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                offset = keyboardSize.height
+                let newHeight = scroll.contentSize.height + offset
+                scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: newHeight)
+                insideHeight.constant += offset
+                upper.constant += offset
+                keyBoardPresent = true
+            }
+        }*/
+    }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        //let frame = textField.superview?.convert(textField.frame.origin, to: nil)// convertPoint:aView.frame.origin toView:nil
-        list.isHidden = ( textField == category ) ?  false: true
+        if textField == category {
+          /*  if upper.constant != 18 {
+                let newHeight = scroll.contentSize.height - offset
+                scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: newHeight)
+                insideHeight.constant -= offset
+                upper.constant = 18
+                keyBoardPresent = false
+            }*/
+            list.isHidden = false
+        }
+        else {
+            list.isHidden = true
+        }
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         if textField != category {
             UIView.animate(withDuration: 0.25, animations: {
-                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y + 200, width: self.view.frame.size.width, height: self.view.frame.size.height);
+                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y + 210, width: self.view.frame.size.width, height: self.view.frame.size.height)
             })
         }
     }
@@ -116,8 +126,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField != category {
             UIView.animate(withDuration: 0.25, animations: {
-                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y - 200, width: self.view.frame.size.width, height: self.view.frame.size.height);
-                
+                self.view.frame = CGRect(x: self.view.frame.origin.x, y:self.view.frame.origin.y - 210, width: self.view.frame.size.width, height: self.view.frame.size.height)
             })
         }
     }
@@ -142,52 +151,55 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     }
     
     @IBAction func postToGoogle(_ sender: UIButton) {
-         let coordinates: [String: Double] = [
-        "lat": (newLocation?.latitude)!,
-        "lng": (newLocation?.longitude)!
-      ]
-       //wrap!!!!
-      let jsonArray: [String: Any] =
-             [ "location": coordinates,
-               "accuracy": 50,
-               "name": name.text!,
-               "phone_number": number.text!,
-               "address": addres.text!,
-               "types": [category.text],
-               "language": "en-AU"]
-        
-        let jsonData = try? JSONSerialization.data(withJSONObject: jsonArray)
-        
-        var answer = [String: Any] ()
-        
-        if let url = URL(string: "https://maps.googleapis.com/maps/api/place/add/json?key=\(AppDelegate.apiKey)"){
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.httpBody = jsonData
-        
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else {
-                   print(error?.localizedDescription ?? "No data")
-                return
+        if checkForFields() {
+            let coordinates: [String: Double] = [
+                "lat": (newLocation?.latitude)!,
+                "lng": (newLocation?.longitude)!
+            ]
+            let jsonArray: [String: Any] =
+                 [ "location": coordinates,
+                   "accuracy": 50,
+                   "name": name.text!,
+                   "phone_number": number.text!,
+                   "address": addres.text!,
+                   "types": [category.text],
+                   "language": "en-AU"]
+            
+            let jsonData = try? JSONSerialization.data(withJSONObject: jsonArray)
+            
+            var answer = [String: Any] ()
+            
+            if let url = URL(string: "https://maps.googleapis.com/maps/api/place/add/json?key=\(AppDelegate.apiKey)"){
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.httpBody = jsonData
+            
+                let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                    guard let data = data, error == nil else {
+                       print(error?.localizedDescription ?? "No data")
+                        return
+                    }
+                    let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                    if let responseJSON = responseJSON as? [String: Any] {
+                       answer = responseJSON
+                       print(responseJSON)
+                    }
                 }
-                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-                if let responseJSON = responseJSON as? [String: Any] {
-                   answer = responseJSON
-                   print(responseJSON)
-                }
+                task.resume()
             }
-            task.resume()
+            let _ = answer["status"]
+            
+            let alert = UIAlertController(title: "YOUR REQUEST WAS SENDED", message: "waiting for approval", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: { action in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
-        
-        let requestStatus = answer["status"]// as? String
-        //print(answer["status"] as Any)
-        //print(requestStatus as Any)
-        
-        let alert = UIAlertController(title: "YOUR REQUEST WAS SENDED", message: "you request status is \(requestStatus ?? "unknown")", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: { action in
-            self.dismiss(animated: true, completion: nil)
-        }))
-        self.present(alert, animated: true, completion: nil)
+        else {
+            let alert = UIAlertController(title: "WARNING", message: "all fields should be filled", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func cansel(_ sender: UIButton) {
@@ -195,10 +207,12 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     }
     
     func checkForFields() -> Bool{
-        if isValidEmail(testStr: website.text!) {
+        if name.text != "" && addres.text != "" && number.text?.contains(underLiner) == false && category.text != "" && isValidEmail(testStr: website.text!) {
             return true
         }
-        return false
+        else {
+            return false
+        }
     }
     
     func setCategoryText(newText: String) {
@@ -208,9 +222,7 @@ class AddNewPlaceController: UIViewController, UITextFieldDelegate, UIScrollView
     
     func isValidEmail(testStr:String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: testStr)
-    }
-    
+    }    
 }

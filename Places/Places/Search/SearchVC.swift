@@ -23,7 +23,7 @@ class SearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate,  U
             apiKey: AppDelegate.apiKey,
             radius: UserDefaults.standard.integer(forKey: "Radius"),
             currentLocation: pressCoordinate,
-            filters: [PlaceType](),
+            filters: PlaceType.all,
             completion: {foundedPlaces, errorMessage in
                 if let errorMessage = errorMessage{
                     self.showAlert(message: errorMessage)

@@ -81,20 +81,17 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     private func refillOpenPlaces() {
-        if filterOpenOnly {
-            openPlaces = places.filter {
-                if $0.isOpen != nil {
-                    return $0.isOpen! == true
-                } else {
-                    return false
-                }
+        guard filterOpenOnly else {
+            return  openPlaces = places
+        }
+        openPlaces = places.filter {
+            guard $0.isOpen != nil else {
+                  return false
             }
-        } else {
-            openPlaces = places
+             return $0.isOpen! == true
         }
     }
     
-   
     func updateData() {
         loadVC.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
         googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate, filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
@@ -107,17 +104,16 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if let foundedPlaces = foundedPlaces {
                 self.places = foundedPlaces
                 self.places.sort(by: {($0.distance ?? 0) < ($1.distance ?? 0)})
-               
+                
                 DispatchQueue.main.sync {
                     self.tableView.reloadData()
                     loadVC.customActivityIndicatory((self.view)!, startAnimate: false).stopAnimating()
-                    }
-                
-        }
-    })
+                }
+            }
+        })
     }
     
-    //MARK:- TableView DataSource
+    // MARK:- TableView DataSource
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -127,11 +123,11 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		return filterOpenOnly ? openPlaces.count : places.count
 	}
 
-    //MARK:- TableView Delegate
+    // MARK:- TableView Delegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
             let place = (filterOpenOnly) ? openPlaces[safe: indexPath.row] : places[safe: indexPath.row]
-            //placeholder image
+            // image
             cell.thumbnailImageView.image = place?.icon
             //name
             cell.name.text = place?.name
@@ -160,7 +156,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    //MARK: - Fade in effect
+    // MARK:- Fade in effect
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // Define the initial state (Before the animation)
         cell.alpha = 0
@@ -168,10 +164,10 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
     }
     
-   private func typePlaces (types: [PlaceType]) -> String {
+    private func typePlaces (types: [PlaceType]) -> String {
         var stringType = ""
         for type in types {
-            stringType += type.rawValue + ", "
+            stringType += type.printableStyle + ", "
         }
         stringType.removeLast()
         stringType.removeLast()
@@ -192,7 +188,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
  
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let place = (filterOpenOnly) ? openPlaces[safe: indexPath.row] : places[safe: indexPath.row]
-        googlePlacesManager.getPhotos(ofPlace: place!){ filledPlace, errorMessage in
+        googlePlacesManager.getPhotos(ofPlace: place!) { filledPlace, errorMessage in
                 DispatchQueue.main.async {
                     print(errorMessage ?? "")
                     self.performSegue(withIdentifier: "ShowDetailPlace", sender: filledPlace)

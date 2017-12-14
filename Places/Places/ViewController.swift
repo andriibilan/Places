@@ -70,11 +70,20 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         
     }
     
-    //MARK:- Custom menu view and animations
+    // MARK:- Custom menu view and animations
     
     @IBAction func menuTapped(_ sender: FloatingActionButton) {
         animateThemeView(expand: !menuIsOpen)
+        
         UIView.animate(withDuration: 0.3, animations: {
+            if sender.transform == .identity {
+                sender.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
+                sender.backgroundColor = #colorLiteral(red: 0.8338858485, green: 0.2595152557, blue: 0.3878593445, alpha: 1)
+            } else {
+                sender.transform = .identity
+                sender.backgroundColor = #colorLiteral(red: 0.9351765513, green: 0.296548903, blue: 0.4392450452, alpha: 1)
+            }
+
             if self.menuView.transform == .identity {
                 self.closeMenu()
             } else {
@@ -98,7 +107,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         settingsButton.transform = CGAffineTransform(translationX: 15, y: 0)
     }
     
-    //MARK:- Custom compass animations
+    // MARK:- Custom compass animations
     
     func animateThemeView(expand: Bool) {
         menuIsOpen = expand
