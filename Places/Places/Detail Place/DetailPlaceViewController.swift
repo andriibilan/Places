@@ -67,6 +67,28 @@ class DetailPlaceViewController: UIViewController, UITableViewDelegate {
     
     let transition = CustomTransitionAnimator()
     
+    
+    //
+    @IBOutlet weak var clockInfo: UIButton!
+    
+    @IBOutlet weak var scheduleTimeLabel: UILabel!
+    
+    @IBOutlet weak var heightEqualConstrainForSchedule: NSLayoutConstraint!
+    
+    private var isInfoOpen = false
+    
+    @IBAction func openCloseClockInfo(_ sender: UIButton) {
+        switch isInfoOpen {
+        case true :
+            isInfoOpen = false
+            heightEqualConstrainForSchedule.constant = 0
+        case false:
+            isInfoOpen = true
+            heightEqualConstrainForSchedule.constant = scheduleTimeLabel.frame.width / 2
+        }
+    }
+    //
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.35
@@ -75,6 +97,22 @@ class DetailPlaceViewController: UIViewController, UITableViewDelegate {
         if let name = place.name {
             placeName?.text = name
         }
+        
+        //print("time: \(place.workingSchedule![0])")
+        if let time = place.workingSchedule {
+            scheduleTimeLabel.text = """
+            \(time[0])
+            \(time[1])
+            \(time[2])
+            \(time[3])
+            \(time[4])
+            \(time[5])
+            \(time[6])
+            """
+        }else {
+            clockInfo.isHidden = true
+        }
+        
         feedbackTableView.reloadData()
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
     }
