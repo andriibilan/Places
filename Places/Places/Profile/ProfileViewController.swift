@@ -38,8 +38,8 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     var validator = Validator()
     let blurEffect = UIBlurEffect(style: .light)
     
-    @IBOutlet weak var dismissButton: UIButton!{
-        didSet{
+    @IBOutlet weak var dismissButton: UIButton! {
+        didSet {
             dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
             dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
         }

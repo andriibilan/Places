@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wgX-I0-ut5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0zQ-oc-99s">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="y1Q-Hq-eQW">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="0zQ-oc-99s" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sHp-nd-gvi">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="DjC-KS-0zF" kind="relationship" relationship="rootViewController" id="75K-kx-zoj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tii-q0-Kbn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2145" y="10"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Z2A-jn-3On">
             <objects>
@@ -519,6 +534,43 @@
             </objects>
             <point key="canvasLocation" x="3393" y="539"/>
         </scene>
+        <!--Launch Screen Controller-->
+        <scene sceneID="Smf-bN-Ud7">
+            <objects>
+                <viewController id="DjC-KS-0zF" customClass="LaunchScreenController" customModule="Places" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6IM-cd-8WU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ItunesArtwork" translatesAutoresizingMaskIntoConstraints="NO" id="TXF-hf-kur">
+                                <rect key="frame" x="0.0" y="89" width="375" height="342"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLACES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SI-2i-kyu">
+                                <rect key="frame" x="67" y="463" width="240" height="84"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
+                                <color key="textColor" red="0.2274509804" green="0.67843137249999996" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6SI-2i-kyu" firstAttribute="centerX" secondItem="TXF-hf-kur" secondAttribute="centerX" id="09O-AF-GFn"/>
+                            <constraint firstItem="kEH-Xw-gf7" firstAttribute="bottom" secondItem="TXF-hf-kur" secondAttribute="bottom" constant="236" id="3v4-a6-gfS"/>
+                            <constraint firstItem="6SI-2i-kyu" firstAttribute="top" secondItem="TXF-hf-kur" secondAttribute="bottom" constant="32" id="QFP-yh-SRb"/>
+                            <constraint firstItem="TXF-hf-kur" firstAttribute="top" secondItem="kEH-Xw-gf7" secondAttribute="top" constant="69" id="YNY-uQ-a6C"/>
+                            <constraint firstItem="TXF-hf-kur" firstAttribute="leading" secondItem="kEH-Xw-gf7" secondAttribute="leading" id="g7H-4v-MIe"/>
+                            <constraint firstItem="TXF-hf-kur" firstAttribute="trailing" secondItem="kEH-Xw-gf7" secondAttribute="trailing" id="g84-Ju-tlM"/>
+                            <constraint firstItem="6SI-2i-kyu" firstAttribute="leading" secondItem="kEH-Xw-gf7" secondAttribute="leading" constant="67" id="iuN-aW-gkl"/>
+                            <constraint firstItem="kEH-Xw-gf7" firstAttribute="bottom" secondItem="6SI-2i-kyu" secondAttribute="bottom" constant="120" id="od3-80-QjG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kEH-Xw-gf7"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="s7g-aZ-P8M"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AgA-XO-M6I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1124" y="9"/>
+        </scene>
     </scenes>
     <resources>
         <image name="115801-64" width="32" height="32"/>
@@ -527,6 +579,7 @@
         <image name="2703062-64" width="32" height="32"/>
         <image name="2703073-64" width="64" height="64"/>
         <image name="314478-64" width="32" height="32"/>
+        <image name="ItunesArtwork" width="512" height="512"/>
         <image name="closed-sign" width="32" height="32"/>
         <image name="distance-sorting" width="32" height="32"/>
         <image name="filter" width="32" height="32"/>
