@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OutputInterface {
+class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OutputInterface  {
     let listDynamic = Dynamic()
     public var places: [Place] = []
     private var openPlaces: [Place] = []
     private var filterOpenOnly = false
     private var sortingByName = true
-     var googlePlacesManager: GooglePlacesManager!
+    var googlePlacesManager: GooglePlacesManager!
+    let transition = CustomTransitionAnimator()
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -80,19 +81,16 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     private func refillOpenPlaces() {
-        if filterOpenOnly {
-            openPlaces = places.filter {
-                if $0.isOpen != nil {
-                    return $0.isOpen! == true
-                } else {
-                    return false
-                }
+        guard filterOpenOnly else {
+            return  openPlaces = places
+        }
+        openPlaces = places.filter {
+            guard $0.isOpen != nil else {
+                  return false
             }
-        } else {
-            openPlaces = places
+             return $0.isOpen! == true
         }
     }
-    
     
     func updateData() {
         loadVC.customActivityIndicatory(self.view, startAnimate: true).startAnimating()
@@ -115,7 +113,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         })
     }
     
-    //MARK:- TableView DataSource
+    // MARK:- TableView DataSource
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -125,7 +123,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		return filterOpenOnly ? openPlaces.count : places.count
 	}
 
-    //MARK:- TableView Delegate
+    // MARK:- TableView Delegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
             let place = (filterOpenOnly) ? openPlaces[safe: indexPath.row] : places[safe: indexPath.row]
@@ -158,7 +156,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    //MARK: - Fade in effect
+    // MARK:- Fade in effect
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // Define the initial state (Before the animation)
         cell.alpha = 0
@@ -190,7 +188,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
  
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let place = (filterOpenOnly) ? openPlaces[safe: indexPath.row] : places[safe: indexPath.row]
-        googlePlacesManager.getPhotos(ofPlace: place!){ filledPlace, errorMessage in
+        googlePlacesManager.getPhotos(ofPlace: place!) { filledPlace, errorMessage in
                 DispatchQueue.main.async {
                     print(errorMessage ?? "")
                     self.performSegue(withIdentifier: "ShowDetailPlace", sender: filledPlace)
@@ -202,7 +200,11 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		if segue.identifier == "ShowDetailPlace" {
             let d = segue.destination as? DetailPlaceViewController
             d?.place = sender as! Place
+            d?.transitioningDelegate = self
+            d?.modalPresentationStyle = .custom
 		}
 	}
-    
 }
+
+
+

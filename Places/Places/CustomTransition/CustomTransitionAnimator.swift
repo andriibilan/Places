@@ -31,7 +31,7 @@ class CustomTransitionAnimator: NSObject,UIViewControllerAnimatedTransitioning {
 	func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
 		return duration
 	}
-	
+    
 	func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 		
 		let containerView = transitionContext.containerView

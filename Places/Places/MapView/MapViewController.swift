@@ -11,6 +11,7 @@ import MapKit
 import CoreLocation
 import Firebase
 
+
 var pressCoordinate = Location(latitude: 49.841856, longitude: 24.031530)
 var filterArray = [PlaceType]()
 
@@ -24,11 +25,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     let mapDynamic = Dynamic()
     //    var menuIsOpen = false
     private let transition = CustomTransitionAnimator()
-
+    
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var filterTableView: UITableView!
     @IBOutlet weak var viewForFilter: UIView!
-
+    
     @IBAction func currentLocation(_ sender: Any) {
         map.removeAnnotations(self.map.annotations)
         map.removeOverlays(self.map.overlays)
@@ -51,6 +52,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         loadVC.customActivityIndicatory(self.view, startAnimate: true)
         mapDynamic.dynamicFilter(button: filterButton, parView: view)
         changeMapType()
@@ -60,7 +62,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         locationManagerConfigurate()
         
-
+        
         googlePlacesManager = GooglePlacesManager(
             apiKey: AppDelegate.apiKey,
             radius: UserDefaults.standard.integer(forKey: "Radius"),
@@ -93,7 +95,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         sideMenuConstraint.constant = -160
         // Do any additional setup after loading the view.
-
+        
     }
     
     
@@ -191,7 +193,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     // MARK: - Long Press Action
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
-       
+        
         locationManager.stopUpdatingLocation()
         let pressPoint = sender.location(in: map)
         let location = map.convert(pressPoint, toCoordinateFrom: map)
@@ -208,52 +210,52 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         actionSheet.addAction(UIAlertAction.init(title: "Add new place",
                                                  style: UIAlertActionStyle.default,
                                                  handler: { (action) in
-            pressCoordinate = Location(latitude: location.latitude,
-                                       longitude: location.longitude )
-            if Auth.auth().currentUser != nil {
-                self.performSegue(withIdentifier: self.segueToAddScreen,
-                                  sender: pressCoordinate)
-            } else {
-                self.performSegue(withIdentifier: "toLogin", sender: nil)
-            }
+                                                    pressCoordinate = Location(latitude: location.latitude,
+                                                                               longitude: location.longitude )
+                                                    if Auth.auth().currentUser != nil {
+                                                        self.performSegue(withIdentifier: self.segueToAddScreen,
+                                                                          sender: pressCoordinate)
+                                                    } else {
+                                                        self.performSegue(withIdentifier: "toLogin", sender: nil)
+                                                    }
         }))
         
         actionSheet.addAction(UIAlertAction.init(title: "Show selected place",
                                                  style: UIAlertActionStyle.default,
                                                  handler: { (action) in
-            self.map.removeAnnotations(self.map.annotations)
-            self.map.removeOverlays(self.map.overlays)
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = location
-            annotation.title = "Selected place"
-            annotation.subtitle = "Add another place"
-            self.map.addAnnotation(annotation)
-            
-            let loc = CLLocation(latitude: location.latitude as CLLocationDegrees,
-                                 longitude: location.longitude as CLLocationDegrees)
-            pressCoordinate = Location(latitude: location.latitude,
-                                       longitude: location.longitude )
-  
-
-            self.googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
-                
-                if errorMessage != nil {
-                    print("\t\(errorMessage!)")
-                    self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
-                    
-                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
-                    }
-
-                if let foundedPlaces = foundedPlaces {
-                    self.places = foundedPlaces
-                    DispatchQueue.main.sync {
-                        self.updateData()
-                    }
-                }
-            })
-            
-            self.addRadiusCircle(location: loc)
+                                                    self.map.removeAnnotations(self.map.annotations)
+                                                    self.map.removeOverlays(self.map.overlays)
+                                                    
+                                                    let annotation = MKPointAnnotation()
+                                                    annotation.coordinate = location
+                                                    annotation.title = "Selected place"
+                                                    annotation.subtitle = "Add another place"
+                                                    self.map.addAnnotation(annotation)
+                                                    
+                                                    let loc = CLLocation(latitude: location.latitude as CLLocationDegrees,
+                                                                         longitude: location.longitude as CLLocationDegrees)
+                                                    pressCoordinate = Location(latitude: location.latitude,
+                                                                               longitude: location.longitude )
+                                                    
+                                                    
+                                                    self.googlePlacesManager = GooglePlacesManager(apiKey: AppDelegate.apiKey, radius: UserDefaults.standard.integer(forKey: "Radius"), currentLocation: pressCoordinate , filters: MapViewController.checkFilter(filter: filterArray), completion: { (foundedPlaces, errorMessage) in
+                                                        
+                                                        if errorMessage != nil {
+                                                            print("\t\(errorMessage!)")
+                                                            self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
+                                                            
+                                                            loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                                                        }
+                                                        
+                                                        if let foundedPlaces = foundedPlaces {
+                                                            self.places = foundedPlaces
+                                                            DispatchQueue.main.sync {
+                                                                self.updateData()
+                                                            }
+                                                        }
+                                                    })
+                                                    
+                                                    self.addRadiusCircle(location: loc)
         }))
         
         actionSheet.view.tintColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
@@ -267,10 +269,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let loc = locations.last! as CLLocation
         pressCoordinate = Location(latitude: loc.coordinate.latitude, longitude: loc.coordinate.longitude)
         let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
-      
+        
         if map.annotations.count != 0 {
             let annotation = self.map.annotations[0]
-        map.removeAnnotation(annotation)
+            map.removeAnnotation(annotation)
         }
         addRadiusCircle(location: loc)
         addCurrentLocation(coords: center)
@@ -341,10 +343,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             circle.lineWidth = 1
             
             return circle
-        } else {
-            return MKPolylineRenderer()
         }
+        
+        if overlay.isKind(of: MKPolyline.self) {
+            let polyLine = overlay
+            let polyLineRenderer = MKPolylineRenderer(overlay: polyLine)
+            polyLineRenderer.strokeColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+            polyLineRenderer.lineWidth = 2.0
+            return polyLineRenderer
+        }
+        
+        return MKPolylineRenderer()
+        
     }
+    
+    
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
@@ -391,6 +404,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if segue.identifier == "detailVC" {
             let d = segue.destination as? DetailPlaceViewController
             d?.place = sender as! Place
+            d?.mapView = map
+            d?.transitioningDelegate = self
+            d?.modalPresentationStyle = .custom
         }
         if segue.identifier == segueToAddScreen {
             let addScreen = segue.destination as? AddNewPlaceController
@@ -412,13 +428,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     var nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beauty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
     let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
-
+    
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nameFilterArray.count
     }
@@ -435,7 +451,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterCell.backgroundColor = colorForIndex(index: indexPath.row)
         filterCell.accessoryType = accessory
         filterCell.selectionStyle = .none
-
+        
         return filterCell
     }
     
@@ -481,7 +497,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-
+    
     func addRadiusCircle(location: CLLocation){
         for overlay in self.map.overlays {
             self.map.remove(overlay)
@@ -495,17 +511,35 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .present
-        transition.startingPoint = CGPoint(x: view.bounds.midX, y: view.bounds.maxY)
-        transition.circleColor = UIColor(red: 235.0/255.0, green: 75.0/255.0, blue: 110.0/255.0, alpha: 1.0)
-        
+        switch presenting {
+        case is DetailPlaceViewController:
+            transition.transitionMode = .present
+            transition.startingPoint = CGPoint(x: view.bounds.midX, y: view.bounds.height - (view.bounds.height * 0.1 / 2))
+            transition.circleColor = UIColor.white
+        case is AddNewPlaceController:
+            transition.transitionMode = .present
+            transition.startingPoint = CGPoint(x: view.bounds.midX, y: view.bounds.maxY)
+            transition.circleColor = UIColor(red: 235.0/255.0, green: 75.0/255.0, blue: 110.0/255.0, alpha: 1.0)
+        default:
+            break
+        }
         return transition
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .dismiss
-        transition.startingPoint = CGPoint(x: view.bounds.midX, y: view.bounds.maxY)
-        transition.circleColor = UIColor(red: 235.0/255.0, green: 75.0/255.0, blue: 110.0/255.0, alpha: 1.0)
-        
+        switch dismissed {
+        case is DetailPlaceViewController:
+            transition.transitionMode = .dismiss
+            transition.startingPoint = CGPoint(x: view.bounds.midX, y: view.bounds.height - (view.bounds.height * 0.1 / 2))
+            transition.circleColor = UIColor.white
+        case is AddNewPlaceController:
+            transition.transitionMode = .dismiss
+            transition.startingPoint = CGPoint(x: view.bounds.midX, y: view.bounds.maxY)
+            transition.circleColor = UIColor(red: 235.0/255.0, green: 75.0/255.0, blue: 110.0/255.0, alpha: 1.0)
+        default:
+            break
+        }
         return transition
     }
     

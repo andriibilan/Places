@@ -12,7 +12,7 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate {
     
     @IBOutlet weak var currentPhotoCollectionView: UICollectionView!
     
-    @IBOutlet weak var dismissButtonOutlet: UIButtonExplicit!
+    @IBOutlet weak var dismissButtonOutlet: UIButton!
     
     var photoArray : [UIImage] = []
     
@@ -22,7 +22,6 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate {
         super.viewDidLoad()
         dismissButtonOutlet.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
         dismissButtonOutlet.backgroundColor = #colorLiteral(red: 0.8338858485, green: 0.2595152557, blue: 0.3878593445, alpha: 1)
-        
         currentPhotoCollectionView.delegate = self
         currentPhotoCollectionView.dataSource = self
     }
@@ -31,7 +30,8 @@ class PhotoPagingViewController: UIViewController,UICollectionViewDelegate {
         currentPhotoCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
     }
     
-    @IBAction func dismissButton(_ sender: UIButtonExplicit) {
+    @IBAction func dismissButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
-    } 
+    }
 }
+

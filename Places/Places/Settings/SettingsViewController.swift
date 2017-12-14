@@ -8,10 +8,9 @@
 
 import UIKit
 
-
 class SettingsViewController: UIViewController {
 	@IBOutlet weak var dismissButton: UIButton! {
-		didSet{
+		didSet {
 			dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
 			dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
 		}
@@ -27,4 +26,3 @@ class SettingsViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
     }
 }
-

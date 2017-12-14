@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UITableViewDelegate {
+class DetailPlaceViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var PhotoCollectionView: UICollectionView!
     
@@ -34,6 +34,14 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
     @IBOutlet weak var dismissButton: UIButtonExplicit!
     
     @IBOutlet weak var placeTypeIcon: UIImageView!
+    
+    @IBOutlet weak var placeAddressIcon: UIImageViewExplicit!
+    
+    @IBOutlet weak var placeClockIcon: UIImageViewExplicit!
+    
+    @IBOutlet weak var placePhoneIcon: UIImageViewExplicit!
+    
+    @IBOutlet weak var placeWebsiteIcon: UIImageViewExplicit!
     
     @IBOutlet weak var heightConstaintForReviewTable: NSLayoutConstraint!
     
@@ -61,15 +69,56 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
     
     @IBOutlet weak var heightEqualConstrainForType: NSLayoutConstraint!
     
+    let transition = CustomTransitionAnimator()
+    
     var place:Place!
+    
+    var mapView : MKMapView!
+    
+    
+    
+    
+    //
+    @IBOutlet weak var clockInfo: UIButton!
+    
+    @IBOutlet weak var scheduleTimeLabel: UILabel!
+    
+    @IBOutlet weak var heightEqualConstrainForSchedule: NSLayoutConstraint!
+    
+    private var isInfoOpen = false
+    
+    @IBAction func openCloseClockInfo(_ sender: UIButton) {
+        switch isInfoOpen {
+        case true :
+            isInfoOpen = false
+            heightEqualConstrainForSchedule.constant = 0
+        case false:
+            isInfoOpen = true
+            heightEqualConstrainForSchedule.constant = scheduleTimeLabel.frame.width / 2
+        }
+    }
+    //
     
     override func viewDidLoad() {
         super.viewDidLoad()
         dismissButton.layer.cornerRadius = dismissButton.bounds.size.width * 0.35
         dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
-        dismissButton.backgroundColor = #colorLiteral(red: 0.8338858485, green: 0.2595152557, blue: 0.3878593445, alpha: 1)
+        dismissButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         if let name = place.name {
             placeName?.text = name
+        }
+        if let time = place.workingSchedule {
+            scheduleTimeLabel.text = """
+            \(time[0])
+            \(time[1])
+            \(time[2])
+            \(time[3])
+            \(time[4])
+            \(time[5])
+            \(time[6])
+            """
+        }else {
+            clockInfo.isHidden = true
         }
         feedbackTableView.reloadData()
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
@@ -115,7 +164,27 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func createPathBetweenTwoLocations(_ sender: UIButton) {
+    @IBAction func AlertForCreatingPathBetweenTwoLocations(_ sender: UIButton) {
+        let mapAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        if let subview = mapAlert.view.subviews.first, let mapAlert = subview.subviews.first {
+            for innerView in mapAlert.subviews {
+                innerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                innerView.layer.cornerRadius = 15.0
+                innerView.clipsToBounds = true
+            }
+        }
+        mapAlert.addAction(UIAlertAction(title: "Place Map", style: .default, handler: {(action:UIAlertAction) in
+            self.drawRouteAtPlaceMap(sourse: CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude), destination: CLLocationCoordinate2D(latitude: (self.place.location?.latitude)!, longitude: (self.place.location?.longitude)!))
+        }))
+        mapAlert.addAction(UIAlertAction(title: "Apple Map", style: .default, handler: {(action:UIAlertAction) in
+            self.drawRouteAtAppleMap()
+        }))
+        mapAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        mapAlert.view.tintColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
+        self.present(mapAlert, animated: true, completion: nil)
+    }
+    
+    func drawRouteAtAppleMap() {
         let regionDistance : CLLocationDistance = Double(place.distance!)
         let coordinates = CLLocationCoordinate2DMake((place.location?.latitude)!, (place.location?.longitude)!)
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
@@ -131,11 +200,12 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
             let photoVC = segue.destination as! PhotoPagingViewController
             photoVC.photoArray = self.place.photos
             photoVC.indexPath = sender as? IndexPath
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailToPhoto", sender:  indexPath)
+            photoVC.transitioningDelegate = self
+            photoVC.modalPresentationStyle = .custom
+        }/*else if segue.identifier == "DetailToMap" {
+            let MapVC = segue.destination as! MapViewController
+            MapVC.map.add((sender as! MKRoute).polyline, level: .aboveRoads)
+        }*/
     }
     
     func setAllData() {
@@ -145,22 +215,27 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         if !setData(set: place.types, at: placeType) {
             heightProportionalConstrainForType.isActive = false
             heightEqualConstrainForType.isActive = true
+            placeTypeIcon.isHidden = true
         }
         if !setData(set: place.address, at: placeAddress) {
             heightProportionalConstrainForAddress.isActive = false
             heightEqualConstrainForAddress.isActive = true
+            placeAddressIcon.isHidden = true
         }
         if !setData(set: place.isOpen, at: placeHours) {
             heightProportionalConstrainForClock.isActive = false
             heightEqualConstantForClock.isActive = true
+            placeClockIcon.isHidden = true
         }
         if !setData(set: place.phoneNumber, at: placePhone) {
             heightProportionalConstrainForPhone.isActive = false
             heightEqualConstantForPhone.isActive = true
+            placePhoneIcon.isHidden = true
         }
         if !setData(set: place.website, at: placeWebsite) {
             heightProportionalConstraintForWebsite.isActive = false
             heightEqualConstantForWebsite.isActive = true
+            placeWebsiteIcon.isHidden = true
         }
     }
     
@@ -208,5 +283,38 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
             return true
         }
         return false
+    }
+    
+    func drawRouteAtPlaceMap(sourse: CLLocationCoordinate2D, destination: CLLocationCoordinate2D) {
+        
+        let sourseItem = MKMapItem(placemark: MKPlacemark(coordinate: sourse))
+        let destItem = MKMapItem(placemark: MKPlacemark(coordinate: destination))
+        
+        let directionRequest = MKDirectionsRequest()
+        directionRequest.source = sourseItem
+        directionRequest.destination = destItem
+        directionRequest.transportType = .walking
+        
+        let directions = MKDirections(request: directionRequest)
+        directions.calculate(completionHandler: {
+            responce, error in
+            
+            guard let responce = responce else {
+                if let error = error {
+                    print("Something whent wrong \(error)")
+                }
+                return
+            }
+            
+            let route = responce.routes[0]
+            
+            if let _ = self.mapView {
+                self.mapView.add(route.polyline, level: .aboveRoads)
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+            
+        //  self.performSegue(withIdentifier: "DetailToMap", sender: route)
+        })
     }
 }

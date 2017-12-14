@@ -10,29 +10,33 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
-extension SettingTableViewController {
+class ChangeEmail {
+    let validator = Validator()
     var dataBaseReference: DatabaseReference! {
         return Database.database().reference()
     }
     
-    func changeEmail() {
+    func changeEmail(controller: UIViewController) {
         let emailAlertController = UIAlertController(title: "e-mail", message: "Please write new e-mail", preferredStyle: .alert)
-        changeAlertProperties(alertController: emailAlertController, color: .white)
+        emailAlertController.changeAlertProperties(alertController: emailAlertController, color: .white)
         emailAlertController.addAction(UIAlertAction(title: "Save", style: .default, handler: {(alert: UIAlertAction) in
-            if self.validator.isValidEmail(email: emailAlertController.textFields![0].text!) {
-                self.updateMail(mailString: emailAlertController.textFields![0].text!)
-            } else {
-                self.resultAlert(text: "Error", message:"Please write correct e-mail", color: .red)
-            }
+            self.checkEmail(newEmail: emailAlertController.textFields![0].text!, controller: controller)
         }))
         emailAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         emailAlertController.addTextField {(emailTextFiled) in
             emailTextFiled.placeholder = "please write new e-mail"
         }
-        present(emailAlertController, animated: true, completion: nil)
+        controller.present(emailAlertController, animated: true, completion: nil)
     }
     
-    func updateMail (mailString: String) {
+    private func checkEmail(newEmail: String, controller: UIViewController) {
+        guard validator.isValidEmail(email: newEmail) else {
+            return controller.resultAlert(text: "Error", message:"Please write correct e-mail", color: .red)
+        }
+        updateMail(mailString: newEmail, controller: controller)
+    }
+
+   private func updateMail (mailString: String, controller: UIViewController) {
         let userID : String = (Auth.auth().currentUser?.uid)!
         if let user = Auth.auth().currentUser {
             user.updateEmail(to: mailString, completion: {(error) in
@@ -41,10 +45,9 @@ extension SettingTableViewController {
                 } else {
                     let emailUpdate = ["email": mailString]
                     self.dataBaseReference.child("Users").child(userID).updateChildValues(emailUpdate)
-                    self.resultAlert(text: "DONE", message:"You have successfully updated your email", color: .white)
+                    controller.resultAlert(text: "DONE", message:"You have successfully updated your email", color: .green)
                 }
             })
         }
     }
-
 }
