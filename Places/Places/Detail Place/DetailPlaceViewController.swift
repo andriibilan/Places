@@ -9,9 +9,7 @@
 import UIKit
 import MapKit
 
-class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UITableViewDelegate {
-    
-    
+class DetailPlaceViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var PhotoCollectionView: UICollectionView!
     
@@ -66,6 +64,8 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
     var place:Place!
     
     var mapView : MKMapView!
+    
+    let transition = CustomTransitionAnimator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,12 +146,7 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
     }
     
     @IBAction func AlertForCreatingPathBetweenTwoLocations(_ sender: UIButton) {
-        
-        
-        //
         let mapAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
-        
-        
         if let subview = mapAlert.view.subviews.first, let mapAlert = subview.subviews.first {
             for innerView in mapAlert.subviews {
                 innerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -159,24 +154,15 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
                 innerView.clipsToBounds = true
             }
         }
-        
-        
         mapAlert.addAction(UIAlertAction(title: "Place Map", style: .default, handler: {(action:UIAlertAction) in
             self.drawRouteAtPlaceMap(sourse: CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude), destination: CLLocationCoordinate2D(latitude: (self.place.location?.latitude)!, longitude: (self.place.location?.longitude)!))
         }))
-        
         mapAlert.addAction(UIAlertAction(title: "Apple Map", style: .default, handler: {(action:UIAlertAction) in
             self.drawRouteAtAppleMap()
         }))
-        
         mapAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        
         mapAlert.view.tintColor = #colorLiteral(red: 0.9211991429, green: 0.2922174931, blue: 0.431709826, alpha: 1)
-        
         self.present(mapAlert, animated: true, completion: nil)
-        
-        
     }
     
     func drawRouteAtAppleMap() {
@@ -190,7 +176,6 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         mapItem.openInMaps(launchOptions: options)
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailToPhoto" {
             let photoVC = segue.destination as! PhotoPagingViewController
@@ -202,10 +187,6 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
             let MapVC = segue.destination as! MapViewController
             MapVC.map.add((sender as! MKRoute).polyline, level: .aboveRoads)
         }*/
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailToPhoto", sender:  indexPath)
     }
     
     func setAllData() {
@@ -280,8 +261,6 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         return false
     }
     
-    
-    
     func drawRouteAtPlaceMap(sourse: CLLocationCoordinate2D, destination: CLLocationCoordinate2D) {
         
         let sourseItem = MKMapItem(placemark: MKPlacemark(coordinate: sourse))
@@ -314,61 +293,4 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         //  self.performSegue(withIdentifier: "DetailToMap", sender: route)
         })
     }
-    
-
-    
-    
-    
-    
-   
-    
-    
-    
-    
-    
-    
-    
-   private let transition = CustomTransitionAnimator()
-}//end class
-
-
-
-
-
-
-
-
-extension DetailPlaceViewController: UIViewControllerTransitioningDelegate {
-    //MARK:- Custom Transition
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.transitionMode = .present
-       // transition.startingPoint = dismissButton.center
-        transition.startingPoint = CGPoint(x: view.bounds.maxX - 50, y: view.bounds.maxY - 50)
-        transition.circleColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        
-        return transition
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.transitionMode = .dismiss
-        transition.startingPoint = CGPoint(x: view.bounds.maxX - 50, y: view.bounds.maxY - 50)
-        transition.circleColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        return transition
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
