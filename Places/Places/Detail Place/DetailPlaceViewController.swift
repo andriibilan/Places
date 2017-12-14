@@ -77,32 +77,6 @@ class DetailPlaceViewController: UIViewController, UITableViewDelegate {
         }
         feedbackTableView.reloadData()
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
-    
-    
-        /*
-        DispatchQueue.global(qos: .background).async {
-            for _ in 1...100{
-                print(1)
-                DispatchQueue.main.async {
-                    self.dismissButton.backgroundColor = UIColor(red: CGFloat(arc4random()) / CGFloat(UINT32_MAX), green: CGFloat(arc4random()) / CGFloat(UINT32_MAX), blue: CGFloat(arc4random()) / CGFloat(UINT32_MAX), alpha: 1)
-                }
-                sleep(2)
-            }
-        }
-
-        
-        DispatchQueue.global(qos: .background).async {
-            for _ in 1...100{
-                print(2)
-                DispatchQueue.main.async {
-                    self.dismissButton.backgroundColor = UIColor(red: CGFloat(arc4random()) / CGFloat(UINT32_MAX), green: CGFloat(arc4random()) / CGFloat(UINT32_MAX), blue: CGFloat(arc4random()) / CGFloat(UINT32_MAX), alpha: 1)
-                }
-                sleep(5)
-            }
-        }
-        */
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
