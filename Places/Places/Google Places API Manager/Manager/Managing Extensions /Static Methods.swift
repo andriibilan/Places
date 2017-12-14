@@ -11,8 +11,7 @@ import UIKit
 
 
 extension GooglePlacesManager{
-    static func makeConforming(type: String) -> String{
-
+    static func makeConforming(type: String) -> String {
         var conformingType = type.lowercased()
         
         if let regEx = try? NSRegularExpression(pattern: "\\s+") {

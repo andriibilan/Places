@@ -48,10 +48,9 @@ class phoneNumberFormatter {
         }
         display.text = String(curStr)
         
-        if let selectedRange = display.selectedTextRange {
-            let screenCursorPosition = display.offset(from: display.beginningOfDocument, to: selectedRange.start)
-            print(screenCursorPosition)
-        }
+        //if let selectedRange = display.selectedTextRange {
+        //    let screenCursorPosition = display.offset(from: display.beginningOfDocument, to: selectedRange.start)
+        //}
         
         if let cursorPosition = display.position(from: display.beginningOfDocument, offset: pos) {
             display.selectedTextRange = display.textRange(from: cursorPosition, to: cursorPosition)

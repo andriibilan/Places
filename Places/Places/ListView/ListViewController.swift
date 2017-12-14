@@ -166,10 +166,10 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         UIView.animate(withDuration: 0.75, animations: { cell.alpha = 1 })
     }
     
-   private func typePlaces (types: [PlaceType]) -> String {
+    private func typePlaces (types: [PlaceType]) -> String {
         var stringType = ""
         for type in types {
-            stringType += type.rawValue + ", "
+            stringType += type.printableStyle + ", "
         }
         stringType.removeLast()
         stringType.removeLast()
