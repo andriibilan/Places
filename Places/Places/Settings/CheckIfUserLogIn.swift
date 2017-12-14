@@ -43,14 +43,6 @@ extension SettingTableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 1 {
-            return checkIfUserLogIn()
-        } else {
-            return UITableViewAutomaticDimension
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 1 {
             return checkIfUserLogIn()

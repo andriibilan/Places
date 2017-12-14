@@ -90,6 +90,7 @@
 		8A9C7C7B1FCB371A009B9C86 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C7C7A1FCB371A009B9C86 /* UIView.swift */; };
 		8AA21ED51FC8446B0046202F /* MapFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA21ED41FC8446B0046202F /* MapFilterTableViewCell.swift */; };
 		8AAC34041FC6D3BE0060C3A2 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AAC34031FC6D3BE0060C3A2 /* Settings.storyboard */; };
+		8AC070051FE29E5100A9518B /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC070041FE29E5100A9518B /* UIAlertController.swift */; };
 		BF830C9C5DBC1BE7459571A2 /* Pods_Places.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3AF254E3C5EE01EBA2A9FF6 /* Pods_Places.framework */; };
 /* End PBXBuildFile section */
 
@@ -207,6 +208,7 @@
 		8A9C7C7A1FCB371A009B9C86 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		8AA21ED41FC8446B0046202F /* MapFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterTableViewCell.swift; sourceTree = "<group>"; };
 		8AAC34031FC6D3BE0060C3A2 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		8AC070041FE29E5100A9518B /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		CB4057642B85CB5208C2B10D /* Pods-Places.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Places.release.xcconfig"; path = "Pods/Target Support Files/Pods-Places/Pods-Places.release.xcconfig"; sourceTree = "<group>"; };
 		E3AF254E3C5EE01EBA2A9FF6 /* Pods_Places.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Places.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -335,6 +337,7 @@
 				8A9C7C7A1FCB371A009B9C86 /* UIView.swift */,
 				521CFD731FCCCE3800CD86DD /* UIImage.swift */,
 				2146AF8B1FD3549700A32BBD /* UIViewController.swift */,
+				8AC070041FE29E5100A9518B /* UIAlertController.swift */,
 				2150009A1FD80DB50009B9E2 /* Array.swift */,
 			);
 			path = Extensions;
@@ -818,6 +821,7 @@
 				8A8C5C8A1FC5A1C100A834EA /* ListViewController.swift in Sources */,
 				8A6884861FE036F00097DD22 /* CheckIfUserLogIn.swift in Sources */,
 				8A9C7C7B1FCB371A009B9C86 /* UIView.swift in Sources */,
+				8AC070051FE29E5100A9518B /* UIAlertController.swift in Sources */,
 				49E3C00F1FC6E12800400A06 /* UIImageViewExplicit.swift in Sources */,
 				2B2910231FD956F9008E07F0 /* PhotoPagingCollectionViewDataSource.swift in Sources */,
 				8A8C5C761FC57F3E00A834EA /* AppDelegate.swift in Sources */,

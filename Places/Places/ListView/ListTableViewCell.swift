@@ -11,28 +11,19 @@ import UIKit
 
 class ListTableViewCell: UITableViewCell {
 	
-	@IBOutlet weak var thumbnailImageView: UIImageViewExplicit! {
-		didSet {
-//            thumbnailImageView.layer.cornerRadius = thumbnailImageView.bounds.width / 2
-//            thumbnailImageView.clipsToBounds = true
-		}
-	}
-	
-	@IBOutlet weak var name: UILabel!
-		{
+	@IBOutlet weak var thumbnailImageView: UIImageViewExplicit!
+	@IBOutlet weak var name: UILabel! {
 		didSet {
 			name.numberOfLines = 0
 		}
 	}
-	@IBOutlet weak var type: UILabel!
-		{
+	@IBOutlet weak var type: UILabel! {
 		didSet {
 			type.numberOfLines = 0
 		}
 	}
 	@IBOutlet weak var openClosedImageView: UIImageViewExplicit!
-	@IBOutlet weak var distance: UILabel!
-		{
+	@IBOutlet weak var distance: UILabel! {
 		didSet {
 			distance.numberOfLines = 0
 		}

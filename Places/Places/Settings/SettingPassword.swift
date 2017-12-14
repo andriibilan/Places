@@ -9,20 +9,21 @@
 import UIKit
 import Firebase
 
-extension SettingTableViewController {
+class ChangePassword {
+    let validator = Validator()
     
-    func  changePassword() {
+    func  changePassword(controller: UIViewController) {
         var newPassword = ""
         var confirmPassword = ""
         let passwordAllertController = UIAlertController(title: "Password", message: "Please write new password", preferredStyle: .alert)
-        changeAlertProperties(alertController: passwordAllertController, color: .white)
+        passwordAllertController.changeAlertProperties(alertController: passwordAllertController, color: .white)
         passwordAllertController.addAction(UIAlertAction(title: "Save", style: .default, handler: {(alert: UIAlertAction) in
             newPassword = passwordAllertController.textFields![0].text!
             confirmPassword = passwordAllertController.textFields![1].text!
             if newPassword == confirmPassword && self.validator.isValidPassword(password: newPassword) {
-                self.updatePassword(password: newPassword)
+                self.updatePassword(password: newPassword, controller: controller)
             } else {
-                self.resultAlert(text: "Please write correct  confirm password", message: nil, color: .red)
+               controller.resultAlert(text: "Please write correct  confirm password", message: nil, color: .red)
                 
             }
         }))
@@ -37,18 +38,19 @@ extension SettingTableViewController {
             confirmPasswordTextField.isSecureTextEntry = true
             confirmPassword = confirmPasswordTextField.text!
         }
-        present(passwordAllertController, animated: true, completion: nil)
+        controller.present(passwordAllertController, animated: true, completion: nil)
     }
     
-    func updatePassword(password: String) {
+    func updatePassword(password: String, controller: UIViewController) {
         if let user = Auth.auth().currentUser {
             user.updatePassword(to: password, completion: { (error) in
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
-                    self.resultAlert(text: "DONE", message: "You have successfully updated your password", color: .green)
+                   controller.resultAlert(text: "DONE", message: "You have successfully updated your password", color: .green)
                 }
             })
         }
-    } 
+    }
 }
+

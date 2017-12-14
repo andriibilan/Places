@@ -10,6 +10,8 @@ import UIKit
 
 class SettingTableViewController: UITableViewController {
    let validator = Validator()
+    let password = ChangePassword()
+    let email = ChangeEmail()
     let defaults = UserDefaults.standard
 
     @IBOutlet weak var distanceSegment: UISegmentedControl!
@@ -97,30 +99,14 @@ class SettingTableViewController: UITableViewController {
         if indexPath.section == 1 {
             switch indexPath.row {
             case 0 :
-                changeEmail()
+                email.changeEmail(controller: self)
             case 1:
-                changePassword()
+                password.changePassword(controller: self)
             default:
                 break
             }
         }
     }
-    
-    func resultAlert(text: String, message: String?, color: UIColor) {
-        let alertBad = UIAlertController(title: text, message: message, preferredStyle: .alert)
-        changeAlertProperties(alertController: alertBad, color: color)
-        self.present(alertBad, animated: true, completion: {
-            sleep(1)
-            self.dismiss(animated: true, completion: nil)
-        })
-    }
-    
-    func changeAlertProperties(alertController: UIAlertController, color: UIColor) {
-        let subview = alertController.view.subviews.first! as UIView
-        let alertContentView = subview.subviews.first! as UIView
-        alertContentView.backgroundColor = color
-        alertContentView.layer.cornerRadius = 15
-        alertContentView.layer.borderWidth = 3
-        alertContentView.layer.borderColor = UIColor.white.cgColor
-    }
 }
+
+
