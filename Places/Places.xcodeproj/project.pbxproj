@@ -28,6 +28,8 @@
 		2B2910281FD9584A008E07F0 /* DetailPlaceCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2910271FD9584A008E07F0 /* DetailPlaceCollectionViewDataSource.swift */; };
 		2B3920F71FE2B17A0061BEFE /* DetailPlaceTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3920F61FE2B17A0061BEFE /* DetailPlaceTransitioningDelegate.swift */; };
 		2B3920F91FE2B2390061BEFE /* DetailPlaceCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3920F81FE2B2390061BEFE /* DetailPlaceCollectionViewDelegate.swift */; };
+		2B3920FB1FE2D4A70061BEFE /* ExtensionListViewTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3920FA1FE2D4A70061BEFE /* ExtensionListViewTransitioningDelegate.swift */; };
+		2B3920FD1FE2D4DB0061BEFE /* ExtensionMapViewTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3920FC1FE2D4DB0061BEFE /* ExtensionMapViewTransitioningDelegate.swift */; };
 		2B4BA9151FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4BA9111FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift */; };
 		2B4BA9161FC5EC0E00B5E598 /* PhotoPagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4BA9121FC5EC0E00B5E598 /* PhotoPagingViewController.swift */; };
 		2B8608061FCC4DB10007B777 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8608051FCC4DB10007B777 /* ReviewTableViewCell.swift */; };
@@ -148,6 +150,8 @@
 		2B2910271FD9584A008E07F0 /* DetailPlaceCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlaceCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		2B3920F61FE2B17A0061BEFE /* DetailPlaceTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlaceTransitioningDelegate.swift; sourceTree = "<group>"; };
 		2B3920F81FE2B2390061BEFE /* DetailPlaceCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlaceCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		2B3920FA1FE2D4A70061BEFE /* ExtensionListViewTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionListViewTransitioningDelegate.swift; sourceTree = "<group>"; };
+		2B3920FC1FE2D4DB0061BEFE /* ExtensionMapViewTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionMapViewTransitioningDelegate.swift; sourceTree = "<group>"; };
 		2B4BA9111FC5EC0E00B5E598 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		2B4BA9121FC5EC0E00B5E598 /* PhotoPagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPagingViewController.swift; sourceTree = "<group>"; };
 		2B8608051FCC4DB10007B777 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
@@ -511,6 +515,7 @@
 				8A8C5C871FC5A1B000A834EA /* MapViewController.swift */,
 				8AA21ED41FC8446B0046202F /* MapFilterTableViewCell.swift */,
 				5291916A1FCC1E02008FD5AB /* myAnnotation.swift */,
+				2B3920FC1FE2D4DB0061BEFE /* ExtensionMapViewTransitioningDelegate.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -520,6 +525,7 @@
 			children = (
 				8A8C5C891FC5A1C100A834EA /* ListViewController.swift */,
 				8A9BF77B1FC6F89A002E970C /* ListTableViewCell.swift */,
+				2B3920FA1FE2D4A70061BEFE /* ExtensionListViewTransitioningDelegate.swift */,
 			);
 			path = ListView;
 			sourceTree = "<group>";
@@ -737,6 +743,7 @@
 				7510D9711FCD77A9004B83CD /* AvatarImageView.swift in Sources */,
 				21FEF2521FD6D17600DF5A40 /* Static Methods.swift in Sources */,
 				258B065A1FC861D6003A09B8 /* AddNewPlaceController.swift in Sources */,
+				2B3920FB1FE2D4A70061BEFE /* ExtensionListViewTransitioningDelegate.swift in Sources */,
 				49E3C0091FC6D18E00400A06 /* UIButtonExplicit.swift in Sources */,
 				2BDB159C1FD06D0C00C32F81 /* DetailPlaceViewController.swift in Sources */,
 				528825AA1FCEF53700C29BFE /* SearchVC.swift in Sources */,
@@ -783,6 +790,7 @@
 				49E3C00F1FC6E12800400A06 /* UIImageViewExplicit.swift in Sources */,
 				2B2910231FD956F9008E07F0 /* PhotoPagingCollectionViewDataSource.swift in Sources */,
 				8A8C5C761FC57F3E00A834EA /* AppDelegate.swift in Sources */,
+				2B3920FD1FE2D4DB0061BEFE /* ExtensionMapViewTransitioningDelegate.swift in Sources */,
 				25316AEE1FCDBC6800CE29DE /* CategoriesViewCell.swift in Sources */,
 				2B3920F91FE2B2390061BEFE /* DetailPlaceCollectionViewDelegate.swift in Sources */,
 				757042241FCB09620075FC87 /* User.swift in Sources */,

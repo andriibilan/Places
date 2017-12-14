@@ -35,6 +35,14 @@ class DetailPlaceViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var placeTypeIcon: UIImageView!
     
+    @IBOutlet weak var placeAddressIcon: UIImageViewExplicit!
+    
+    @IBOutlet weak var placeClockIcon: UIImageViewExplicit!
+    
+    @IBOutlet weak var placePhoneIcon: UIImageViewExplicit!
+    
+    @IBOutlet weak var placeWebsiteIcon: UIImageViewExplicit!
+    
     @IBOutlet weak var heightConstaintForReviewTable: NSLayoutConstraint!
     
     @IBOutlet weak var heightProportionalConstrainForPhotoColelctionView: NSLayoutConstraint!
@@ -61,11 +69,13 @@ class DetailPlaceViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var heightEqualConstrainForType: NSLayoutConstraint!
     
+    let transition = CustomTransitionAnimator()
+    
     var place:Place!
     
     var mapView : MKMapView!
     
-    let transition = CustomTransitionAnimator()
+    
     
     
     //
@@ -97,8 +107,6 @@ class DetailPlaceViewController: UIViewController, UITableViewDelegate {
         if let name = place.name {
             placeName?.text = name
         }
-        
-        //print("time: \(place.workingSchedule![0])")
         if let time = place.workingSchedule {
             scheduleTimeLabel.text = """
             \(time[0])
@@ -112,7 +120,6 @@ class DetailPlaceViewController: UIViewController, UITableViewDelegate {
         }else {
             clockInfo.isHidden = true
         }
-        
         feedbackTableView.reloadData()
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
     }
@@ -208,22 +215,27 @@ class DetailPlaceViewController: UIViewController, UITableViewDelegate {
         if !setData(set: place.types, at: placeType) {
             heightProportionalConstrainForType.isActive = false
             heightEqualConstrainForType.isActive = true
+            placeTypeIcon.isHidden = true
         }
         if !setData(set: place.address, at: placeAddress) {
             heightProportionalConstrainForAddress.isActive = false
             heightEqualConstrainForAddress.isActive = true
+            placeAddressIcon.isHidden = true
         }
         if !setData(set: place.isOpen, at: placeHours) {
             heightProportionalConstrainForClock.isActive = false
             heightEqualConstantForClock.isActive = true
+            placeClockIcon.isHidden = true
         }
         if !setData(set: place.phoneNumber, at: placePhone) {
             heightProportionalConstrainForPhone.isActive = false
             heightEqualConstantForPhone.isActive = true
+            placePhoneIcon.isHidden = true
         }
         if !setData(set: place.website, at: placeWebsite) {
             heightProportionalConstraintForWebsite.isActive = false
             heightEqualConstantForWebsite.isActive = true
+            placeWebsiteIcon.isHidden = true
         }
     }
     

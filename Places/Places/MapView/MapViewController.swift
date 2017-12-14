@@ -18,6 +18,8 @@ var filterArray = [PlaceType]()
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, OutputInterface {
     
+    
+    let transition = CustomTransitionAnimator()
     let segueToAddScreen = "addPlace"
     var locationManager:CLLocationManager!
     var region: MKCoordinateRegion?
@@ -417,6 +419,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let d = segue.destination as? DetailPlaceViewController
             d?.place = sender as! Place
             d?.mapView = map
+            d?.transitioningDelegate = self
+            d?.modalPresentationStyle = .custom
         }
         if segue.identifier == segueToAddScreen {
             let addScreen = segue.destination as? AddNewPlaceController
