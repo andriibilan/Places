@@ -77,6 +77,32 @@ class DetailPlaceViewController: UIViewController, UICollectionViewDelegate, UIT
         }
         feedbackTableView.reloadData()
         heightConstaintForReviewTable.constant = feedbackTableView.contentSize.height
+    
+    
+        /*
+        DispatchQueue.global(qos: .background).async {
+            for _ in 1...100{
+                print(1)
+                DispatchQueue.main.async {
+                    self.dismissButton.backgroundColor = UIColor(red: CGFloat(arc4random()) / CGFloat(UINT32_MAX), green: CGFloat(arc4random()) / CGFloat(UINT32_MAX), blue: CGFloat(arc4random()) / CGFloat(UINT32_MAX), alpha: 1)
+                }
+                sleep(2)
+            }
+        }
+
+        
+        DispatchQueue.global(qos: .background).async {
+            for _ in 1...100{
+                print(2)
+                DispatchQueue.main.async {
+                    self.dismissButton.backgroundColor = UIColor(red: CGFloat(arc4random()) / CGFloat(UINT32_MAX), green: CGFloat(arc4random()) / CGFloat(UINT32_MAX), blue: CGFloat(arc4random()) / CGFloat(UINT32_MAX), alpha: 1)
+                }
+                sleep(5)
+            }
+        }
+        */
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -327,7 +353,6 @@ extension DetailPlaceViewController: UIViewControllerTransitioningDelegate {
         transition.transitionMode = .dismiss
         transition.startingPoint = CGPoint(x: view.bounds.maxX - 50, y: view.bounds.maxY - 50)
         transition.circleColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        
         return transition
     }
 }
