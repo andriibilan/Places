@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OutputInterface {
+class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OutputInterface  {
     let listDynamic = Dynamic()
     public var places: [Place] = []
     private var openPlaces: [Place] = []
     private var filterOpenOnly = false
     private var sortingByName = true
-     var googlePlacesManager: GooglePlacesManager!
+    var googlePlacesManager: GooglePlacesManager!
+    let transition = CustomTransitionAnimator()
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -200,7 +201,11 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		if segue.identifier == "ShowDetailPlace" {
             let d = segue.destination as? DetailPlaceViewController
             d?.place = sender as? Place
+            d?.transitioningDelegate = self
+            d?.modalPresentationStyle = .custom
 		}
 	}
-    
 }
+
+
+
