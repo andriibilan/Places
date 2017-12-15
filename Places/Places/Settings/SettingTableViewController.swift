@@ -9,7 +9,6 @@
 import UIKit
 
 class SettingTableViewController: UITableViewController {
-   let validator = Validator()
     let password = ChangePassword()
     let email = ChangeEmail()
     let defaults = UserDefaults.standard

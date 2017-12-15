@@ -76,7 +76,8 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.tableFooterView = UIView()
         listDynamic.dynamicSort(button: sortingButton, parView: self.view)
         listDynamic.dynamicFilterList(filter: filteringButton, parView: self.view)
-
+        
+        
     }
     
     private func refillOpenPlaces() {
@@ -198,7 +199,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "ShowDetailPlace" {
             let d = segue.destination as? DetailPlaceViewController
-            d?.place = sender as! Place
+            d?.place = sender as? Place
 		}
 	}
     

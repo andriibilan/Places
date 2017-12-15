@@ -20,10 +20,9 @@ class Dynamic {
     var box: UIButton?
     var filterD: UIButton?
     var sort: UIButton?
-    
+ 
     var parentView: UIView?
     var listView: UIView?
-   
     
     func dynamicFilter (button: UIButton, parView: UIView) {
         box = button
@@ -44,7 +43,7 @@ class Dynamic {
         self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(panSort))
         self.sort?.addGestureRecognizer(panGesture!)
     }
-    
+
     func dynamicFilterList (filter: UIButton, parView: UIView) {
         filterD = filter
         listView = parView
@@ -70,7 +69,7 @@ class Dynamic {
             break
         }
     }
-
+    
     @objc func panSort(pan: UIPanGestureRecognizer) {
         self.animator!.removeAllBehaviors()
         switch pan.state {
@@ -84,7 +83,7 @@ class Dynamic {
             break
         }
     }
-
+    
     @objc func panFilter(pan: UIPanGestureRecognizer) {
         self.animator!.removeAllBehaviors()
         switch pan.state {
@@ -98,5 +97,4 @@ class Dynamic {
             break
         }
     }
-  
 }
