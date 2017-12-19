@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="DjC-KS-0zF" kind="relationship" relationship="rootViewController" id="75K-kx-zoj"/>
+                        <segue destination="Afu-93-Bl2" kind="relationship" relationship="rootViewController" id="FnM-ue-eHd"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tii-q0-Kbn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -41,6 +41,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E84-z6-6OS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-303" y="0.0"/>
+        </scene>
+        <!--Launch Screen Controller-->
+        <scene sceneID="BtA-42-1jo">
+            <objects>
+                <viewController id="Afu-93-Bl2" customClass="LaunchScreenController" customModule="Places" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="859-o5-hG2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoPin" translatesAutoresizingMaskIntoConstraints="NO" id="qwi-eg-WXf">
+                                <rect key="frame" x="0.0" y="104" width="375" height="345"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pin" translatesAutoresizingMaskIntoConstraints="NO" id="ebD-kr-N4h">
+                                <rect key="frame" x="0.0" y="104" width="375" height="345"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLACES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="md2-zV-27N">
+                                <rect key="frame" x="67" y="486" width="240" height="55"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
+                                <color key="textColor" red="0.2274509804" green="0.67843137249999996" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ebD-kr-N4h" firstAttribute="leading" secondItem="eo9-iw-EII" secondAttribute="leading" id="86e-eM-T2g"/>
+                            <constraint firstItem="md2-zV-27N" firstAttribute="leading" secondItem="eo9-iw-EII" secondAttribute="leading" constant="67" id="NSY-vO-6If"/>
+                            <constraint firstItem="qwi-eg-WXf" firstAttribute="leading" secondItem="eo9-iw-EII" secondAttribute="leading" id="PY9-NU-Voz"/>
+                            <constraint firstAttribute="bottom" secondItem="qwi-eg-WXf" secondAttribute="bottom" constant="218" id="Vs6-IG-KO5"/>
+                            <constraint firstItem="qwi-eg-WXf" firstAttribute="trailing" secondItem="eo9-iw-EII" secondAttribute="trailing" id="Y7w-tZ-LsW"/>
+                            <constraint firstItem="ebD-kr-N4h" firstAttribute="trailing" secondItem="eo9-iw-EII" secondAttribute="trailing" id="j8G-A0-ukO"/>
+                            <constraint firstItem="eo9-iw-EII" firstAttribute="bottom" secondItem="md2-zV-27N" secondAttribute="bottom" constant="126" id="kXK-P6-1QV"/>
+                            <constraint firstItem="qwi-eg-WXf" firstAttribute="top" secondItem="859-o5-hG2" secondAttribute="top" constant="104" id="mrL-9x-ibD"/>
+                            <constraint firstItem="eo9-iw-EII" firstAttribute="trailing" secondItem="md2-zV-27N" secondAttribute="trailing" constant="68" id="qr1-iD-mLG"/>
+                            <constraint firstItem="ebD-kr-N4h" firstAttribute="top" secondItem="859-o5-hG2" secondAttribute="top" constant="104" id="umt-fp-XlA"/>
+                            <constraint firstAttribute="bottom" secondItem="ebD-kr-N4h" secondAttribute="bottom" constant="218" id="upH-2R-Svn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eo9-iw-EII"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Knu-L0-Qgp"/>
+                    <connections>
+                        <outlet property="imageScreen" destination="ebD-kr-N4h" id="LQs-cz-5Yf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qs9-PB-mKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1201" y="9"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -534,46 +580,6 @@
             </objects>
             <point key="canvasLocation" x="3393" y="539"/>
         </scene>
-        <!--Launch Screen Controller-->
-        <scene sceneID="Smf-bN-Ud7">
-            <objects>
-                <viewController id="DjC-KS-0zF" customClass="LaunchScreenController" customModule="Places" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6IM-cd-8WU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ItunesArtwork" translatesAutoresizingMaskIntoConstraints="NO" id="TXF-hf-kur">
-                                <rect key="frame" x="0.0" y="89" width="375" height="342"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLACES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SI-2i-kyu">
-                                <rect key="frame" x="67" y="463" width="240" height="84"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
-                                <color key="textColor" red="0.2274509804" green="0.67843137249999996" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="6SI-2i-kyu" firstAttribute="centerX" secondItem="TXF-hf-kur" secondAttribute="centerX" id="09O-AF-GFn"/>
-                            <constraint firstItem="kEH-Xw-gf7" firstAttribute="bottom" secondItem="TXF-hf-kur" secondAttribute="bottom" constant="236" id="3v4-a6-gfS"/>
-                            <constraint firstItem="6SI-2i-kyu" firstAttribute="top" secondItem="TXF-hf-kur" secondAttribute="bottom" constant="32" id="QFP-yh-SRb"/>
-                            <constraint firstItem="TXF-hf-kur" firstAttribute="top" secondItem="kEH-Xw-gf7" secondAttribute="top" constant="69" id="YNY-uQ-a6C"/>
-                            <constraint firstItem="TXF-hf-kur" firstAttribute="leading" secondItem="kEH-Xw-gf7" secondAttribute="leading" id="g7H-4v-MIe"/>
-                            <constraint firstItem="TXF-hf-kur" firstAttribute="trailing" secondItem="kEH-Xw-gf7" secondAttribute="trailing" id="g84-Ju-tlM"/>
-                            <constraint firstItem="6SI-2i-kyu" firstAttribute="leading" secondItem="kEH-Xw-gf7" secondAttribute="leading" constant="67" id="iuN-aW-gkl"/>
-                            <constraint firstItem="kEH-Xw-gf7" firstAttribute="bottom" secondItem="6SI-2i-kyu" secondAttribute="bottom" constant="120" id="od3-80-QjG"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="kEH-Xw-gf7"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="s7g-aZ-P8M"/>
-                    <connections>
-                        <outlet property="imageScreen" destination="TXF-hf-kur" id="NBL-ao-UWJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AgA-XO-M6I" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1124" y="9"/>
-        </scene>
     </scenes>
     <resources>
         <image name="115801-64" width="32" height="32"/>
@@ -582,10 +588,11 @@
         <image name="2703062-64" width="32" height="32"/>
         <image name="2703073-64" width="64" height="64"/>
         <image name="314478-64" width="32" height="32"/>
-        <image name="ItunesArtwork" width="512" height="512"/>
+        <image name="Pin" width="1024" height="1024"/>
         <image name="closed-sign" width="32" height="32"/>
         <image name="distance-sorting" width="32" height="32"/>
         <image name="filter" width="32" height="32"/>
+        <image name="logoPin" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="h6x-wR-fUd"/>
