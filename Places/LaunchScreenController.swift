@@ -30,7 +30,7 @@ class  LaunchScreenController: UIViewController {
             UIView.setAnimationRepeatCount(2)
             
             self.imageScreen.frame.origin.y += 20
-            self.imageScreen.frame.origin.y = 0
+//            self.imageScreen.frame.origin.y = 0
           
         },
             completion: { finished in

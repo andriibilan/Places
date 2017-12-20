@@ -27,7 +27,7 @@
                                     <constraint firstAttribute="width" constant="235" id="ycG-Rz-3Dx"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ios123@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bbL-KY-9zT">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ios13@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bbL-KY-9zT">
                                 <rect key="frame" x="56" y="255" width="263" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="TiC-Ar-2m1"/>
