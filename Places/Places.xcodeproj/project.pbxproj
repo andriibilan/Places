@@ -67,6 +67,7 @@
 		5291916B1FCC1E02008FD5AB /* myAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5291916A1FCC1E02008FD5AB /* myAnnotation.swift */; };
 		52E5577C1FCA4E90000B7FFC /* CustomTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5577B1FCA4E90000B7FFC /* CustomTransitionAnimator.swift */; };
 		750592051FD427490051E404 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 750592041FD427490051E404 /* Profile.storyboard */; };
+		750ABFBD1FEC3CE000FFF6C8 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750ABFBC1FEC3CE000FFF6C8 /* NumberFormatter.swift */; };
 		7510D9711FCD77A9004B83CD /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7510D96F1FCD77A9004B83CD /* AvatarImageView.swift */; };
 		757042221FCB09450075FC87 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757042211FCB09450075FC87 /* Validator.swift */; };
 		757042241FCB09620075FC87 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757042231FCB09620075FC87 /* User.swift */; };
@@ -186,6 +187,7 @@
 		52E5577B1FCA4E90000B7FFC /* CustomTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionAnimator.swift; sourceTree = "<group>"; };
 		612ABD6E4073E47B3FBF9A37 /* Pods-Places.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Places.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Places/Pods-Places.debug.xcconfig"; sourceTree = "<group>"; };
 		750592041FD427490051E404 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		750ABFBC1FEC3CE000FFF6C8 /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		7510D96F1FCD77A9004B83CD /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		757042211FCB09450075FC87 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		757042231FCB09620075FC87 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 			isa = PBXGroup;
 			children = (
 				75F7EB781FC59E96002F169E /* ProfileViewController.swift */,
+				750ABFBC1FEC3CE000FFF6C8 /* NumberFormatter.swift */,
 				750592041FD427490051E404 /* Profile.storyboard */,
 				7510D96C1FCD776E004B83CD /* Helpers */,
 			);
@@ -818,6 +821,7 @@
 				521CFD741FCCCE3800CD86DD /* UIImage.swift in Sources */,
 				528825D11FCF0EA400C29BFE /* FetchDistance.swift in Sources */,
 				49E3C00D1FC6D1A000400A06 /* FloatingActionButton.swift in Sources */,
+				750ABFBD1FEC3CE000FFF6C8 /* NumberFormatter.swift in Sources */,
 				8AA21ED51FC8446B0046202F /* MapFilterTableViewCell.swift in Sources */,
 				528825AB1FCEF53A00C29BFE /* ItemCell.swift in Sources */,
 				8A8C5C881FC5A1B000A834EA /* MapViewController.swift in Sources */,

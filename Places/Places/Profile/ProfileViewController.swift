@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
-let offset_HeaderStop:CGFloat = 30.0 // At this offset the Header stops its transformations
+let offsetHeaderStop:CGFloat = 30.0 // At this offset the Header stops its transformations
 let offset_B_LabelHeader:CGFloat = 105.0 // At this offset the Black label reaches the Header
 let distance_W_LabelHeader:CGFloat = 100.0 // The distance between the bottom of the Header and the top of the White Label
 
@@ -27,7 +27,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet var headerImageView:UIImageView!
     @IBOutlet var headerBlurImageView:UIImageView!
-
+    
     private var blurEffectView: UIVisualEffectView?
     private let transition = CustomTransitionAnimator()
     private var messageText : String!
@@ -37,6 +37,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     var authService = AuthService()
     var validator = Validator()
     let blurEffect = UIBlurEffect(style: .light)
+    var formatter = NumberFormatter()
     
     @IBOutlet weak var dismissButton: UIButton! {
         didSet {
@@ -55,7 +56,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     
     override func viewDidAppear(_ animated: Bool) {
         // Header - Blurred Image
-      
+        
         headerBlurImageView = UIImageView(frame: header.bounds)
         headerImageView?.image = UIImage(named: "lviv")
         blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -100,7 +101,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
         })
     }
     
-
+    
     func alertAction(_ message: String) {
         let alertMessage = UIAlertController(title: "Oops!", message: message , preferredStyle: .alert)
         alertMessage.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
@@ -133,6 +134,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
             
             return
         }
+        
         authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
         performSegue(withIdentifier: "unwindFromProfile", sender: self)
         
@@ -141,7 +143,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     @IBAction func chooseImage(_ sender: Any) {
         chooseImage()
     }
-
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -222,7 +224,7 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
 }
 
 extension ProfileViewController:  UIScrollViewDelegate {
-   
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let offset = scrollView.contentOffset.y
@@ -239,21 +241,21 @@ extension ProfileViewController:  UIScrollViewDelegate {
         }
             // SCROLL UP/DOWN
         else {
-            headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offset_HeaderStop, -offset), 0)
+            headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offsetHeaderStop, -offset), 0)
             let labelTransform = CATransform3DMakeTranslation(0, max(-distance_W_LabelHeader, 20 - offset), 0)
             headerLabel.layer.transform = labelTransform
             
             // Blur
             blurEffectView?.alpha = min (0.8, (offset + 20 - offset_B_LabelHeader))
             blurEffectView?.frame = view.bounds
-          
+            
             // Avatar
-            let avatarScaleFactor = (min(offset_HeaderStop, offset)) / profileImage.bounds.height / 1.4 // Slow down the animation
+            let avatarScaleFactor = (min(offsetHeaderStop, offset)) / profileImage.bounds.height / 1.4 // Slow down the animation
             let avatarSizeVariation = ((profileImage.bounds.height * (1.0 + avatarScaleFactor)) - profileImage.bounds.height) / 2.0
             avatarTransform = CATransform3DTranslate(avatarTransform, 0, avatarSizeVariation, 0)
             avatarTransform = CATransform3DScale(avatarTransform, 1.0 - avatarScaleFactor, 1.0 - avatarScaleFactor, 0)
             
-            if offset <= offset_HeaderStop {
+            if offset <= offsetHeaderStop {
                 if profileImage.layer.zPosition < header.layer.zPosition{
                     header.layer.zPosition = 0
                 }
@@ -284,41 +286,22 @@ extension ProfileViewController: UITextFieldDelegate {
         case nameTextField:
             guard let text = nameTextField.text else { return true }
             let newLength = text.count + string.count - range.length
+//            authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: nil)
             return newLength <= 20
             
         case phoneTextField:
             let allowedCharacters = CharacterSet.decimalDigits
             let characterSet = CharacterSet(charactersIn: string)
+            let inputNumber = textField.text
             
-            var originalText = textField.text
-            
-            if (originalText?.count)! == 0
+            if (inputNumber?.count)! < 19
             {
-                originalText?.append("+38")
-            }
-            if (originalText?.count)! == 3
-            {
-                originalText?.append(" (0")
-            }
-            if (originalText?.count)! == 8
-            {
-                originalText?.append(") ")
-            }
-            if (originalText?.count)! == 12
-            {
-                originalText?.append("-")
-            }
-            if (originalText?.count)! == 15
-            {
-                originalText?.append("-")
-            }
-            if (originalText?.count)! == 19
-            {
-                guard let text = phoneTextField.text else { return true }
-                let newLength = text.count + string.count - range.length
+                phoneTextField.text = formatter.formatPhoneNumber(inputNumber!)
+                
+            } else {
+                let newLength = (inputNumber?.count)! + string.count - range.length
                 return newLength <= 19
             }
-            phoneTextField.text = originalText
             return allowedCharacters.isSuperset(of: characterSet)
         default:
             break

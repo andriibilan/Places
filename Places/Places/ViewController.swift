@@ -9,10 +9,11 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
-  
+class ViewController: UIViewController,UIViewControllerTransitioningDelegate, SlashScreenHiddenDelegate {
+
     var map : MapViewController?
     var listObj : ListViewController?
+    
     var menuIsOpen = false
     
     @IBOutlet weak var settingsButton: UIButton!
@@ -20,9 +21,10 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var listView: UIView!
+    @IBOutlet weak var splashView: UIView!
     @IBOutlet weak var menuView: UIViewExplicit!
+    @IBOutlet weak var menuTapped: FloatingActionButton!
     
-
     
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -40,7 +42,6 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     }
     
 
-	
    
     private let transition = CustomTransitionAnimator()
 
@@ -59,10 +60,11 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(splashView)
         listView.isHidden = true
+        menuTapped.isHidden = true
         closeMenu()
-        
-        // Do any additional setup after loading the view, typically from a nib.
+       
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -98,6 +100,11 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
                 self.settingsButton.transform = .identity
             }
         })
+    }
+    
+    func splashScreenHidden() {
+        splashView.removeFromSuperview()
+        menuTapped.isHidden = false
     }
     
     func closeMenu() {
@@ -173,6 +180,10 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate {
         }
         if segue.identifier == "ListView" {
            listObj = segue.destination as? ListViewController
+        }
+        if segue.identifier == "SplashView" {
+            let splashVC = segue.destination as? LaunchScreenController
+            splashVC?.delegate = self
         }
 	}
     

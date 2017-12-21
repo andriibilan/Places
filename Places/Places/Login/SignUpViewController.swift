@@ -26,13 +26,14 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
     private let transition = CustomTransitionAnimator()
     var authService = AuthService()
     var validator = Validator()
+    var formatter = NumberFormatter()
     
     var dataBaseReference: DatabaseReference! {
         return Database.database().reference()
     }
     
-    @IBOutlet weak var dismissButton: UIButton!{
-        didSet{
+    @IBOutlet weak var dismissButton: UIButton! {
+        didSet {
             dismissButton.layer.cornerRadius = dismissButton.frame.size.width / 2
             dismissButton.transform = CGAffineTransform(rotationAngle: 45 * (.pi / 180))
         }
@@ -260,35 +261,16 @@ extension SignUpViewController: UITextFieldDelegate {
             let allowedCharacters = CharacterSet.decimalDigits
             let characterSet = CharacterSet(charactersIn: string)
             
-            var originalText = textField.text
+            let inputNumber = textField.text
             
-            if (originalText?.count)! == 0
+            if (inputNumber?.count)! < 19
             {
-                originalText?.append("+38")
-            }
-            if (originalText?.count)! == 3
-            {
-                originalText?.append(" (0")
-            }
-            if (originalText?.count)! == 8
-            {
-                originalText?.append(") ")
-            }
-            if (originalText?.count)! == 12
-            {
-                originalText?.append("-")
-            }
-            if (originalText?.count)! == 15
-            {
-                originalText?.append("-")
-            }
-            if (originalText?.count)! == 19
-            {
-                guard let text = phoneTextField.text else { return true }
-                let newLength = text.count + string.count - range.length
+                phoneTextField.text = formatter.formatPhoneNumber(inputNumber!)
+                
+            } else {
+                let newLength = (inputNumber?.count)! + string.count - range.length
                 return newLength <= 19
             }
-            phoneTextField.text = originalText
             return allowedCharacters.isSuperset(of: characterSet)
         default:
             break

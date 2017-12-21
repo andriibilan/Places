@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Zah-W8-dVk">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,6 +10,61 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="hul-oE-5t4">
+            <objects>
+                <viewController id="Zah-W8-dVk" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SbC-Uk-3xd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2l-sb-pp0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoPin" translatesAutoresizingMaskIntoConstraints="NO" id="QgR-Np-Kcq">
+                                        <rect key="frame" x="0.0" y="104" width="375" height="345"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pin" translatesAutoresizingMaskIntoConstraints="NO" id="g0U-jU-BbO">
+                                        <rect key="frame" x="0.0" y="104" width="375" height="345"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLACES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAQ-bf-Oxg">
+                                        <rect key="frame" x="67" y="486" width="240" height="55"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="46"/>
+                                        <color key="textColor" red="0.2274509804" green="0.67843137249999996" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="g0U-jU-BbO" secondAttribute="bottom" constant="218" id="2Zv-6I-66a"/>
+                                    <constraint firstItem="eAQ-bf-Oxg" firstAttribute="leading" secondItem="5jO-wP-jz7" secondAttribute="leading" constant="67" id="5uV-4k-lpU"/>
+                                    <constraint firstItem="5jO-wP-jz7" firstAttribute="bottom" secondItem="eAQ-bf-Oxg" secondAttribute="bottom" constant="126" id="BJL-q0-oXd"/>
+                                    <constraint firstItem="QgR-Np-Kcq" firstAttribute="top" secondItem="b2l-sb-pp0" secondAttribute="top" constant="104" id="OKe-WC-8GP"/>
+                                    <constraint firstItem="5jO-wP-jz7" firstAttribute="trailing" secondItem="eAQ-bf-Oxg" secondAttribute="trailing" constant="68" id="Okk-Ah-hH3"/>
+                                    <constraint firstItem="g0U-jU-BbO" firstAttribute="leading" secondItem="5jO-wP-jz7" secondAttribute="leading" id="b1B-Bw-byn"/>
+                                    <constraint firstItem="g0U-jU-BbO" firstAttribute="top" secondItem="b2l-sb-pp0" secondAttribute="top" constant="104" id="fBe-au-mdj"/>
+                                    <constraint firstItem="QgR-Np-Kcq" firstAttribute="leading" secondItem="5jO-wP-jz7" secondAttribute="leading" id="jpp-ZM-WDW"/>
+                                    <constraint firstItem="g0U-jU-BbO" firstAttribute="trailing" secondItem="5jO-wP-jz7" secondAttribute="trailing" id="nXe-c1-nWL"/>
+                                    <constraint firstItem="QgR-Np-Kcq" firstAttribute="trailing" secondItem="5jO-wP-jz7" secondAttribute="trailing" id="tcJ-3R-eCX"/>
+                                    <constraint firstAttribute="bottom" secondItem="QgR-Np-Kcq" secondAttribute="bottom" constant="218" id="zo7-c6-Y4e"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="5jO-wP-jz7"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="b2l-sb-pp0" firstAttribute="top" secondItem="SbC-Uk-3xd" secondAttribute="top" id="ZTo-hx-6jm"/>
+                            <constraint firstItem="b2l-sb-pp0" firstAttribute="bottom" secondItem="pgY-vY-7JG" secondAttribute="bottom" id="cW9-Ma-cuR"/>
+                            <constraint firstItem="b2l-sb-pp0" firstAttribute="leading" secondItem="pgY-vY-7JG" secondAttribute="leading" id="qF0-8i-AcJ"/>
+                            <constraint firstItem="b2l-sb-pp0" firstAttribute="trailing" secondItem="pgY-vY-7JG" secondAttribute="trailing" id="wdu-6C-7fv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pgY-vY-7JG"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pQG-k6-1HU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1118" y="68"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
@@ -52,5 +107,7 @@
     </scenes>
     <resources>
         <image name="ItunesArtwork" width="512" height="512"/>
+        <image name="Pin" width="1024" height="1024"/>
+        <image name="logoPin" width="1024" height="1024"/>
     </resources>
 </document>
