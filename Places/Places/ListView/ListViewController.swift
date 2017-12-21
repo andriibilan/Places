@@ -114,7 +114,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         })
     }
     
-    // MARK:- TableView DataSource
+    // MARK: - TableView DataSource
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -124,7 +124,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		return filterOpenOnly ? openPlaces.count : places.count
 	}
 
-    // MARK:- TableView Delegate
+    // MARK: - TableView Delegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
             let place = (filterOpenOnly) ? openPlaces[safe: indexPath.row] : places[safe: indexPath.row]
@@ -157,7 +157,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    // MARK:- Fade in effect
+    // MARK: - Fade in effect
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // Define the initial state (Before the animation)
         cell.alpha = 0

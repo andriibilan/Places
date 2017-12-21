@@ -13,16 +13,23 @@ extension GooglePlacesManager{
     /// Loads place photos (up to 10); (by photo requests)
     func getPhotos(ofPlace givenPlace: Place, maxWidth: Int = 500, maxHeight: Int = 500, completion: @escaping (Place?, String?) -> ()){
 
-        func loadPhotos(of foundedPlace: Place?, errorMessage: String?){
+        func loadPhotos(of foundedPlace: Place?, errorMessage: String?) {
             if foundedPlace == nil { return }
-            if errorMessage != nil{
+            if errorMessage != nil {
                 completion(givenPlace, errorMessage!)
                 return
             }
             
             loadedPlaceTypes = 0
             
-            for photoReference in foundedPlace!.photoReferences{
+            for photoReference in foundedPlace!.photoReferences {
+                if photoReference.hasPrefix("http") {
+                    if photoReference.count == 1 {
+                        completion(givenPlace, nil)
+                    }
+                    continue
+                }
+                
                 let jsonPhotoRequest = """
                 https://maps.googleapis.com/maps/api/place/photo?\
                 maxwidth=\(maxWidth)&\
@@ -40,7 +47,7 @@ extension GooglePlacesManager{
                         }
                         print("\nPhotoRequest: " + jsonPhotoRequest)
                         
-                        switch (response as! HTTPURLResponse).statusCode{
+                        switch (response as! HTTPURLResponse).statusCode {
                         case 403:
                             completion(givenPlace, "Photo gives: You have exceeded your daily request quota for this API")
                             return
@@ -51,13 +58,13 @@ extension GooglePlacesManager{
                         }
                         
                         if let dataImage = data{
-                            if let image = UIImage(data: dataImage){
+                            if let image = UIImage(data: dataImage) {
                                 givenPlace.photos.append(image)
                                 
                                 self?.loadedPhotos += 1
                                 
                                 // if all photos loaded
-                                if (self?.loadedPhotos) == (givenPlace.photoReferences.count - 1){
+                                if (self?.loadedPhotos) == (givenPlace.photoReferences.count - 1) {
                                     completion(givenPlace, nil)
                                 }
                             }
@@ -70,10 +77,11 @@ extension GooglePlacesManager{
             }
         }
         
-        if givenPlace.reviews.isEmpty{  // "review" instead of "photoReferences" because "photoReferences" has icon!
+        self.loadedPhotos = 0
+        
+        if givenPlace.reviews.isEmpty {  // "review" instead of "photoReferences" because "photoReferences" has icon!
             getAdditionalData(ofPlace: givenPlace, completion: loadPhotos)
-
-        } else{
+        } else {
             loadPhotos(of: givenPlace, errorMessage: nil)
         }
     }
