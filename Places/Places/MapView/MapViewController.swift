@@ -15,6 +15,9 @@ import Firebase
 var pressCoordinate = Location(latitude: 49.841856, longitude: 24.031530)
 var filterArray = [PlaceType]()
 
+protocol SlashScreenDelegate: class {
+    func splashScreen()
+}
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, OutputInterface {
     
@@ -25,6 +28,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     let mapDynamic = Dynamic()
     //    var menuIsOpen = false
     private let transition = CustomTransitionAnimator()
+    weak var delegate: SlashScreenDelegate?
     
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var filterTableView: UITableView!
@@ -62,7 +66,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         locationManagerConfigurate()
         
-        
         googlePlacesManager = GooglePlacesManager(
             apiKey: AppDelegate.apiKey,
             radius: UserDefaults.standard.integer(forKey: "Radius"),
@@ -89,7 +92,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         })
         
         viewForFilter.setCorenerAndShadow(viewForFilter)
-        
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
@@ -137,7 +139,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     func updateData() {
-        loadVC.customActivityIndicatory(self.view, startAnimate: true)
+//        loadVC.customActivityIndicatory(self.view, startAnimate: true)
         let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
         
         googlePlacesManager = GooglePlacesManager(
@@ -151,7 +153,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                     
                     DispatchQueue.main.sync {
-                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
+//                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
                         self.addCurrentLocation(coords: center)
                     }
                 }
@@ -161,10 +163,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                         self.addAnnotations(coords: self.places)
                         self.addCurrentLocation(coords: center)
                         loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                        self.delegate?.splashScreen()
                     }
                 }
         })
         changeMapType()
+//        self.delegate?.splashScreen()
     }
     
     

@@ -25,14 +25,13 @@ class  LaunchScreenController: UIViewController {
     func animationLogo() {
         
         UIView.animateKeyframes(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations:  {
-            UIView.setAnimationRepeatCount(3)
-                         self.imageScreen.frame.origin.y += 0
+//            UIView.setAnimationRepeatCount(5)
+//            self.imageScreen.frame.origin.y += 0
             self.imageScreen.frame.origin.y += 20
-            //            self.imageScreen.frame.origin.y = 0
-            
-        },completion: { finished in
-//           self.view.removeFromSuperview()
-            self.delegate?.splashScreenHidden()
         })
+//            ,completion: { finished in
+//           self.view.removeFromSuperview()
+//            self.delegate?.splashScreenHidden()
+//        })
     }
 }
