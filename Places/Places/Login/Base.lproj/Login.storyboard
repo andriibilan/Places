@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kGH-RH-c2b">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kGH-RH-c2b">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -776,7 +776,7 @@
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="Kjl-96-Rdw">
-                                                <rect key="frame" x="124" y="510" width="35" height="35"/>
+                                                <rect key="frame" x="123" y="510" width="35" height="35"/>
                                                 <color key="backgroundColor" red="0.23375499248504639" green="0.34919965267181396" blue="0.60641884803771973" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </imageView>
                                         </subviews>
@@ -789,7 +789,7 @@
                                             <constraint firstItem="rtv-SE-3qo" firstAttribute="top" secondItem="Rc2-5r-Z2t" secondAttribute="bottom" constant="8" id="57w-9F-O8t"/>
                                             <constraint firstItem="2LT-qg-a07" firstAttribute="top" secondItem="rtv-SE-3qo" secondAttribute="bottom" constant="19" id="8cv-DP-kdA"/>
                                             <constraint firstItem="m3p-Hp-dM3" firstAttribute="top" secondItem="Rc2-5r-Z2t" secondAttribute="bottom" constant="40" id="A3f-uP-iUL"/>
-                                            <constraint firstItem="Kjl-96-Rdw" firstAttribute="leading" secondItem="wqc-0v-xHw" secondAttribute="leading" constant="12" id="FbB-yv-Ptg"/>
+                                            <constraint firstItem="Kjl-96-Rdw" firstAttribute="leading" secondItem="wqc-0v-xHw" secondAttribute="leading" constant="11" id="FbB-yv-Ptg"/>
                                             <constraint firstItem="ff9-Rf-J3w" firstAttribute="top" secondItem="q2C-cL-k4g" secondAttribute="bottom" constant="20" id="FeK-99-hYe"/>
                                             <constraint firstItem="tlw-n2-tTF" firstAttribute="leading" secondItem="cjc-dr-WmB" secondAttribute="leading" constant="25" id="LO9-I8-czQ"/>
                                             <constraint firstItem="m3p-Hp-dM3" firstAttribute="leading" secondItem="rtv-SE-3qo" secondAttribute="trailing" constant="20" id="Mxz-yt-JC7"/>
@@ -805,7 +805,7 @@
                                             <constraint firstItem="ff9-Rf-J3w" firstAttribute="centerX" secondItem="cjc-dr-WmB" secondAttribute="centerX" id="bPb-Md-RVn"/>
                                             <constraint firstItem="tlw-n2-tTF" firstAttribute="top" secondItem="f8Q-7S-x2I" secondAttribute="bottom" constant="15" id="dOO-JR-bN7"/>
                                             <constraint firstItem="q2C-cL-k4g" firstAttribute="leading" secondItem="cjc-dr-WmB" secondAttribute="leading" constant="25" id="gXf-qt-IQM"/>
-                                            <constraint firstItem="Kjl-96-Rdw" firstAttribute="trailing" secondItem="wqc-0v-xHw" secondAttribute="trailing" constant="-103" id="jk2-pS-YJH"/>
+                                            <constraint firstItem="Kjl-96-Rdw" firstAttribute="trailing" secondItem="wqc-0v-xHw" secondAttribute="trailing" constant="-104" id="jk2-pS-YJH"/>
                                             <constraint firstItem="rtv-SE-3qo" firstAttribute="leading" secondItem="cjc-dr-WmB" secondAttribute="leading" constant="25" id="t0y-aQ-5Vn"/>
                                             <constraint firstItem="Rc2-5r-Z2t" firstAttribute="top" secondItem="cjc-dr-WmB" secondAttribute="top" constant="28" id="tSf-W0-tTs"/>
                                             <constraint firstItem="wqc-0v-xHw" firstAttribute="top" secondItem="ff9-Rf-J3w" secondAttribute="bottom" constant="15" id="wS6-cJ-RPk"/>

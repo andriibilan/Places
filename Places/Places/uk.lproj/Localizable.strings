@@ -2,5 +2,17 @@
 "Close" = "Закрито";
 
 /* No comment provided by engineer. */
+"Map Settings" = "Налаштування карти";
+
+/* No comment provided by engineer. */
 "Open" = "Відкрито";
+
+/* No comment provided by engineer. */
+"Search Radius: ((Double(radiusValue).kilometr).rounded(toPlaces: 2)) km" = "Пошук";
+
+/* No comment provided by engineer. */
+"Search Radius: (radiusValue ) m" = "Пошук";
+
+/* No comment provided by engineer. */
+"User Settings" = "Налаштування користувача";
 
