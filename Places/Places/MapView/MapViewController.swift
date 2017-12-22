@@ -207,7 +207,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
         }
         
-        actionSheet.addAction(UIAlertAction.init(title: "Add new place",
+        actionSheet.addAction(UIAlertAction.init(title: NSLocalizedString("Add new place", comment: ""),
                                                  style: UIAlertActionStyle.default,
                                                  handler: { (action) in
                                                     pressCoordinate = Location(latitude: location.latitude,
@@ -220,7 +220,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                                                     }
         }))
         
-        actionSheet.addAction(UIAlertAction.init(title: "Show selected place",
+        actionSheet.addAction(UIAlertAction.init(title: NSLocalizedString("Show selected place", comment: ""),
                                                  style: UIAlertActionStyle.default,
                                                  handler: { (action) in
                                                     self.map.removeAnnotations(self.map.annotations)
@@ -228,8 +228,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                                                     
                                                     let annotation = MKPointAnnotation()
                                                     annotation.coordinate = location
-                                                    annotation.title = "Selected place"
-                                                    annotation.subtitle = "Add another place"
+                                                    annotation.title = NSLocalizedString("Selected place", comment: "")
+                                                    annotation.subtitle = NSLocalizedString("Add another place", comment: "")
                                                     self.map.addAnnotation(annotation)
                                                     
                                                     let loc = CLLocation(latitude: location.latitude as CLLocationDegrees,
@@ -259,7 +259,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }))
         
         actionSheet.view.tintColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
-        actionSheet.addAction(UIAlertAction.init(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (action) in
+        actionSheet.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: { (action) in
         }))
         
         self.present(actionSheet, animated: true, completion: nil)
@@ -426,7 +426,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     /////////////////////////////////////////////////////////////////////////
     
     
-    var nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beauty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
+    var nameFilterArray = [ NSLocalizedString("Bar", comment: ""),
+                            NSLocalizedString("Cafe", comment: ""),
+                            NSLocalizedString("Restaurant", comment: ""),
+                            NSLocalizedString("Bank", comment: ""),
+                            NSLocalizedString("Night Club", comment: ""),
+                            NSLocalizedString("Museum", comment: ""),
+                            NSLocalizedString("Beauty Salon", comment: ""),
+                            NSLocalizedString("Pharmacy", comment: ""),
+                            NSLocalizedString("Hospital", comment: ""),
+                            NSLocalizedString("Bus Station", comment: ""),
+                            NSLocalizedString("Gas Station", comment: ""),
+                            NSLocalizedString("University", comment: ""),
+                            NSLocalizedString("Police", comment: ""),
+                            NSLocalizedString("Church", comment: ""),
+                            NSLocalizedString("Cemetery", comment: ""),
+                            NSLocalizedString("Park", comment: ""),
+                            NSLocalizedString("Gym", comment: "")]
     let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
     
     
@@ -544,6 +560,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
 }
+
 
 
 
