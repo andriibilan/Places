@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "FpE-xD-QRr"; */
+"FpE-xD-QRr.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "category"; ObjectID = "NbS-f2-U0h"; */
+"NbS-f2-U0h.placeholder" = "category";
+
+/* Class = "UITextField"; placeholder = "name"; ObjectID = "Ttn-Wg-0Nh"; */
+"Ttn-Wg-0Nh.placeholder" = "name";
+
+/* Class = "UITextField"; placeholder = "web@site.com"; ObjectID = "cMF-Qo-bSv"; */
+"cMF-Qo-bSv.placeholder" = "web@site.com";
+
+/* Class = "UITextField"; placeholder = "phone"; ObjectID = "dbx-Zd-WOM"; */
+"dbx-Zd-WOM.placeholder" = "phone";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "uHb-xq-I5a"; */
+"uHb-xq-I5a.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "addres"; ObjectID = "xav-yF-dD8"; */
+"xav-yF-dD8.placeholder" = "addres";

@@ -1,0 +1,15 @@
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "0Fq-qv-GL1"; */
+"0Fq-qv-GL1.placeholder" = "Email";
+
+/* Class = "UILabel"; text = "Phone Number"; ObjectID = "9EF-z5-8t8"; */
+"9EF-z5-8t8.text" = "Phone Number";
+
+/* Class = "UITextField"; placeholder = "User Name"; ObjectID = "c1P-sa-CjL"; */
+"c1P-sa-CjL.placeholder" = "User Name";
+
+/* Class = "UITextField"; placeholder = "Phone"; ObjectID = "f4L-C7-slV"; */
+"f4L-C7-slV.placeholder" = "Phone";
+
+/* Class = "UILabel"; text = "Email Address"; ObjectID = "x6m-Gj-0Bn"; */
+"x6m-Gj-0Bn.text" = "Email Address";
