@@ -13,21 +13,6 @@
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
-        <scene sceneID="y1Q-Hq-eQW">
-            <objects>
-                <navigationController navigationBarHidden="YES" id="0zQ-oc-99s" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sHp-nd-gvi">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Afu-93-Bl2" kind="relationship" relationship="rootViewController" id="FnM-ue-eHd"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tii-q0-Kbn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2145" y="10"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="Z2A-jn-3On">
             <objects>
                 <navigationController navigationBarHidden="YES" id="wgX-I0-ut5" sceneMemberID="viewController">
@@ -41,52 +26,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E84-z6-6OS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-303" y="0.0"/>
-        </scene>
-        <!--Launch Screen Controller-->
-        <scene sceneID="BtA-42-1jo">
-            <objects>
-                <viewController id="Afu-93-Bl2" customClass="LaunchScreenController" customModule="Places" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="859-o5-hG2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoPin" translatesAutoresizingMaskIntoConstraints="NO" id="qwi-eg-WXf">
-                                <rect key="frame" x="0.0" y="104" width="375" height="345"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pin" translatesAutoresizingMaskIntoConstraints="NO" id="ebD-kr-N4h">
-                                <rect key="frame" x="0.0" y="104" width="375" height="345"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLACES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="md2-zV-27N">
-                                <rect key="frame" x="67" y="486" width="240" height="55"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
-                                <color key="textColor" red="0.2274509804" green="0.67843137249999996" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="ebD-kr-N4h" firstAttribute="leading" secondItem="eo9-iw-EII" secondAttribute="leading" id="86e-eM-T2g"/>
-                            <constraint firstItem="md2-zV-27N" firstAttribute="leading" secondItem="eo9-iw-EII" secondAttribute="leading" constant="67" id="NSY-vO-6If"/>
-                            <constraint firstItem="qwi-eg-WXf" firstAttribute="leading" secondItem="eo9-iw-EII" secondAttribute="leading" id="PY9-NU-Voz"/>
-                            <constraint firstAttribute="bottom" secondItem="qwi-eg-WXf" secondAttribute="bottom" constant="218" id="Vs6-IG-KO5"/>
-                            <constraint firstItem="qwi-eg-WXf" firstAttribute="trailing" secondItem="eo9-iw-EII" secondAttribute="trailing" id="Y7w-tZ-LsW"/>
-                            <constraint firstItem="ebD-kr-N4h" firstAttribute="trailing" secondItem="eo9-iw-EII" secondAttribute="trailing" id="j8G-A0-ukO"/>
-                            <constraint firstItem="eo9-iw-EII" firstAttribute="bottom" secondItem="md2-zV-27N" secondAttribute="bottom" constant="126" id="kXK-P6-1QV"/>
-                            <constraint firstItem="qwi-eg-WXf" firstAttribute="top" secondItem="859-o5-hG2" secondAttribute="top" constant="104" id="mrL-9x-ibD"/>
-                            <constraint firstItem="eo9-iw-EII" firstAttribute="trailing" secondItem="md2-zV-27N" secondAttribute="trailing" constant="68" id="qr1-iD-mLG"/>
-                            <constraint firstItem="ebD-kr-N4h" firstAttribute="top" secondItem="859-o5-hG2" secondAttribute="top" constant="104" id="umt-fp-XlA"/>
-                            <constraint firstAttribute="bottom" secondItem="ebD-kr-N4h" secondAttribute="bottom" constant="218" id="upH-2R-Svn"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="eo9-iw-EII"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Knu-L0-Qgp"/>
-                    <connections>
-                        <outlet property="imageScreen" destination="ebD-kr-N4h" id="LQs-cz-5Yf"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qs9-PB-mKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1201" y="9"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">

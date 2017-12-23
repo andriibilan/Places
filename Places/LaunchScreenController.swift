@@ -9,14 +9,10 @@
 import Foundation
 import UIKit
 
-protocol SlashScreenHiddenDelegate: class {
-    func splashScreenHidden()
-}
-
 class  LaunchScreenController: UIViewController {
     
     @IBOutlet weak var imageScreen: UIImageView!
-    weak var delegate : SlashScreenHiddenDelegate?
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         animationLogo()

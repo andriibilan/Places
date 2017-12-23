@@ -12,8 +12,8 @@ import FirebaseDatabase
 import FirebaseStorage
 
 let offsetHeaderStop:CGFloat = 30.0 // At this offset the Header stops its transformations
-let offset_B_LabelHeader:CGFloat = 105.0 // At this offset the Black label reaches the Header
-let distance_W_LabelHeader:CGFloat = 100.0 // The distance between the bottom of the Header and the top of the White Label
+let offsetBLabelHeader:CGFloat = 105.0 // At this offset the Black label reaches the Header
+let distanceWLabelHeader:CGFloat = 100.0 // The distance between the bottom of the Header and the top of the White Label
 
 class ProfileViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
@@ -135,7 +135,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
             return
         }
         
-        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: profileImage.image!)
+        authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: nil)
         performSegue(withIdentifier: "unwindFromProfile", sender: self)
         
     }
@@ -198,6 +198,7 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
         actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (action: UIAlertAction) in
             imagePickerController.sourceType = .photoLibrary
             self.present(imagePickerController, animated: true, completion: nil)
+            print("Enter Choose image")
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -209,8 +210,8 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
         let images  = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         profileImage.image = images
-        
-        picker.dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: { self.authService.updateUserInfo(userName: self.nameTextField.text!, email: self.emailTextField.text!, phone: self.phoneTextField.text!, profileImage: self.profileImage.image!)
+        })
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!) {
@@ -242,11 +243,11 @@ extension ProfileViewController:  UIScrollViewDelegate {
             // SCROLL UP/DOWN
         else {
             headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offsetHeaderStop, -offset), 0)
-            let labelTransform = CATransform3DMakeTranslation(0, max(-distance_W_LabelHeader, 20 - offset), 0)
+            let labelTransform = CATransform3DMakeTranslation(0, max(-distanceWLabelHeader, 20 - offset), 0)
             headerLabel.layer.transform = labelTransform
             
             // Blur
-            blurEffectView?.alpha = min (0.8, (offset + 20 - offset_B_LabelHeader))
+            blurEffectView?.alpha = min (0.8, (offset + 20 - offsetBLabelHeader))
             blurEffectView?.frame = view.bounds
             
             // Avatar
@@ -286,7 +287,6 @@ extension ProfileViewController: UITextFieldDelegate {
         case nameTextField:
             guard let text = nameTextField.text else { return true }
             let newLength = text.count + string.count - range.length
-//            authService.updateUserInfo(userName: nameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, profileImage: nil)
             return newLength <= 20
             
         case phoneTextField:

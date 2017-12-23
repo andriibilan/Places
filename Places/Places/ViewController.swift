@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController,UIViewControllerTransitioningDelegate, SlashScreenHiddenDelegate, SlashScreenDelegate {
+class ViewController: UIViewController,UIViewControllerTransitioningDelegate, SlashScreenDelegate {
 
     var map : MapViewController?
     var listObj : ListViewController?
@@ -102,11 +102,6 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate, Sl
         })
     }
     
-    func splashScreenHidden() {
-//        splashView.removeFromSuperview()
-//        menuTapped.isHidden = false
-    }
-    
     func splashScreen() {
         splashView.removeFromSuperview()
         menuTapped.isHidden = false
@@ -189,10 +184,7 @@ class ViewController: UIViewController,UIViewControllerTransitioningDelegate, Sl
         if segue.identifier == "ListView" {
            listObj = segue.destination as? ListViewController
         }
-        if segue.identifier == "SplashView" {
-            let splashVC = segue.destination as? LaunchScreenController
-            splashVC?.delegate = self
-        }
+        
 	}
     
     @IBAction func unwindFromSettings(segue: UIStoryboardSegue) {
