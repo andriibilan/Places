@@ -53,7 +53,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadVC.customActivityIndicatory(self.view, startAnimate: true)
+        _ = loadVC.customActivityIndicatory(self.view, startAnimate: true)
         mapDynamic.dynamicFilter(button: filterButton, parView: view)
         changeMapType()
         
@@ -75,7 +75,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     
                     DispatchQueue.main.sync {
                         self.locationManagerConfigurate()
-                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                        _ = loadVC.customActivityIndicatory(self.view, startAnimate: false)
                     }
                 }
                 
@@ -137,7 +137,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     func updateData() {
-        loadVC.customActivityIndicatory(self.view, startAnimate: true)
+        _ = loadVC.customActivityIndicatory(self.view, startAnimate: true)
         let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
         
         googlePlacesManager = GooglePlacesManager(
@@ -151,7 +151,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                     
                     DispatchQueue.main.sync {
-                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                        _ = loadVC.customActivityIndicatory(self.view, startAnimate: false)
                         self.addCurrentLocation(coords: center)
                     }
                 }
@@ -160,7 +160,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     DispatchQueue.main.sync {
                         self.addAnnotations(coords: self.places)
                         self.addCurrentLocation(coords: center)
-                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                        _ = loadVC.customActivityIndicatory(self.view, startAnimate: false)
                     }
                 }
         })
@@ -244,7 +244,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                                                             print("\t\(errorMessage!)")
                                                             self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                                                             
-                                                            loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                                                            _ = loadVC.customActivityIndicatory(self.view, startAnimate: false)
                                                         }
                                                         
                                                         if let foundedPlaces = foundedPlaces {
