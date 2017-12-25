@@ -129,7 +129,7 @@ class SignUpViewController: UIViewController, AuthServiceDelegate {
             return
         }
         let pictureData = UIImageJPEGRepresentation(self.profileImage.image!, 0.20)
-        loadVC.customActivityIndicatory(self.view, startAnimate: true)
+        _ = loadVC.customActivityIndicatory(self.view, startAnimate: true)
         authService.createUser(userName: firstNameTextField.text!, email: emailTextField.text!, phone: phoneTextField.text!, password: passwordTextField.text!, pictureData: pictureData!)
     }
     
