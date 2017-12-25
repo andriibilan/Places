@@ -15,7 +15,7 @@ import Firebase
 var pressCoordinate = Location(latitude: 49.841856, longitude: 24.031530)
 var filterArray = [PlaceType]()
 
-protocol SlashScreenDelegate: class {
+protocol SplashScreenDelegate: class {
     func splashScreen()
 }
 
@@ -28,7 +28,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     let mapDynamic = Dynamic()
     //    var menuIsOpen = false
     private let transition = CustomTransitionAnimator()
-    weak var delegate: SlashScreenDelegate?
+    weak var delegate: SplashScreenDelegate?
     
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var filterTableView: UITableView!
@@ -139,7 +139,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     func updateData() {
-//        loadVC.customActivityIndicatory(self.view, startAnimate: true)
+        loadVC.customActivityIndicatory(self.view, startAnimate: true)
         let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
         
         googlePlacesManager = GooglePlacesManager(
@@ -153,7 +153,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                     
                     DispatchQueue.main.sync {
-//                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
                         self.addCurrentLocation(coords: center)
                     }
                 }
@@ -168,7 +168,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 }
         })
         changeMapType()
-//        self.delegate?.splashScreen()
+
     }
     
     

@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController,UIViewControllerTransitioningDelegate, SlashScreenDelegate {
+class ViewController: UIViewController,UIViewControllerTransitioningDelegate, SplashScreenDelegate {
 
     var map : MapViewController?
     var listObj : ListViewController?
