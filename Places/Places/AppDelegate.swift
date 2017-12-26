@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     
-    static var apiKey = "AIzaSyB-pH6swhtcKVc0GzzL0pOTIr8Z9c36WoU"
+    static var apiKey = "AIzaSyAEMsUJkEQaNxAxcmuQ92dnjQOWtEz1A_g"
 
     //static var apiKey = ""
     
