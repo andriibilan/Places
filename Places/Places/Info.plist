@@ -33,6 +33,7 @@
 	<string>Places</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>cards</string>
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
