@@ -1,0 +1,12 @@
+/* Class = "UITextField"; placeholder = "category"; ObjectID = "NbS-f2-U0h"; */
+"NbS-f2-U0h.placeholder" = "категорія";
+
+/* Class = "UITextField"; placeholder = "name"; ObjectID = "Ttn-Wg-0Nh"; */
+"Ttn-Wg-0Nh.placeholder" = "ім'я";
+
+/* Class = "UITextField"; placeholder = "phone"; ObjectID = "dbx-Zd-WOM"; */
+"dbx-Zd-WOM.placeholder" = "телефон";
+
+/* Class = "UITextField"; placeholder = "addres"; ObjectID = "xav-yF-dD8"; */
+"xav-yF-dD8.placeholder" = "адреса";
+

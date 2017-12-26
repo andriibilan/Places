@@ -14,6 +14,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private var openPlaces: [Place] = []
     private var filterOpenOnly = false
     private var sortingByName = true
+	private var canOpenURL = false
     var googlePlacesManager: GooglePlacesManager!
     let transition = CustomTransitionAnimator()
 
@@ -67,6 +68,13 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
             [button] in button.transform = CGAffineTransform.identity
             }, completion: nil)
     }
+	
+	private func schemeAvailable(scheme: String) -> Bool {
+		if let url = URL(string: scheme) {
+			return UIApplication.shared.canOpenURL(url)
+		}
+		return false
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +86,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         listDynamic.dynamicSort(button: sortingButton, parView: self.view)
         listDynamic.dynamicFilterList(filter: filteringButton, parView: self.view)
         
-        
+		canOpenURL = schemeAvailable(scheme: "cards://")
     }
     
     private func refillOpenPlaces() {
@@ -114,7 +122,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         })
     }
     
-    // MARK:- TableView DataSource
+    // MARK: - TableView DataSource
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -124,7 +132,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		return filterOpenOnly ? openPlaces.count : places.count
 	}
 
-    // MARK:- TableView Delegate
+    // MARK: - TableView Delegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "listTableView", for: indexPath) as? ListTableViewCell {
             let place = (filterOpenOnly) ? openPlaces[safe: indexPath.row] : places[safe: indexPath.row]
@@ -155,9 +163,41 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         return UITableViewCell()
     }
-    
-    
-    // MARK:- Fade in effect
+	
+	//MARK: - SWIPE
+	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		
+		//OPEN CARDS APP
+		let editAction = UIContextualAction(style: .normal, title: "") { (action, sourceView, completionHandler) in
+			
+			let place = (self.filterOpenOnly) ? self.openPlaces[safe: indexPath.row] : self.places[safe: indexPath.row]
+			let cardName = place?.name ?? ""
+			let cardNameURL = String(cardName.filter { !" \n\t\r".characters.contains($0) })
+			
+			if let url = URL(string: "cards://\(cardNameURL)") {
+				UIApplication.shared.open(url, options: [:], completionHandler: {
+					(success) in
+					print("Open \(url.absoluteString): \(success)")
+				})
+			}
+			completionHandler(true)
+		}
+		
+		// Customize the action buttons
+		editAction.backgroundColor = #colorLiteral(red: 0.2275260389, green: 0.6791594625, blue: 0.5494497418, alpha: 1)
+		editAction.title = "Add Card"
+		
+		let swipeConfiguration = UISwipeActionsConfiguration(actions: [editAction])
+		
+		return swipeConfiguration
+	}
+	
+	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		return canOpenURL
+	}
+	
+	
+    // MARK: - Fade in effect
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // Define the initial state (Before the animation)
         cell.alpha = 0

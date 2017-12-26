@@ -1,0 +1,30 @@
+
+/* Class = "UITableViewSection"; headerTitle = "Map Settings"; ObjectID = "7iq-eh-9VE"; */
+"7iq-eh-9VE.headerTitle" = "Map Settings";
+
+/* Class = "UILabel"; text = "Change e-mail"; ObjectID = "9pP-RH-NEc"; */
+"9pP-RH-NEc.text" = "Change e-mail";
+
+/* Class = "UISegmentedControl"; Ey9-bC-YIM.segmentTitles[0] = "Standart"; ObjectID = "Ey9-bC-YIM"; */
+"Ey9-bC-YIM.segmentTitles[0]" = "Standart";
+
+/* Class = "UISegmentedControl"; Ey9-bC-YIM.segmentTitles[1] = "Satellite"; ObjectID = "Ey9-bC-YIM"; */
+"Ey9-bC-YIM.segmentTitles[1]" = "Satellite";
+
+/* Class = "UITableViewSection"; headerTitle = "User Settings"; ObjectID = "gld-Y0-Ka4"; */
+"gld-Y0-Ka4.headerTitle" = "User Settings";
+
+/* Class = "UILabel"; text = "Change map type"; ObjectID = "h54-He-pP6"; */
+"h54-He-pP6.text" = "Change map type";
+
+/* Class = "UISegmentedControl"; hS7-V5-rsQ.segmentTitles[0] = "Km"; ObjectID = "hS7-V5-rsQ"; */
+"hS7-V5-rsQ.segmentTitles[0]" = "Km";
+
+/* Class = "UISegmentedControl"; hS7-V5-rsQ.segmentTitles[1] = "Miles"; ObjectID = "hS7-V5-rsQ"; */
+"hS7-V5-rsQ.segmentTitles[1]" = "Miles";
+
+/* Class = "UILabel"; text = "Change password"; ObjectID = "sVr-lh-BVm"; */
+"sVr-lh-BVm.text" = "Change password";
+
+/* Class = "UILabel"; text = "Change distance"; ObjectID = "uQb-uq-Nh7"; */
+"uQb-uq-Nh7.text" = "Change distance";

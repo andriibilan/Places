@@ -100,14 +100,21 @@ extension SearchVC{
             
             cell.name.text = place.name ?? "No name"
             
-            switch place.isOpen{
+            var typesNames = ""
+            for type in place.types {
+                typesNames += String(describing: type.printableStyle) + ", "
+            }
+            typesNames.removeLast()
+            typesNames.removeLast()
+            
+            cell.type.text = typesNames
+            
+            switch place.isOpen {
             case true?:
                 cell.openClosedImageView.image = #imageLiteral(resourceName: "open-sign")
             case false?:
                 cell.openClosedImageView.image = #imageLiteral(resourceName: "closed-sign")
-            case nil:
-                // remove this questionmark !
-                cell.openClosedImageView.image = #imageLiteral(resourceName: "questionMark")
+            default: break
             }
             
             if let distance = place.distance{

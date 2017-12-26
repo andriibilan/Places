@@ -1,0 +1,42 @@
+/* Class = "UITextField"; placeholder = "First Name"; ObjectID = "Ff9-GJ-Qyt"; */
+"Ff9-GJ-Qyt.placeholder" = "Ім'я";
+
+/* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "Fht-dV-p8k"; */
+"Fht-dV-p8k.normalTitle" = "Увійти";
+
+/* Class = "UITextField"; placeholder = "First Name"; ObjectID = "Oew-HI-spp"; */
+"Oew-HI-spp.placeholder" = "Ім'я";
+
+/* Class = "UILabel"; text = "Create Account "; ObjectID = "Rc2-5r-Z2t"; */
+"Rc2-5r-Z2t.text" = "Реєстрація";
+
+/* Class = "UIButton"; normalTitle = "Already have an account? Sign In."; ObjectID = "aa5-ai-bG6"; */
+"aa5-ai-bG6.normalTitle" = "Немає облікового запису? Зареєструватися!";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "bbL-KY-9zT"; */
+"bbL-KY-9zT.placeholder" = "Пошта";
+
+/* Class = "UILabel"; text = "Create Account "; ObjectID = "eEi-0I-Npy"; */
+"eEi-0I-Npy.text" = "Реєстрація";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "f5p-Sg-uwl"; */
+"f5p-Sg-uwl.placeholder" = "Пароль";
+
+/* Class = "UIButton"; normalTitle = "SIGN UP"; ObjectID = "ff9-Rf-J3w"; */
+"ff9-Rf-J3w.normalTitle" = "Зареєструватися";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "jaS-Iw-Lhy"; */
+"jaS-Iw-Lhy.placeholder" = "Пошта";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "qIW-M0-pVR"; */
+"qIW-M0-pVR.placeholder" = "Пошта";
+
+/* Class = "UIButton"; normalTitle = "  JOIN US !"; ObjectID = "wqc-0v-xHw"; */
+"wqc-0v-xHw.normalTitle" = "Увійти!";
+
+/* Class = "UIButton"; normalTitle = "Don't have an account? Sign Up!"; ObjectID = "xZO-ca-bgR"; */
+"xZO-ca-bgR.normalTitle" = "Немає облікового запису? Зареєструватися!";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "zGh-nl-nWQ"; */
+"zGh-nl-nWQ.normalTitle" = "Зареєструватися";
+

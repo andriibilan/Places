@@ -44,14 +44,14 @@ class SettingTableViewController: UITableViewController {
   private  func valueForMetres() {
         let radiusValue = defaults.integer(forKey: "Radius")
         if radiusValue < 1000 {
-            searchRadius.text = "Search Radius: \(radiusValue ) m"
+            searchRadius.text = NSLocalizedString("Search Radius:", comment: "") + " \(radiusValue ) m"
         } else {
-            searchRadius.text = "Search Radius: \((Double(radiusValue).kilometr).rounded(toPlaces: 2)) km"
+            searchRadius.text = NSLocalizedString("Search Radius:", comment: "") + " \((Double(radiusValue).kilometr).rounded(toPlaces: 2)) km"
         }
     }
     
     private func valueForMiles() {
-        searchRadius.text = "Search Radius: \(String((defaults.double(forKey: "Radius").miles).rounded(toPlaces: 2))) mi"
+        searchRadius.text = NSLocalizedString("Search Radius:", comment: "") + " \(String((defaults.double(forKey: "Radius").miles).rounded(toPlaces: 2))) mi"
     }
     
    private func updateSliderValue (distanceIsKms: Bool) {

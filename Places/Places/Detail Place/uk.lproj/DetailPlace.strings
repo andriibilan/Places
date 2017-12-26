@@ -1,0 +1,12 @@
+/* Class = "UILabel"; text = "Name"; ObjectID = "TEx-j0-9j8"; */
+"TEx-j0-9j8.text" = "Ім'я";
+
+/* Class = "UILabel"; text = "Phone"; ObjectID = "XL7-n6-HnJ"; */
+"XL7-n6-HnJ.text" = "Телефон";
+
+/* Class = "UILabel"; text = "Clock"; ObjectID = "f43-lS-oNb"; */
+"f43-lS-oNb.text" = "Графік";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "yRl-Tm-9Tw"; */
+"yRl-Tm-9Tw.text" = "Адреса";
+

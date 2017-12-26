@@ -1,0 +1,24 @@
+
+/* Class = "UILabel"; text = "PLACES"; ObjectID = "0qm-Rv-KQJ"; */
+"0qm-Rv-KQJ.text" = "PLACES";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "G0P-W5-2IT"; */
+"G0P-W5-2IT.text" = "Name";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "LHx-rr-LBK"; */
+"LHx-rr-LBK.text" = "Label";
+
+/* Class = "UILabel"; text = "Type"; ObjectID = "gmi-NC-vDE"; */
+"gmi-NC-vDE.text" = "Type";
+
+/* Class = "UILabel"; text = "PLACES"; ObjectID = "md2-zV-27N"; */
+"md2-zV-27N.text" = "PLACES";
+
+/* Class = "UISegmentedControl"; nDW-Of-fAx.segmentTitles[0] = "Map"; ObjectID = "nDW-Of-fAx"; */
+"nDW-Of-fAx.segmentTitles[0]" = "Map";
+
+/* Class = "UISegmentedControl"; nDW-Of-fAx.segmentTitles[1] = "List"; ObjectID = "nDW-Of-fAx"; */
+"nDW-Of-fAx.segmentTitles[1]" = "List";
+
+/* Class = "UILabel"; text = "Distance"; ObjectID = "rJh-gH-rV6"; */
+"rJh-gH-rV6.text" = "Distance";

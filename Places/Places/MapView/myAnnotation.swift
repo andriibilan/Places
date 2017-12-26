@@ -24,9 +24,9 @@ class CustomAnnotation : NSObject, MKAnnotation {
         self.isOpen = place.isOpen
         self.image = (place.icon)?.resizedImage(withBounds: CGSize(width: 50.0, height: 50.0))
         if place.isOpen == true{
-            subtitle = "Open now"
+            subtitle = NSLocalizedString("Open now", comment: "")
         } else {
-            subtitle = "Closed"
+            subtitle = NSLocalizedString("Closed", comment: "")
         }
     }
 }

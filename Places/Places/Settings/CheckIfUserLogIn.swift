@@ -29,9 +29,9 @@ extension SettingTableViewController {
             guard Auth.auth().currentUser != nil else {
                 return ""
             }
-            return "User Settings"
+            return NSLocalizedString("User Settings", comment: "")
         } else {
-            return "Map Settings"
+            return NSLocalizedString("Map Settings", comment: "")
         }
     }
 

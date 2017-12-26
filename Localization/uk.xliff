@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Places In Current Location/Info.plist" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleDisplayName">
+        <source>Places </source>
+      </trans-unit>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Places In Current Location/View/Base.lproj/MainInterface.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="9u3-zh-EYw.text">
+        <source>123m</source>
+        <note>Class = "UILabel"; text = "123m"; ObjectID = "9u3-zh-EYw";</note>
+      </trans-unit>
+      <trans-unit id="pTY-cm-3ta.text">
+        <source>Meet &amp; Burger</source>
+        <note>Class = "UILabel"; text = "Meet &amp; Burger"; ObjectID = "pTY-cm-3ta";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Places/AddPlace/Base.lproj/NewPlaceBoard.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="FpE-xD-QRr.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "FpE-xD-QRr";</note>
+      </trans-unit>
+      <trans-unit id="NbS-f2-U0h.placeholder">
+        <source>category</source>
+        <target>категорія</target>
+        <note>Class = "UITextField"; placeholder = "category"; ObjectID = "NbS-f2-U0h";</note>
+      </trans-unit>
+      <trans-unit id="Ttn-Wg-0Nh.placeholder">
+        <source>name</source>
+        <target>ім'я</target>
+        <note>Class = "UITextField"; placeholder = "name"; ObjectID = "Ttn-Wg-0Nh";</note>
+      </trans-unit>
+      <trans-unit id="cMF-Qo-bSv.placeholder">
+        <source>web@site.com</source>
+        <note>Class = "UITextField"; placeholder = "web@site.com"; ObjectID = "cMF-Qo-bSv";</note>
+      </trans-unit>
+      <trans-unit id="dbx-Zd-WOM.placeholder">
+        <source>phone</source>
+        <target>телефон</target>
+        <note>Class = "UITextField"; placeholder = "phone"; ObjectID = "dbx-Zd-WOM";</note>
+      </trans-unit>
+      <trans-unit id="uHb-xq-I5a.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "uHb-xq-I5a";</note>
+      </trans-unit>
+      <trans-unit id="xav-yF-dD8.placeholder">
+        <source>addres</source>
+        <target>адреса</target>
+        <note>Class = "UITextField"; placeholder = "addres"; ObjectID = "xav-yF-dD8";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Places/Base.lproj/LaunchScreen.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="d2i-FS-zwe.text">
+        <source>PLACES</source>
+        <target>PLACES</target>
+        <note>Class = "UILabel"; text = "PLACES"; ObjectID = "d2i-FS-zwe";</note>
+      </trans-unit>
+      <trans-unit id="eAQ-bf-Oxg.text">
+        <source>PLACES</source>
+        <target>PLACES</target>
+        <note>Class = "UILabel"; text = "PLACES"; ObjectID = "eAQ-bf-Oxg";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Places/Base.lproj/Main.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="0qm-Rv-KQJ.text">
+        <source>PLACES</source>
+        <note>Class = "UILabel"; text = "PLACES"; ObjectID = "0qm-Rv-KQJ";</note>
+      </trans-unit>
+      <trans-unit id="G0P-W5-2IT.text">
+        <source>Name</source>
+        <note>Class = "UILabel"; text = "Name"; ObjectID = "G0P-W5-2IT";</note>
+      </trans-unit>
+      <trans-unit id="LHx-rr-LBK.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "LHx-rr-LBK";</note>
+      </trans-unit>
+      <trans-unit id="gmi-NC-vDE.text">
+        <source>Type</source>
+        <note>Class = "UILabel"; text = "Type"; ObjectID = "gmi-NC-vDE";</note>
+      </trans-unit>
+      <trans-unit id="md2-zV-27N.text">
+        <source>PLACES</source>
+        <note>Class = "UILabel"; text = "PLACES"; ObjectID = "md2-zV-27N";</note>
+      </trans-unit>
+      <trans-unit id="nDW-Of-fAx.segmentTitles[0]">
+        <source>Map</source>
+        <target>Карта</target>
+        <note>Class = "UISegmentedControl"; nDW-Of-fAx.segmentTitles[0] = "Map"; ObjectID = "nDW-Of-fAx";</note>
+      </trans-unit>
+      <trans-unit id="nDW-Of-fAx.segmentTitles[1]">
+        <source>List</source>
+        <target>Список</target>
+        <note>Class = "UISegmentedControl"; nDW-Of-fAx.segmentTitles[1] = "List"; ObjectID = "nDW-Of-fAx";</note>
+      </trans-unit>
+      <trans-unit id="rJh-gH-rV6.text">
+        <source>Distance</source>
+        <note>Class = "UILabel"; text = "Distance"; ObjectID = "rJh-gH-rV6";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Places/Detail Place/Base.lproj/DetailPlace.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="E88-ja-mcb.text">
+        <source>Type</source>
+        <note>Class = "UILabel"; text = "Type"; ObjectID = "E88-ja-mcb";</note>
+      </trans-unit>
+      <trans-unit id="LuK-Xb-uV3.text">
+        <source>Website</source>
+        <note>Class = "UILabel"; text = "Website"; ObjectID = "LuK-Xb-uV3";</note>
+      </trans-unit>
+      <trans-unit id="TEx-j0-9j8.text">
+        <source>Name</source>
+        <target>Ім'я</target>
+        <note>Class = "UILabel"; text = "Name"; ObjectID = "TEx-j0-9j8";</note>
+      </trans-unit>
+      <trans-unit id="XL7-n6-HnJ.text">
+        <source>Phone</source>
+        <target>Телефон</target>
+        <note>Class = "UILabel"; text = "Phone"; ObjectID = "XL7-n6-HnJ";</note>
+      </trans-unit>
+      <trans-unit id="f43-lS-oNb.text">
+        <source>Clock</source>
+        <target>Графік</target>
+        <note>Class = "UILabel"; text = "Clock"; ObjectID = "f43-lS-oNb";</note>
+      </trans-unit>
+      <trans-unit id="hKg-ta-2D6.text">
+        <source>★</source>
+        <note>Class = "UILabel"; text = "★"; ObjectID = "hKg-ta-2D6";</note>
+      </trans-unit>
+      <trans-unit id="yRl-Tm-9Tw.text">
+        <source>Address</source>
+        <target>Адреса</target>
+        <note>Class = "UILabel"; text = "Address"; ObjectID = "yRl-Tm-9Tw";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Places/Info.plist" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+      </trans-unit>
+      <trans-unit id="NSCameraUsageDescription">
+        <source>need camera</source>
+      </trans-unit>
+      <trans-unit id="NSLocationAlwaysAndWhenInUseUsageDescription">
+        <source>Do you allow this app to know your current location?</source>
+      </trans-unit>
+      <trans-unit id="NSLocationWhenInUseUsageDescription">
+        <source>Will you allow this app to always know your location?</source>
+      </trans-unit>
+      <trans-unit id="NSPhotoLibraryAddUsageDescription">
+        <source/>
+      </trans-unit>
+      <trans-unit id="NSPhotoLibraryUsageDescription">
+        <source/>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Places/Localizable.strings" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="Add another place">
+        <source>Add another place</source>
+        <target>Додати інше місце</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Add new place">
+        <source>Add new place</source>
+        <target>Додати нове місце</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Bank">
+        <source>Bank</source>
+        <target>Банк</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Bar">
+        <source>Bar</source>
+        <target>Бар</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Beauty Salon">
+        <source>Beauty Salon</source>
+        <target>Салон краси</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Bus Station">
+        <source>Bus Station</source>
+        <target>Зупинка</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cafe">
+        <source>Cafe</source>
+        <target>Кафе</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cancel">
+        <source>Cancel</source>
+        <target>Відмінити</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cemetery">
+        <source>Cemetery</source>
+        <target>Цвинтар</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Church">
+        <source>Church</source>
+        <target>Церква</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Close">
+        <source>Close</source>
+        <target>Закрито</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Closed">
+        <source>Closed</source>
+        <target>Закрито</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gas Station">
+        <source>Gas Station</source>
+        <target>Заправка</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gym">
+        <source>Gym</source>
+        <target>Спортзал</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hospital">
+        <source>Hospital</source>
+        <target>Лікарня</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Map Settings">
+        <source>Map Settings</source>
+        <target>Налаштування карти</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Museum">
+        <source>Museum</source>
+        <target>Музей</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Night Club">
+        <source>Night Club</source>
+        <target>Нічний клуб</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Open">
+        <source>Open</source>
+        <target>Відкрито</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Open now">
+        <source>Open now</source>
+        <target>Відкрито</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Park">
+        <source>Park</source>
+        <target>Парк</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Pharmacy">
+        <source>Pharmacy</source>
+        <target>Аптека</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Police">
+        <source>Police</source>
+        <target>Поліція</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Restaurant">
+        <source>Restaurant</source>
+        <target>Ресторан</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Search Radius:">
+        <source>Search Radius:</source>
+        <target>Радіус пошуку:</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Selected place">
+        <source>Selected place</source>
+        <target>Вибрати місце</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Show selected place">
+        <source>Show selected place</source>
+        <target>Показати місце</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="University">
+        <source>University</source>
+        <target>Університет</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="User Settings">
+        <source>User Settings</source>
+        <target>Налаштування користувача</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Places/Login/Base.lproj/Login.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="2uX-cg-baM.placeholder">
+        <source>+38 (xxx) xx-xx-xxx</source>
+        <note>Class = "UITextField"; placeholder = "+38 (xxx) xx-xx-xxx"; ObjectID = "2uX-cg-baM";</note>
+      </trans-unit>
+      <trans-unit id="3VP-xA-Ilx.placeholder">
+        <source>********</source>
+        <note>Class = "UITextField"; placeholder = "********"; ObjectID = "3VP-xA-Ilx";</note>
+      </trans-unit>
+      <trans-unit id="9K4-6p-f7I.placeholder">
+        <source>Last Name</source>
+        <note>Class = "UITextField"; placeholder = "Last Name"; ObjectID = "9K4-6p-f7I";</note>
+      </trans-unit>
+      <trans-unit id="EE8-Ra-Hg7.placeholder">
+        <source>********</source>
+        <note>Class = "UITextField"; placeholder = "********"; ObjectID = "EE8-Ra-Hg7";</note>
+      </trans-unit>
+      <trans-unit id="Ff9-GJ-Qyt.placeholder">
+        <source>First Name</source>
+        <target>Ім'я</target>
+        <note>Class = "UITextField"; placeholder = "First Name"; ObjectID = "Ff9-GJ-Qyt";</note>
+      </trans-unit>
+      <trans-unit id="Fht-dV-p8k.normalTitle">
+        <source>Sign In</source>
+        <target>Увійти</target>
+        <note>Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "Fht-dV-p8k";</note>
+      </trans-unit>
+      <trans-unit id="Oew-HI-spp.placeholder">
+        <source>First Name</source>
+        <target>Ім'я</target>
+        <note>Class = "UITextField"; placeholder = "First Name"; ObjectID = "Oew-HI-spp";</note>
+      </trans-unit>
+      <trans-unit id="Rc2-5r-Z2t.text">
+        <source>Create Account </source>
+        <target>Реєстрація</target>
+        <note>Class = "UILabel"; text = "Create Account "; ObjectID = "Rc2-5r-Z2t";</note>
+      </trans-unit>
+      <trans-unit id="VJR-ne-QPh.placeholder">
+        <source>********</source>
+        <note>Class = "UITextField"; placeholder = "********"; ObjectID = "VJR-ne-QPh";</note>
+      </trans-unit>
+      <trans-unit id="Ve7-HY-hn4.placeholder">
+        <source>+380 xx xxx-xx-xx</source>
+        <note>Class = "UITextField"; placeholder = "+380 xx xxx-xx-xx"; ObjectID = "Ve7-HY-hn4";</note>
+      </trans-unit>
+      <trans-unit id="XMF-9Y-UG5.placeholder">
+        <source>********</source>
+        <note>Class = "UITextField"; placeholder = "********"; ObjectID = "XMF-9Y-UG5";</note>
+      </trans-unit>
+      <trans-unit id="aa5-ai-bG6.normalTitle">
+        <source>Already have an account? Sign In.</source>
+        <target>Немає облікового запису? Зареєструватися!</target>
+        <note>Class = "UIButton"; normalTitle = "Already have an account? Sign In."; ObjectID = "aa5-ai-bG6";</note>
+      </trans-unit>
+      <trans-unit id="bbL-KY-9zT.placeholder">
+        <source>Email</source>
+        <target>Пошта</target>
+        <note>Class = "UITextField"; placeholder = "Email"; ObjectID = "bbL-KY-9zT";</note>
+      </trans-unit>
+      <trans-unit id="bbL-KY-9zT.text">
+        <source>ios13@gmail.com</source>
+        <note>Class = "UITextField"; text = "ios13@gmail.com"; ObjectID = "bbL-KY-9zT";</note>
+      </trans-unit>
+      <trans-unit id="eEi-0I-Npy.text">
+        <source>Create Account </source>
+        <target>Реєстрація</target>
+        <note>Class = "UILabel"; text = "Create Account "; ObjectID = "eEi-0I-Npy";</note>
+      </trans-unit>
+      <trans-unit id="f5p-Sg-uwl.placeholder">
+        <source>Password</source>
+        <target>Пароль</target>
+        <note>Class = "UITextField"; placeholder = "Password"; ObjectID = "f5p-Sg-uwl";</note>
+      </trans-unit>
+      <trans-unit id="f5p-Sg-uwl.text">
+        <source>12345678</source>
+        <note>Class = "UITextField"; text = "12345678"; ObjectID = "f5p-Sg-uwl";</note>
+      </trans-unit>
+      <trans-unit id="ff9-Rf-J3w.normalTitle">
+        <source>SIGN UP</source>
+        <target>Зареєструватися</target>
+        <note>Class = "UIButton"; normalTitle = "SIGN UP"; ObjectID = "ff9-Rf-J3w";</note>
+      </trans-unit>
+      <trans-unit id="jaS-Iw-Lhy.placeholder">
+        <source>Email</source>
+        <target>Пошта</target>
+        <note>Class = "UITextField"; placeholder = "Email"; ObjectID = "jaS-Iw-Lhy";</note>
+      </trans-unit>
+      <trans-unit id="qIW-M0-pVR.placeholder">
+        <source>Email</source>
+        <target>Пошта</target>
+        <note>Class = "UITextField"; placeholder = "Email"; ObjectID = "qIW-M0-pVR";</note>
+      </trans-unit>
+      <trans-unit id="wqc-0v-xHw.normalTitle">
+        <source>  JOIN US !</source>
+        <target>Увійти!</target>
+        <note>Class = "UIButton"; normalTitle = "  JOIN US !"; ObjectID = "wqc-0v-xHw";</note>
+      </trans-unit>
+      <trans-unit id="xZO-ca-bgR.normalTitle">
+        <source>Don't have an account? Sign Up!</source>
+        <target>Немає облікового запису? Зареєструватися!</target>
+        <note>Class = "UIButton"; normalTitle = "Don't have an account? Sign Up!"; ObjectID = "xZO-ca-bgR";</note>
+      </trans-unit>
+      <trans-unit id="zGh-nl-nWQ.normalTitle">
+        <source>Sign Up</source>
+        <target>Зареєструватися</target>
+        <note>Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "zGh-nl-nWQ";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Places/Profile/Base.lproj/Profile.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="0Fq-qv-GL1.placeholder">
+        <source>Email</source>
+        <target>Пошта</target>
+        <note>Class = "UITextField"; placeholder = "Email"; ObjectID = "0Fq-qv-GL1";</note>
+      </trans-unit>
+      <trans-unit id="9EF-z5-8t8.text">
+        <source>Phone Number</source>
+        <target>Телефон</target>
+        <note>Class = "UILabel"; text = "Phone Number"; ObjectID = "9EF-z5-8t8";</note>
+      </trans-unit>
+      <trans-unit id="c1P-sa-CjL.placeholder">
+        <source>User Name</source>
+        <target>Ім'я</target>
+        <note>Class = "UITextField"; placeholder = "User Name"; ObjectID = "c1P-sa-CjL";</note>
+      </trans-unit>
+      <trans-unit id="f4L-C7-slV.placeholder">
+        <source>Phone</source>
+        <target>Телефон</target>
+        <note>Class = "UITextField"; placeholder = "Phone"; ObjectID = "f4L-C7-slV";</note>
+      </trans-unit>
+      <trans-unit id="x6m-Gj-0Bn.text">
+        <source>Email Address</source>
+        <target>Пошта</target>
+        <note>Class = "UILabel"; text = "Email Address"; ObjectID = "x6m-Gj-0Bn";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Places/Search/Base.lproj/Search.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="Ihb-Ac-yXO.text">
+        <source>Type</source>
+        <note>Class = "UILabel"; text = "Type"; ObjectID = "Ihb-Ac-yXO";</note>
+      </trans-unit>
+      <trans-unit id="TSt-LY-VfZ.text">
+        <source>Name</source>
+        <note>Class = "UILabel"; text = "Name"; ObjectID = "TSt-LY-VfZ";</note>
+      </trans-unit>
+      <trans-unit id="jTf-V4-hKH.text">
+        <source>Distance</source>
+        <note>Class = "UILabel"; text = "Distance"; ObjectID = "jTf-V4-hKH";</note>
+      </trans-unit>
+      <trans-unit id="z83-57-i1A.text">
+        <source>No Places Found</source>
+        <target>Місць не знайдено</target>
+        <note>Class = "UILabel"; text = "No Places Found"; ObjectID = "z83-57-i1A";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Places/Settings/Base.lproj/Settings.storyboard" source-language="en" datatype="plaintext" target-language="uk">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.1" build-num="9B55"/>
+    </header>
+    <body>
+      <trans-unit id="7iq-eh-9VE.headerTitle">
+        <source>Map Settings</source>
+        <target>Налаштування карти</target>
+        <note>Class = "UITableViewSection"; headerTitle = "Map Settings"; ObjectID = "7iq-eh-9VE";</note>
+      </trans-unit>
+      <trans-unit id="9pP-RH-NEc.text">
+        <source>Change e-mail</source>
+        <target>Змінити пошту</target>
+        <note>Class = "UILabel"; text = "Change e-mail"; ObjectID = "9pP-RH-NEc";</note>
+      </trans-unit>
+      <trans-unit id="Ey9-bC-YIM.segmentTitles[0]">
+        <source>Standart</source>
+        <target>Стандарт</target>
+        <note>Class = "UISegmentedControl"; Ey9-bC-YIM.segmentTitles[0] = "Standart"; ObjectID = "Ey9-bC-YIM";</note>
+      </trans-unit>
+      <trans-unit id="Ey9-bC-YIM.segmentTitles[1]">
+        <source>Satellite</source>
+        <target>Супутник</target>
+        <note>Class = "UISegmentedControl"; Ey9-bC-YIM.segmentTitles[1] = "Satellite"; ObjectID = "Ey9-bC-YIM";</note>
+      </trans-unit>
+      <trans-unit id="gld-Y0-Ka4.headerTitle">
+        <source>User Settings</source>
+        <target>Налаштування користувач</target>
+        <note>Class = "UITableViewSection"; headerTitle = "User Settings"; ObjectID = "gld-Y0-Ka4";</note>
+      </trans-unit>
+      <trans-unit id="h54-He-pP6.text">
+        <source>Change map type</source>
+        <target>Тип карти</target>
+        <note>Class = "UILabel"; text = "Change map type"; ObjectID = "h54-He-pP6";</note>
+      </trans-unit>
+      <trans-unit id="hS7-V5-rsQ.segmentTitles[0]">
+        <source>Km</source>
+        <target>Км</target>
+        <note>Class = "UISegmentedControl"; hS7-V5-rsQ.segmentTitles[0] = "Km"; ObjectID = "hS7-V5-rsQ";</note>
+      </trans-unit>
+      <trans-unit id="hS7-V5-rsQ.segmentTitles[1]">
+        <source>Miles</source>
+        <target>Милі</target>
+        <note>Class = "UISegmentedControl"; hS7-V5-rsQ.segmentTitles[1] = "Miles"; ObjectID = "hS7-V5-rsQ";</note>
+      </trans-unit>
+      <trans-unit id="sVr-lh-BVm.text">
+        <source>Change password</source>
+        <target>Змінити пароль</target>
+        <note>Class = "UILabel"; text = "Change password"; ObjectID = "sVr-lh-BVm";</note>
+      </trans-unit>
+      <trans-unit id="uQb-uq-Nh7.text">
+        <source>Change distance</source>
+        <target>Відстань</target>
+        <note>Class = "UILabel"; text = "Change distance"; ObjectID = "uQb-uq-Nh7";</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

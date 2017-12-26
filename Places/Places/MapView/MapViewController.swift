@@ -15,6 +15,9 @@ import Firebase
 var pressCoordinate = Location(latitude: 49.841856, longitude: 24.031530)
 var filterArray = [PlaceType]()
 
+protocol SlashScreenDelegate: class {
+    func splashScreen()
+}
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, OutputInterface {
     
@@ -25,6 +28,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     let mapDynamic = Dynamic()
     //    var menuIsOpen = false
     private let transition = CustomTransitionAnimator()
+    weak var delegate: SlashScreenDelegate?
     
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var filterTableView: UITableView!
@@ -53,7 +57,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadVC.customActivityIndicatory(self.view, startAnimate: true)
+        _ = loadVC.customActivityIndicatory(self.view, startAnimate: true)
         mapDynamic.dynamicFilter(button: filterButton, parView: view)
         changeMapType()
         
@@ -61,7 +65,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         filterTableView.dataSource = self
         
         locationManagerConfigurate()
-        
         
         googlePlacesManager = GooglePlacesManager(
             apiKey: AppDelegate.apiKey,
@@ -75,7 +78,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     
                     DispatchQueue.main.sync {
                         self.locationManagerConfigurate()
-                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                        _ = loadVC.customActivityIndicatory(self.view, startAnimate: false)
                     }
                 }
                 
@@ -89,7 +92,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         })
         
         viewForFilter.setCorenerAndShadow(viewForFilter)
-        
         if UserDefaults.standard.integer(forKey: "Radius") == 0 {
             UserDefaults.standard.set(200, forKey: "Radius")
         }
@@ -137,7 +139,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     
     func updateData() {
-        loadVC.customActivityIndicatory(self.view, startAnimate: true)
+
+        _ = loadVC.customActivityIndicatory(self.view, startAnimate: true)
+
         let center = CLLocationCoordinate2D(latitude: pressCoordinate.latitude, longitude: pressCoordinate.longitude)
         
         googlePlacesManager = GooglePlacesManager(
@@ -151,7 +155,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                     
                     DispatchQueue.main.sync {
-                        loadVC.customActivityIndicatory(self.view, startAnimate: false)
+
+                        _ = loadVC.customActivityIndicatory(self.view, startAnimate: false)
+
                         self.addCurrentLocation(coords: center)
                     }
                 }
@@ -161,10 +167,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                         self.addAnnotations(coords: self.places)
                         self.addCurrentLocation(coords: center)
                         loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                        self.delegate?.splashScreen()
+
                     }
                 }
         })
         changeMapType()
+//        self.delegate?.splashScreen()
     }
     
     
@@ -207,7 +216,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
         }
         
-        actionSheet.addAction(UIAlertAction.init(title: "Add new place",
+        actionSheet.addAction(UIAlertAction.init(title: NSLocalizedString("Add new place", comment: ""),
                                                  style: UIAlertActionStyle.default,
                                                  handler: { (action) in
                                                     pressCoordinate = Location(latitude: location.latitude,
@@ -220,7 +229,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                                                     }
         }))
         
-        actionSheet.addAction(UIAlertAction.init(title: "Show selected place",
+        actionSheet.addAction(UIAlertAction.init(title: NSLocalizedString("Show selected place", comment: ""),
                                                  style: UIAlertActionStyle.default,
                                                  handler: { (action) in
                                                     self.map.removeAnnotations(self.map.annotations)
@@ -228,8 +237,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                                                     
                                                     let annotation = MKPointAnnotation()
                                                     annotation.coordinate = location
-                                                    annotation.title = "Selected place"
-                                                    annotation.subtitle = "Add another place"
+                                                    annotation.title = NSLocalizedString("Selected place", comment: "")
+                                                    annotation.subtitle = NSLocalizedString("Add another place", comment: "")
                                                     self.map.addAnnotation(annotation)
                                                     
                                                     let loc = CLLocation(latitude: location.latitude as CLLocationDegrees,
@@ -244,7 +253,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                                                             print("\t\(errorMessage!)")
                                                             self.showAlert(message: "Cannot load all places! Try it tomorrow ;)")
                                                             
-                                                            loadVC.customActivityIndicatory(self.view, startAnimate: false)
+                                                            _ = loadVC.customActivityIndicatory(self.view, startAnimate: false)
                                                         }
                                                         
                                                         if let foundedPlaces = foundedPlaces {
@@ -259,7 +268,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }))
         
         actionSheet.view.tintColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
-        actionSheet.addAction(UIAlertAction.init(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (action) in
+        actionSheet.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: { (action) in
         }))
         
         self.present(actionSheet, animated: true, completion: nil)
@@ -426,7 +435,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     /////////////////////////////////////////////////////////////////////////
     
     
-    var nameFilterArray = [ "Bar","Cafe","Restaurant", "Bank","Night Club","Museum", "Beauty Salon","Pharmacy","Hospital","Bus Station","Gas Station","University","Police","Church","Cemetery","Park","Gym"]
+    var nameFilterArray = [ NSLocalizedString("Bar", comment: ""),
+                            NSLocalizedString("Cafe", comment: ""),
+                            NSLocalizedString("Restaurant", comment: ""),
+                            NSLocalizedString("Bank", comment: ""),
+                            NSLocalizedString("Night Club", comment: ""),
+                            NSLocalizedString("Museum", comment: ""),
+                            NSLocalizedString("Beauty Salon", comment: ""),
+                            NSLocalizedString("Pharmacy", comment: ""),
+                            NSLocalizedString("Hospital", comment: ""),
+                            NSLocalizedString("Bus Station", comment: ""),
+                            NSLocalizedString("Gas Station", comment: ""),
+                            NSLocalizedString("University", comment: ""),
+                            NSLocalizedString("Police", comment: ""),
+                            NSLocalizedString("Church", comment: ""),
+                            NSLocalizedString("Cemetery", comment: ""),
+                            NSLocalizedString("Park", comment: ""),
+                            NSLocalizedString("Gym", comment: "")]
     let iconFilterArray = [#imageLiteral(resourceName: "bar"),#imageLiteral(resourceName: "cafe"),#imageLiteral(resourceName: "restaurant"), #imageLiteral(resourceName: "bank"),#imageLiteral(resourceName: "nightClub") ,#imageLiteral(resourceName: "museum"),#imageLiteral(resourceName: "beutySalon"),#imageLiteral(resourceName: "pharmacy"),#imageLiteral(resourceName: "hospital"),#imageLiteral(resourceName: "busStation"),#imageLiteral(resourceName: "gasStation"),#imageLiteral(resourceName: "university"), #imageLiteral(resourceName: "police"),#imageLiteral(resourceName: "church"),#imageLiteral(resourceName: "cemetery"),#imageLiteral(resourceName: "park"),#imageLiteral(resourceName: "gym")]
     
     
@@ -544,6 +569,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
 }
+
 
 
 

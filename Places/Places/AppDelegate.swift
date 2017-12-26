@@ -16,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     
-    static var apiKey = "AIzaSyAEMsUJkEQaNxAxcmuQ92dnjQOWtEz1A_g"
+    static var apiKey = "AIzaSyB-pH6swhtcKVc0GzzL0pOTIr8Z9c36WoU"
+
     //static var apiKey = ""
     
     //AIzaSyB1AHQpRBMU2vc6T7guiqFz2f5_CUyTRRc
@@ -45,15 +46,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return handled
     }
-    
-//    func showProfile(){
-//        
-//        if Auth.auth().currentUser != nil {
-//            let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
-//            self.window?.rootViewController = profileVC
-//        } else {
-//            let profileVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
-//            self.window?.rootViewController = profileVC
-//        }
-//    }
+ 
 }

@@ -2,26 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>fbapi</string>
-		<string>fb-messenger-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
-	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb134610637251320</string>
-			</array>
-		</dict>
-	</array>
-	<key>FacebookAppID</key>
-	<string>134610637251320</string>
-	<key>FacebookDisplayName</key>
-	<string>Places</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -53,6 +33,7 @@
 	<string>Places</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>cards</string>
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
@@ -60,8 +41,6 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
 	<key>NSCameraUsageDescription</key>
 	<string>need camera</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -69,6 +48,8 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Will you allow this app to always know your location?</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string></string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

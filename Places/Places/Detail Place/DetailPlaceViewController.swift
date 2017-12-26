@@ -261,8 +261,8 @@ class DetailPlaceViewController: UIViewController, UITableViewDelegate {
     
     func setData(set data: Bool?, at label: UILabel?) -> Bool {
         switch self.place.isOpen {
-        case true?:  label?.text = "Open"
-        case false?:  label?.text = "Close"
+        case true?:  label?.text = NSLocalizedString("Open", comment: "")
+        case false?:  label?.text = NSLocalizedString("Close", comment: "")
         default:
             return false
         }
