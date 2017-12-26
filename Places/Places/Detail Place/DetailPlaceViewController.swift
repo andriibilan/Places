@@ -75,10 +75,6 @@ class DetailPlaceViewController: UIViewController, UITableViewDelegate {
     
     var mapView : MKMapView!
     
-    
-    
-    
-    //
     @IBOutlet weak var clockInfo: UIButton!
     
     @IBOutlet weak var scheduleTimeLabel: UILabel!
@@ -202,10 +198,7 @@ class DetailPlaceViewController: UIViewController, UITableViewDelegate {
             photoVC.indexPath = sender as? IndexPath
             photoVC.transitioningDelegate = self
             photoVC.modalPresentationStyle = .custom
-        }/*else if segue.identifier == "DetailToMap" {
-            let MapVC = segue.destination as! MapViewController
-            MapVC.map.add((sender as! MKRoute).polyline, level: .aboveRoads)
-        }*/
+        }
     }
     
     func setAllData() {
